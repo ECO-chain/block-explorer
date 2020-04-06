@@ -1,0 +1,125 @@
+@function rem($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}rem;
+}
+
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em;
+}
+
+
+@mixin bg-purple-gd {
+  background: rgba(129,62,157,1);
+  background: -moz-linear-gradient(-45deg, rgba(129,62,157,1) 0%, rgba(20,23,37,1) 100%);
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(129,62,157,1)), 
+  color-stop(100%, rgba(20,23,37,1))); 
+  background: -webkit-linear-gradient(-45deg, rgba(129,62,157,1) 0%, rgba(20,23,37,1) 100%);
+  background: -o-linear-gradient(-45deg, rgba(129,62,157,1) 0%, rgba(20,23,37,1) 100%);
+  background: -ms-linear-gradient(-45deg, rgba(129,62,157,1) 0%, rgba(20,23,37,1) 100%);
+  background: linear-gradient(135deg, rgba(129,62,157,1) 0%, rgba(20,23,37,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#813e9d', endColorstr='#141725', GradientType=1 );
+}
+
+@mixin bg-purple-gd-2 {
+  background: rgba(20,23,37,1);
+  background: -moz-linear-gradient(-45deg, rgba(20,23,37,1) 0%, rgba(0,0,0,1) 100%);
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(20,23,37,1)), color-stop(100%, rgba(0,0,0,1)));
+  background: -webkit-linear-gradient(-45deg, rgba(20,23,37,1) 0%, rgba(0,0,0,1) 100%);
+  background: -o-linear-gradient(-45deg, rgba(20,23,37,1) 0%, rgba(0,0,0,1) 100%);
+  background: -ms-linear-gradient(-45deg, rgba(20,23,37,1) 0%, rgba(0,0,0,1) 100%);
+  background: linear-gradient(135deg, rgba(20,23,37,1) 0%, rgba(0,0,0,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#141725', endColorstr='#000000', GradientType=1 );
+}
+
+@mixin bg-purple-gd-3 {
+  background: rgba(0,187,212,1) !important;
+  background: -moz-linear-gradient(-45deg, rgba(0,187,212,1) 0%, rgba(0,0,0,1) 100%) !important;
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(0,187,212,1)), color-stop(100%, rgba(0,0,0,1))) !important;
+  background: -webkit-linear-gradient(-45deg, rgba(0,187,212,1) 0%, rgba(0,0,0,1) 100%) !important;
+  background: -o-linear-gradient(-45deg, rgba(0,187,212,1) 0%, rgba(0,0,0,1) 100%) !important;
+  background: -ms-linear-gradient(-45deg, rgba(0,187,212,1) 0%, rgba(0,0,0,1) 100%) !important;
+  background: linear-gradient(135deg, rgba(0,187,212,1) 0%, rgba(0,0,0,1) 100%) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00bbd4', endColorstr='#000000', GradientType=1 ) !important;
+}
+
+@mixin bg-purple-gd-4 {
+  background: rgba(185,183,255,1);
+  background: -moz-linear-gradient(-45deg, rgba(185,183,255,1) 0%, rgba(0,0,0,1) 100%) !important;
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(185,183,255,1)), color-stop(100%, rgba(0,0,0,1))) !important;
+  background: -webkit-linear-gradient(-45deg, rgba(185,183,255,1) 0%, rgba(0,0,0,1) 100%) !important;
+  background: -o-linear-gradient(-45deg, rgba(185,183,255,1) 0%, rgba(0,0,0,1) 100%) !important;
+  background: -ms-linear-gradient(-45deg, rgba(185,183,255,1) 0%, rgba(0,0,0,1) 100%) !important;
+  background: linear-gradient(135deg, rgba(185,183,255,1) 0%, rgba(0,0,0,1) 100%) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b9b7ff', endColorstr='#000000', GradientType=1 ) !important;
+}
+
+@mixin vh-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+@mixin vh-center-reset {
+  position: relative;
+  left: inherit;
+  top: inherit;
+  -webkit-transform: inherit;
+  transform: inherit;
+}
+
+@mixin v-center {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@mixin h-center {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+@mixin h-center-relative {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+@mixin transition-all($speed) {
+  transition: all ($speed + s);
+}
+
+@mixin rotate($degrees) {
+  -webkit-transform: rotate($degrees);
+  -moz-transform: rotate($degrees);
+  -ms-transform: rotate($degrees);
+  -o-transform: rotate($degrees);
+  transform: rotate($degrees);
+}
+
+@mixin avoid-click {
+  pointer-events: none !important;
+}
+
+@mixin am-performance {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  perspective: 1000;
+}
