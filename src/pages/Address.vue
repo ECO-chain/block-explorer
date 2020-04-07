@@ -13,10 +13,12 @@
         </b-col>
 
         <b-col cols="12">
-          <h3 class="head-global big my-3">
-            Summary
-            <span class="small text-purple">[Confirmed]</span>
-          </h3>
+          <div class="group-head my-3 text-center text-md-left">
+            <h3 class="head-global my-3">
+              Summary
+              <span class="small text-purple">[Confirmed]</span>
+            </h3>
+          </div>
           <div class="block-global p-3 mb-3 rounded-lg">
             <b-row class="justify-content-center">
               <b-col cols="12" md>
@@ -79,10 +81,12 @@
         </b-col>
 
         <b-col cols="12">
-          <h3 class="head-global big my-3">
-            Storage
-            <span class="small text-purple">[66 entries]</span>
-          </h3>
+          <div class="group-head my-3 text-center text-md-left">
+            <h3 class="head-global my-3">
+              Storage
+              <span class="small text-purple">[66 entries]</span>
+            </h3>
+          </div>
           <div class="block-global p-3 mb-3 rounded-lg add-border-top">
             <div>
               <b-row class="align-items-center text-center my-2">
@@ -248,7 +252,9 @@
         </b-col>
 
         <b-col cols="12">
-          <h3 class="head-global big my-3">Transactions</h3>
+          <div class="group-head my-3 text-center text-md-left">
+            <h3 class="head-global my-3">Transactions</h3>
+          </div>
 
           <div class="block-global p-3 my-3 rounded-lg">
             <b-row class="align-items-end mb-3">
@@ -265,7 +271,10 @@
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">0.1689944 ECOC</b-col>
                     </b-row>
@@ -276,13 +285,19 @@
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EJ8hLZCmbfKf62cgYmPUeknD1NTiNuGaYM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EJ8hLZCmbfKf62cgYmPUeknD1NTiNuGaYM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">0 ECOC (U)</b-col>
                     </b-row>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">0.0672024 ECOC (U)</b-col>
                     </b-row>
@@ -293,14 +308,18 @@
             <hr />
             <b-row>
               <b-col cols="12">
-                <router-link to="/token">BlockChainStore Token</router-link> <span class="small text-purple-light">(ECRC20)</span>
+                <router-link to="/token">BlockChainStore Token</router-link>
+                <span class="small text-purple-light">(ECRC20)</span>
               </b-col>
               <b-col cols="12">
                 <b-row class="justify-content-center align-items-center no-gutters">
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">8094.39 BCST</b-col>
                     </b-row>
@@ -311,7 +330,10 @@
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">8094.39 BCST</b-col>
                     </b-row>
@@ -364,7 +386,10 @@
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">0.1689944 ECOC</b-col>
                     </b-row>
@@ -375,13 +400,19 @@
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EJ8hLZCmbfKf62cgYmPUeknD1NTiNuGaYM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EJ8hLZCmbfKf62cgYmPUeknD1NTiNuGaYM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">0 ECOC (U)</b-col>
                     </b-row>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">0.0672024 ECOC (U)</b-col>
                     </b-row>
@@ -400,7 +431,10 @@
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">8094.39 BCST</b-col>
                     </b-row>
@@ -411,7 +445,10 @@
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">8094.39 BCST</b-col>
                     </b-row>
@@ -464,7 +501,10 @@
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">0.1689944 ECOC</b-col>
                     </b-row>
@@ -475,13 +515,19 @@
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EJ8hLZCmbfKf62cgYmPUeknD1NTiNuGaYM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EJ8hLZCmbfKf62cgYmPUeknD1NTiNuGaYM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">0 ECOC (U)</b-col>
                     </b-row>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">0.0672024 ECOC (U)</b-col>
                     </b-row>
@@ -500,7 +546,10 @@
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">8094.39 BCST</b-col>
                     </b-row>
@@ -511,7 +560,10 @@
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
-                        <router-link to="/address" class="d-block text-truncate">EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                        <router-link
+                          to="/address"
+                          class="d-block text-truncate"
+                        >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
                       </b-col>
                       <b-col cols="4" class="text-right small text-purple-light">8094.39 BCST</b-col>
                     </b-row>

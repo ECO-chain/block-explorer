@@ -13,7 +13,9 @@
             <b-col cols="12" md="6">
               <b-row>
                 <b-col>
-                  <h3 class="head-global big my-3">Sync Status</h3>
+                  <div class="group-head my-3 text-center text-md-left">
+                    <h3 class="head-global my-3">Sync Status</h3>
+                  </div>
                   <div class="block-global p-3 mb-3 rounded-lg">
                     <b-row class="align-items-center">
                       <b-col cols="6">
@@ -66,7 +68,9 @@
               </b-row>
               <b-row>
                 <b-col>
-                  <h3 class="head-global big my-3">Last Blocks</h3>
+                  <div class="group-head my-3 text-center text-md-left">
+                    <h3 class="head-global mb-0">Last Blocks</h3>
+                  </div>
                   <div class="block-global p-3 mb-3 rounded-lg">
                     <b-row class="align-items-center">
                       <b-col cols="12">
@@ -74,7 +78,10 @@
                       </b-col>
                       <b-col cols="12">
                         <div class="my-1 text-right">
-                          <router-link to="/block" class="d-block text-truncate">d896fb8bb843c6c1f2d7c2ee228bee1286c3a73062c00d9580885e6c79b3dd6a</router-link>
+                          <router-link
+                            to="/block"
+                            class="d-block text-truncate"
+                          >d896fb8bb843c6c1f2d7c2ee228bee1286c3a73062c00d9580885e6c79b3dd6a</router-link>
                         </div>
                       </b-col>
                       <b-col cols="12">
@@ -82,7 +89,10 @@
                       </b-col>
                       <b-col cols="12">
                         <div class="my-1 text-right">
-                          <router-link to="/block" class="d-block text-truncate">b620e613d0d655b2ba080f08743d05925c92d55b851402c7cc91160b6d1265b2</router-link>
+                          <router-link
+                            to="/block"
+                            class="d-block text-truncate"
+                          >b620e613d0d655b2ba080f08743d05925c92d55b851402c7cc91160b6d1265b2</router-link>
                         </div>
                       </b-col>
                     </b-row>
@@ -91,7 +101,9 @@
               </b-row>
             </b-col>
             <b-col cols="12" md="6" class="d-flex flex-column">
-              <h3 class="head-global big my-3">Ecochain node information</h3>
+              <div class="group-head my-3 text-center text-md-left">
+                <h3 class="head-global mb-0">Ecochain node information</h3>
+              </div>
               <div class="block-global p-3 mb-3 rounded-lg h-100">
                 <b-row class="align-items-center">
                   <b-col cols="6">

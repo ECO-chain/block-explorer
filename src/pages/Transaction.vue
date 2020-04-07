@@ -18,7 +18,9 @@
         </b-col>
 
         <b-col cols="12">
-          <h3 class="head-global big my-3">Summary</h3>
+          <div class="group-head my-3 text-center text-md-left">
+            <h3 class="head-global my-3">Summary</h3>
+          </div>
           <div class="block-global p-3 mb-3 rounded-lg">
             <b-row>
               <b-col cols="6">
@@ -61,7 +63,9 @@
         </b-col>
 
         <b-col cols="12">
-          <h3 class="head-global big my-3">Details</h3>
+          <div class="group-head my-3 text-center text-md-left">
+            <h3 class="head-global my-3">Details</h3>
+          </div>
 
           <div class="block-global p-3 my-3 rounded-lg">
             <b-row class="align-items-end mb-3">

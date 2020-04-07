@@ -10,8 +10,12 @@
             <p class="my-0">ECOC statistics for the last 24 hours</p>
           </div>
           <!-- END .group-head -->
+        </b-col>
 
-          <h3 class="head-global big my-3">Block Summary</h3>
+        <b-col cols="12">
+          <div class="group-head my-3 text-center text-md-left">
+            <h3 class="head-global my-3">Block Summary</h3>
+          </div>
           <div class="block-global p-3 mb-3 rounded-lg">
             <b-row class="align-items-center">
               <b-col cols="6">
@@ -34,85 +38,93 @@
               </b-col>
             </b-row>
           </div>
+        </b-col>
 
-          <h3 class="head-global big my-3">Transaction Summary</h3>
+        <b-col cols="12">
+          <div class="group-head my-3 text-center text-md-left">
+            <h3 class="head-global my-3">Transaction Summary</h3>
+          </div>
           <div class="block-global p-3 mb-3 rounded-lg">
-            <b-row>
+            <b-row class="align-items-center">
               <b-col>
                 <div class="my-1">Total Transaction Fees</div>
               </b-col>
               <b-col>
-                <div class="my-1">60,800.56963296 ECOC</div>
+                <div class="my-1 text-right">60,800.56963296 ECOC</div>
               </b-col>
-              <b-col cols="auto">
-                <div class="my-1">
+              <b-col cols="12" md="auto">
+                <div class="mt-1 mb-3 mb-md-1 text-center">
                   <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
-            <b-row>
+            <b-row class="align-items-center">
               <b-col>
                 <div class="my-1">Number of Transactions</div>
               </b-col>
               <b-col>
-                <div class="my-1">5583</div>
+                <div class="my-1 text-right">5583</div>
               </b-col>
-              <b-col cols="auto">
-                <div class="my-1">
+              <b-col cols="12" md="auto">
+                <div class="mt-1 mb-3 mb-md-1 text-center">
                   <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
-            <b-row>
+            <b-row class="align-items-center">
               <b-col>
                 <div class="my-1">Total Output Volume (ECOC)</div>
               </b-col>
               <b-col>
-                <div class="my-1">283.33837916 ECOC</div>
+                <div class="my-1 text-right">283.33837916 ECOC</div>
               </b-col>
-              <b-col cols="auto">
-                <div class="my-1">
+              <b-col cols="12" md="auto">
+                <div class="mt-1 mb-3 mb-md-1 text-center">
                   <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
-            <b-row>
+            <b-row class="align-items-center">
               <b-col>
                 <div class="my-1">Estimated Transaction Volume (ECOC)</div>
               </b-col>
               <b-col>
-                <div class="my-1">-</div>
+                <div class="my-1 text-right"></div>
               </b-col>
-              <b-col cols="auto">
-                <div class="my-1">-</div>
+              <b-col cols="12" md="auto">
+                <div class="mt-1 mb-3 mb-md-1 text-center"></div>
               </b-col>
             </b-row>
           </div>
+        </b-col>
 
-          <h3 class="head-global big my-3">Staking difficulty</h3>
+        <b-col cols="12">
+          <div class="group-head my-3 text-center text-md-left">
+            <h3 class="head-global my-3">Staking difficulty</h3>
+          </div>
           <div class="block-global p-3 mb-3 rounded-lg">
-            <b-row>
+            <b-row class="align-items-center">
               <b-col>
                 <div class="my-1">Difficulty</div>
               </b-col>
               <b-col>
-                <div class="my-1">5,683,342.93347735</div>
+                <div class="my-1 text-right">5,683,342.93347735</div>
               </b-col>
-              <b-col cols="auto">
-                <div class="my-1">
+              <b-col cols="12" md="auto">
+                <div class="mt-1 mb-3 mb-md-1 text-center">
                   <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
-            <b-row>
+            <b-row class="align-items-center">
               <b-col>
                 <div class="my-1">Percent of staked supply</div>
               </b-col>
               <b-col>
-                <div class="my-1">0.6266743993294185 %</div>
+                <div class="my-1 text-right">0.6266743993294185 %</div>
               </b-col>
-              <b-col cols="auto">
-                <div class="my-1">
+              <b-col cols="12" md="auto">
+                <div class="mt-1 mb-3 mb-md-1 text-center">
                   <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>

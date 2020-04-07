@@ -11,7 +11,7 @@
           <!-- END .group-head -->
 
           <div class="group-head my-3 text-center text-md-left">
-            <h3 class="head-global big mb-1">ECOC total supply</h3>
+            <h3 class="head-global mb-1">ECOC total supply</h3>
             <p class="m-0">Check current ECOC supply.</p>
             <p class="m-0">Maximum supply is 2,000,000,000 ECOC</p>
           </div>
@@ -20,7 +20,7 @@
           </div>
         </b-col>
         <b-col cols="12">
-          <h3 class="head-global big my-3">Rich List</h3>
+          <h3 class="head-global my-3">Rich List</h3>
           <div class="block-global p-3 mb-3 rounded-lg">
             <div class="table-responsive">
               <table class="table table-hover table-dark">
