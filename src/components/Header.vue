@@ -9,7 +9,7 @@
             </router-link>
             <transition name="am-topnav">
               <nav class="topnav" v-if="menuActive">
-                <ul class="list-unstyled d-md-flex m-0 topnav-list">
+                <ul class="list-unstyled d-md-flex m-0 topnav-list align-items-center">
                   <li class="ml-3">
                     <router-link to="/" @click.native="toggleShow()">Home</router-link>
                   </li>
@@ -30,6 +30,18 @@
                   </li>
                   <li class="ml-3">
                     <router-link to="/rich-list" @click.native="toggleShow()">Rich List</router-link>
+                  </li>
+                  <li class="ml-3">
+                    <b-dropdown
+                      size="sm"
+                      id="dropdown-right"
+                      right
+                      text="English"
+                      class="switch-language"
+                    >
+                      <b-dropdown-item href="#">English</b-dropdown-item>
+                      <b-dropdown-item href="#">Chinese</b-dropdown-item>
+                    </b-dropdown>
                   </li>
                 </ul>
               </nav>
@@ -79,13 +91,19 @@ export default {
 }
 .header {
   height: 60px;
+  @include media-breakpoint-down(md) {
+      font-size: rem(12);
+  }
+  @include media-breakpoint-down(sm) {
+      font-size: rem(16);
+  }
   a {
     color: $white;
     &.router-link-exact-active,
     &:hover {
       color: $purple;
     }
-    @include media-breakpoint-down(xs) {
+    @include media-breakpoint-down(sm) {
       &.router-link-exact-active {
         font-size: rem(20);
       }
@@ -111,7 +129,7 @@ export default {
     text-align: center;
     padding: 2rem 0;
     li {
-      padding: 1rem 0;
+      padding: .5rem 0;
     }
   }
 }
