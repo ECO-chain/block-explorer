@@ -1,0 +1,171 @@
+<template>
+  <header class="wrap-header">
+    <b-container>
+      <b-row>
+        <b-col cols="12">
+          <div class="header d-flex justify-content-between align-items-center">
+            <router-link to="/" class="logo">
+              <img alt="Ecochain Explorer" src="~@/assets/images/logo-ecoc.png" />
+            </router-link>
+            <transition name="am-topnav">
+              <nav class="topnav" v-if="menuActive">
+                <ul class="list-unstyled d-md-flex m-0 topnav-list align-items-center">
+                  <li class="ml-3">
+                    <router-link to="/" @click.native="toggleShow()">Home</router-link>
+                  </li>
+                  <li class="ml-3">
+                    <router-link to="/blocks" @click.native="toggleShow()">Blocks</router-link>
+                  </li>
+                  <li class="ml-3">
+                    <router-link to="/status" @click.native="toggleShow()">Status</router-link>
+                  </li>
+                  <li class="ml-3">
+                    <router-link to="/stats" @click.native="toggleShow()">Stats</router-link>
+                  </li>
+                  <li class="ml-3">
+                    <router-link to="/charts" @click.native="toggleShow()">Charts</router-link>
+                  </li>
+                  <li class="ml-3">
+                    <router-link to="/tokens" @click.native="toggleShow()">Tokens</router-link>
+                  </li>
+                  <li class="ml-3">
+                    <router-link to="/rich-list" @click.native="toggleShow()">Rich List</router-link>
+                  </li>
+                  <li class="ml-3">
+                    <b-dropdown
+                      size="sm"
+                      id="dropdown-right"
+                      right
+                      text="English"
+                      class="switch-language"
+                    >
+                      <b-dropdown-item href="#">English</b-dropdown-item>
+                      <b-dropdown-item href="#">Chinese</b-dropdown-item>
+                    </b-dropdown>
+                  </li>
+                </ul>
+              </nav>
+            </transition>
+            <div
+              class="hamburger hamburger--spring js-hamburger d-md-none"
+              id="btn-hamburger"
+              :class="{ 'is-active': menuActive }"
+              v-on:click="menuActive = !menuActive"
+            >
+              <div class="hamburger-box">
+                <div class="hamburger-inner"></div>
+              </div>
+            </div>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
+  </header>
+</template>
+
+<script>
+export default {
+  name: "BlockHeader",
+  data() {
+    return {
+      menuActive: screen.width <= 767.98 ? false : true
+    };
+  },
+  methods: {
+    toggleShow() {
+      this.menuActive = screen.width <= 767.98 ? false : true;
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.wrap-header {
+  background: $purple-dark;
+  box-shadow: 0 0 10px rgba($purple-light, 0.5);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}
+.header {
+  height: 60px;
+  @include media-breakpoint-down(md) {
+      font-size: rem(12);
+  }
+  @include media-breakpoint-down(sm) {
+      font-size: rem(16);
+  }
+  a {
+    color: $white;
+    &.router-link-exact-active,
+    &:hover {
+      color: $purple;
+    }
+    @include media-breakpoint-down(sm) {
+      &.router-link-exact-active {
+        font-size: rem(20);
+      }
+    }
+  }
+}
+.topnav-list {
+  text-transform: uppercase;
+}
+.logo {
+  width: 150px;
+  @include media-breakpoint-down(sm) {
+    width: 100px;
+  }
+}
+@include media-breakpoint-down(sm) {
+  .topnav {
+    background: $purple-dark;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 60px;
+    text-align: center;
+    padding: 2rem 0;
+    li {
+      padding: .5rem 0;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .am-topnav-enter {
+    opacity: 0;
+    .topnav-list {
+      transform: translate3d(0, 5px, 0);
+      @include transition(transform 0.2s);
+    }
+  }
+  .am-topnav-enter-to {
+    opacity: 1;
+    .topnav-list {
+      transform: translate3d(0, 0, 0);
+      @include transition(transform 0.2s);
+    }
+  }
+  .am-topnav-leave {
+    opacity: 1;
+    .topnav-list {
+      transform: translate3d(0, 0, 0);
+      @include transition(transform 0.2s);
+    }
+  }
+  .am-topnav-leave-to {
+    opacity: 0;
+    .topnav-list {
+      transform: translate3d(0, 5px, 0);
+      @include transition(transform 0.2s);
+    }
+  }
+  .am-topnav-leave-active,
+  .am-topnav-enter-active {
+    @include transition(opacity 0.4s);
+  }
+}
+</style>
