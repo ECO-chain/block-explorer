@@ -18,17 +18,18 @@
     </b-container>
   </div>
 </template>
-<script>
+
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator";
 import Chart from "chart.js";
 
-export default {
-  name: "Charts",
-  components: {},
-  data() {
-    return {};
-  },
-  mounted: function() {
-    // chartjs
+@Component
+export default class Outputs extends Vue {
+  mounted() {
+    this.chartInit()
+  }
+
+  chartInit() {
     Chart.defaults.global.legend.display = false;
     var ctx = document.getElementById("graph");
     new Chart(ctx, {
@@ -50,8 +51,6 @@ export default {
         options: {}
       }
     });
-  },
-  computed: {},
-  methods: {}
-};
+  }
+}
 </script>

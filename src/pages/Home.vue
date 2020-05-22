@@ -324,51 +324,54 @@
     </b-row>
   </b-container>
 </template>
-<script>
-import BlockSearchBox from "../components/SearchBox";
+
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator";
+import BlockSearchBox from "@/components/SearchBox.vue";
 import Chart from "chart.js";
 
-export default {
-  name: "Home",
+@Component({
   components: {
-    BlockSearchBox
-  },
-  data() {
-    return {
-      swiperOption: {
-        autoplay: {
-          delay: Math.floor(Math.random() * (4000 - 3000) + 3000),
-          stopOnLastSlide: false,
-          disableOnInteraction: false
-        },
-        loop: false,
-        watchSlidesVisibility: true,
-        slidesPerView: 5,
-        spaceBetween: 30,
-        breakpoints: {
-          575.98: {
-            slidesPerView: 2,
-            spaceBetween: 15
-          },
-          767.98: {
-            slidesPerView: 2
-          },
-          991.98: {
-            slidesPerView: 3
-          },
-          1199.98: {
-            slidesPerView: 4
-          }
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true
-        }
+    BlockSearchBox,
+  }
+})
+export default class Home extends Vue {
+  mounted() {
+    this.chartInit()
+  }
+
+  swiperOption = {
+    autoplay: {
+      delay: Math.floor(Math.random() * (4000 - 3000) + 3000),
+      stopOnLastSlide: false,
+      disableOnInteraction: false
+    },
+    loop: false,
+    watchSlidesVisibility: true,
+    slidesPerView: 5,
+    spaceBetween: 30,
+    breakpoints: {
+      575.98: {
+        slidesPerView: 2,
+        spaceBetween: 15
+      },
+      767.98: {
+        slidesPerView: 2
+      },
+      991.98: {
+        slidesPerView: 3
+      },
+      1199.98: {
+        slidesPerView: 4
       }
-    };
-  },
-  mounted: function() {
-    // chartjs
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true
+    }
+  }
+
+  chartInit() {
     Chart.defaults.global.legend.display = false;
     var ctx = document.getElementById("graph");
     new Chart(ctx, {
@@ -390,8 +393,6 @@ export default {
         options: {}
       }
     });
-  },
-  computed: {},
-  methods: {}
-};
+  }
+}
 </script>

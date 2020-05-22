@@ -63,20 +63,17 @@
   </header>
 </template>
 
-<script>
-export default {
-  name: "BlockHeader",
-  data() {
-    return {
-      menuActive: screen.width <= 767.98 ? false : true
-    };
-  },
-  methods: {
-    toggleShow() {
-      this.menuActive = screen.width <= 767.98 ? false : true;
-    }
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+
+@Component
+export default class BlockHeader extends Vue {
+  menuActive = screen.width <= 767.98 ? false : true
+
+  toggleShow() {
+    this.menuActive = screen.width <= 767.98 ? false : true
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

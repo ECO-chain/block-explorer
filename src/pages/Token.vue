@@ -562,18 +562,13 @@
     </b-container>
   </div>
 </template>
-<script>
-export default {
-  name: "Token",
-  components: {},
-  data() {
-    return {
-      rows: 100,
-      currentPage: 1
-    };
-  },
-  mounted: function() {},
-  computed: {},
-  methods: {}
-};
+
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator";
+
+@Component
+export default class Token extends Vue {
+  rows = 100
+  currentPage = 1
+}
 </script>
