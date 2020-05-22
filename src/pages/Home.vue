@@ -86,10 +86,9 @@
                 </div>
                 <div class="my-1 small">
                   Mined by:
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
+                  <router-link to="/address" class="d-block text-truncate"
+                    >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link
+                  >
                 </div>
                 <div class="my-1 small">Size: 927</div>
                 <div class="my-1 small">Transactions: 2</div>
@@ -105,10 +104,9 @@
                 </div>
                 <div class="my-1 small">
                   Mined by:
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
+                  <router-link to="/address" class="d-block text-truncate"
+                    >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link
+                  >
                 </div>
                 <div class="my-1 small">Size: 927</div>
                 <div class="my-1 small">Transactions: 2</div>
@@ -124,10 +122,9 @@
                 </div>
                 <div class="my-1 small">
                   Mined by:
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
+                  <router-link to="/address" class="d-block text-truncate"
+                    >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link
+                  >
                 </div>
                 <div class="my-1 small">Size: 927</div>
                 <div class="my-1 small">Transactions: 2</div>
@@ -143,10 +140,9 @@
                 </div>
                 <div class="my-1 small">
                   Mined by:
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
+                  <router-link to="/address" class="d-block text-truncate"
+                    >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link
+                  >
                 </div>
                 <div class="my-1 small">Size: 927</div>
                 <div class="my-1 small">Transactions: 2</div>
@@ -162,10 +158,9 @@
                 </div>
                 <div class="my-1 small">
                   Mined by:
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
+                  <router-link to="/address" class="d-block text-truncate"
+                    >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link
+                  >
                 </div>
                 <div class="my-1 small">Size: 927</div>
                 <div class="my-1 small">Transactions: 2</div>
@@ -181,10 +176,9 @@
                 </div>
                 <div class="my-1 small">
                   Mined by:
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
+                  <router-link to="/address" class="d-block text-truncate"
+                    >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link
+                  >
                 </div>
                 <div class="my-1 small">Size: 927</div>
                 <div class="my-1 small">Transactions: 2</div>
@@ -200,10 +194,9 @@
                 </div>
                 <div class="my-1 small">
                   Mined by:
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
+                  <router-link to="/address" class="d-block text-truncate"
+                    >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link
+                  >
                 </div>
                 <div class="my-1 small">Size: 927</div>
                 <div class="my-1 small">Transactions: 2</div>
@@ -228,7 +221,9 @@
                 </div>
                 <div class="my-1 small">
                   Hash:
-                  <router-link to="/tx" class="d-block text-truncate">9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
+                  <router-link to="/tx" class="d-block text-truncate"
+                    >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link
+                  >
                 </div>
                 <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
               </div>
@@ -242,7 +237,9 @@
                 </div>
                 <div class="my-1 small">
                   Hash:
-                  <router-link to="/tx" class="d-block text-truncate">9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
+                  <router-link to="/tx" class="d-block text-truncate"
+                    >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link
+                  >
                 </div>
                 <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
               </div>
@@ -256,7 +253,9 @@
                 </div>
                 <div class="my-1 small">
                   Hash:
-                  <router-link to="/tx" class="d-block text-truncate">9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
+                  <router-link to="/tx" class="d-block text-truncate"
+                    >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link
+                  >
                 </div>
                 <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
               </div>
@@ -270,7 +269,9 @@
                 </div>
                 <div class="my-1 small">
                   Hash:
-                  <router-link to="/tx" class="d-block text-truncate">9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
+                  <router-link to="/tx" class="d-block text-truncate"
+                    >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link
+                  >
                 </div>
                 <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
               </div>
@@ -284,7 +285,9 @@
                 </div>
                 <div class="my-1 small">
                   Hash:
-                  <router-link to="/tx" class="d-block text-truncate">9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
+                  <router-link to="/tx" class="d-block text-truncate"
+                    >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link
+                  >
                 </div>
                 <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
               </div>
@@ -298,7 +301,9 @@
                 </div>
                 <div class="my-1 small">
                   Hash:
-                  <router-link to="/tx" class="d-block text-truncate">9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
+                  <router-link to="/tx" class="d-block text-truncate"
+                    >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link
+                  >
                 </div>
                 <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
               </div>
@@ -312,7 +317,9 @@
                 </div>
                 <div class="my-1 small">
                   Hash:
-                  <router-link to="/tx" class="d-block text-truncate">9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
+                  <router-link to="/tx" class="d-block text-truncate"
+                    >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link
+                  >
                 </div>
                 <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
               </div>
@@ -326,18 +333,21 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
-import BlockSearchBox from "@/components/SearchBox.vue";
-import Chart from "chart.js";
+import { Vue, Component } from 'vue-property-decorator'
+import BlockSearchBox from '@/components/SearchBox.vue'
+import store from '@/store/index'
+import Chart from 'chart.js'
 
 @Component({
   components: {
-    BlockSearchBox,
+    BlockSearchBox
   }
 })
 export default class Home extends Vue {
   mounted() {
     this.chartInit()
+    console.log('store', store.state.ecocApiUrl)
+    console.log('this store', this.$store.state)
   }
 
   swiperOption = {
@@ -366,33 +376,33 @@ export default class Home extends Vue {
       }
     },
     pagination: {
-      el: ".swiper-pagination",
+      el: '.swiper-pagination',
       clickable: true
     }
   }
 
   chartInit() {
-    Chart.defaults.global.legend.display = false;
-    var ctx = document.getElementById("graph");
+    Chart.defaults.global.legend.display = false
+    var ctx = document.getElementById('graph')
     new Chart(ctx, {
-      type: "line",
+      type: 'line',
       data: {
-        labels: ["1", "2", "3", "4", "5", "6", "7"],
+        labels: ['1', '2', '3', '4', '5', '6', '7'],
         datasets: [
           {
-            borderColor: "#803e9d",
-            backgroundColor: "#141725",
+            borderColor: '#803e9d',
+            backgroundColor: '#141725',
             borderWidth: 2,
             lineTension: 0,
-            pointBackgroundColor: "#803e9d",
+            pointBackgroundColor: '#803e9d',
             pointBorderWidth: 4,
-            pointStyle: "rect",
+            pointStyle: 'rect',
             data: [5600, 6200, 5600, 5300, 5436, 5436, 5346]
           }
         ],
         options: {}
       }
-    });
+    })
   }
 }
 </script>

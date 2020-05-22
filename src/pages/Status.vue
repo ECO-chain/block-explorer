@@ -4,9 +4,7 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page mb-1">
-              <span>C</span>hain Status
-            </h2>
+            <h2 class="head-page mb-1"><span>C</span>hain Status</h2>
           </div>
           <!-- END .group-head -->
           <b-row>
@@ -23,7 +21,12 @@
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1">
-                          <b-progress :value="value" :max="max" show-progress height="20px"></b-progress>
+                          <b-progress
+                            :value="value"
+                            :max="max"
+                            show-progress
+                            height="20px"
+                          ></b-progress>
                         </div>
                       </b-col>
                       <b-col cols="6">
@@ -78,10 +81,9 @@
                       </b-col>
                       <b-col cols="12">
                         <div class="my-1 text-right">
-                          <router-link
-                            to="/block"
-                            class="d-block text-truncate"
-                          >d896fb8bb843c6c1f2d7c2ee228bee1286c3a73062c00d9580885e6c79b3dd6a</router-link>
+                          <router-link to="/block" class="d-block text-truncate"
+                            >d896fb8bb843c6c1f2d7c2ee228bee1286c3a73062c00d9580885e6c79b3dd6a</router-link
+                          >
                         </div>
                       </b-col>
                       <b-col cols="12">
@@ -89,10 +91,9 @@
                       </b-col>
                       <b-col cols="12">
                         <div class="my-1 text-right">
-                          <router-link
-                            to="/block"
-                            class="d-block text-truncate"
-                          >b620e613d0d655b2ba080f08743d05925c92d55b851402c7cc91160b6d1265b2</router-link>
+                          <router-link to="/block" class="d-block text-truncate"
+                            >b620e613d0d655b2ba080f08743d05925c92d55b851402c7cc91160b6d1265b2</router-link
+                          >
                         </div>
                       </b-col>
                     </b-row>
@@ -171,7 +172,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component } from 'vue-property-decorator'
 
 @Component
 export default class Status extends Vue {

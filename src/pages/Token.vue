@@ -4,9 +4,7 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page my-0">
-              <span>T</span>oken tracker summary
-            </h2>
+            <h2 class="head-page my-0"><span>T</span>oken tracker summary</h2>
           </div>
           <!-- END .group-head -->
         </b-col>
@@ -51,7 +49,9 @@
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">
-                      <router-link to="/address" class="d-block text-truncate">0abd9012fc9495d94346cbaded83f9e33be2ae07</router-link>
+                      <router-link to="/address" class="d-block text-truncate"
+                        >0abd9012fc9495d94346cbaded83f9e33be2ae07</router-link
+                      >
                     </div>
                   </b-col>
                 </b-row>
@@ -103,201 +103,177 @@
                     <tbody class="small">
                       <tr>
                         <td>
-                          <router-link
-                            to="/tx"
-                            class="d-block text-truncate w-200px"
-                          >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link>
+                          <router-link to="/tx" class="d-block text-truncate w-200px"
+                            >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link
+                          >
                         </td>
                         <td class="text-center">a day ago</td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">
                           <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                         </td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">8094.39</td>
                       </tr>
                       <tr>
                         <td>
-                          <router-link
-                            to="/tx"
-                            class="d-block text-truncate w-200px"
-                          >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link>
+                          <router-link to="/tx" class="d-block text-truncate w-200px"
+                            >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link
+                          >
                         </td>
                         <td class="text-center">a day ago</td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">
                           <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                         </td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">8094.39</td>
                       </tr>
                       <tr>
                         <td>
-                          <router-link
-                            to="/tx"
-                            class="d-block text-truncate w-200px"
-                          >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link>
+                          <router-link to="/tx" class="d-block text-truncate w-200px"
+                            >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link
+                          >
                         </td>
                         <td class="text-center">a day ago</td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">
                           <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                         </td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">8094.39</td>
                       </tr>
                       <tr>
                         <td>
-                          <router-link
-                            to="/tx"
-                            class="d-block text-truncate w-200px"
-                          >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link>
+                          <router-link to="/tx" class="d-block text-truncate w-200px"
+                            >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link
+                          >
                         </td>
                         <td class="text-center">a day ago</td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">
                           <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                         </td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">8094.39</td>
                       </tr>
                       <tr>
                         <td>
-                          <router-link
-                            to="/tx"
-                            class="d-block text-truncate w-200px"
-                          >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link>
+                          <router-link to="/tx" class="d-block text-truncate w-200px"
+                            >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link
+                          >
                         </td>
                         <td class="text-center">a day ago</td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">
                           <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                         </td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">8094.39</td>
                       </tr>
                       <tr>
                         <td>
-                          <router-link
-                            to="/tx"
-                            class="d-block text-truncate w-200px"
-                          >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link>
+                          <router-link to="/tx" class="d-block text-truncate w-200px"
+                            >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link
+                          >
                         </td>
                         <td class="text-center">a day ago</td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">
                           <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                         </td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">8094.39</td>
                       </tr>
                       <tr>
                         <td>
-                          <router-link
-                            to="/tx"
-                            class="d-block text-truncate w-200px"
-                          >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link>
+                          <router-link to="/tx" class="d-block text-truncate w-200px"
+                            >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link
+                          >
                         </td>
                         <td class="text-center">a day ago</td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">
                           <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                         </td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">8094.39</td>
                       </tr>
                       <tr>
                         <td>
-                          <router-link
-                            to="/tx"
-                            class="d-block text-truncate w-200px"
-                          >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link>
+                          <router-link to="/tx" class="d-block text-truncate w-200px"
+                            >88c9ca186c24a847701137a8afca822d8ff8aba3134fc21bbb538a602f3d0e47</router-link
+                          >
                         </td>
                         <td class="text-center">a day ago</td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">
                           <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                         </td>
                         <td class="text-right">
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate w-200px"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate w-200px"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td class="text-center">8094.39</td>
                       </tr>
@@ -335,10 +311,9 @@
                       <tr>
                         <td class="text-center">1</td>
                         <td>
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td>8094.39</td>
                         <td>78.409075521707835977 %</td>
@@ -346,10 +321,9 @@
                       <tr>
                         <td class="text-center">2</td>
                         <td>
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td>8094.39</td>
                         <td>78.409075521707835977 %</td>
@@ -357,10 +331,9 @@
                       <tr>
                         <td class="text-center">3</td>
                         <td>
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td>8094.39</td>
                         <td>78.409075521707835977 %</td>
@@ -368,10 +341,9 @@
                       <tr>
                         <td class="text-center">4</td>
                         <td>
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td>8094.39</td>
                         <td>78.409075521707835977 %</td>
@@ -379,10 +351,9 @@
                       <tr>
                         <td class="text-center">5</td>
                         <td>
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td>8094.39</td>
                         <td>78.409075521707835977 %</td>
@@ -390,10 +361,9 @@
                       <tr>
                         <td class="text-center">6</td>
                         <td>
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td>8094.39</td>
                         <td>78.409075521707835977 %</td>
@@ -401,10 +371,9 @@
                       <tr>
                         <td class="text-center">7</td>
                         <td>
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td>8094.39</td>
                         <td>78.409075521707835977 %</td>
@@ -412,10 +381,9 @@
                       <tr>
                         <td class="text-center">8</td>
                         <td>
-                          <router-link
-                            to="/address"
-                            class="d-block text-truncate"
-                          >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                          <router-link to="/address" class="d-block text-truncate"
+                            >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link
+                          >
                         </td>
                         <td>8094.39</td>
                         <td>78.409075521707835977 %</td>
@@ -498,10 +466,9 @@
                             balance
                             <span class="text-purple-light">uint256</span> 0
                           </b-col>
-                          <b-col
-                            cols="auto"
-                            class="d-block text-truncate"
-                          >[ Owner address: 0abd9012fc9495d94346cbaded83f9e33be2ae07 ]</b-col>
+                          <b-col cols="auto" class="d-block text-truncate"
+                            >[ Owner address: 0abd9012fc9495d94346cbaded83f9e33be2ae07 ]</b-col
+                          >
                         </b-row>
                       </div>
                     </div>
@@ -545,10 +512,9 @@
                             balance
                             <span class="text-purple-light">uint256</span> 0
                           </b-col>
-                          <b-col
-                            cols="auto"
-                            class="d-block text-truncate"
-                          >[ Owner address: 0abd9012fc9495d94346cbaded83f9e33be2ae07 ]</b-col>
+                          <b-col cols="auto" class="d-block text-truncate"
+                            >[ Owner address: 0abd9012fc9495d94346cbaded83f9e33be2ae07 ]</b-col
+                          >
                         </b-row>
                       </div>
                     </div>
@@ -564,7 +530,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component } from 'vue-property-decorator'
 
 @Component
 export default class Token extends Vue {

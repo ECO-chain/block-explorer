@@ -2,19 +2,19 @@
   <div class="container-fill-height">
     <b-container class="mb-3 mb-sm-4 pt-4 pt-sm-5">
       <b-row>
-
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page mb-1">
-              <span>T</span>oken Contracts
-            </h2>
+            <h2 class="head-page mb-1"><span>T</span>oken Contracts</h2>
           </div>
           <!-- END .group-head -->
         </b-col>
 
         <b-col cols="12">
           <div class="block-search p-3 mb-2 rounded-lg d-flex">
-            <b-form-input class="rounded-0" placeholder="Enter an ERC20 Contract Address or Token Name"></b-form-input>
+            <b-form-input
+              class="rounded-0"
+              placeholder="Enter an ERC20 Contract Address or Token Name"
+            ></b-form-input>
             <b-button variant="primary" class="rounded-0">Search</b-button>
           </div>
         </b-col>
@@ -77,17 +77,14 @@
             </div>
           </div>
         </b-col>
-        
       </b-row>
     </b-container>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component } from 'vue-property-decorator'
 
 @Component
-export default class Tokens extends Vue {
-
-}
+export default class Tokens extends Vue {}
 </script>

@@ -4,9 +4,7 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page mb-1">
-              <span>B</span>locks by Date
-            </h2>
+            <h2 class="head-page mb-1"><span>B</span>locks by Date</h2>
           </div>
           <!-- END .group-head -->
 
@@ -30,9 +28,7 @@
             </ul>
             <p class="mb-0 text-center text-md-right">
               SUN MAR 29 2020 00:00:00 GMT+0700 (INDOCHINA TIME)
-              <span
-                class="small text-white-50"
-              >a day ago</span>
+              <span class="small text-white-50">a day ago</span>
             </p>
           </nav>
 
@@ -351,10 +347,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component } from 'vue-property-decorator'
 
 @Component
-export default class Blocks extends Vue {
-
-}
+export default class Blocks extends Vue {}
 </script>

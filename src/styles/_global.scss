@@ -263,7 +263,7 @@ hr {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=1 );
   } */
   .swiper-slide::after {
-    content: "";
+    content: '';
     display: block;
     height: 15px;
     background: $purple-light;
@@ -327,8 +327,8 @@ hr {
 }
 
 // hide arrow number
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
@@ -371,7 +371,7 @@ select.form-control {
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
-  text-overflow: "";
+  text-overflow: '';
   option {
     color: $purple-dark;
   }
@@ -597,7 +597,7 @@ select.form-control::-ms-expand {
 .switch-language {
   position: relative;
   &::after {
-    content: "";
+    content: '';
     display: block;
     width: 1px;
     height: 15px;

@@ -4,9 +4,7 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page mb-1">
-              <span>C</span>harts
-            </h2>
+            <h2 class="head-page mb-1"><span>C</span>harts</h2>
           </div>
           <!-- END .group-head -->
 
@@ -136,8 +134,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
-import Chart from "chart.js";
+import { Vue, Component } from 'vue-property-decorator'
+import Chart from 'chart.js'
 
 @Component
 export default class Charts extends Vue {
@@ -146,27 +144,27 @@ export default class Charts extends Vue {
   }
 
   chartInit() {
-    Chart.defaults.global.legend.display = false;
-    var ctx = document.getElementById("graph");
+    Chart.defaults.global.legend.display = false
+    var ctx = document.getElementById('graph')
     new Chart(ctx, {
-      type: "line",
+      type: 'line',
       data: {
-        labels: ["1", "2", "3", "4", "5", "6", "7"],
+        labels: ['1', '2', '3', '4', '5', '6', '7'],
         datasets: [
           {
-            borderColor: "#803e9d",
-            backgroundColor: "#141725",
+            borderColor: '#803e9d',
+            backgroundColor: '#141725',
             borderWidth: 2,
             lineTension: 0,
-            pointBackgroundColor: "#803e9d",
+            pointBackgroundColor: '#803e9d',
             pointBorderWidth: 4,
-            pointStyle: "rect",
+            pointStyle: 'rect',
             data: [217000, 217500, 218000, 218500, 219000, 219500, 220000]
           }
         ],
         options: {}
       }
-    });
+    })
   }
 }
 </script>

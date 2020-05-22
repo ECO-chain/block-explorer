@@ -4,9 +4,7 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page my-0">
-              <span>S</span>tatistics
-            </h2>
+            <h2 class="head-page my-0"><span>S</span>tatistics</h2>
             <p class="my-0">ECOC statistics for the last 24 hours</p>
           </div>
           <!-- END .group-head -->
@@ -54,7 +52,9 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
+                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary"
+                    >View Chart</router-link
+                  >
                 </div>
               </b-col>
             </b-row>
@@ -67,7 +67,9 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
+                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary"
+                    >View Chart</router-link
+                  >
                 </div>
               </b-col>
             </b-row>
@@ -80,7 +82,9 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
+                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary"
+                    >View Chart</router-link
+                  >
                 </div>
               </b-col>
             </b-row>
@@ -112,7 +116,9 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
+                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary"
+                    >View Chart</router-link
+                  >
                 </div>
               </b-col>
             </b-row>
@@ -125,7 +131,9 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
+                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary"
+                    >View Chart</router-link
+                  >
                 </div>
               </b-col>
             </b-row>
@@ -137,10 +145,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component } from 'vue-property-decorator'
 
 @Component
-export default class Stats extends Vue {
-
-}
+export default class Stats extends Vue {}
 </script>

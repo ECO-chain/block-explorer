@@ -4,14 +4,12 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page my-0">
-              <span>T</span>ransaction
-            </h2>
+            <h2 class="head-page my-0"><span>T</span>ransaction</h2>
             <p class="my-0 text-truncate">
               TRANSACTION:
-              <span
-                class="text-purple"
-              >6e06120d8be3a2873aaca2db4e658ecdfd15304139687432ed067300253ca106</span>
+              <span class="text-purple"
+                >6e06120d8be3a2873aaca2db4e658ecdfd15304139687432ed067300253ca106</span
+              >
             </p>
           </div>
           <!-- END .group-head -->
@@ -46,10 +44,9 @@
               </b-col>
               <b-col cols="6">
                 <div class="my-1 text-right text-truncate">
-                  <router-link
-                    to="/block"
-                    class="d-block text-truncate"
-                  >b87804578b840872c0df8c892b6cb5d4797948847f93a933fae3986d8854058b</router-link>
+                  <router-link to="/block" class="d-block text-truncate"
+                    >b87804578b840872c0df8c892b6cb5d4797948847f93a933fae3986d8854058b</router-link
+                  >
                 </div>
               </b-col>
               <b-col cols="6">
@@ -69,11 +66,9 @@
 
           <div class="block-global p-3 my-3 rounded-lg">
             <b-row class="align-items-end mb-3">
-              <b-col
-                cols="12"
-                md
-                class="text-truncate"
-              >6e06120d8be3a2873aaca2db4e658ecdfd15304139687432ed067300253ca106</b-col>
+              <b-col cols="12" md class="text-truncate"
+                >6e06120d8be3a2873aaca2db4e658ecdfd15304139687432ed067300253ca106</b-col
+              >
               <b-col cols="12" md class="text-md-right small">mined April 7, 2020 2:49:36 AM</b-col>
             </b-row>
             <b-row>
@@ -88,7 +83,9 @@
                     </b-row>
                   </b-col>
                   <b-col cols="12" lg="1" class="text-center">
-                    <b-icon-arrow-right-short class="h3 mb-0 rotate-md-90"></b-icon-arrow-right-short>
+                    <b-icon-arrow-right-short
+                      class="h3 mb-0 rotate-md-90"
+                    ></b-icon-arrow-right-short>
                   </b-col>
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
@@ -101,7 +98,9 @@
                       <b-col cols="8" class="text-truncate">
                         <router-link to="/address">EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
                       </b-col>
-                      <b-col cols="4" class="text-right small text-purple-light">319.49 ECOC (U)</b-col>
+                      <b-col cols="4" class="text-right small text-purple-light"
+                        >319.49 ECOC (U)</b-col
+                      >
                     </b-row>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
@@ -115,7 +114,9 @@
             </b-row>
             <b-row>
               <b-col cols="12" md class="text-center text-md-right">
-                <div class="d-inline-block small text-purple-light mx-3 mr-md-0">CONFIRMATIONS: 43</div>
+                <div class="d-inline-block small text-purple-light mx-3 mr-md-0">
+                  CONFIRMATIONS: 43
+                </div>
                 <div class="d-inline-block small text-purple-light mx-3 mr-md-0">359.49 ECOC</div>
               </b-col>
             </b-row>
@@ -124,11 +125,9 @@
 
           <div class="block-global p-3 my-3 rounded-lg">
             <b-row class="align-items-end mb-3">
-              <b-col
-                cols="12"
-                md
-                class="text-truncate"
-              >ac8a3348a82e4aedf6177264e216a81a032fc9df2fd6feb32e56495037b9ee4c</b-col>
+              <b-col cols="12" md class="text-truncate"
+                >ac8a3348a82e4aedf6177264e216a81a032fc9df2fd6feb32e56495037b9ee4c</b-col
+              >
               <b-col cols="12" md class="text-md-right small">mined April 6, 2020 8:19:52 PM</b-col>
             </b-row>
             <b-row>
@@ -143,7 +142,9 @@
                     </b-row>
                   </b-col>
                   <b-col cols="12" lg="1" class="text-center">
-                    <b-icon-arrow-right-short class="h3 mb-0 rotate-md-90"></b-icon-arrow-right-short>
+                    <b-icon-arrow-right-short
+                      class="h3 mb-0 rotate-md-90"
+                    ></b-icon-arrow-right-short>
                   </b-col>
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
@@ -156,7 +157,9 @@
                       <b-col cols="8" class="text-truncate">
                         <router-link to="/address">EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
                       </b-col>
-                      <b-col cols="4" class="text-right small text-purple-light">319.49 ECOC (U)</b-col>
+                      <b-col cols="4" class="text-right small text-purple-light"
+                        >319.49 ECOC (U)</b-col
+                      >
                     </b-row>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
@@ -170,7 +173,9 @@
             </b-row>
             <b-row>
               <b-col cols="12" md class="text-center text-md-right">
-                <div class="d-inline-block small text-purple-light mx-3 mr-md-0">CONFIRMATIONS: 43</div>
+                <div class="d-inline-block small text-purple-light mx-3 mr-md-0">
+                  CONFIRMATIONS: 43
+                </div>
                 <div class="d-inline-block small text-purple-light mx-3 mr-md-0">359.49 ECOC</div>
               </b-col>
             </b-row>
@@ -178,11 +183,9 @@
           <!-- END .block-global -->
           <div class="block-global p-3 my-3 rounded-lg">
             <b-row class="align-items-end mb-3">
-              <b-col
-                cols="12"
-                md
-                class="text-truncate"
-              >ac8a3348a82e4aedf6177264e216a81a032fc9df2fd6feb32e56495037b9ee4c</b-col>
+              <b-col cols="12" md class="text-truncate"
+                >ac8a3348a82e4aedf6177264e216a81a032fc9df2fd6feb32e56495037b9ee4c</b-col
+              >
               <b-col cols="12" md class="text-md-right small">mined April 6, 2020 8:19:52 PM</b-col>
             </b-row>
             <b-row>
@@ -197,7 +200,9 @@
                     </b-row>
                   </b-col>
                   <b-col cols="12" lg="1" class="text-center">
-                    <b-icon-arrow-right-short class="h3 mb-0 rotate-md-90"></b-icon-arrow-right-short>
+                    <b-icon-arrow-right-short
+                      class="h3 mb-0 rotate-md-90"
+                    ></b-icon-arrow-right-short>
                   </b-col>
                   <b-col cols="12" lg>
                     <b-row class="align-items-center no-gutters">
@@ -210,7 +215,9 @@
                       <b-col cols="8" class="text-truncate">
                         <router-link to="/address">EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
                       </b-col>
-                      <b-col cols="4" class="text-right small text-purple-light">319.49 ECOC (U)</b-col>
+                      <b-col cols="4" class="text-right small text-purple-light"
+                        >319.49 ECOC (U)</b-col
+                      >
                     </b-row>
                     <b-row class="align-items-center no-gutters">
                       <b-col cols="8" class="text-truncate">
@@ -224,7 +231,9 @@
             </b-row>
             <b-row>
               <b-col cols="12" md class="text-center text-md-right">
-                <div class="d-inline-block small text-purple-light mx-3 mr-md-0">CONFIRMATIONS: 43</div>
+                <div class="d-inline-block small text-purple-light mx-3 mr-md-0">
+                  CONFIRMATIONS: 43
+                </div>
                 <div class="d-inline-block small text-purple-light mx-3 mr-md-0">359.49 ECOC</div>
               </b-col>
             </b-row>
@@ -237,10 +246,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component } from 'vue-property-decorator'
 
 @Component
-export default class Transaction extends Vue {
-
-}
+export default class Transaction extends Vue {}
 </script>

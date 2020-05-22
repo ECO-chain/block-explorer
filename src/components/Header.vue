@@ -29,7 +29,9 @@
                     <router-link to="/tokens" @click.native="toggleShow()">Tokens</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/rich-list" @click.native="toggleShow()">Rich List</router-link>
+                    <router-link to="/rich-list" @click.native="toggleShow()"
+                      >Rich List</router-link
+                    >
                   </li>
                   <li class="ml-3">
                     <b-dropdown
@@ -64,7 +66,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator'
 
 @Component
 export default class BlockHeader extends Vue {
@@ -89,10 +91,10 @@ export default class BlockHeader extends Vue {
 .header {
   height: 60px;
   @include media-breakpoint-down(md) {
-      font-size: rem(12);
+    font-size: rem(12);
   }
   @include media-breakpoint-down(sm) {
-      font-size: rem(16);
+    font-size: rem(16);
   }
   a {
     color: $white;
@@ -126,7 +128,7 @@ export default class BlockHeader extends Vue {
     text-align: center;
     padding: 2rem 0;
     li {
-      padding: .5rem 0;
+      padding: 0.5rem 0;
     }
   }
 }

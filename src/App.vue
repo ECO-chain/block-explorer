@@ -7,9 +7,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-import BlockHeader from "./components/Header.vue";
-import BlockFooter from "./components/Footer.vue";
+import { Vue, Component } from 'vue-property-decorator'
+import BlockHeader from './components/Header.vue'
+import BlockFooter from './components/Footer.vue'
 
 @Component({
   components: {
@@ -17,9 +17,7 @@ import BlockFooter from "./components/Footer.vue";
     BlockHeader
   }
 })
-export default class App extends Vue {
-
-}
+export default class App extends Vue {}
 </script>
 
 <style lang="scss">

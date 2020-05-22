@@ -4,9 +4,7 @@
       <b-row class="mb-3">
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page mb-1">
-              <span>R</span>ichest Addresses
-            </h2>
+            <h2 class="head-page mb-1"><span>R</span>ichest Addresses</h2>
           </div>
           <!-- END .group-head -->
         </b-col>
@@ -153,10 +151,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component } from 'vue-property-decorator'
 
 @Component
-export default class RichList extends Vue {
-
-}
+export default class RichList extends Vue {}
 </script>
