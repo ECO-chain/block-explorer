@@ -20,5 +20,10 @@ npm run build
 npm run lint
 ```
 
+### Styling code to match a project code format
+```
+npm run pt
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
