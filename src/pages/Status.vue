@@ -169,18 +169,13 @@
     </b-container>
   </div>
 </template>
-<script>
-export default {
-  name: "Status",
-  components: {},
-  data() {
-    return {
-      value: 80,
-      max: 100
-    };
-  },
-  mounted: function() {},
-  computed: {},
-  methods: {}
-};
+
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator";
+
+@Component
+export default class Status extends Vue {
+  value = 80
+  max = 100
+}
 </script>

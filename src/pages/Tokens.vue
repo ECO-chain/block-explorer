@@ -82,15 +82,12 @@
     </b-container>
   </div>
 </template>
-<script>
-export default {
-  name: "Tokens",
-  components: {},
-  data() {
-    return {};
-  },
-  mounted: function() {},
-  computed: {},
-  methods: {}
-};
+
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator";
+
+@Component
+export default class Tokens extends Vue {
+
+}
 </script>

@@ -4,8 +4,11 @@
   </footer>
 </template>
 
-<script>
-export default {
-  name: "BlockFooter"
-};
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+
+@Component
+export default class BlockFooter extends Vue {
+
+}
 </script>

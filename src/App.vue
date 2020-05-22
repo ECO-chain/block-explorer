@@ -6,26 +6,20 @@
   </div>
 </template>
 
-<script>
-import BlockHeader from "./components/Header";
-import BlockFooter from "./components/Footer";
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+import BlockHeader from "./components/Header.vue";
+import BlockFooter from "./components/Footer.vue";
 
-
-export default {
-  name: "App",
+@Component({
   components: {
-    BlockHeader,
     BlockFooter,
-  },
-  data() {
-    return {
-    };
-  },
-  mounted: function() {
-  },
-  computed: {},
-  methods: {}
-};
+    BlockHeader
+  }
+})
+export default class App extends Vue {
+
+}
 </script>
 
 <style lang="scss">

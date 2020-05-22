@@ -330,15 +330,12 @@
     </b-container>
   </div>
 </template>
-<script>
-export default {
-  name: "Block",
-  components: {},
-  data() {
-    return {};
-  },
-  mounted: function() {},
-  computed: {},
-  methods: {}
-};
+
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator";
+
+@Component
+export default class Block extends Vue {
+
+}
 </script>

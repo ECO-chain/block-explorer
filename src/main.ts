@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
-import VueRouter from 'vue-router'
 
-import routes from './routes';
+import router from './routes';
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)
@@ -13,16 +14,12 @@ Vue.use(IconsPlugin)
 
 // vue-awesome-swiper
 // https://github.com/surmon-china/vue-awesome-swiper
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
-Vue.use(VueAwesomeSwiper, /* { default global options } */)
+
+Vue.use(VueAwesomeSwiper)
 
 Vue.config.productionTip = false
 
-Vue.use(VueRouter);
-const router = new VueRouter({routes});
-
-new Vue({
+export default new Vue({
   router,
   render: h => h(App)
-}).$mount('#app')
+}).$mount("#app")

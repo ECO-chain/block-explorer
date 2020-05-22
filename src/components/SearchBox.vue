@@ -6,18 +6,16 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "BlockSearchBox",
-  data() {
-    return {
-      selected: null,
-      options: [
-        { value: null, text: "All Filters" },
-        { value: "1", text: "Addresses" },
-        { value: "2", text: "Tokens" },
-      ]
-    };
-  }
-};
+<script lang="ts">
+import { Vue, Component } from "vue-property-decorator";
+
+@Component
+export default class BlockSearchBox extends Vue {
+  selected = null;
+  options = [
+    { value: null, text: "All Filters" },
+    { value: "1", text: "Addresses" },
+    { value: "2", text: "Tokens" }
+  ];
+}
 </script>
