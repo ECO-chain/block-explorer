@@ -1,8 +1,11 @@
 export interface StatusState {
   finalSupply: Number
+  info: Info
+  stakingInfo: StakingInfo
+  supply: String
 }
 
-export interface Status {
+export interface Info {
   version: Number
   protocolversion: Number
   walletversion: Number
@@ -15,7 +18,7 @@ export interface Status {
     "proof-of-work": Number
     "proof-of-stake": Number
   }
-  testnet: Boolean
+  testnet: Boolean | null
   keypoololdest: Number
   keypoolsize: Number
   paytxfee: Number
