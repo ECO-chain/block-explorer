@@ -8,6 +8,12 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 
+import VueSocketIOExt from 'vue-socket.io-extended';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:3001/');
+
+Vue.use(VueSocketIOExt, socket);
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
