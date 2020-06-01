@@ -1,5 +1,7 @@
-import { ExplorerState } from '../api/types'
+import { StatusState } from '../api/status/type'
+import { StatisticsState } from '../api/statistics/type'
 
 export interface RootState {
-  explorer: ExplorerState
+  status: StatusState
+  statistics: StatisticsState
 }
