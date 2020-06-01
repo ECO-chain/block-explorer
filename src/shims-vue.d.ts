@@ -5,3 +5,5 @@ declare module '*.vue' {
 
 declare module 'vue-awesome-swiper'
 declare module 'chart.js'
+declare module 'socket.io'
+declare module 'socket.io-client'

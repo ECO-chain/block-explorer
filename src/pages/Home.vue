@@ -12,13 +12,13 @@
           <b-row>
             <b-col cols="12" md="6">
               <div class="bg-purple-gd rounded-lg text-center p-3 my-3">
-                <p class="my-1 text-style-2">2,000,000,000 ECOC</p>
+                <p class="my-1 text-style-2">{{ statusState.finalSupply }}</p>
                 <p class="my-1">Final Supply(Max)</p>
               </div>
             </b-col>
             <b-col cols="12" md="6">
               <div class="bg-purple-gd rounded-lg text-center p-3 my-3">
-                <p class="my-1 text-style-2">219,586,100 ECOC</p>
+                <p class="my-1 text-style-2">{{ statusState.supply }} ECOC</p>
                 <p class="my-1">Current Supply</p>
               </div>
             </b-col>
@@ -26,37 +26,37 @@
           <b-row>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">0.004</div>
+                <div class="my-1 text-truncate">{{ info.relayfee }}</div>
                 <div class="my-1 small text-purple-light">Relay Fee</div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">8,852,401.7178329</div>
+                <div class="my-1 text-truncate">{{ info.difficulty['proof-of-stake'] }}</div>
                 <div class="my-1 small text-purple-light">Difficulty</div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">118</div>
+                <div class="my-1 text-truncate">{{ info.connections }}</div>
                 <div class="my-1 small text-purple-light">Connections</div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">43,321,266.64651033</div>
+                <div class="my-1 text-truncate">{{ stakingInfo.netstakeweight }}</div>
                 <div class="my-1 small text-purple-light">Network Weight</div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">401,700</div>
+                <div class="my-1 text-truncate">{{ info.blocks }}</div>
                 <div class="my-1 small text-purple-light">Block Height</div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">50 ECOC</div>
+                <div class="my-1 text-truncate">{{ info.reward }} ECOC</div>
                 <div class="my-1 small text-purple-light">Block Reward</div>
               </div>
             </b-col>
@@ -66,7 +66,9 @@
       <b-col cols="12" lg="6" class="d-flex flex-column">
         <h2 class="head-global my-3">7 day ECOC transaction history</h2>
         <div class="block-global p-3 mb-3 rounded-lg w-100 h-100 d-flex align-items-center">
-          <canvas id="graph"></canvas>
+          <template v-if="Array.isArray(sevenDaysTx)">
+            <LineChart id="1" :labels.sync="txDJa" :data.sync="txCJa"></LineChart>
+          </template>
         </div>
       </b-col>
     </b-row>
@@ -349,23 +351,21 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import BlockSearchBox from '@/components/SearchBox.vue'
+import LineChart from '@/components/LineChart.vue'
 import statusModule from '@/api/status/index'
-import Chart from 'chart.js'
+import statisticsModule from '@/api/statistics/index'
+// import { Socket } from 'vue-socket.io-extended'
+/* eslint-disable no-unused-vars */
+import { StatusState, Info, StakingInfo } from '../api/status/type'
+import { TransactionStats } from '../api/statistics/type'
 
 @Component({
   components: {
-    BlockSearchBox
+    BlockSearchBox,
+    LineChart
   }
 })
 export default class Home extends Vue {
-  async mounted() {
-    this.chartInit()
-    const response = await statusModule.getStatus()
-    // const res2 = await explorerModule.getBlocks()
-
-    console.log(response)
-  }
-
   swiperOption = {
     autoplay: {
       delay: Math.floor(Math.random() * (4000 - 3000) + 3000),
@@ -397,28 +397,38 @@ export default class Home extends Vue {
     }
   }
 
-  chartInit() {
-    Chart.defaults.global.legend.display = false
-    var ctx = document.getElementById('graph')
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
-        datasets: [
-          {
-            borderColor: '#803e9d',
-            backgroundColor: '#141725',
-            borderWidth: 2,
-            lineTension: 0,
-            pointBackgroundColor: '#803e9d',
-            pointBorderWidth: 4,
-            pointStyle: 'rect',
-            data: [5600, 6200, 5600, 5300, 5436, 5436, 5346]
-          }
-        ],
-        options: {}
-      }
-    })
+  sevenDaysTx: TransactionStats[] | null = null
+  txDJa: String[] = []
+  txCJa: Number[] = []
+
+  async created() {
+    const info = await statusModule.getInfo()
+    const stakingInfo = await statusModule.getStakingInfo()
+    const supply = await statusModule.getTotalSupply()
+
+    this.sevenDaysTx = await statisticsModule.getTransactionStats('7')
+    this.txDJa = this.sevenDaysTx.map(tx => tx.date)
+    this.txCJa = this.sevenDaysTx.map(tx => tx.transaction_count)
+
+    statusModule.setInfo(info)
+    statusModule.setStakingInfo(stakingInfo)
+    statusModule.setSupply(supply)
+  }
+
+  get statusState(): StatusState {
+    return statusModule.state
+  }
+
+  get info(): Info {
+    return this.statusState.info
+  }
+
+  get stakingInfo(): StakingInfo {
+    return this.statusState.stakingInfo
+  }
+
+  get sevenTx() {
+    return statisticsModule.getTransactionStats('7')
   }
 }
 </script>
