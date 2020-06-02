@@ -67,7 +67,7 @@
         <h2 class="head-global my-3">7 day ECOC transaction history</h2>
         <div class="block-global p-3 mb-3 rounded-lg w-100 h-100 d-flex align-items-center">
           <template v-if="Array.isArray(sevenDaysTx)">
-            <LineChart id="1" :labels.sync="txDJa" :data.sync="txCJa"></LineChart>
+            <LineChart id="1" :labels.sync="txDate" :data.sync="txCount"></LineChart>
           </template>
         </div>
       </b-col>
@@ -354,6 +354,7 @@ import BlockSearchBox from '@/components/SearchBox.vue'
 import LineChart from '@/components/LineChart.vue'
 import statusModule from '@/api/status/index'
 import statisticsModule from '@/api/statistics/index'
+import { toMonthDayFormat } from '@/api/utils'
 // import { Socket } from 'vue-socket.io-extended'
 /* eslint-disable no-unused-vars */
 import { StatusState, Info, StakingInfo } from '../api/status/type'
@@ -398,17 +399,21 @@ export default class Home extends Vue {
   }
 
   sevenDaysTx: TransactionStats[] | null = null
-  txDJa: String[] = []
-  txCJa: Number[] = []
+  txDate: String[] = []
+  txCount: Number[] = []
 
-  async created() {
+  async mounted() {
     const info = await statusModule.getInfo()
     const stakingInfo = await statusModule.getStakingInfo()
     const supply = await statusModule.getTotalSupply()
 
     this.sevenDaysTx = await statisticsModule.getTransactionStats('7')
-    this.txDJa = this.sevenDaysTx.map(tx => tx.date)
-    this.txCJa = this.sevenDaysTx.map(tx => tx.transaction_count)
+    this.txDate = this.sevenDaysTx
+      .map(tx => {
+        return toMonthDayFormat(tx.date.toString())
+      })
+      .reverse()
+    this.txCount = this.sevenDaysTx.map(tx => tx.transaction_count).reverse()
 
     statusModule.setInfo(info)
     statusModule.setStakingInfo(stakingInfo)
@@ -425,10 +430,6 @@ export default class Home extends Vue {
 
   get stakingInfo(): StakingInfo {
     return this.statusState.stakingInfo
-  }
-
-  get sevenTx() {
-    return statisticsModule.getTransactionStats('7')
   }
 }
 </script>

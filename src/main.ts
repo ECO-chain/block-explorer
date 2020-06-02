@@ -7,6 +7,7 @@ import { store } from './store'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
+import { initFilters } from '@/api/filters'
 
 import VueSocketIOExt from 'vue-socket.io-extended';
 import io from 'socket.io-client';
@@ -25,6 +26,8 @@ Vue.use(IconsPlugin)
 Vue.use(VueAwesomeSwiper)
 
 Vue.config.productionTip = false
+
+initFilters()
 
 export default new Vue({
   router,

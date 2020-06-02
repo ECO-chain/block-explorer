@@ -1,5 +1,5 @@
 <template>
-    <canvas id="graph"></canvas>
+    <canvas :id="graphId"></canvas>
 </template>
 
 <script lang="ts">
@@ -15,12 +15,8 @@ export default class LineChart extends Vue {
   graphId = `graph${this.idNumber}`
 
   mounted() {
-
-    console.log('labels is', this.labelSet)
-    console.log('data is', this.dataSet)
-
     Chart.defaults.global.legend.display = false
-    var ctx = document.getElementById('graph')
+    var ctx = document.getElementById(this.graphId)
     new Chart(ctx, {
       type: 'line',
       data: {

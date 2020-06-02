@@ -41,11 +41,6 @@ export default class App extends Vue {
     console.log('receiving', payload)
   }
 
-  @Socket('status')
-  onStatus(payload: any) {
-    console.log('onstatus', payload)
-  }
-
   @Socket('block')
   onBlock(payload: any) {
     console.log('onBlock', payload)
