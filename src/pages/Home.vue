@@ -12,13 +12,13 @@
           <b-row>
             <b-col cols="12" md="6">
               <div class="bg-purple-gd rounded-lg text-center p-3 my-3">
-                <p class="my-1 text-style-2">{{ statusState.finalSupply }}</p>
+                <p class="my-1 text-style-2">{{ statusState.finalSupply | numberWithCommas }} ECOC</p>
                 <p class="my-1">Final Supply(Max)</p>
               </div>
             </b-col>
             <b-col cols="12" md="6">
               <div class="bg-purple-gd rounded-lg text-center p-3 my-3">
-                <p class="my-1 text-style-2">{{ statusState.supply }} ECOC</p>
+                <p class="my-1 text-style-2">{{ Number(statusState.supply) | numberWithCommas }} ECOC</p>
                 <p class="my-1">Current Supply</p>
               </div>
             </b-col>
@@ -32,7 +32,7 @@
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">{{ info.difficulty['proof-of-stake'] }}</div>
+                <div class="my-1 text-truncate">{{ info.difficulty['proof-of-stake'] | numberWithCommas }}</div>
                 <div class="my-1 small text-purple-light">Difficulty</div>
               </div>
             </b-col>
@@ -44,19 +44,19 @@
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">{{ stakingInfo.netstakeweight }}</div>
+                <div class="my-1 text-truncate">{{ stakingInfo.netstakeweight | numberWithCommas(8) }}</div>
                 <div class="my-1 small text-purple-light">Network Weight</div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">{{ info.blocks }}</div>
+                <div class="my-1 text-truncate">{{ info.blocks | numberWithCommas }}</div>
                 <div class="my-1 small text-purple-light">Block Height</div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">{{ info.reward }} ECOC</div>
+                <div class="my-1 text-truncate">{{ info.reward | numberWithCommas(8) }} ECOC</div>
                 <div class="my-1 small text-purple-light">Block Reward</div>
               </div>
             </b-col>

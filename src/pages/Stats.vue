@@ -4,7 +4,9 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page my-0"><span>S</span>tatistics</h2>
+            <h2 class="head-page my-0">
+              <span>S</span>tatistics
+            </h2>
             <p class="my-0">ECOC statistics for the last 24 hours</p>
           </div>
           <!-- END .group-head -->
@@ -20,19 +22,19 @@
                 <div class="my-1">Blocks Minted</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1 text-right">2669</div>
+                <div class="my-1 text-right">{{ totalStats.n_blocks_mined | numberWithCommas }}</div>
               </b-col>
               <b-col cols="6">
                 <div class="my-1">Time Between Blocks</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1 text-right">32.37 secs</div>
+                <div class="my-1 text-right">{{ totalStats.time_between_blocks | numberWithCommas }} secs</div>
               </b-col>
               <b-col cols="6">
                 <div class="my-1">Minted ECOC coins</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1 text-right">133,450.00000000 ECOC</div>
+                <div class="my-1 text-right">{{ totalStats.mined_currency_amount | numberWithCommas(8) }} ECOC</div>
               </b-col>
             </b-row>
           </div>
@@ -48,13 +50,11 @@
                 <div class="my-1">Total Transaction Fees</div>
               </b-col>
               <b-col>
-                <div class="my-1 text-right">60,800.56963296 ECOC</div>
+                <div class="my-1 text-right">{{ totalStats.transaction_fees | numberWithCommas(8) }} ECOC</div>
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary"
-                    >View Chart</router-link
-                  >
+                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
@@ -63,13 +63,11 @@
                 <div class="my-1">Number of Transactions</div>
               </b-col>
               <b-col>
-                <div class="my-1 text-right">5583</div>
+                <div class="my-1 text-right">{{ totalStats.number_of_transactions | numberWithCommas }}</div>
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary"
-                    >View Chart</router-link
-                  >
+                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
@@ -78,13 +76,11 @@
                 <div class="my-1">Total Output Volume (ECOC)</div>
               </b-col>
               <b-col>
-                <div class="my-1 text-right">283.33837916 ECOC</div>
+                <div class="my-1 text-right">{{ totalStats.outputs_volume | numberWithCommas(8) }} ECOC</div>
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary"
-                    >View Chart</router-link
-                  >
+                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
@@ -112,13 +108,11 @@
                 <div class="my-1">Difficulty</div>
               </b-col>
               <b-col>
-                <div class="my-1 text-right">5,683,342.93347735</div>
+                <div class="my-1 text-right">{{ totalStats.difficulty | numberWithCommas }}</div>
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary"
-                    >View Chart</router-link
-                  >
+                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
@@ -127,13 +121,11 @@
                 <div class="my-1">Percent of staked supply</div>
               </b-col>
               <b-col>
-                <div class="my-1 text-right">0.6266743993294185 %</div>
+                <div class="my-1 text-right">{{ totalStats.stake | numberWithCommas }} %</div>
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary"
-                    >View Chart</router-link
-                  >
+                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
@@ -146,7 +138,16 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import statisticsModule from '@/api/statistics/index'
+// eslint-disable-next-line no-unused-vars
+import { Total } from '../api/statistics/type'
 
-@Component
-export default class Stats extends Vue {}
+@Component({})
+export default class Stats extends Vue {
+  totalStats: Total = {} as Total
+
+  async mounted() {
+    this.totalStats = await statisticsModule.getTotalStats()
+  }
+}
 </script>

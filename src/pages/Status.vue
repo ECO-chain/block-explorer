@@ -47,7 +47,7 @@
                         <div class="my-1">Initial Block Chain Height</div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1 text-right">{{ sync.blockChainHeight }}</div>
+                        <div class="my-1 text-right">{{ sync.blockChainHeight | numberWithCommas }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1">Synced Blocks</div>
@@ -127,7 +127,7 @@
                     <div class="my-1">Blocks</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">{{ statusInfo.blocks }}</div>
+                    <div class="my-1 text-right">{{ statusInfo.blocks | numberWithCommas }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1">Time Offset</div>
@@ -145,7 +145,7 @@
                     <div class="my-1">Mining Difficulty</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">{{ statusInfo.difficulty['proof-of-stake'] }}</div>
+                    <div class="my-1 text-right">{{ statusInfo.difficulty['proof-of-stake'] | numberWithCommas }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1">Network</div>
