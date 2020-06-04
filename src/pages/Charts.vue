@@ -4,17 +4,32 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page mb-1"><span>C</span>harts</h2>
+            <h2 class="head-page mb-1">
+              <span>C</span>harts
+            </h2>
           </div>
           <!-- END .group-head -->
 
-          <div class="group-head my-3 text-center text-md-left">
-            <h3 class="head-global mb-1">ECOC total supply</h3>
+          <div class="group-head my-3 text-center text-md-left mb-5">
+            <b-form-select v-model="chartSelected" :options="allCharts"></b-form-select>
+            <!-- <h3 class="head-global mb-1">ECOC total supply</h3> -->
             <p class="m-0">Check current ECOC supply.</p>
             <p class="m-0">Maximum supply is 2,000,000,000 ECOC</p>
           </div>
+          <div class="mb-2">
+            <b-form-radio-group
+              id="btn-radios-1"
+              v-model="daysSelected"
+              :options="daysOptions"
+              buttons
+              @input="daysChanged"
+              name="radios-btn-default"
+            ></b-form-radio-group>
+          </div>
           <div class="block-global p-3 mb-3 rounded-lg">
-            <canvas id="graph"></canvas>
+            <template v-if="labels.length > 0">
+              <LineChart id="1" :labels.sync="labels" :data.sync="data"></LineChart>
+            </template>
           </div>
         </b-col>
         <b-col cols="12">
@@ -134,37 +149,208 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import Chart from 'chart.js'
+/* eslint-disable no-unused-vars */
+import { Vue, Component, Watch } from 'vue-property-decorator'
+import LineChart from '@/components/LineChart.vue'
+import statisticsModule from '@/api/statistics/index'
+import { toMonthDayFormat } from '@/api/filters'
+import {
+  SupplyStats,
+  FeeStat,
+  TransactionStats,
+  OutputStat,
+  DifficultyStats,
+  StakeStats
+} from '../api/statistics/type'
 
-@Component
+@Component({
+  components: {
+    LineChart
+  }
+})
 export default class Charts extends Vue {
-  mounted() {
-    this.chartInit()
+
+  totalSupply: SupplyStats[] = []
+  fees: FeeStat[] = []
+  transactions: TransactionStats[] = []
+  outputs: OutputStat[] = []
+  difficulty: DifficultyStats[] = []
+  stakes: StakeStats[] = []
+
+  labels: any[] = []
+  data: any[] = []
+
+  chartSelected = 'total-supply'
+  // TODO: find other way to handle these data
+  allCharts = ['total-supply', 'fees', 'transaction', 'outputs', 'difficulty', 'stakes']
+  allChartsObj = [
+    {
+      name: 'ECOC Total supply',
+      description: 'Check current ECOC supply. Maximum supply is 2,000,000,000 ECOC',
+      getData: this.getSupplyData
+    },
+    {
+      name: 'Fees',
+      description:
+        'The total value of all transaction fees paid to miners (not including the coinbase value of block rewards).',
+      getData: this.getFeesData
+    },
+    {
+      name: 'Transactions',
+      description: 'The number of daily confirmed ECOC transactions.',
+      getData: this.getTransactionsData
+    },
+    {
+      name: 'Outputs',
+      description:
+        'The total value of all transaction outputs per day (includes coins returned to the sender as change).',
+      getData: this.getOutputsData
+    },
+    {
+      name: 'Difficulty',
+      description:
+        'A relative measure of how difficult it is to find a new block. The difficulty is adjusted periodically as a function of how much hashing power has been deployed by the network of miners.',
+      getData: this.getDifficultyData
+    },
+    {
+      name: 'Stakes',
+      description: '',
+      getData: this.getStakesData
+    }
+  ]
+
+  daysOptions = [
+    { text: '30 Days', value: '30' },
+    { text: '60 Days', value: '60' },
+    { text: '180 Days', value: '180' },
+    { text: '1 Year', value: '365' },
+    { text: '2 Years', value: '730' },
+    { text: 'All Time', value: 'all' }
+  ]
+
+  daysSelected = '30'
+
+  async mounted() {
+    // console.log(await this.getSupplyData('30'))
+    this.getSupplyData(this.daysSelected).then(val => {
+      this.labels = val.tsDate
+      this.data = val.tsData
+    })
   }
 
-  chartInit() {
-    Chart.defaults.global.legend.display = false
-    var ctx = document.getElementById('graph')
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
-        datasets: [
-          {
-            borderColor: '#803e9d',
-            backgroundColor: '#141725',
-            borderWidth: 2,
-            lineTension: 0,
-            pointBackgroundColor: '#803e9d',
-            pointBorderWidth: 4,
-            pointStyle: 'rect',
-            data: [217000, 217500, 218000, 218500, 219000, 219500, 220000]
-          }
-        ],
-        options: {}
-      }
+  async getSupplyData(days?: any) {
+    this.totalSupply = await statisticsModule.getSupplyStats(days)
+    let tsDate = this.totalSupply
+      .map(ts => {
+        return toMonthDayFormat(ts.date.toString())
+      })
+      .reverse()
+    // sum
+    let tsData = this.totalSupply.map(ts => ts.sum).reverse()
+    return { tsDate, tsData }
+  }
+
+  async getFeesData(days?: any) {
+    this.fees = await statisticsModule.getFeeStats(days)
+    let tsDate = this.fees
+      .map(ts => {
+        return toMonthDayFormat(ts.date.toString())
+      })
+      .reverse()
+    // fee
+    let tsData = this.fees.map(ts => ts.fee).reverse()
+
+    return { tsDate, tsData }
+  }
+
+  async getTransactionsData(days?: any) {
+    this.transactions = await statisticsModule.getTransactionStats(days)
+    let tsDate = this.transactions
+      .map(ts => {
+        return toMonthDayFormat(ts.date.toString())
+      })
+      .reverse()
+
+    let tsData = this.transactions.map(ts => ts.transaction_count).reverse()
+
+    return { tsDate, tsData }
+  }
+
+  async getOutputsData(days?: any) {
+    this.outputs = await statisticsModule.getOutputStats(days)
+    let tsDate = this.outputs
+      .map(ts => {
+        return toMonthDayFormat(ts.date.toString())
+      })
+      .reverse()
+
+    let tsData = this.outputs.map(ts => ts.sum).reverse()
+
+    return { tsDate, tsData }
+  }
+
+  async getDifficultyData(days?: any) {
+    this.difficulty = await statisticsModule.getDifficultyStats(days)
+    let tsDate = this.difficulty
+      .map(ts => {
+        return toMonthDayFormat(ts.date.toString())
+      })
+      .reverse()
+
+    let tsData = this.difficulty.map(ts => ts.sum).reverse()
+
+    return { tsDate, tsData }
+  }
+
+  async getStakesData(days?: any) {
+    this.stakes = await statisticsModule.getStakeStats(days)
+    let tsDate = this.stakes
+      .map(ts => {
+        return toMonthDayFormat(ts.date.toString())
+      })
+      .reverse()
+
+    let tsData = this.stakes.map(ts => ts.sum).reverse()
+
+    return { tsDate, tsData }
+  }
+
+  async daysChanged() {
+    const index = this.allCharts.indexOf(this.chartSelected)
+    //@ts-ignore
+    this.allChartsObj[index].getData(this.daysSelected).then(val => {
+      this.labels = val.tsDate
+      this.data = val.tsData
+    })
+  }
+
+  @Watch('chartSelected')
+  async onChartChanged(val: string) {
+    const index = this.allCharts.indexOf(val)
+    //@ts-ignore
+    this.allChartsObj[index].getData().then(val => {
+      this.labels = val.tsDate
+      this.data = val.tsData
     })
   }
 }
 </script>
+
+<style lang="scss" scoped>
+// select {
+//   border-color: #ffffff00;
+//   background-color: transparent;
+//   width: auto;
+//   display: block;
+//   font-size: 2.25rem;
+//   outline-color: transparent;
+//   text-shadow: 0 0 0 #000;
+//   /* color: rgb(0,0,0,0); */
+//   padding-top: 0;
+//   padding-right: 2.75rem;
+//   padding-bottom: 0;
+//   padding-left: initial;
+//   cursor: pointer;
+//   text-transform: capitalize;
+// }
+</style>

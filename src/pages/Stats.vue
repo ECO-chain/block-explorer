@@ -54,7 +54,7 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
+                  <router-link to="/charts" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
@@ -67,7 +67,7 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
+                  <router-link to="/charts" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
@@ -80,7 +80,7 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
+                  <router-link to="/charts" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
@@ -112,7 +112,7 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
+                  <router-link to="/charts" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
@@ -125,7 +125,7 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
+                  <router-link to="/charts" class="btn btn-sm btn-primary">View Chart</router-link>
                 </div>
               </b-col>
             </b-row>
