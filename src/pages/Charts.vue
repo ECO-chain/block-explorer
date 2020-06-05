@@ -12,7 +12,6 @@
           <div class="group-head my-3 text-center text-md-left mb-5">
             <span class="stats-span">{{ chartSelected }}</span>
             <b-form-select class="stats-select mb-2" v-model="chartSelected" :options="chartsList"></b-form-select>
-            <!-- <h3 class="head-global mb-1">ECOC total supply</h3> -->
             <p class="m-0">{{ chart.description }}</p>
           </div>
           <div class="mb-2">

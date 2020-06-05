@@ -7,7 +7,7 @@ import Status from './pages/Status.vue'
 import Stats from './pages/Stats.vue'
 import Charts from './pages/Charts.vue'
 import Tokens from './pages/Tokens.vue'
-import RichList from './pages/RichList.vue'
+import RichestList from './pages/RichestList.vue'
 import Address from './pages/Address.vue'
 import Block from './pages/Block.vue'
 import Outputs from './pages/Outputs.vue'
@@ -51,9 +51,9 @@ const router = new VueRouter({
         component: Tokens
       },
       {
-        path: '/rich-list',
-        name: 'richList',
-        component: RichList,
+        path: '/richest-list',
+        name: 'richestList',
+        component: RichestList,
       },
       {
         path: '/address',

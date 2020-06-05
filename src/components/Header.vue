@@ -29,7 +29,7 @@
                     <router-link to="/tokens" @click.native="toggleShow()">Tokens</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/rich-list" @click.native="toggleShow()"
+                    <router-link to="/richest-list" @click.native="toggleShow()"
                       >Rich List</router-link
                     >
                   </li>
