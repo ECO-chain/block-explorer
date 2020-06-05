@@ -398,8 +398,8 @@ export default class Home extends Vue {
   }
 
   sevenDaysTx: TransactionStats[] | null = null
-  txDate: String[] = []
-  txCount: Number[] = []
+  txDate: string[] = []
+  txCount: number[] = []
 
   async mounted() {
     const info = await statusModule.getInfo()

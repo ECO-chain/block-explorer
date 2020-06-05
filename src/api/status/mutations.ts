@@ -8,6 +8,6 @@ export function setStakingInfo(state: StatusState, stakingInfo: StakingInfo) {
   state.stakingInfo = stakingInfo
 }
 
-export function setSupply(state: StatusState, supply: String) {
+export function setSupply(state: StatusState, supply: string) {
   state.supply = supply
 }

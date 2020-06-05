@@ -97,7 +97,7 @@ async function getStakingInfo(context: ActionContext): Promise<StakingInfo> {
   }
 }
 
-async function getTotalSupply(context: ActionContext): Promise<String> {
+async function getTotalSupply(context: ActionContext): Promise<string> {
   try {
     const res = await Axios.get(`${env!.baseURL}api/statistics/total-supply?format=object`)
     return res.data['supply']

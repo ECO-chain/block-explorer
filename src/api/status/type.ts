@@ -1,48 +1,48 @@
 export interface StatusState {
-  finalSupply: Number
+  finalSupply: number
   info: Info
   stakingInfo: StakingInfo
-  supply: String
+  supply: string
 }
 
 export interface Info {
-  version: Number
-  protocolversion: Number
-  walletversion: Number
-  balance: Number
-  blocks: Number
-  timeoffset: Number
-  connections: Number
-  proxy: String
+  version: number
+  protocolversion: number
+  walletversion: number
+  balance: number
+  blocks: number
+  timeoffset: number
+  connections: number
+  proxy: string
   difficulty: {
-    "proof-of-work": Number
-    "proof-of-stake": Number
+    "proof-of-work": number
+    "proof-of-stake": number
   }
-  testnet: Boolean | null
-  keypoololdest: Number
-  keypoolsize: Number
-  paytxfee: Number
-  relayfee: Number
-  errors: String
-  network: String
-  reward: Number
+  testnet: boolean | null
+  keypoololdest: number
+  keypoolsize: number
+  paytxfee: number
+  relayfee: number
+  errors: string
+  network: string
+  reward: number
 }
 
 export interface SyncStatus {
-  status: String
-  blockChainHeight: Number
-  syncPercentage: Number
-  height: Number
+  status: string
+  blockChainHeight: number
+  syncPercentage: number
+  height: number
   error: any | null
-  type: String
+  type: string
 }
 
 export interface LastBlockHash {
-  syncTipHash: String
-  lastblockhash: String
+  syncTipHash: string
+  lastblockhash: string
 }
 
 export interface StakingInfo {
-  weight: Number
-  netstakeweight: Number
+  weight: number
+  netstakeweight: number
 }

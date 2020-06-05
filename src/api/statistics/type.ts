@@ -1,100 +1,68 @@
 export interface StatisticsState {}
 
 export interface Total {
-  n_blocks_mined: Number
-  time_between_blocks: Number
-  mined_currency_amount: Number
-  transaction_fees: Number
-  number_of_transactions: Number
-  outputs_volume: Number
-  difficulty: Number
-  stake: Number
+  n_blocks_mined: number
+  time_between_blocks: number
+  mined_currency_amount: number
+  transaction_fees: number
+  number_of_transactions: number
+  outputs_volume: number
+  difficulty: number
+  stake: number
 }
 
 export interface TransactionStats {
-  date: String
-  transaction_count: Number
-  block_count: Number
+  date: string
+  transaction_count: number
+  block_count: number
 }
 
 export interface FeeStat {
-  date: String
-  fee: Number
+  date: string
+  fee: number
 }
 
 export interface OutputStat {
-  date: String
-  sum: String
+  date: string
+  sum: string
 }
 
 export interface DifficultyStats {
-  date: String
-  sum: Number
+  date: string
+  sum: number
 }
 
 export interface StakeStats {
-  date: String
-  sum: Number
+  date: string
+  sum: number
 }
 
 export interface SupplyStats {
-  date: String
-  sum: String
+  date: string
+  sum: string
 }
 
 export interface BalanceIntervals {
-  max: Number
-  min: Number
-  count: Number
-  sum: Number
+  max: number
+  min: number
+  count: number
+  sum: number
 }
 
 export interface RichList {
-  address: String
-  blocks_mined: Number
-  balance: Number
+  address: string
+  blocks_mined: number
+  balance: number
 }
 
-// export interface TxStats {
-//   date: String
-//   transaction_count: Number
-//   block_count: Number
-// }
+// For display a table
+export interface BalanceIntervalsTable {
+  balance: string
+  addresses: number
+  percentAddresses: number
+  percentAddressesTotal: number
+  coins: number
+  percentCoins: number
+  percentCoinsTotal: number
+}
 
-// export interface Fee {
-//   date: String
-//   fee: Number
-// }
-
-// export interface Outputs {
-//   date: String
-//   sum: String
-// }
-
-// export interface Difficulty {
-//   date: String
-//   sum: Number
-// }
-
-// export interface Stake {
-//   date: String
-//   sum: Number
-// }
-
-// export interface Supply {
-//   date: String
-//   sum: String
-// }
-
-// export interface BalanceIntervals {
-//   max: Number
-//   min: Number
-//   count: Number
-//   sum: Number
-// }
-
-// export interface RichAddress {
-//   address: String
-//   blocks_mined: Number
-//   balance: Number
-// }

@@ -1,4 +1,4 @@
 export interface AppConfig {
-  name: String
-  baseURL: String
+  name: string
+  baseURL: string
 }

@@ -2,87 +2,87 @@ export interface ExplorerState { }
 
 // Blockchain info
 export interface Status {
-  version: Number
-  protocolversion: Number
-  walletversion: Number
-  balance: Number
-  blocks: Number
-  timeoffset: Number
-  connections: Number
-  proxy: String
+  version: number
+  protocolversion: number
+  walletversion: number
+  balance: number
+  blocks: number
+  timeoffset: number
+  connections: number
+  proxy: string
   difficulty: {
-    "proof-of-work": Number
-    "proof-of-stake": Number
+    "proof-of-work": number
+    "proof-of-stake": number
   }
-  testnet: Boolean
-  keypoololdest: Number
-  keypoolsize: Number
-  paytxfee: Number
-  relayfee: Number
-  errors: String
-  network: String
-  reward: Number
+  testnet: boolean
+  keypoololdest: number
+  keypoolsize: number
+  paytxfee: number
+  relayfee: number
+  errors: string
+  network: string
+  reward: number
 }
 
 export interface Block {
-  height: Number
-  size: Number
-  hash: String
-  time: Number
-  txlength: Number
+  height: number
+  size: number
+  hash: string
+  time: number
+  txlength: number
   poolInfo: Object
-  isMainChain: Boolean
-  minedBy: String
+  isMainChain: boolean
+  minedBy: string
 }
 
 // for Blocks
 export interface Blocks {
   blocks: Block[]
-  length: Number
+  length: number
   pagination: Pagination
 }
 
 export interface BlockDetail {
-  hash: String
-  size: Number
-  height: Number
-  version: Number
-  merkleroot: String
-  tx: String[]
-  time: Number
-  nonce: Number
-  bits: String
-  difficulty: Number
-  chainwork: String
-  confirmations: Number
-  previousblockhash: String
-  nextblockhash: String
-  flags: String
-  reward: Number
-  isMainChain: Boolean
-  minedBy: String
+  hash: string
+  size: number
+  height: number
+  version: number
+  merkleroot: string
+  tx: string[]
+  time: number
+  nonce: number
+  bits: string
+  difficulty: number
+  chainwork: string
+  confirmations: number
+  previousblockhash: string
+  nextblockhash: string
+  flags: string
+  reward: number
+  isMainChain: boolean
+  minedBy: string
   poolInfo: Object
 }
 
 export interface Pagination {
-  next: String
-  prev: String
-  currenTs: Number
-  current: String
-  isToday: Boolean
-  more: Boolean
-  moreTs: Number
+  next: string
+  prev: string
+  currenTs: number
+  current: string
+  isToday: boolean
+  more: boolean
+  moreTs: number
 }
 
 // Blockchain info
 export interface TotalSupply {
-  supply: Number
+  supply: number
 }
 
 // Blockchain info
 export interface StakingInfo {
-  weight: Number
-  netstakeweight: Number
+  weight: number
+  netstakeweight: number
 }
 
 // 7 days transaction chart
@@ -91,72 +91,72 @@ export interface Transactions {
 }
 
 export interface TransactionCount {
-  date: String
-  transaction_count: Number
-  block_count: Number
+  date: string
+  transaction_count: number
+  block_count: number
 }
 
 export interface Txs {
-  pagesTotal: Number
+  pagesTotal: number
   txs: Tx[]
 }
 
 export interface Tx {
-  txid: String
-  version: Number
-  locktime: Number
-  isEcrc20Transfer: Boolean
+  txid: string
+  version: number
+  locktime: number
+  isEcrc20Transfer: boolean
   vin: TxValueIn[]
   vout: TxValueOut[]
-  blockhash: String
-  blockheight: Number
-  confirmations: Number
-  time: Number
-  blocktime: Number
-  valueOut: Number
-  size: Number
+  blockhash: string
+  blockheight: number
+  confirmations: number
+  time: number
+  blocktime: number
+  valueOut: number
+  size: number
   // In case of coin generating transaction
-  isCoinBase?: Boolean
+  isCoinBase?: boolean
   // In case of normal transaction / reward transaction
-  valueIn?: Number
-  fees?: Number
+  valueIn?: number
+  fees?: number
 }
 
 // for vin
 export interface TxValueIn {
   // In case of coin generating transaction
-  coinbase?: String
+  coinbase?: string
   // In case of normal transaction / reward transaction
-  txid?: String
-  vout?: Number
+  txid?: string
+  vout?: number
   scriptSig?: {
-    hex?: String
-    asm?: String
+    hex?: string
+    asm?: string
   }
-  addr?: String
-  valueSat?: Number
-  value?: Number
+  addr?: string
+  valueSat?: number
+  value?: number
   doubleSpentTxID?: any
   // Mandatory
-  n: Number
-  sequence: Number
+  n: number
+  sequence: number
 
 }
 
 // for vout
 export interface TxValueOut {
-  value: String
-  n: Number
+  value: string
+  n: number
   scriptPubKey: ScriptPublicKey
-  spentTxId: String | null
-  spentIndex: Number | null
-  spentHeight: Number |  null
+  spentTxId: string | null
+  spentIndex: number | null
+  spentHeight: number |  null
 }
 
 export interface ScriptPublicKey {
-  hex: String
-  asm: String
+  hex: string
+  asm: string
   // In case of reward transaction / normal transaction
-  addresses?: String[]
-  type?: String
+  addresses?: string[]
+  type?: string
 }

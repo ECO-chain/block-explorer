@@ -1,8 +1,9 @@
 import { getStoreBuilder, BareActionContext } from 'vuex-typex'
 import { RootState } from '@/store/types'
 import Axios from 'axios'
-import { StatisticsState, Total, TransactionStats, FeeStat, OutputStat, DifficultyStats, StakeStats, SupplyStats, BalanceIntervals, RichList } from './type'
+import { StatisticsState, Total, TransactionStats, FeeStat, OutputStat, DifficultyStats, StakeStats, SupplyStats, BalanceIntervals, RichList, BalanceIntervalsTable } from './type'
 import { env } from '@/config'
+import { toAddressesPercent, toAddressesRelativePercent, toCoinsPercent, toCoinsRelativePercent } from '@/api/utils'
 
 const initialState: StatisticsState = {}
 const builder = getStoreBuilder<RootState>().module('statistics', initialState)
@@ -21,7 +22,8 @@ const statisticsModule = {
   getStakeStats: builder.dispatch(getStakeStats),
   getSupplyStats: builder.dispatch(getSupplyStats),
   getBalanceIntervals: builder.dispatch(getBalanceIntervals),
-  getRichestList: builder.dispatch(getRichestList)
+  getRichestList: builder.dispatch(getRichestList),
+  getBalanceIntervalsTable: builder.dispatch(getBalanceIntervalsTable)
 }
 
 export default statisticsModule
@@ -37,7 +39,7 @@ async function getTotalStats(context: ActionContext): Promise<Total> {
   }
 }
 
-async function getTransactionStats(context: ActionContext, days: String = '30'): Promise<TransactionStats[]> {
+async function getTransactionStats(context: ActionContext, days: string = '30'): Promise<TransactionStats[]> {
   // Default is latest transactions 30 days
   try {
     const res = await Axios.get(`${env!.baseURL}api/statistics/transactions?days=${days}`)
@@ -47,7 +49,7 @@ async function getTransactionStats(context: ActionContext, days: String = '30'):
   }
 }
 
-async function getFeeStats(context: ActionContext, days: String = '30'): Promise<FeeStat[]> {
+async function getFeeStats(context: ActionContext, days: string = '30'): Promise<FeeStat[]> {
   // Default is latest fees in 30 days
   try {
     const res = await Axios.get(`${env!.baseURL}api/statistics/fees?days=${days}`)
@@ -57,7 +59,7 @@ async function getFeeStats(context: ActionContext, days: String = '30'): Promise
   }
 }
 
-async function getOutputStats(context: ActionContext, days: String = '30'): Promise<OutputStat[]> {
+async function getOutputStats(context: ActionContext, days: string = '30'): Promise<OutputStat[]> {
   // Default is latest outputs in 30 days
   try {
     const res = await Axios.get(`${env!.baseURL}api/statistics/outputs?days=${days}`)
@@ -67,7 +69,7 @@ async function getOutputStats(context: ActionContext, days: String = '30'): Prom
   }
 }
 
-async function getDifficultyStats(context: ActionContext, days: String = '30'): Promise<DifficultyStats[]> {
+async function getDifficultyStats(context: ActionContext, days: string = '30'): Promise<DifficultyStats[]> {
   // Default is latest difficulty in 30 days
   try {
     const res = await Axios.get(`${env!.baseURL}api/statistics/difficulty?days=${days}`)
@@ -77,7 +79,7 @@ async function getDifficultyStats(context: ActionContext, days: String = '30'): 
   }
 }
 
-async function getStakeStats(context: ActionContext, days: String = '30'): Promise<StakeStats[]> {
+async function getStakeStats(context: ActionContext, days: string = '30'): Promise<StakeStats[]> {
   // Default is latest staking in 30 days
   try {
     const res = await Axios.get(`${env!.baseURL}api/statistics/stake?days=${days}`)
@@ -87,7 +89,7 @@ async function getStakeStats(context: ActionContext, days: String = '30'): Promi
   }
 }
 
-async function getSupplyStats(context: ActionContext, days: String = '30'): Promise<SupplyStats[]> {
+async function getSupplyStats(context: ActionContext, days: string = '30'): Promise<SupplyStats[]> {
   // Default is latest supply in 30 days
   try {
     const res = await Axios.get(`${env!.baseURL}api/statistics/supply?days=${days}`)
@@ -97,7 +99,7 @@ async function getSupplyStats(context: ActionContext, days: String = '30'): Prom
   }
 }
 
-async function getBalanceIntervals(context: ActionContext): Promise<BalanceIntervals[]> {
+async function getBalanceIntervals(): Promise<BalanceIntervals[]> {
   try {
     const res = await Axios.get(`${env!.baseURL}api/statistics/balance-intervals`)
     return res.data
@@ -111,6 +113,31 @@ async function getRichestList(context: ActionContext): Promise<RichList[]> {
     const res = await Axios.get(`${env!.baseURL}api/statistics/richest-addresses-list`)
     return res.data
   } catch (e) {
+    return e
+  }
+}
+
+async function getBalanceIntervalsTable(context: ActionContext) {
+  try {
+    const res = await getBalanceIntervals()
+    const addrCountArr = res.map((bi) => bi.count)
+    const coinsArr = res.map((bi) => bi.sum)
+
+    let biTable = res.map((val) => {
+      return {
+        balance: `${val.min.toLocaleString()} - ${val.max.toLocaleString()}`,
+        addresses: val.count.toLocaleString(),
+        percentAddresses: toAddressesPercent(val.count, addrCountArr),
+        percentAddressesTotal: toAddressesRelativePercent(val.count, addrCountArr),
+        coins: val.sum.toLocaleString(),
+        percentCoins: toCoinsPercent(val.sum, coinsArr),
+        percentCoinsTotal: toCoinsRelativePercent(val.sum, coinsArr),
+      }
+    })
+
+    return biTable
+  }
+  catch (e) {
     return e
   }
 }
