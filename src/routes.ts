@@ -43,6 +43,7 @@ const router = new VueRouter({
         path: '/charts',
         name: 'charts',
         component: Charts,
+        props: true
       },
       {
         path: '/tokens',

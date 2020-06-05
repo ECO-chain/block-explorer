@@ -9,12 +9,11 @@
             </h2>
           </div>
           <!-- END .group-head -->
-
           <div class="group-head my-3 text-center text-md-left mb-5">
-            <b-form-select v-model="chartSelected" :options="allCharts"></b-form-select>
+            <span class="stats-span">{{ chartSelected }}</span>
+            <b-form-select class="stats-select mb-2" v-model="chartSelected" :options="chartsList"></b-form-select>
             <!-- <h3 class="head-global mb-1">ECOC total supply</h3> -->
-            <p class="m-0">Check current ECOC supply.</p>
-            <p class="m-0">Maximum supply is 2,000,000,000 ECOC</p>
+            <p class="m-0">{{ chart.description }}</p>
           </div>
           <div class="mb-2">
             <b-form-radio-group
@@ -169,7 +168,6 @@ import {
   }
 })
 export default class Charts extends Vue {
-
   totalSupply: SupplyStats[] = []
   fees: FeeStat[] = []
   transactions: TransactionStats[] = []
@@ -179,11 +177,12 @@ export default class Charts extends Vue {
 
   labels: any[] = []
   data: any[] = []
+  chartsList: string[] = []
 
-  chartSelected = 'total-supply'
+  chartSelected: string = ''
+  chart = {}
   // TODO: find other way to handle these data
-  allCharts = ['total-supply', 'fees', 'transaction', 'outputs', 'difficulty', 'stakes']
-  allChartsObj = [
+  allCharts = [
     {
       name: 'ECOC Total supply',
       description: 'Check current ECOC supply. Maximum supply is 2,000,000,000 ECOC',
@@ -232,6 +231,19 @@ export default class Charts extends Vue {
 
   async mounted() {
     // console.log(await this.getSupplyData('30'))
+    this.chartsList = this.allCharts.map(chart => chart.name)
+
+    const params = this.$route.params.type
+    // if given params is not undefined
+    if (params !== undefined) {
+      this.chartSelected = params
+    } else {
+      this.chartSelected = this.chartsList[0]
+    }
+
+    const index = this.chartsList.indexOf(this.chartSelected)
+    this.chart = this.allCharts[index]
+
     this.getSupplyData(this.daysSelected).then(val => {
       this.labels = val.tsDate
       this.data = val.tsData
@@ -284,7 +296,7 @@ export default class Charts extends Vue {
       })
       .reverse()
 
-    let tsData = this.outputs.map(ts => ts.sum).reverse()
+    let tsData = this.outputs.map(ts => Number(ts.sum) / Math.pow(10, 8)).reverse()
 
     return { tsDate, tsData }
   }
@@ -316,9 +328,8 @@ export default class Charts extends Vue {
   }
 
   async daysChanged() {
-    const index = this.allCharts.indexOf(this.chartSelected)
     //@ts-ignore
-    this.allChartsObj[index].getData(this.daysSelected).then(val => {
+    this.chart.getData(this.daysSelected).then(val => {
       this.labels = val.tsDate
       this.data = val.tsData
     })
@@ -326,9 +337,10 @@ export default class Charts extends Vue {
 
   @Watch('chartSelected')
   async onChartChanged(val: string) {
-    const index = this.allCharts.indexOf(val)
+    const index = this.chartsList.indexOf(val)
+    this.chart = this.allCharts[index]
     //@ts-ignore
-    this.allChartsObj[index].getData().then(val => {
+    this.chart.getData().then(val => {
       this.labels = val.tsDate
       this.data = val.tsData
     })
@@ -337,20 +349,31 @@ export default class Charts extends Vue {
 </script>
 
 <style lang="scss" scoped>
-// select {
-//   border-color: #ffffff00;
-//   background-color: transparent;
-//   width: auto;
-//   display: block;
-//   font-size: 2.25rem;
-//   outline-color: transparent;
-//   text-shadow: 0 0 0 #000;
-//   /* color: rgb(0,0,0,0); */
-//   padding-top: 0;
-//   padding-right: 2.75rem;
-//   padding-bottom: 0;
-//   padding-left: initial;
-//   cursor: pointer;
-//   text-transform: capitalize;
-// }
+
+  select:hover {
+    border-color: white !important;
+  }
+
+  .stats-select {
+    border-color: transparent;
+    color: transparent;
+    background-color: transparent;
+    width: auto;
+    outline-color: transparent;
+    padding-bottom: 3.3rem;
+    padding-right: 6.75rem;
+    padding-left: 3rem;
+    cursor: pointer;
+  }
+
+  .stats-span {
+    color: white;
+    font-size: 1.75rem;
+    position: absolute;
+    padding-left: 6px;
+    padding-top: 9px;
+    cursor: pointer;
+    pointer-events: none;
+  }
+
 </style>
