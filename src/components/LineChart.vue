@@ -61,7 +61,7 @@ export default class LineChart extends Vue {
                 autoSkip: true,
                 maxTicksLimit: 8,
                 userCallback: function(value: any) {
-                  return Number(value).toLocaleString()
+                  return value.toLocaleString()
                 }
               }
             }
