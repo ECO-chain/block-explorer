@@ -2,7 +2,7 @@ import { getStoreBuilder, BareActionContext } from 'vuex-typex'
 import { RootState } from '@/store/types'
 import Axios from 'axios'
 import { env } from '@/config'
-import { ECRC20State, Tokens, TokenSummary, TokenTransfers, TokenHolders, TokenTracker } from './type'
+import { ECRC20State, TokenItems, TokenSummary, TokenTransfers, TokenHolders, TokenTracker } from './type'
 
 const initialState: ECRC20State = {}
 const builder = getStoreBuilder<RootState>().module('ecrc20', initialState)
@@ -25,7 +25,7 @@ export default ecrc20Module
 
 declare type ActionContext = BareActionContext<ECRC20State, RootState>
 
-async function getAllTokens(context: ActionContext): Promise<Tokens> {
+async function getAllTokens(context: ActionContext): Promise<TokenItems> {
   try {
     const res = await Axios.get(`${env!.baseURL}api/tokens`)
     return res.data
@@ -34,7 +34,7 @@ async function getAllTokens(context: ActionContext): Promise<Tokens> {
   }
 }
 
-async function getTokenBySearch(context: ActionContext, keyword: string): Promise<Tokens> {
+async function getTokenBySearch(context: ActionContext, keyword: string): Promise<TokenItems> {
   try {
     const res = await Axios.get(`${env!.baseURL}api/ecrc20/search?query=${keyword}`)
     return res.data

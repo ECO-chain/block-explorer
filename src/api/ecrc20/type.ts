@@ -1,6 +1,6 @@
 export interface ECRC20State {}
 
-export interface Tokens {
+export interface TokenItems {
   count: number,
   items: Token[]
 }
