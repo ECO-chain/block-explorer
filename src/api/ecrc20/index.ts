@@ -52,18 +52,18 @@ async function getTokenSummary(context: ActionContext, contractAddr: string): Pr
   }
 }
 
-async function getTokenTransfers(context: ActionContext, contractAddr: string): Promise<TokenTransfers> {
+async function getTokenTransfers(context: ActionContext, payload: {contractAddr: string, limit: number, offset: number}): Promise<TokenTransfers> {
   try {
-    const res = await Axios.get(`${env!.baseURL}api/ecrc20/${contractAddr}`)
+    const res = await Axios.get(`${env!.baseURL}api/ecrc20/${payload.contractAddr}/transfers?limit=${payload.limit}&offset=${payload.offset}`)
     return res.data
   } catch (e) {
     return e
   }
 }
 
-async function getTokenHolders(context: ActionContext, contractAddr: string): Promise<TokenHolders> {
+async function getTokenHolders(context: ActionContext, payload: {contractAddr: string, limit: number, offset: number}): Promise<TokenHolders> {
   try {
-    const res = await Axios.get(`${env!.baseURL}api/ecrc20/${contractAddr}`)
+    const res = await Axios.get(`${env!.baseURL}api/ecrc20/${payload.contractAddr}/balances?limit=${payload.limit}&offset=${payload.offset}`)
     return res.data
   } catch (e) {
     return e

@@ -71,9 +71,10 @@ const router = new VueRouter({
         component: Outputs,
       },
       {
-        path: '/token',
+        path: '/token/:addr',
         name: 'token',
         component: Token,
+        props: true
       },
       {
         path: '/tx',

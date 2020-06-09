@@ -21,7 +21,7 @@
             ></b-form-input>
             <b-button variant="primary" class="rounded-0">Search</b-button>
           </div>
-          <template v-if="Array.isArray(tokensResult.items) && tokensResult.items.length && input.length > 0">
+          <template v-if="Array.isArray(tokensResult.items) && input.length > 0">
             <!-- <span>Hi</span> -->
             <token-search-result class="result-from-input" :result.sync="tokensResult.items"></token-search-result>
           </template>
@@ -32,64 +32,12 @@
             <div class="table-responsive m-0">
               <b-table dark :items="tokens.items" :fields="fields">
                 <template v-slot:cell(name)="data">
-                  <a href="#">{{ data.item.symbol }} - {{data.item.name}}</a>
+                  <a :href="`token/${data.item.contract_address}`">{{ data.item.symbol }} - {{data.item.name}}</a>
                 </template>
                 <template v-slot:cell(contract_address)="data">
-                  <a href="#">{{ data.item.contract_address }}</a>
+                  <a :href="`token/${data.item.contract_address}`">{{ data.item.contract_address }}</a>
                 </template>
               </b-table>
-              <!-- <table class="table table-hover table-dark">
-                <thead>
-                  <tr>
-                    <th class="text-nowrap">TOKENS INFORMATION</th>
-                    <th class="text-nowrap">CONTRACT ADDRESS</th>
-                    <th class="text-nowrap text-center">TOTAL SUPPLY</th>
-                    <th class="text-nowrap text-center">HOLDERS</th>
-                  </tr>
-                </thead>
-                <tbody class="small">
-                  <tr>
-                    <td>
-                      <router-link to="/token">BCST - BlockChainStore Token</router-link>
-                    </td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">79840501</td>
-                    <td class="text-center">128</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/token">BCST - BlockChainStore Token</router-link>
-                    </td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">37827162</td>
-                    <td class="text-center">1</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/token">BCST - BlockChainStore Token</router-link>
-                    </td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">76876227</td>
-                    <td class="text-center">23,453</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/token">BCST - BlockChainStore Token</router-link>
-                    </td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">43211739</td>
-                    <td class="text-center">61</td>
-                  </tr>
-                </tbody>
-              </table>-->
             </div>
           </div>
         </b-col>
@@ -147,6 +95,6 @@ export default class Tokens extends Vue {
 
 <style lang="scss" scoped>
   .result-from-input {
-    margin: -2% 12% 0 2.5%;
+    margin: -1.4rem 5.3rem 0 1.1rem;
   }
 </style>
