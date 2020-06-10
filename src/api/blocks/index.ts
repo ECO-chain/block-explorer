@@ -14,8 +14,10 @@ const blocksModule = {
   },
 
   getBlocksList: builder.dispatch(getBlocksList),
-  getBlocksByDateTime: builder.dispatch(getBlockDetail),
-  getBlockDetail: builder.dispatch(getBlockDetail)
+  getBlocksByDateTime: builder.dispatch(getBlocksByDateTime),
+  getBlockDetail: builder.dispatch(getBlockDetail),
+
+  getAllBlocksByDateTime: builder.dispatch(getAllBlocksByDateTime)
 }
 
 export default blocksModule
@@ -51,4 +53,22 @@ async function getBlockDetail(context: ActionContext, hash: string): Promise<Blo
   } catch (e) {
     return e
   }
+}
+
+async function getAllBlocksByDateTime(context: ActionContext, date: string): Promise<Blocks> {
+  let res = await Axios.get(`${env!.baseURL}api/blocks?blockDate=${date}`)
+  let entireBlocks: any[] = []
+  entireBlocks = entireBlocks.concat(res.data.blocks)
+  let next = res.data.pagination.next
+
+  while (res.data.pagination.more) {
+    let moreTimestamp = res.data.pagination.moreTs
+    res = await Axios.get(`${env!.baseURL}api/blocks?blockDate=${date}&startTimestamp=${moreTimestamp}`)
+    entireBlocks = entireBlocks.concat(res.data.blocks)
+  }
+
+  res.data.blocks = entireBlocks
+  res.data.length = res.data.blocks.length
+  res.data.pagination.next = next
+  return res.data
 }

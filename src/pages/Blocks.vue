@@ -4,7 +4,9 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page mb-1"><span>B</span>locks by Date</h2>
+            <h2 class="head-page mb-1">
+              <span>B</span>locks by Date
+            </h2>
           </div>
           <!-- END .group-head -->
 
@@ -15,331 +17,65 @@
               class="pagination pagination-dark mb-3 mb-md-0 justify-content-center justify-content-md-end"
             >
               <li class="page-item">
-                <a class="page-link d-flex align-items-center" href="#">
-                  <b-icon-arrow-left-short class="h3 mb-0"></b-icon-arrow-left-short>28-03-2020
+                <a
+                  class="page-link d-flex align-items-center"
+                  @click="changeBlocksDate(blocks.pagination.prev)"
+                >
+                  <b-icon-arrow-left-short class="h3 mb-0"></b-icon-arrow-left-short>
+                  {{ blocks.pagination.prev | timeFormat('ll') }}
                 </a>
               </li>
-              <li class="page-item">
-                <a class="page-link d-flex align-items-center" href="#">
-                  30-03-2020
+              <li
+                class="page-item"
+                v-if="!blocks.pagination.isToday"
+                @click="changeBlocksDate(blocks.pagination.next)"
+              >
+                <a class="page-link d-flex align-items-center">
+                  {{ blocks.pagination.next | timeFormat('ll') }}
                   <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                 </a>
               </li>
             </ul>
-            <p class="mb-0 text-center text-md-right">
-              SUN MAR 29 2020 00:00:00 GMT+0700 (INDOCHINA TIME)
-              <span class="small text-white-50">a day ago</span>
-            </p>
+            <div class="text-center text-md-right">
+              <p class="mb-0">{{ blocks.pagination.current | timeFormat('dddd MMMM Do YYYY') }}</p>
+              <span class="small text-white-50">{{ checkDate(blocks.pagination) }}</span>
+            </div>
           </nav>
 
           <div class="block-global p-3 mb-3 rounded-lg">
             <div class="table-responsive">
-              <table class="table table-hover table-dark">
-                <thead>
-                  <tr>
-                    <th class="text-nowrap">HEIGHT</th>
-                    <th class="text-nowrap">TIMESTAMP</th>
-                    <th class="text-nowrap text-center">TRANSACTIONS</th>
-                    <th class="text-nowrap">MINED BY</th>
-                    <th class="text-nowrap text-center">SIZE IN BYTES</th>
-                  </tr>
-                </thead>
-                <tbody class="small">
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <router-link to="/block">417839</router-link>
-                    </td>
-                    <td>Mar 29, 2020 5:47:44 PM (UTC)</td>
-                    <td class="text-center">2</td>
-                    <td>
-                      <router-link to="/address">EMEg71KGAbMueuUNuhTacifqm4dEbt2KN5</router-link>
-                    </td>
-                    <td class="text-center">882</td>
-                  </tr>
-                </tbody>
-              </table>
+              <b-table
+                id="blocks-table"
+                dark
+                :fields="fields"
+                :items="blocks.blocks"
+                :per-page="perPage"
+                :current-page="currentPage"
+                :busy="isBusy"
+              >
+                <template v-slot:cell(height)="data">
+                  <a :href="`block/${data.item.hash}`">{{ data.item.height}}</a>
+                </template>
+                <template v-slot:table-busy>
+                  <div class="text-center text-danger my-2">
+                    <b-spinner class="align-middle"></b-spinner>
+                    <strong>Loading...</strong>
+                  </div>
+                </template>
+              </b-table>
             </div>
           </div>
 
-          <nav class="d-flex justify-content-center my-2 my-md-3">
-            <ul class="pagination pagination-dark my-2 my-md-3 justify-content-center">
-              <li class="page-item">
-                <a class="page-link d-flex align-items-center" href="#">
-                  <b-icon-arrow-left-short class="h3 mb-0"></b-icon-arrow-left-short>Newer blocks
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link d-flex align-items-center" href="#">
-                  Order blocks
-                  <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <div class="my-2 d-flex justify-content-center">
+            <b-pagination
+              v-if="!isBusy"
+              class="pagination-dark"
+              v-model="currentPage"
+              :total-rows="blocks.length"
+              :per-page="perPage"
+              aria-controls="blocks-table"
+            ></b-pagination>
+          </div>
         </b-col>
       </b-row>
     </b-container>
@@ -348,7 +84,67 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import blocksModule from '../api/blocks/index'
+// eslint-disable-next-line no-unused-vars
+import { Blocks, Pagination } from '../api/blocks/type'
+import moment from 'moment'
 
 @Component
-export default class Blocks extends Vue {}
+export default class BlocksList extends Vue {
+  blocks: Blocks = {} as Blocks
+  allBlocks: Blocks = {} as Blocks
+
+  fields = [
+    'height',
+    {
+      key: 'time',
+      label: 'Timestamp (UTC)',
+      formatter: (val: number) => {
+        return moment
+          .unix(val)
+          .utc()
+          .format('LLL')
+      }
+    },
+    { key: 'txlength', label: 'Transactions' },
+    { key: 'minedBy', label: 'Mined By' },
+    { key: 'size', label: 'Size in bytes' }
+  ]
+
+  perPage = 200
+  currentPage = 1
+  isBusy = true
+
+  async mounted() {
+    this.blocks = await blocksModule.getAllBlocksByDateTime(this.nowTime)
+    this.isBusy = false
+    console.log('blocks', this.blocks)
+  }
+
+  get nowTime() {
+    return moment()
+      .format()
+      .split('T')[0]
+  }
+
+  checkDate(time: Pagination) {
+    if (time.isToday) {
+      return 'Today'
+    }
+    return moment(time.current).from(this.nowTime)
+  }
+
+  async changeBlocksDate(date: string) {
+    this.isBusy = true
+    this.blocks = await blocksModule.getAllBlocksByDateTime(date)
+    this.isBusy = false
+    this.currentPage = 1
+  }
+}
 </script>
+
+<style lang="scss" scoped>
+.page-item {
+  cursor: pointer;
+}
+</style>

@@ -61,9 +61,10 @@ const router = new VueRouter({
         component: Address,
       },
       {
-        path: '/block',
+        path: '/block/:hash',
         name: 'block',
         component: Block,
+        props: true
       },
       {
         path: '/stats/outputs',
