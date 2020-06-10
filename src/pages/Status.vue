@@ -47,7 +47,7 @@
                         <div class="my-1">Initial Block Chain Height</div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1 text-right">{{ sync.blockChainHeight | numberWithCommas }}</div>
+                        <div class="my-1 text-right">{{ sync.blockChainHeight }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1">Synced Blocks</div>

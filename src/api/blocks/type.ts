@@ -42,7 +42,8 @@ export interface BlockDetail {
   chainwork: string
   confirmations: number
   previousblockhash: string
-  nextblockhash: string
+  // latest block doesn't have this
+  nextblockhash?: string
   flags: string
   reward: number
   isMainChain: boolean

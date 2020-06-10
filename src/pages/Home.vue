@@ -50,7 +50,7 @@
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">{{ info.blocks | numberWithCommas }}</div>
+                <div class="my-1 text-truncate">{{ info.blocks }}</div>
                 <div class="my-1 small text-purple-light">Block Height</div>
               </div>
             </b-col>
