@@ -42,7 +42,7 @@ async function getAddressTransactions(context: ActionContext, hash: string): Pro
 
 async function getTransactionByHash(context: ActionContext, hash: string): Promise<Tx> {
   try {
-    const res = await Axios.get(`${env!.baseURL}api/txs/${hash}`)
+    const res = await Axios.get(`${env!.baseURL}api/tx/${hash}`)
     return res.data
   } catch (e) {
     return e

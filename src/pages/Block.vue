@@ -5,7 +5,8 @@
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
             <h2 class="head-page my-0">
-              <span>B</span>lock #{{ block.height }}
+              <span>B</span>
+              lock #{{ block.height }}
             </h2>
             <p class="my-0 text-truncate">
               BLOCKHASH:
@@ -148,7 +149,9 @@
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">
-                      <a :href="`/block/${block.previousblockhash}`">{{ block.height - 1 }}</a>
+                      <router-link
+                        :to="{ name: 'block', params: { hash: block.previousblockhash }}"
+                      >{{ block.height - 1 }}</router-link>
                     </div>
                   </b-col>
                 </b-row>
@@ -160,7 +163,9 @@
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">
-                      <a :href="`/block/${block.nextblockhash}`">{{ block.height + 1 }}</a>
+                      <router-link
+                        :to="{ name: 'block', params: { hash: block.previousblockhash }}"
+                      >{{ block.height + 1 }}</router-link>
                     </div>
                   </b-col>
                 </b-row>
@@ -174,8 +179,7 @@
             <h3 class="head-global my-3">Transactions</h3>
           </div>
 
-          <TransactionBox v-for="(tx, index) in txs.txs" :key="index" :tx="tx"></TransactionBox>
-
+          <TransactionBox v-for="(tx, index) in txs.txs" :key="index" :tx="tx" :txPage="false"></TransactionBox>
         </b-col>
       </b-row>
     </b-container>
@@ -183,7 +187,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import blocksModule from '@/api/blocks/index'
 import txModule from '@/api/transaction/index'
 import TransactionBox from '@/components/TransactionBox.vue'
@@ -204,12 +208,20 @@ export default class Block extends Vue {
   txs: Txs = {} as Txs
 
   async mounted() {
-    this.block = await blocksModule.getBlockDetail(this.hash)
+    this.initBlockData()
+  }
 
+  async initBlockData() {
+    this.block = await blocksModule.getBlockDetail(this.hash)
     this.txs = await txModule.getBlockTransactions(this.block.hash)
 
     console.log('block', this.block)
     console.log('txs', this.txs)
+  }
+
+  @Watch('hash')
+  async onHashChanged() {
+    this.initBlockData()
   }
 }
 </script>

@@ -78,9 +78,10 @@ const router = new VueRouter({
         props: true
       },
       {
-        path: '/tx',
+        path: '/tx/:hash',
         name: 'transaction',
         component: Transaction,
+        props: true
       }
     ]
 })

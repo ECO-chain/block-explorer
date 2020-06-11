@@ -7,7 +7,8 @@
           :icon="moreDetail ? 'dash-square' : 'plus-square'"
           @click="toggleMore"
         ></b-icon>
-        {{ tx.blockhash }}
+        <span v-if="txPage">{{ tx.txid }}</span>
+        <router-link v-else :to="{ name: 'transaction', params: { hash: tx.txid } }">{{ tx.txid }}</router-link>
       </b-col>
       <b-col cols="12" md class="text-md-right small">mined {{ tx.time | timeFormat('LLL') }}</b-col>
     </b-row>
@@ -101,6 +102,8 @@ import { Tx, TxValueIn } from '../api/transaction/type'
 @Component({})
 export default class TransactionBox extends Vue {
   @Prop() tx!: Tx
+  @Prop() txPage!: boolean
+
   moreDetail = false
 
   mounted() {}

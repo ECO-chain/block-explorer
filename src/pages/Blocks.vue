@@ -54,7 +54,7 @@
                 :busy="isBusy"
               >
                 <template v-slot:cell(height)="data">
-                  <a :href="`block/${data.item.hash}`">{{ data.item.height}}</a>
+                  <router-link :to="{ name: 'block', params: { hash: data.item.hash }}">{{ data.item.height }}</router-link>
                 </template>
                 <template v-slot:table-busy>
                   <div class="text-center text-danger my-2">
