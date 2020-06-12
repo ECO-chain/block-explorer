@@ -83,8 +83,53 @@
         </b-row>
       </b-col>
     </b-row>
+
+    <div v-if="tx.isEcrc20Transfer">
+      <hr />
+      <b-row>
+        <b-col cols="12">
+          <router-link to="/token">BlockChainStore Token</router-link>
+          <span class="small text-purple-light">(ECRC20)</span>
+        </b-col>
+        <b-col cols="12">
+          <b-row class="justify-content-center align-items-center no-gutters">
+            <b-col cols="12" lg>
+              <b-row class="align-items-center no-gutters">
+                <b-col cols="8" class="text-truncate">
+                  <router-link
+                    to="/address"
+                    class="d-block text-truncate"
+                  >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                </b-col>
+                <b-col cols="4" class="text-right small text-purple-light">8094.39 BCST</b-col>
+              </b-row>
+            </b-col>
+            <b-col cols="12" lg="1" class="text-center">
+              <b-icon-arrow-right-short class="h3 mb-0 rotate-md-90"></b-icon-arrow-right-short>
+            </b-col>
+            <b-col cols="12" lg>
+              <b-row class="align-items-center no-gutters">
+                <b-col cols="8" class="text-truncate">
+                  <router-link
+                    to="/address"
+                    class="d-block text-truncate"
+                  >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
+                </b-col>
+                <b-col cols="4" class="text-right small text-purple-light">8094.39 BCST</b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
+      <TxScriptLog v-if="tx.isEcrc20Transfer"></TxScriptLog>
+    </div>
+
+    <hr />
     <b-row>
-      <b-col cols="12" md class="text-center text-md-right">
+      <b-col md v-if="tx.fees > 0">
+        <div class="d-inline-block small text-purple-light mx-3 mr-md-0">FEE: {{ tx.fees }}</div>
+      </b-col>
+      <b-col md class="text-center text-md-right">
         <div
           class="d-inline-block small text-purple-light mx-3 mr-md-0"
         >CONFIRMATIONS: {{ tx.confirmations }}</div>
@@ -96,15 +141,22 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import TxScriptLog from '@/components/TxScriptLog.vue'
 // eslint-disable-next-line no-unused-vars
 import { Tx, TxValueIn } from '../api/transaction/type'
 
-@Component({})
+@Component({
+  components: {
+    TxScriptLog
+  }
+})
 export default class TransactionBox extends Vue {
   @Prop() tx!: Tx
   @Prop() txPage!: boolean
 
   moreDetail = false
+
+  notYetShow = false
 
   mounted() {}
   toggleMore() {
