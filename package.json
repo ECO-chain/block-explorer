@@ -9,6 +9,7 @@
     "pt": "prettier --write 'src/**/*.{js,vue,scss}'"
   },
   "dependencies": {
+    "@chenfengyuan/vue-qrcode": "^1.0.2",
     "@types/socket.io": "^2.1.8",
     "@types/socket.io-client": "^1.4.33",
     "axios": "^0.19.2",
