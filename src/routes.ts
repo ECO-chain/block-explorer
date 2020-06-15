@@ -56,10 +56,9 @@ const router = new VueRouter({
         component: RichestList,
       },
       {
-        path: '/address/:addr',
+        path: '/address',
         name: 'address',
         component: Address,
-        props: true
       },
       {
         path: '/block/:hash',

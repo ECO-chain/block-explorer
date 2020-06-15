@@ -70,7 +70,7 @@ async function getTokenHolders(context: ActionContext, payload: {contractAddr: s
   }
 }
 
-async function getTokenTracker(context: ActionContext, userAddr: string): Promise<TokenTracker[]> {
+async function getTokenTracker(context: ActionContext, userAddr: string): Promise<TokenTracker> {
   try {
     const res = await Axios.get(`${env!.baseURL}api/ecrc20/balances?balanceAddress=${userAddr}`)
     return res.data

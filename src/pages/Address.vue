@@ -7,7 +7,7 @@
             <h2 class="head-page my-0">
               <span>A</span>ddress
             </h2>
-            <h4 class="my-0 text-truncate text-purple">{{ addressSummary.addrStr }}</h4>
+            <h4 class="my-0 text-truncate text-purple">0abd9012fc9495d94346cbaded83f9e33be2ae07</h4>
           </div>
           <!-- END .group-head -->
         </b-col>
@@ -23,7 +23,7 @@
             <b-row>
               <b-col>Balance</b-col>
               <b-col class="text-right addr-balance">
-                {{ addressSummary.balance | numberWithCommas }}
+                0.23215115
                 <span>ECOC</span>
               </b-col>
             </b-row>
@@ -36,24 +36,24 @@
                     <div class="my-1">Total Received</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">{{ addressSummary.totalReceived | numberWithCommas }} ECOC</div>
+                    <div class="my-1 text-right">0 ECOC</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1">Total Sent</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">{{ addressSummary.totalSent | numberWithCommas }} ECOC</div>
+                    <div class="my-1 text-right">0 ECOC</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1">No. Transactions</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">{{ addressSummary.txApperances | numberWithCommas }}</div>
+                    <div class="my-1 text-right">2623</div>
                   </b-col>
-                  <b-col cols="6" v-if="isTokenAddr(addressSummary.addrStr)">
+                  <b-col cols="6" v-if="isTokenAddr">
                     <div class="my-1">ECRC20 Token</div>
                   </b-col>
-                  <b-col cols="6" v-if="isTokenAddr(addressSummary.addrStr)">
+                  <b-col cols="6" v-if="isTokenAddr">
                     <div class="my-1 text-right">
                       <router-link to="/token">BCST</router-link>
                     </div>
@@ -61,13 +61,12 @@
                 </b-row>
               </b-col>
               <b-col cols="auto">
-                <VueQrcode class="qr" :value="addressSummary.addrStr" :options="{ color: { dark: '#803D9E', light: '#0e111b' }, width: 125 }"></VueQrcode>
-                <!-- <div class="mt-2 mt-md-0 w-125px">
+                <div class="mt-2 mt-md-0 w-125px">
                   <img alt="QR" src="~@/assets/images/qr-sample.png" />
-                </div> -->
+                </div>
               </b-col>
 
-              <b-col cols="12" v-if="isTokenAddr(addressSummary.addrStr)">
+              <b-col cols="12" v-if="isTokenAddr">
                 <hr class="mb-0"/>
                 <TxScriptLog></TxScriptLog>
               </b-col>
@@ -76,14 +75,14 @@
           </div>
         </b-col>
 
-        <b-col cols="12" v-if="tokenBalance.length > 0 && !isTokenAddr(addressSummary.addrStr)">
+        <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
             <h3 class="head-global my-3">ECRC20 Token</h3>
           </div>
           <TokenTracker></TokenTracker>
         </b-col>
 
-        <b-col cols="12" v-if="isTokenAddr(addressSummary.addrStr)">
+        <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
             <h3 class="head-global my-3">
               Storage
@@ -105,18 +104,12 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator'
 import VueQrcode from '@chenfengyuan/vue-qrcode'
 import TokenTracker from '@/components/TokenTracker.vue'
 import TransactionBox from '@/components/TransactionBox.vue'
 import TxScriptLog from '@/components/TxScriptLog.vue'
 import StorageLog from '@/components/StorageLog.vue'
-import addressModule from '@/api/address/index'
-import ecrc20Module from  '@/api/ecrc20/index'
-// eslint-disable-next-line no-unused-vars
-import { AddressSummary } from '../api/address/type'
-// eslint-disable-next-line no-unused-vars
-import { TokenTracker as Tracker } from '../api/ecrc20/type'
 
 @Component({
   components: {
@@ -128,24 +121,10 @@ import { TokenTracker as Tracker } from '../api/ecrc20/type'
   }
 })
 export default class Address extends Vue {
-  @Prop() addr!: string
 
-  addressSummary: AddressSummary = {} as AddressSummary
-  tokenBalance: Tracker[] = []
 
-  async mounted() {
-    this.addressSummary = await addressModule.getAddressSummary(this.addr)
-    if (!this.isTokenAddr(this.addr)) {
-      this.tokenBalance = await ecrc20Module.getTokenTracker(this.addr)
-    }
-  }
-
-  isTokenAddr(addr: string) {
-    return addr === '0abd9012fc9495d94346cbaded83f9e33be2ae07'
-  }
-
-  beforeDestroy() {
-    // unsubscribe transaction
+  isTokenAddr(hash: string) {
+    return hash === '0abd9012fc9495d94346cbaded83f9e33be2ae07'
   }
 }
 </script>
@@ -160,9 +139,5 @@ export default class Address extends Vue {
       color: #803e9d;
     }
   }
-}
-
-.qr {
-  border-radius: 8px;
 }
 </style>
