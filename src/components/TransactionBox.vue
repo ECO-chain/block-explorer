@@ -161,6 +161,7 @@ export default class TransactionBox extends Vue {
   notYetShow = false
 
   mounted() {}
+
   toggleMore() {
     this.moreDetail = !this.moreDetail
   }

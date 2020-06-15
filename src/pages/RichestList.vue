@@ -12,7 +12,11 @@
         <b-col cols="12">
           <div class="block-global p-3 my-3 rounded-lg">
             <div class="table-responsive m-0">
-              <b-table dark :fields="fields" :items="richestList"></b-table>
+              <b-table dark :fields="fields" :items="richestList">
+                <template v-slot:cell(address)="data">
+                  <router-link :to="{ name: 'address', params: { addr: data.item.address } }">{{ data.item.address }}</router-link>
+                </template>
+              </b-table>
             </div>
           </div>
         </b-col>

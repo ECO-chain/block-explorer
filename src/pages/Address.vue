@@ -97,7 +97,7 @@
           <div class="group-head my-3 text-center text-md-left">
             <h3 class="head-global my-3">Transactions</h3>
           </div>
-
+          <TransactionBox v-for="(tx, index) in txs.txs" :key="index" :tx="tx"></TransactionBox>
         </b-col>
       </b-row>
     </b-container>
@@ -113,10 +113,13 @@ import TxScriptLog from '@/components/TxScriptLog.vue'
 import StorageLog from '@/components/StorageLog.vue'
 import addressModule from '@/api/address/index'
 import ecrc20Module from  '@/api/ecrc20/index'
+import txModule from '@/api/transaction/index'
 // eslint-disable-next-line no-unused-vars
 import { AddressSummary } from '../api/address/type'
 // eslint-disable-next-line no-unused-vars
 import { TokenTracker as Tracker } from '../api/ecrc20/type'
+// eslint-disable-next-line no-unused-vars
+import { Txs } from '../api/transaction/type'
 
 @Component({
   components: {
@@ -132,12 +135,14 @@ export default class Address extends Vue {
 
   addressSummary: AddressSummary = {} as AddressSummary
   tokenBalance: Tracker[] = []
+  txs: Txs = {} as Txs
 
   async mounted() {
     this.addressSummary = await addressModule.getAddressSummary(this.addr)
     if (!this.isTokenAddr(this.addr)) {
       this.tokenBalance = await ecrc20Module.getTokenTracker(this.addr)
     }
+    this.txs = await txModule.getAddressTransactions(this.addr)
   }
 
   isTokenAddr(addr: string) {

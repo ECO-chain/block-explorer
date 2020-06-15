@@ -53,7 +53,14 @@
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">
-                      <i :class="hovered ? 'fas fa-copy copy-i' : 'far fa-copy copy-i'" @mouseover="toggleCopyMessage(true, false)" @mouseout="toggleCopyMessage(false, false)" @click="toggleCopyMessage(true, true)" v-b-tooltip.hover :title="copyMessage"></i>
+                      <i
+                        :class="hovered ? 'fas fa-copy copy-i' : 'far fa-copy copy-i'"
+                        @mouseover="toggleCopyMessage(true, false)"
+                        @mouseout="toggleCopyMessage(false, false)"
+                        @click="toggleCopyMessage(true, true)"
+                        v-b-tooltip.hover
+                        :title="copyMessage"
+                      ></i>
                       <router-link
                         to="/address"
                         class="text-truncate"
@@ -97,7 +104,23 @@
                   <span class="text-green">{{ transfer.count }}</span> found
                 </p>
                 <div class="table-responsive m-0">
-                  <b-table dark :items="transfer.items" :fields="transferFields"></b-table>
+                  <b-table dark :items="transfer.items" :fields="transferFields">
+                    <template v-slot:cell(tx_hash)="data">
+                      <router-link
+                        :to="{ name: 'transaction', params: { hash: data.item.tx_hash } }"
+                      >{{ data.item.tx_hash }}</router-link>
+                    </template>
+                    <template v-slot:cell(from)="data">
+                      <router-link
+                        :to="{ name: 'address', params: { addr: data.item.from } }"
+                      >{{ data.item.from }}</router-link>
+                    </template>
+                    <template v-slot:cell(to)="data">
+                      <router-link
+                        :to="{ name: 'address', params: { addr: data.item.to } }"
+                      >{{ data.item.to }}</router-link>
+                    </template>
+                  </b-table>
                 </div>
                 <div class="my-2 d-flex justify-content-center">
                   <b-pagination
@@ -120,12 +143,15 @@
                 </p>
                 <div class="table-responsive m-0">
                   <b-table dark :items="holder.items" :fields="holderFields">
-                    <template v-slot:cell(rank)="data">
-                      {{ holder.offset + data.index + 1}}
-                    </template>
+                    <template v-slot:cell(rank)="data">{{ holder.offset + data.index + 1}}</template>
                     <template
                       v-slot:cell(percentage)="data"
                     >{{ calculatePercentage(summary.total_supply, data.item.amount) }}%</template>
+                    <template v-slot:cell(address)="data">
+                      <router-link
+                        :to="{ name: 'address', params: { addr: data.item.address } }"
+                      >{{ data.item.address }}</router-link>
+                    </template>
                   </b-table>
                 </div>
                 <div class="my-2 d-flex justify-content-center">

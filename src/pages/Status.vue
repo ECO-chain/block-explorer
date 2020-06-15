@@ -82,10 +82,9 @@
                         <div class="my-1">Last Block Hash (ECOC)</div>
                       </b-col>
                       <b-col cols="12">
-                        <div class="my-1 text-right">
+                        <div class="my-1 text-right text-truncate">
                           <router-link
-                            to="/block"
-                            class="d-block text-truncate"
+                            :to="{ name: 'block', params: { hash: lastBlockHash.lastblockhash }}"
                           >{{ lastBlockHash.lastblockhash }}</router-link>
                         </div>
                       </b-col>
@@ -93,11 +92,10 @@
                         <div class="my-1">Current Blockchain Tip ()</div>
                       </b-col>
                       <b-col cols="12">
-                        <div class="my-1 text-right">
+                        <div class="my-1 text-right text-truncate">
                           <router-link
-                            to="/block"
-                            class="d-block text-truncate"
-                          >{{ lastBlockHash.syncTipHash }}</router-link>
+                            :to="{ name: 'block', params: { hash: lastBlockHash.lastblockhash }}"
+                          >{{ lastBlockHash.lastblockhash }}</router-link>
                         </div>
                       </b-col>
                     </b-row>
@@ -145,7 +143,9 @@
                     <div class="my-1">Mining Difficulty</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">{{ statusInfo.difficulty['proof-of-stake'] | numberWithCommas }}</div>
+                    <div
+                      class="my-1 text-right"
+                    >{{ statusInfo.difficulty['proof-of-stake'] | numberWithCommas }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1">Network</div>
