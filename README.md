@@ -27,3 +27,7 @@ npm run pt
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## LICENSE
+
+Project is under [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
