@@ -25,7 +25,7 @@
                 :key="index"
               >
                 <b-col cols="8" class="text-truncate">
-                  <router-link to="/address">Unparsed address [{{ index }}]</router-link>
+                  Unparsed address [{{ index }}]
                   <b-collapse v-model="moreDetail" class="tx-collapse">
                     <p class="tx-detail">Type</p>
                     <p class="tx-detail">scriptPubKey {{ vout.scriptPubKey.asm }}</p>
@@ -43,7 +43,7 @@
                 :key="index"
               >
                 <b-col cols="8" class="text-truncate">
-                  <router-link to="/address">{{ vin.addr }}</router-link>
+                  <router-link :to="{ name: 'address', params: { addr: vin.addr } }">{{ vin.addr }}</router-link>
                   <b-collapse v-model="moreDetail" class="tx-collapse">
                     <p class="tx-detail">Confirmations: {{ tx.confirmations }}</p>
                   </b-collapse>
@@ -67,8 +67,10 @@
               >
                 <b-col cols="8" class="text-truncate">
                   <router-link
-                    to="/address"
-                  >{{ 'addresses' in vout.scriptPubKey ? vout.scriptPubKey.addresses[0] : `Unparsed address ${index}` }}</router-link>
+                    v-if="'addresses' in vout.scriptPubKey"
+                    :to="{ name: 'address', params: { addr: vout.scriptPubKey.addresses[0] } }"
+                  >{{ vout.scriptPubKey.addresses[0] }}</router-link>
+                  <span v-else>{{ `Unparsed address ${index}` }}</span>
                   <b-collapse v-model="moreDetail" class="tx-collapse">
                     <p
                       class="tx-detail"
