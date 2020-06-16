@@ -57,13 +57,14 @@
           </div>
         </b-col>
 
-        <b-col cols="12">
+        <b-col cols="12" v-if="'txid' in tx">
           <div class="group-head my-3 text-center text-md-left">
             <h3 class="head-global my-3">Details</h3>
           </div>
 
           <TransactionBox :tx="tx" :txPage="true"></TransactionBox>
         </b-col>
+
       </b-row>
     </b-container>
   </div>

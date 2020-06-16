@@ -31,7 +31,7 @@
                     <p class="tx-detail">scriptPubKey {{ vout.scriptPubKey.asm }}</p>
                   </b-collapse>
                 </b-col>
-                <b-col cols="4" class="text-right small text-purple-light">{{ vout.value }} ECOC</b-col>
+                <b-col cols="4" class="addr-value">{{ vout.value }} ECOC</b-col>
               </b-row>
             </div>
 
@@ -39,16 +39,27 @@
             <div v-else>
               <b-row
                 class="align-items-center no-gutters"
-                v-for="(vin, index) in tx.vin"
+                v-for="(vin, index) in simpleVinTx"
                 :key="index"
               >
-                <b-col cols="8" class="text-truncate">
-                  <router-link :to="{ name: 'address', params: { addr: vin.addr } }">{{ vin.addr }}</router-link>
-                  <b-collapse v-model="moreDetail" class="tx-collapse">
-                    <p class="tx-detail">Confirmations: {{ tx.confirmations }}</p>
-                  </b-collapse>
-                </b-col>
-                <b-col cols="4" class="text-right small text-purple-light">{{ vin.value }} ECOC</b-col>
+                <template v-if="checkDuplicatedAddress(vin)">
+                  <b-col cols="8" class="text-truncate">
+                    <router-link
+                      :to="{ name: 'address', params: { addr: vin.addr } }"
+                    >{{ vin.addr }}</router-link>
+                    <b-collapse v-model="moreDetail" class="tx-collapse">
+                      <p class="tx-detail">Confirmations: {{ tx.confirmations }}</p>
+                      <div v-if="vin.items.length > 0">
+                        <div v-for="(val,index) in vin.items" :key="index">
+                          <p class="tx-detail">{{ val.addr }}</p>
+                          <p class="tx-detail">{{ val.value }}</p>
+                        </div>
+                      </div>
+                    </b-collapse>
+                  </b-col>
+                  <b-col cols="4" class="addr-value" v-if="!moreDetail && vin.sumValue">{{ vin.sumValue }}</b-col>
+                  <b-col cols="4" class="addr-value" v-else>{{ vin.value }} ECOC</b-col>
+                </template>
               </b-row>
             </div>
           </b-col>
@@ -62,23 +73,34 @@
             <div v-else>
               <b-row
                 class="align-items-center no-gutters"
-                v-for="(vout, index) in tx.vout"
+                v-for="(vout, index) in simpleVoutTx"
                 :key="index"
               >
-                <b-col cols="8" class="text-truncate">
-                  <router-link
-                    v-if="'addresses' in vout.scriptPubKey"
-                    :to="{ name: 'address', params: { addr: vout.scriptPubKey.addresses[0] } }"
-                  >{{ vout.scriptPubKey.addresses[0] }}</router-link>
-                  <span v-else>{{ `Unparsed address ${index}` }}</span>
-                  <b-collapse v-model="moreDetail" class="tx-collapse">
-                    <p
-                      class="tx-detail"
-                    >Type {{ 'type' in vout.scriptPubKey ? vout.scriptPubKey.type : '' }}</p>
-                    <p class="tx-detail">scriptPubKey {{ vout.scriptPubKey.asm }}</p>
-                  </b-collapse>
-                </b-col>
-                <b-col cols="4" class="text-right small text-purple-light">{{ vout.value }} ECOC (U)</b-col>
+                <template v-if="checkVoutDuplicatedAddress(vout)">
+                  <b-col cols="8" class="text-truncate">
+                    <router-link
+                      v-if="'addresses' in vout.scriptPubKey"
+                      :to="{ name: 'address', params: { addr: vout.scriptPubKey.addresses[0] } }"
+                    >{{ vout.scriptPubKey.addresses[0] }}</router-link>
+                    <span v-else>{{ `Unparsed address ${index}` }}</span>
+                    <b-collapse v-model="moreDetail" class="tx-collapse">
+                      <div v-if="vout.items && vout.items.length > 0">
+                        <div v-for="(val,index) in vout.items" :key="index">
+                          <p class="tx-detail">{{ parsingAddress(val) }}</p>
+                          <p class="tx-detail">{{ val.value }}</p>
+                        </div>
+                      </div>
+                      <div v-else>
+                        <p
+                          class="tx-detail"
+                        >Type {{ 'type' in vout.scriptPubKey ? vout.scriptPubKey.type : '' }}</p>
+                        <p class="tx-detail">scriptPubKey {{ vout.scriptPubKey.asm }}</p>
+                      </div>
+                    </b-collapse>
+                  </b-col>
+                  <b-col cols="4" class="addr-value" v-if="!moreDetail && vout.sumValue">{{ vout.sumValue }}</b-col>
+                  <b-col cols="4" class="addr-value" v-else>{{ vout.value }} ECOC (U)</b-col>
+                </template>
               </b-row>
             </div>
           </b-col>
@@ -145,7 +167,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import TxScriptLog from '@/components/TxScriptLog.vue'
 // eslint-disable-next-line no-unused-vars
-import { Tx, TxValueIn } from '../api/transaction/type'
+import { Tx, TxValueIn, TxValueOut } from '../api/transaction/type'
 
 @Component({
   components: {
@@ -157,34 +179,118 @@ export default class TransactionBox extends Vue {
   @Prop() txPage!: boolean
 
   moreDetail = false
+  checkedVinAddr: string[] = []
+  checkedVoutAddr: string[] = []
+  duplicatedVinAddr: string[] = []
+  duplicatedVoutAddr: string[] = []
 
-  notYetShow = false
+  simpleVinTx: TxValueIn[] = []
+  simpleVoutTx: TxValueOut[] = []
 
-  mounted() {}
+  mounted() {
+    this.simpleVinTx = this.aggregateVinValue(this.tx.vin)
+    this.simpleVoutTx = this.aggregateVoutValue(this.tx.vout)
+    console.log('now vout', this.simpleVoutTx)
+  }
 
   toggleMore() {
     this.moreDetail = !this.moreDetail
   }
 
-  // duplicatedValueInAddr(vin: TxValueIn[]) {
-  //   // eslint-disable-next-line no-unused-vars
-  //   let vinTotalVal = 0
-  //   // eslint-disable-next-line no-unused-vars
-  //   let newObj = {}
-  //   for (let i = 0; i < vin.length; i++) {
-  //     for (let j = i+1; j < vin.length; j++) {
-  //       if (vin[i].addr === vin[j].addr) {
-  //         vinTotalVal += vin[i].value! + vin[j].value!
-  //         newObj = Object.assign(vin[i], vin[j])
-  //         dupVin.push(vin[j])
-  //         vin.splice(j, i)
-  //       }
-  //     }
-  //   }
+  aggregateVinValue(vin: any[]) {
+    let vinTotalVal = 0
+    for (let i = 0; i < vin.length; i++) {
+      vinTotalVal = vin[i].value!
+      vin[i].items = []
 
-  //   console.log('dupVin', dupVin)
-  //   console.log('vin', vin)
-  // }
+      for (let j = i + 1; j < vin.length; j++) {
+        if (this.checkedVinAddr.includes(vin[i].addr!)) {
+          continue
+        }
+
+        if (vin[i].addr === vin[j].addr) {
+          vinTotalVal += vin[j].value!
+          vin[i].items.push(vin[j])
+
+          if (!this.duplicatedVinAddr.includes(vin[i].addr)) {
+            this.duplicatedVinAddr.push(vin[i].addr)
+          }
+        }
+      }
+
+      if (vinTotalVal !== vin[i].value) {
+        vin[i].sumValue = vinTotalVal
+      }
+
+      if (!this.checkedVinAddr.includes(vin[i].addr)) {
+        this.checkedVinAddr.push(vin[i].addr)
+      }
+    }
+
+    return vin
+  }
+
+  aggregateVoutValue(vout: any[]) {
+    let voutTotalVal = 0
+    for (let i = 0; i < vout.length; i++) {
+      if (vout[i].scriptPubKey && vout[i].scriptPubKey.addresses) {
+        voutTotalVal = Number(vout[i].value)
+        vout[i].items = []
+        let voutAddr = vout[i].scriptPubKey.addresses[0]
+
+        for (let j = i + 1; j < vout.length; j++) {
+          if (this.checkedVoutAddr.includes(voutAddr)) {
+            continue
+          }
+
+          if (voutAddr === vout[j].scriptPubKey.addresses[0]) {
+            voutTotalVal += Number(vout[j].value)
+            vout[i].items.push(vout[j])
+
+            if (!this.duplicatedVoutAddr.includes(voutAddr)) {
+              this.duplicatedVoutAddr.push(voutAddr)
+            }
+          }
+        }
+
+        if (voutTotalVal !== Number(vout[i].value)) {
+          vout[i].sumValue = voutTotalVal
+        }
+
+        if (!this.checkedVoutAddr.includes(voutAddr)) {
+          this.checkedVoutAddr.push(voutAddr)
+        }
+      }
+    }
+
+    return vout
+  }
+
+  checkDuplicatedAddress(txVal: any) {
+    // vin
+    if (this.duplicatedVinAddr.includes(txVal.addr)) {
+      return txVal.items.length > 0
+    }
+    // display non-duplicated address also
+    return true
+  }
+
+  checkVoutDuplicatedAddress(txVal: any) {
+    txVal = JSON.parse(JSON.stringify(txVal))
+    if (txVal.scriptPubKey.addresses) {
+      let scPubKey = JSON.parse(JSON.stringify(txVal.scriptPubKey.addresses))
+      if (this.duplicatedVoutAddr.includes(scPubKey[0])) {
+        return txVal.items.length > 0
+      }
+    }
+    // display non-duplicated address also
+    return true
+  }
+
+  parsingAddress(val:any) {
+    val = JSON.parse(JSON.stringify(val.scriptPubKey.addresses))
+    return val[0]
+  }
 }
 </script>
 
@@ -203,5 +309,13 @@ export default class TransactionBox extends Vue {
 .tx-collapse {
   padding-top: 0.75rem;
   padding-left: 1rem;
+}
+
+.addr-value {
+  text-align: right;
+  color: #4d465f;
+  align-self: baseline;
+  font-size: 80%;
+  font-weight: 400;
 }
 </style>
