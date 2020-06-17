@@ -64,3 +64,10 @@ export interface ScriptPublicKey {
   addresses?: string[]
   type?: string
 }
+
+export interface SocketTx {
+  isRBF: boolean
+  txid: string
+  valueOut: number
+  vout: object[]
+}

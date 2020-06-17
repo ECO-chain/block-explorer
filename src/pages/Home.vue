@@ -113,126 +113,24 @@
         <h2 class="head-global my-3">Transactions</h2>
         <div class="block-bitcoin">
           <swiper :options="swiperOption">
-            <swiper-slide>
-              <div class="block-item p-3 rounded-lg">
-                <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <span class="small text-purple-light">3 mins ago</span>
+            <template v-if="socketTx.length > 0">
+              <swiper-slide v-for="(tx, index) in socketTx" :key="index">
+                <div class="block-item p-3 rounded-lg">
+                  <div
+                    class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
+                  >
+                    <span class="small text-purple-light">{{ Date.now() | timeFromNow }}</span>
+                  </div>
+                  <div class="my-1 small text-truncate">
+                    Hash:
+                    <router-link
+                      :to="{ name: 'transaction', params: { hash: tx.txid } }"
+                    >{{ tx.txid }}</router-link>
+                  </div>
+                  <div class="my-1 small">Value Out: {{ tx.valueOut }} ECOC</div>
                 </div>
-                <div class="my-1 small">
-                  Hash:
-                  <router-link
-                    to="/tx"
-                    class="d-block text-truncate"
-                  >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
-                </div>
-                <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="block-item p-3 rounded-lg">
-                <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <span class="small text-purple-light">3 mins ago</span>
-                </div>
-                <div class="my-1 small">
-                  Hash:
-                  <router-link
-                    to="/tx"
-                    class="d-block text-truncate"
-                  >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
-                </div>
-                <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="block-item p-3 rounded-lg">
-                <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <span class="small text-purple-light">3 mins ago</span>
-                </div>
-                <div class="my-1 small">
-                  Hash:
-                  <router-link
-                    to="/tx"
-                    class="d-block text-truncate"
-                  >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
-                </div>
-                <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="block-item p-3 rounded-lg">
-                <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <span class="small text-purple-light">3 mins ago</span>
-                </div>
-                <div class="my-1 small">
-                  Hash:
-                  <router-link
-                    to="/tx"
-                    class="d-block text-truncate"
-                  >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
-                </div>
-                <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="block-item p-3 rounded-lg">
-                <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <span class="small text-purple-light">3 mins ago</span>
-                </div>
-                <div class="my-1 small">
-                  Hash:
-                  <router-link
-                    to="/tx"
-                    class="d-block text-truncate"
-                  >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
-                </div>
-                <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="block-item p-3 rounded-lg">
-                <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <span class="small text-purple-light">3 mins ago</span>
-                </div>
-                <div class="my-1 small">
-                  Hash:
-                  <router-link
-                    to="/tx"
-                    class="d-block text-truncate"
-                  >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
-                </div>
-                <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="block-item p-3 rounded-lg">
-                <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <span class="small text-purple-light">3 mins ago</span>
-                </div>
-                <div class="my-1 small">
-                  Hash:
-                  <router-link
-                    to="/tx"
-                    class="d-block text-truncate"
-                  >9bb6236fd1c0d25b98bc8d95b5a7ab81f10e9fa9d57fdbfeb76390c92d1a8db9</router-link>
-                </div>
-                <div class="my-1 small">Value Out: 1,275.7 ECOC</div>
-              </div>
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
+              </swiper-slide>
+            </template>
           </swiper>
         </div>
       </b-col>
@@ -253,6 +151,7 @@ import { toMonthDayFormat } from '@/api/filters'
 import { StatusState, Info, StakingInfo } from '../api/status/type'
 import { TransactionStats } from '../api/statistics/type'
 import { Blocks, Block, BlockDetail } from '../api/blocks/type'
+import { SocketTx } from '../api/transaction/type'
 
 @Component({
   components: {
@@ -271,6 +170,10 @@ export default class Home extends Vue {
   }
   @Socket('tx')
   onTx(payload: any) {
+    if (this.socketTx.length >= 10) {
+      this.socketTx.pop()
+    }
+    this.socketTx.unshift(payload)
     console.log('onTx on Home', payload)
   }
 
@@ -302,6 +205,7 @@ export default class Home extends Vue {
 
   sevenDaysTx: TransactionStats[] | null = null
   blocks: Blocks = {} as Blocks
+  socketTx: SocketTx[] = []
   txDate: string[] = []
   txCount: number[] = []
 
