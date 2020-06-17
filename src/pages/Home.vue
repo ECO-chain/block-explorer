@@ -18,7 +18,9 @@
             </b-col>
             <b-col cols="12" md="6">
               <div class="bg-purple-gd rounded-lg text-center p-3 my-3">
-                <p class="my-1 text-style-2">{{ Number(statusState.supply) | numberWithCommas }} ECOC</p>
+                <p
+                  class="my-1 text-style-2"
+                >{{ Number(statusState.supply) | numberWithCommas }} ECOC</p>
                 <p class="my-1">Current Supply</p>
               </div>
             </b-col>
@@ -32,7 +34,9 @@
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">{{ info.difficulty['proof-of-stake'] | numberWithCommas }}</div>
+                <div
+                  class="my-1 text-truncate"
+                >{{ info.difficulty['proof-of-stake'] | numberWithCommas }}</div>
                 <div class="my-1 small text-purple-light">Difficulty</div>
               </div>
             </b-col>
@@ -44,7 +48,9 @@
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">{{ stakingInfo.netstakeweight | numberWithCommas(8) }}</div>
+                <div
+                  class="my-1 text-truncate"
+                >{{ stakingInfo.netstakeweight | numberWithCommas(8) }}</div>
                 <div class="my-1 small text-purple-light">Network Weight</div>
               </div>
             </b-col>
@@ -78,140 +84,26 @@
         <div class="block-bitcoin">
           <swiper :options="swiperOption">
             <!-- slides -->
-            <swiper-slide>
+            <swiper-slide v-for="(block, index) in blocks.blocks" :key="index">
               <div class="block-item p-3 rounded-lg">
                 <div
                   class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
                 >
-                  <router-link to="/block">399129</router-link>
-                  <span class="small text-purple-light">3 mins ago</span>
+                  <router-link
+                    :to="{ name: 'block', params: { hash: block.hash } }"
+                  >{{ block.height }}</router-link>
+                  <span class="small text-purple-light">{{ block.time * 1000 | timeFromNow }}</span>
                 </div>
-                <div class="my-1 small">
+                <div class="my-1 small text-truncate">
                   Mined by:
                   <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
+                    :to="{ name: 'address', params: { addr: block.minedBy } }"
+                  >{{ block.minedBy }}</router-link>
                 </div>
-                <div class="my-1 small">Size: 927</div>
-                <div class="my-1 small">Transactions: 2</div>
+                <div class="my-1 small">Size: {{ block.size }}</div>
+                <div class="my-1 small">Transactions: {{ block.txlength }}</div>
               </div>
             </swiper-slide>
-            <swiper-slide>
-              <div class="block-item p-3 rounded-lg">
-                <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <router-link to="/block">399129</router-link>
-                  <span class="small text-purple-light">3 mins ago</span>
-                </div>
-                <div class="my-1 small">
-                  Mined by:
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
-                </div>
-                <div class="my-1 small">Size: 927</div>
-                <div class="my-1 small">Transactions: 2</div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="block-item p-3 rounded-lg">
-                <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <router-link to="/block">399129</router-link>
-                  <span class="small text-purple-light">3 mins ago</span>
-                </div>
-                <div class="my-1 small">
-                  Mined by:
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
-                </div>
-                <div class="my-1 small">Size: 927</div>
-                <div class="my-1 small">Transactions: 2</div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="block-item p-3 rounded-lg">
-                <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <router-link to="/block">399129</router-link>
-                  <span class="small text-purple-light">3 mins ago</span>
-                </div>
-                <div class="my-1 small">
-                  Mined by:
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
-                </div>
-                <div class="my-1 small">Size: 927</div>
-                <div class="my-1 small">Transactions: 2</div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="block-item p-3 rounded-lg">
-                <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <router-link to="/block">399129</router-link>
-                  <span class="small text-purple-light">3 mins ago</span>
-                </div>
-                <div class="my-1 small">
-                  Mined by:
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
-                </div>
-                <div class="my-1 small">Size: 927</div>
-                <div class="my-1 small">Transactions: 2</div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="block-item p-3 rounded-lg">
-                <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <router-link to="/block">399129</router-link>
-                  <span class="small text-purple-light">3 mins ago</span>
-                </div>
-                <div class="my-1 small">
-                  Mined by:
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
-                </div>
-                <div class="my-1 small">Size: 927</div>
-                <div class="my-1 small">Transactions: 2</div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="block-item p-3 rounded-lg">
-                <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <router-link to="/block">399129</router-link>
-                  <span class="small text-purple-light">3 mins ago</span>
-                </div>
-                <div class="my-1 small">
-                  Mined by:
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EKfT5eCujEDuMok5kYo8VkG95jRmAnmaaL</router-link>
-                </div>
-                <div class="my-1 small">Size: 927</div>
-                <div class="my-1 small">Transactions: 2</div>
-              </div>
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
       </b-col>
@@ -350,14 +242,17 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import { Socket } from 'vue-socket.io-extended'
 import BlockSearchBox from '@/components/SearchBox.vue'
 import LineChart from '@/components/LineChart.vue'
 import statusModule from '@/api/status/index'
 import statisticsModule from '@/api/statistics/index'
+import blocksModule from '@/api/blocks/index'
 import { toMonthDayFormat } from '@/api/filters'
 /* eslint-disable no-unused-vars */
 import { StatusState, Info, StakingInfo } from '../api/status/type'
 import { TransactionStats } from '../api/statistics/type'
+import { Blocks, Block, BlockDetail } from '../api/blocks/type'
 
 @Component({
   components: {
@@ -366,12 +261,20 @@ import { TransactionStats } from '../api/statistics/type'
   }
 })
 export default class Home extends Vue {
+  @Socket('block')
+  async onBlock(payload: any) {
+    const socketBlock = await blocksModule.getBlockDetail(payload)
+    const newBlock = this.blockDetailToBlocks(socketBlock)
+    this.blocks.blocks.pop()
+    this.blocks.blocks.unshift(newBlock)
+    console.log('on Block', newBlock)
+  }
+  @Socket('tx')
+  onTx(payload: any) {
+    console.log('onTx on Home', payload)
+  }
+
   swiperOption = {
-    autoplay: {
-      delay: Math.floor(Math.random() * (4000 - 3000) + 3000),
-      stopOnLastSlide: false,
-      disableOnInteraction: false
-    },
     loop: false,
     watchSlidesVisibility: true,
     slidesPerView: 5,
@@ -398,6 +301,7 @@ export default class Home extends Vue {
   }
 
   sevenDaysTx: TransactionStats[] | null = null
+  blocks: Blocks = {} as Blocks
   txDate: string[] = []
   txCount: number[] = []
 
@@ -405,6 +309,7 @@ export default class Home extends Vue {
     const info = await statusModule.getInfo()
     const stakingInfo = await statusModule.getStakingInfo()
     const supply = await statusModule.getTotalSupply()
+    this.blocks = await blocksModule.getBlocksWithLimit(5)
 
     this.sevenDaysTx = await statisticsModule.getTransactionStats('7')
     this.txDate = this.sevenDaysTx
@@ -417,6 +322,8 @@ export default class Home extends Vue {
     statusModule.setInfo(info)
     statusModule.setStakingInfo(stakingInfo)
     statusModule.setSupply(supply)
+
+    console.log('homepage blocks', this.blocks)
   }
 
   get statusState(): StatusState {
@@ -429,6 +336,21 @@ export default class Home extends Vue {
 
   get stakingInfo(): StakingInfo {
     return this.statusState.stakingInfo
+  }
+
+  blockDetailToBlocks(blockD: BlockDetail) {
+    let block: Block = {
+      height: blockD.height,
+      size: blockD.size,
+      hash: blockD.hash,
+      time: blockD.time,
+      txlength: blockD.tx.length,
+      poolInfo: blockD.poolInfo,
+      isMainChain: blockD.isMainChain,
+      minedBy: blockD.minedBy
+    }
+
+    return block
   }
 }
 </script>

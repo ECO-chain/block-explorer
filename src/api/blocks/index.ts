@@ -17,7 +17,8 @@ const blocksModule = {
   getBlocksByDateTime: builder.dispatch(getBlocksByDateTime),
   getBlockDetail: builder.dispatch(getBlockDetail),
 
-  getAllBlocksByDateTime: builder.dispatch(getAllBlocksByDateTime)
+  getAllBlocksByDateTime: builder.dispatch(getAllBlocksByDateTime),
+  getBlocksWithLimit: builder.dispatch(getBlocksWithLimit)
 }
 
 export default blocksModule
@@ -63,7 +64,14 @@ async function getAllBlocksByDateTime(context: ActionContext, date: string): Pro
 
   while (res.data.pagination.more) {
     let moreTimestamp = res.data.pagination.moreTs
-    res = await Axios.get(`${env!.baseURL}api/blocks?blockDate=${date}&startTimestamp=${moreTimestamp}`)
+    try {
+      res = await Axios.get(`${env!.baseURL}api/blocks?blockDate=${date}&startTimestamp=${moreTimestamp}`)
+    } catch (e) {
+      if (e.response) {
+        break
+      }
+    }
+
     entireBlocks = entireBlocks.concat(res.data.blocks)
   }
 
@@ -71,4 +79,13 @@ async function getAllBlocksByDateTime(context: ActionContext, date: string): Pro
   res.data.length = res.data.blocks.length
   res.data.pagination.next = next
   return res.data
+}
+
+async function getBlocksWithLimit(context: ActionContext, number: number): Promise<Blocks> {
+  try {
+    const res = await Axios.get(`${env!.baseURL}api/blocks?limit=${number}`)
+    return res.data
+  } catch (e) {
+    return e
+  }
 }

@@ -41,11 +41,6 @@ export default class App extends Vue {
     console.log('receiving', payload)
   }
 
-  @Socket('block')
-  onBlock(payload: any) {
-    console.log('onBlock', payload)
-  }
-
   @Socket('info')
   onInfo(payload: StatusState) {
     statusModule.setInfo(payload.info)
@@ -53,11 +48,6 @@ export default class App extends Vue {
     statusModule.setSupply(payload.supply)
 
     console.log('onInfo', payload)
-  }
-
-  @Socket('tx')
-  onTx(payload: any) {
-    console.log('onTx', payload)
   }
 
   @Socket('markets_info')
