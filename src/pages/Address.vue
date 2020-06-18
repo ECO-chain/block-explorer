@@ -62,9 +62,6 @@
               </b-col>
               <b-col cols="auto">
                 <VueQrcode class="qr" :value="addressSummary.addrStr" :options="{ color: { dark: '#803D9E', light: '#0e111b' }, width: 125 }"></VueQrcode>
-                <!-- <div class="mt-2 mt-md-0 w-125px">
-                  <img alt="QR" src="~@/assets/images/qr-sample.png" />
-                </div> -->
               </b-col>
 
               <b-col cols="12" v-if="isTokenAddr(addressSummary.addrStr)">

@@ -16,6 +16,8 @@
     "bootstrap-vue": "^2.15.0",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.4",
+    "ecoccore-lib": "git+ssh://git@gitlab.com/ecoc/ecoccore-lib.git",
+    "ecoweb3": "^1.1.0-rc1",
     "hamburgers": "^1.1.3",
     "moment": "^2.26.0",
     "socket.io": "^2.3.0",
