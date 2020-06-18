@@ -75,5 +75,6 @@ export interface TokenTracker {
   amount: string
   address: string
   address_eth: string
+  rank?: number
   contract: Token
 }

@@ -7,9 +7,8 @@
             <h2 class="head-page my-0">
               <span>A</span>ddress
             </h2>
-            <h4 class="my-0 text-truncate text-purple">{{ addressSummary.addrStr }}</h4>
+            <h4 class="my-0 text-truncate text-purple">{{ addr }}</h4>
           </div>
-          <!-- END .group-head -->
         </b-col>
 
         <b-col cols="12">
@@ -36,24 +35,30 @@
                     <div class="my-1">Total Received</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">{{ addressSummary.totalReceived | numberWithCommas }} ECOC</div>
+                    <div
+                      class="my-1 text-right"
+                    >{{ addressSummary.totalReceived | numberWithCommas }} ECOC</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1">Total Sent</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">{{ addressSummary.totalSent | numberWithCommas }} ECOC</div>
+                    <div
+                      class="my-1 text-right"
+                    >{{ addressSummary.totalSent | numberWithCommas }} ECOC</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1">No. Transactions</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">{{ addressSummary.txApperances | numberWithCommas }}</div>
+                    <div
+                      class="my-1 text-right"
+                    >{{ addressSummary.txApperances | numberWithCommas }}</div>
                   </b-col>
-                  <b-col cols="6" v-if="isTokenAddr(addressSummary.addrStr)">
+                  <b-col cols="6" v-if="!isEcoAddr">
                     <div class="my-1">ECRC20 Token</div>
                   </b-col>
-                  <b-col cols="6" v-if="isTokenAddr(addressSummary.addrStr)">
+                  <b-col cols="6" v-if="!isEcoAddr">
                     <div class="my-1 text-right">
                       <router-link to="/token">BCST</router-link>
                     </div>
@@ -61,26 +66,29 @@
                 </b-row>
               </b-col>
               <b-col cols="auto">
-                <VueQrcode class="qr" :value="addressSummary.addrStr" :options="{ color: { dark: '#803D9E', light: '#0e111b' }, width: 125 }"></VueQrcode>
+                <VueQrcode
+                  class="qr"
+                  :value="addressSummary.addrStr"
+                  :options="{ color: { dark: '#803D9E', light: '#0e111b' }, width: 125 }"
+                ></VueQrcode>
               </b-col>
 
-              <b-col cols="12" v-if="isTokenAddr(addressSummary.addrStr)">
-                <hr class="mb-0"/>
+              <b-col cols="12" v-if="!isEcoAddr">
+                <hr class="mb-0" />
                 <TxScriptLog></TxScriptLog>
               </b-col>
-
             </b-row>
           </div>
         </b-col>
 
-        <b-col cols="12" v-if="tokenBalance.length > 0 && !isTokenAddr(addressSummary.addrStr)">
+        <b-col cols="12" v-if="tokenBalance.length > 0 && isEcoAddr">
           <div class="group-head my-3 text-center text-md-left">
             <h3 class="head-global my-3">ECRC20 Token</h3>
           </div>
-          <TokenTracker></TokenTracker>
+          <TokenTracker v-for="(balance, index) in tokenBalance" :key="index" :token="balance"></TokenTracker>
         </b-col>
 
-        <b-col cols="12" v-if="isTokenAddr(addressSummary.addrStr)">
+        <b-col cols="12" v-if="!isEcoAddr">
           <div class="group-head my-3 text-center text-md-left">
             <h3 class="head-global my-3">
               Storage
@@ -109,8 +117,9 @@ import TransactionBox from '@/components/TransactionBox.vue'
 import TxScriptLog from '@/components/TxScriptLog.vue'
 import StorageLog from '@/components/StorageLog.vue'
 import addressModule from '@/api/address/index'
-import ecrc20Module from  '@/api/ecrc20/index'
+import ecrc20Module from '@/api/ecrc20/index'
 import txModule from '@/api/transaction/index'
+import { isEcoAddress, getBitAddressFromContractAddress } from '@/ecoweb3/index'
 // eslint-disable-next-line no-unused-vars
 import { AddressSummary } from '../api/address/type'
 // eslint-disable-next-line no-unused-vars
@@ -130,20 +139,26 @@ import { Txs } from '../api/transaction/type'
 export default class Address extends Vue {
   @Prop() addr!: string
 
+  // Subscribe address/tx
+
   addressSummary: AddressSummary = {} as AddressSummary
   tokenBalance: Tracker[] = []
   txs: Txs = {} as Txs
+  isEcoAddr = false
 
   async mounted() {
-    this.addressSummary = await addressModule.getAddressSummary(this.addr)
-    if (!this.isTokenAddr(this.addr)) {
-      this.tokenBalance = await ecrc20Module.getTokenTracker(this.addr)
-    }
-    this.txs = await txModule.getAddressTransactions(this.addr)
-  }
+    let address = this.addr
+    this.isEcoAddr = await isEcoAddress(address)
 
-  isTokenAddr(addr: string) {
-    return addr === '0abd9012fc9495d94346cbaded83f9e33be2ae07'
+    if (!this.isEcoAddr) {
+      console.log('contract addressed!')
+      // if its not a eco address so it is mean a given address is a contract address
+      address = getBitAddressFromContractAddress(address)
+    }
+
+    this.addressSummary = await addressModule.getAddressSummary(address)
+    this.tokenBalance = await ecrc20Module.getTokenTracker(address)
+    this.txs = await txModule.getAddressTransactions(address)
   }
 
   beforeDestroy() {
