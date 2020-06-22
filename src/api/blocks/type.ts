@@ -50,3 +50,7 @@ export interface BlockDetail {
   minedBy: string
   poolInfo: object
 }
+
+export interface BlockHash {
+  blockHash: string
+}

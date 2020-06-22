@@ -32,7 +32,7 @@
             <div class="table-responsive m-0">
               <b-table dark :items="tokens.items" :fields="fields">
                 <template v-slot:cell(name)="data">
-                  <router-link :to="{ name: 'token', params: { addr: data.item.contract_address }}">{{ data.item.symbol }} - {{data.item.name}}</router-link>
+                  <router-link :to="{ name: 'token', params: { addr: data.item.contract_address }}"><b>{{ data.item.symbol }} - {{data.item.name}}</b></router-link>
                 </template>
                 <template v-slot:cell(contract_address)="data">
                   <router-link :to="{ name: 'address', params: { addr: data.item.contract_address }}">{{ data.item.contract_address }}</router-link>

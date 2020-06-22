@@ -34,12 +34,15 @@ export default class LineChart extends Vue {
           {
             borderColor: '#803e9d',
             backgroundColor: '#141725',
-            borderWidth: 2,
+            borderWidth: 3,
             lineTension: 0,
+            fill: true,
             pointBackgroundColor: '#803e9d',
-            pointBorderWidth: 4,
+            pointBorderWidth: 5,
+            pointHoverRadius: 10,
+            pointRadius: 0,
             pointStyle: 'rect',
-            data: dataSet
+            data: dataSet,
           }
         ]
       },
@@ -51,7 +54,6 @@ export default class LineChart extends Vue {
                 autoSkip: true,
                 maxTicksLimit: 8,
                 maxRotation: 0
-                // padding: 25,
               }
             }
           ],

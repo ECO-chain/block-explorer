@@ -11,13 +11,13 @@
         <div class="block-global p-3 mb-3 rounded-lg w-100 h-100">
           <b-row>
             <b-col cols="12" md="6">
-              <div class="bg-purple-gd rounded-lg text-center p-3 my-3">
+              <div class="show-supply-idle rounded-lg text-center p-3 my-3">
                 <p class="my-1 text-style-2">{{ statusState.finalSupply | numberWithCommas }} ECOC</p>
                 <p class="my-1">Final Supply(Max)</p>
               </div>
             </b-col>
             <b-col cols="12" md="6">
-              <div class="bg-purple-gd rounded-lg text-center p-3 my-3">
+              <div class="show-supply-idle rounded-lg text-center p-3 my-3">
                 <p
                   class="my-1 text-style-2"
                 >{{ Number(statusState.supply) | numberWithCommas }} ECOC</p>
@@ -264,3 +264,48 @@ export default class Home extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.show-supply-idle {
+  background: linear-gradient(296deg, #4d1b63, #7e3d9a, #8739a8, #4d1b63, #7704a7, #4d1b63);
+  background-size: 400% 400%;
+
+  -webkit-animation: idle-gradient 20s ease infinite;
+  -moz-animation: idle-gradient 20s ease infinite;
+  animation: idle-gradient 20s ease infinite;
+}
+
+@-webkit-keyframes idle-gradient {
+  0% {
+    background-position: 1% 0%;
+  }
+  50% {
+    background-position: 99% 100%;
+  }
+  100% {
+    background-position: 1% 0%;
+  }
+}
+@-moz-keyframes idle-gradient {
+  0% {
+    background-position: 1% 0%;
+  }
+  50% {
+    background-position: 99% 100%;
+  }
+  100% {
+    background-position: 1% 0%;
+  }
+}
+@keyframes idle-gradient {
+  0% {
+    background-position: 1% 0%;
+  }
+  50% {
+    background-position: 99% 100%;
+  }
+  100% {
+    background-position: 1% 0%;
+  }
+}
+</style>

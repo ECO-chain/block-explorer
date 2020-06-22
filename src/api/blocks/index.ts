@@ -2,7 +2,7 @@ import { getStoreBuilder, BareActionContext } from 'vuex-typex'
 import { RootState } from '@/store/types'
 import Axios from 'axios'
 import { env } from '@/config'
-import { Blocks, BlockDetail, BlockState } from './type'
+import { Blocks, BlockDetail, BlockState, BlockHash } from './type'
 
 const initialState: BlockState = {}
 const builder = getStoreBuilder<RootState>().module('block', initialState)
@@ -18,7 +18,8 @@ const blocksModule = {
   getBlockDetail: builder.dispatch(getBlockDetail),
 
   getAllBlocksByDateTime: builder.dispatch(getAllBlocksByDateTime),
-  getBlocksWithLimit: builder.dispatch(getBlocksWithLimit)
+  getBlocksWithLimit: builder.dispatch(getBlocksWithLimit),
+  getBlockHashByIndex: builder.dispatch(getBlockHashByIndex)
 }
 
 export default blocksModule
@@ -84,6 +85,15 @@ async function getAllBlocksByDateTime(context: ActionContext, date: string): Pro
 async function getBlocksWithLimit(context: ActionContext, number: number): Promise<Blocks> {
   try {
     const res = await Axios.get(`${env!.baseURL}api/blocks?limit=${number}`)
+    return res.data
+  } catch (e) {
+    return e
+  }
+}
+
+async function getBlockHashByIndex(context: ActionContext, index: number): Promise<BlockHash> {
+  try {
+    const res = await Axios.get(`${env!.baseURL}api/block-index/${index}`)
     return res.data
   } catch (e) {
     return e

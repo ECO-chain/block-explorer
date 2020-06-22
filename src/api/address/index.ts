@@ -20,7 +20,7 @@ export default addressModule
 
 declare type ActionContext = BareActionContext<AddressState, RootState>
 
-async function getAddressSummary(context: ActionContext, addr: string): Promise<AddressSummary> {
+async function getAddressSummary(context: ActionContext, addr: string): Promise<AddressSummary | any> {
   try {
     const res = await Axios.get(`${env!.baseURL}api/addr/${addr}`)
     return res.data
