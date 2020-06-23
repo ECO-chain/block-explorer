@@ -74,24 +74,6 @@ export default class TokenTracker extends Vue {
   }
 }
 
-.hvr-grow {
-  cursor: pointer;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-}
-.hvr-grow:hover,
-.hvr-grow:focus,
-.hvr-grow:active {
-  color: whitesmoke;
-  -webkit-transform: scale(1.02);
-  transform: scale(1.02);
-}
-
 .hvr-sweep-to-right {
   cursor: pointer;
   vertical-align: middle;
