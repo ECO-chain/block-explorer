@@ -68,14 +68,14 @@
               <b-col cols="auto">
                 <VueQrcode
                   class="qr"
-                  :value="addressSummary.addrStr"
+                  :value="toQRCodeFormat(addressSummary.addrStr)"
                   :options="{ color: { dark: '#803D9E', light: '#0e111b' }, width: 125 }"
                 ></VueQrcode>
               </b-col>
 
               <b-col cols="12" v-if="!isEcoAddr">
                 <hr class="mb-0" />
-                <TxScriptLog></TxScriptLog>
+                <TokenScriptLog></TokenScriptLog>
               </b-col>
             </b-row>
           </div>
@@ -114,7 +114,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 import VueQrcode from '@chenfengyuan/vue-qrcode'
 import TokenTracker from '@/components/TokenTracker.vue'
 import TransactionBox from '@/components/TransactionBox.vue'
-import TxScriptLog from '@/components/TxScriptLog.vue'
+import TokenScriptLog from '@/components/TokenScriptLog.vue'
 import StorageLog from '@/components/StorageLog.vue'
 import addressModule from '@/api/address/index'
 import ecrc20Module from '@/api/ecrc20/index'
@@ -132,7 +132,7 @@ import { Txs } from '../api/transaction/type'
     VueQrcode,
     TokenTracker,
     TransactionBox,
-    TxScriptLog,
+    TokenScriptLog,
     StorageLog
   }
 })
@@ -159,6 +159,10 @@ export default class Address extends Vue {
     this.addressSummary = await addressModule.getAddressSummary(address)
     this.tokenBalance = await ecrc20Module.getTokenTracker(address)
     this.txs = await txModule.getAddressTransactions(address)
+  }
+
+  toQRCodeFormat(addr: string) {
+    return `ecoc:${addr}?label=ECOC Mobile Wallet`
   }
 
   beforeDestroy() {
