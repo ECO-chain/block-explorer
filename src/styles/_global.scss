@@ -606,18 +606,18 @@ select.form-control::-ms-expand {
 
   .content-scroll {
     scrollbar-width: thin;
-    scrollbar-color: $purple $purple-light;
+    scrollbar-color: $purple #181818;
   }
 
   .content-scroll::-webkit-scrollbar-track {
-    background: $purple-light;
+    background: #181818;
     border-radius: 6px;
   }
 
   .content-scroll::-webkit-scrollbar-thumb {
     background-color: $purple;
     border-radius: 6px;
-    border: 3px solid $purple-light;
+    border: 3px solid #181818;
   }
 }
 

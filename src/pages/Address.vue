@@ -75,7 +75,7 @@
 
               <b-col cols="12" v-if="!isEcoAddr">
                 <hr class="mb-0" />
-                <TokenScriptLog :isToken="true" :bytecode="contractInfo.code"></TokenScriptLog>
+                <TokenScriptLog :isToken="true" :byteCode="contractInfo.code"></TokenScriptLog>
               </b-col>
             </b-row>
           </div>

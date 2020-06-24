@@ -1,6 +1,7 @@
 import ecoUtils from 'ecoweb3/src/utils'
 import ecocCore from 'ecoccore-lib'
 import { env } from '@/config'
+import { lookupOpcode } from './utils'
 
 const CONTRACT_CALL = 194;
 const CONTRACT_CREATE = 193;
@@ -23,6 +24,39 @@ namespace ecoweb3 {
     } catch (e) {
       return null
     }
+  }
+
+  export const getContractOpcodesString = function (hex: any) {
+    let contractCode = new ecocCore.deps.Buffer(hex, 'hex')
+    let ops = [];
+
+    for (let index = 0; index < contractCode.length; index++) {
+      let currentOp = lookupOpcode(contractCode[index], true);
+      // record the program counter
+      currentOp.pc = index;
+      ops.push(currentOp);
+      // handle PUSH inline data
+      if (currentOp.name.slice(0, 4) === 'PUSH') {
+        // load inline data
+        let pushDataLength = contractCode[index] - 0x5f;
+        let pushData = contractCode.slice(index + 1, index + pushDataLength + 1);
+
+        currentOp.pushData = pushData;
+
+        // skip read of inline data
+        index += pushDataLength;
+      }
+    }
+    let opcodesStr = '';
+
+    for (let i = 0; i < ops.length; i++) {
+      if ((ops[i]['pushData'])) {
+        opcodesStr += (' ' + ops[i]['name'] + ((ops[i]['pushData']) ? (' 0x' + ops[i]['pushData']!.toString('hex')) : ''));
+      } else {
+        opcodesStr += (' ' + ops[i]['name']);
+      }
+    }
+    return opcodesStr;
   }
 }
 

@@ -70,7 +70,7 @@
         </div>
       </b-col>
       <b-col cols="12" lg="6" class="d-flex flex-column">
-        <h2 class="head-global my-3">7 day ECOC transaction history</h2>
+        <h2 class="head-global my-3">7 days ECOC transaction history</h2>
         <div class="block-global p-3 mb-3 rounded-lg w-100 h-100 d-flex align-items-center">
           <template v-if="Array.isArray(sevenDaysTx)">
             <LineChart id="1" :labels.sync="txDate" :data.sync="txCount"></LineChart>
