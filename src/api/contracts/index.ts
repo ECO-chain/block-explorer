@@ -22,7 +22,7 @@ declare type ActionContext = BareActionContext<ContractState, RootState>
 
 async function getTokenContractInfo(context: ActionContext, contractAddr: string): Promise<ContractInfo> {
   try {
-    const res = await Axios.get(`${env!.baseURL}api/contracts/${contractAddr}`)
+    const res = await Axios.get(`${env!.baseURL}api/contracts/${contractAddr}/info`)
     return res.data
   } catch (e) {
     return e

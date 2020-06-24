@@ -145,7 +145,7 @@
           </b-row>
         </b-col>
       </b-row>
-      <TxScriptLog v-if="tx.isEcrc20Transfer"></TxScriptLog>
+      <TokenScriptLog v-if="tx.isEcrc20Transfer" :isToken="false"></TokenScriptLog>
     </div>
 
     <hr />
@@ -165,13 +165,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import TxScriptLog from '@/components/TxScriptLog.vue'
+import TokenScriptLog from '@/components/TokenScriptLog.vue'
 // eslint-disable-next-line no-unused-vars
 import { Tx, TxValueIn, TxValueOut } from '../api/transaction/type'
 
 @Component({
   components: {
-    TxScriptLog
+    TokenScriptLog
   }
 })
 export default class TransactionBox extends Vue {

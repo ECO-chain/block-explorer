@@ -75,7 +75,7 @@
 
               <b-col cols="12" v-if="!isEcoAddr">
                 <hr class="mb-0" />
-                <TokenScriptLog></TokenScriptLog>
+                <TokenScriptLog :isToken="true" :bytecode="contractInfo.code"></TokenScriptLog>
               </b-col>
             </b-row>
           </div>
@@ -92,10 +92,10 @@
           <div class="group-head my-3 text-center text-md-left">
             <h3 class="head-global my-3">
               Storage
-              <span class="small text-purple">[66 entries]</span>
+              <span class="small text-purple">[{{ getEntriesCount() }} entries]</span>
             </h3>
           </div>
-          <StorageLog></StorageLog>
+          <StorageLog :entries="contractInfo.storage"></StorageLog>
         </b-col>
 
         <b-col cols="12">
@@ -110,6 +110,7 @@
 </template>
 
 <script lang="ts">
+/* eslint-disable no-unused-vars */
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import VueQrcode from '@chenfengyuan/vue-qrcode'
 import TokenTracker from '@/components/TokenTracker.vue'
@@ -119,13 +120,12 @@ import StorageLog from '@/components/StorageLog.vue'
 import addressModule from '@/api/address/index'
 import ecrc20Module from '@/api/ecrc20/index'
 import txModule from '@/api/transaction/index'
-import { isEcoAddress, getBitAddressFromContractAddress } from '@/ecoweb3/index'
-// eslint-disable-next-line no-unused-vars
+import contractModule from '@/api/contracts/index'
+import ecoweb3 from '@/ecoweb3/index'
 import { AddressSummary } from '../api/address/type'
-// eslint-disable-next-line no-unused-vars
 import { TokenTracker as Tracker } from '../api/ecrc20/type'
-// eslint-disable-next-line no-unused-vars
 import { Txs } from '../api/transaction/type'
+import { ContractInfo } from '../api/contracts/type'
 
 @Component({
   components: {
@@ -144,16 +144,19 @@ export default class Address extends Vue {
   addressSummary: AddressSummary = {} as AddressSummary
   tokenBalance: Tracker[] = []
   txs: Txs = {} as Txs
+  contractInfo: ContractInfo = {} as ContractInfo
   isEcoAddr = false
 
   async mounted() {
     let address = this.addr
-    this.isEcoAddr = await isEcoAddress(address)
+    this.isEcoAddr = await ecoweb3.isEcoAddress(address)
 
     if (!this.isEcoAddr) {
       console.log('contract addressed!')
-      // if its not a eco address so it is mean a given address is a contract address
-      address = getBitAddressFromContractAddress(address)
+      // if its not a eco address so it is meaning a given address is a contract address
+      this.contractInfo = await contractModule.getTokenContractInfo(address)
+      address = await ecoweb3.getBitAddressFromContractAddress(address)
+
     }
 
     this.addressSummary = await addressModule.getAddressSummary(address)
@@ -163,6 +166,10 @@ export default class Address extends Vue {
 
   toQRCodeFormat(addr: string) {
     return `ecoc:${addr}?label=ECOC Mobile Wallet`
+  }
+
+  getEntriesCount() {
+    return Object.keys(this.contractInfo.storage).length
   }
 
   beforeDestroy() {

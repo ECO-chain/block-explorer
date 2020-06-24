@@ -146,7 +146,7 @@ import LineChart from '@/components/LineChart.vue'
 import statusModule from '@/api/status/index'
 import statisticsModule from '@/api/statistics/index'
 import blocksModule from '@/api/blocks/index'
-import { isEcoAddress, getBitAddressFromContractAddress } from '@/ecoweb3/index'
+import ecoweb3 from '@/ecoweb3/index'
 import { toMonthDayFormat } from '@/api/filters'
 /* eslint-disable no-unused-vars */
 import { StatusState, Info, StakingInfo } from '../api/status/type'
@@ -228,11 +228,11 @@ export default class Home extends Vue {
 
     console.log(
       'addr from token addr',
-      await isEcoAddress('0abd9012fc9495d94346cbaded83f9e33be2ae07')
+      await ecoweb3.isEcoAddress('0abd9012fc9495d94346cbaded83f9e33be2ae07')
     )
     console.log(
       'addr from token addr',
-      getBitAddressFromContractAddress('0abd9012fc9495d94346cbaded83f9e33be2ae07')
+      ecoweb3.getBitAddressFromContractAddress('0abd9012fc9495d94346cbaded83f9e33be2ae07')
     )
   }
 
