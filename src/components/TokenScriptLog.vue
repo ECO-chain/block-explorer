@@ -24,11 +24,7 @@ import ecoweb3 from '@/ecoweb3/index'
 @Component({})
 export default class TokenScriptLog extends Vue {
   @Prop() isToken!: boolean
-  @Prop() byteCode?: string
-
-  mounted() {
-    console.log('given byte code', this.byteCode)
-  }
+  @Prop() byteCode!: string
 
   get asmCode() {
     return ecoweb3.getContractOpcodesString(this.byteCode)

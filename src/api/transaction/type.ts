@@ -27,8 +27,7 @@ export interface Tx {
   valueIn?: number
   fees?: number
   // ECRC20 Transaction
-  receipt?: TxReceipt
-  tokenEvent?: TokenEvent[]
+  receipt?: TxReceipt[]
 }
 
 // for vin

@@ -116,45 +116,47 @@
       </b-col>
     </b-row>
 
-    <div v-if="tx.isEcrc20Transfer && tx.receipt">
-      <hr />
-      <b-row>
-        <b-col cols="12">
-          <router-link to="/token">BlockChainStore Token</router-link>
-          <span class="small text-purple-light">(ECRC20)</span>
-        </b-col>
-        <b-col cols="12">
-          <b-row class="justify-content-center align-items-center no-gutters">
-            <b-col cols="12" lg>
-              <b-row class="align-items-center no-gutters">
-                <b-col cols="8" class="text-truncate">
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
-                </b-col>
-                <b-col cols="4" class="text-right small text-purple-light">8094.39 BCST</b-col>
-              </b-row>
-            </b-col>
-            <b-col cols="12" lg="1" class="text-center">
-              <b-icon-arrow-right-short class="h3 mb-0 rotate-md-90"></b-icon-arrow-right-short>
-            </b-col>
-            <b-col cols="12" lg>
-              <b-row class="align-items-center no-gutters">
-                <b-col cols="8" class="text-truncate">
-                  <router-link
-                    to="/address"
-                    class="d-block text-truncate"
-                  >EK9YyB3F4zn6DVt9Ey9n3D4hDHDhzrJrtM</router-link>
-                </b-col>
-                <b-col cols="4" class="text-right small text-purple-light">8094.39 BCST</b-col>
-              </b-row>
-            </b-col>
-          </b-row>
-        </b-col>
-      </b-row>
-      <TokenScriptLog v-if="tx.isEcrc20Transfer" :isToken="false"></TokenScriptLog>
-    </div>
+    <template v-if="tkEvent.length > 0">
+      <div v-for="(event, index) in tkEvent" :key="index">
+        <hr />
+        <b-row>
+          <b-col cols="12">
+            <router-link to="/token">{{ event.contractInfo.name }}</router-link>
+            <span class="small text-purple-light">( ECRC20 )</span>
+          </b-col>
+          <b-col cols="12">
+            <b-row class="justify-content-center align-items-center no-gutters">
+              <b-col cols="12" lg>
+                <b-row class="align-items-center no-gutters">
+                  <b-col cols="8" class="text-truncate">
+                    <router-link to="/address" class="d-block text-truncate">{{ event.addressFrom }}</router-link>
+                  </b-col>
+                  <b-col
+                    cols="4"
+                    class="text-right small text-purple-light"
+                  >{{ event.amount | numberWithCommas(8) }} BCST</b-col>
+                </b-row>
+              </b-col>
+              <b-col cols="12" lg="1" class="text-center">
+                <b-icon-arrow-right-short class="h3 mb-0 rotate-md-90"></b-icon-arrow-right-short>
+              </b-col>
+              <b-col cols="12" lg>
+                <b-row class="align-items-center no-gutters">
+                  <b-col cols="8" class="text-truncate">
+                    <router-link to="/address" class="d-block text-truncate">{{ event.addressTo }}</router-link>
+                  </b-col>
+                  <b-col
+                    cols="4"
+                    class="text-right small text-purple-light"
+                  >{{ event.amount | numberWithCommas(8) }} BCST</b-col>
+                </b-row>
+              </b-col>
+            </b-row>
+          </b-col>
+        </b-row>
+        <TokenScriptLog v-if="byteCode.length > 0" :byteCode="byteCode" :isToken="false"></TokenScriptLog>
+      </div>
+    </template>
 
     <hr />
     <b-row>
@@ -184,6 +186,7 @@ import {
   ReceiptLog,
   TokenEvent
 } from '../api/transaction/type'
+import { Token } from '../api/ecrc20/type'
 
 @Component({
   components: {
@@ -202,13 +205,19 @@ export default class TransactionBox extends Vue {
 
   simpleVinTx: TxValueIn[] = []
   simpleVoutTx: TxValueOut[] = []
+  tkEvent: TokenEvent[] = []
+  byteCode = ''
 
-  created() {
+  async mounted() {
     this.simpleVinTx = this.aggregateVinValue(this.tx.vin)
     this.simpleVoutTx = this.aggregateVoutValue(this.tx.vout)
 
     if (this.tx.isEcrc20Transfer && this.tx.receipt) {
-      this.processECRC20Tx(this.tx.receipt)
+      this.tx.receipt.forEach(async (receipt: TxReceipt) => {
+        this.tkEvent = await this.processECRC20Tx(receipt)
+      })
+
+      this.byteCode = await this.getContractByteCode(this.tx.vout)
     }
   }
 
@@ -313,12 +322,29 @@ export default class TransactionBox extends Vue {
 
   async processECRC20Tx(receipt: TxReceipt) {
     let tokenEvent: TokenEvent = {} as TokenEvent
+    let events: TokenEvent[] = []
+
     receipt.log.forEach(async (log: ReceiptLog) => {
       tokenEvent = await ecoweb3.parseTokenTxEvent(log)
-      this.tx.tokenEvent!.push(tokenEvent)
+      events.push(tokenEvent)
     })
 
-    console.log('after processed', this.tx)
+    return events
+  }
+
+  async getContractByteCode(txValueOut: TxValueOut[]) {
+    let bytecode = ''
+
+    for (let vout of txValueOut) {
+      if (vout.scriptPubKey && vout.scriptPubKey.hex) {
+        const decodedByteCode = await ecoweb3.getContractByteCode(vout.scriptPubKey.hex)
+        if (decodedByteCode) {
+          return decodedByteCode['code']
+        }
+      }
+    }
+
+    return ''
   }
 }
 </script>

@@ -85,6 +85,36 @@ namespace ecoweb3 {
       return e
     }
   }
+
+  export const getContractByteCode = async function (hex: string) {
+    try {
+      let script = ecocCore.Script(hex)
+
+      if (script.chunks && script.chunks.length) {
+        for (let k = 0; k < script.chunks.length; k++) {
+          if (script.chunks[k] &&
+            script.chunks[k]['opcodenum'] &&
+            [CONTRACT_CALL, CONTRACT_CREATE].indexOf(script.chunks[k]['opcodenum']) !== -1) {
+            switch (script.chunks[k]['opcodenum']) {
+              case CONTRACT_CALL:
+                return {
+                  code: script.chunks[k - 2]['buf'].toString('hex'),
+                  type: 'Call'
+                };
+              case CONTRACT_CREATE:
+                return {
+                  code: script.chunks[k - 1]['buf'].toString('hex'),
+                  type: 'Create'
+                }
+            }
+          }
+        }
+      }
+    } catch (e) {
+      return e
+    }
+    return null
+  }
 }
 
 function getContractByteCode(hex: string) {
