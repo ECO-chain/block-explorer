@@ -103,6 +103,7 @@
             <h3 class="head-global my-3">Transactions</h3>
           </div>
           <TransactionBox v-for="(tx, index) in txs.txs" :key="index" :tx="tx"></TransactionBox>
+          <infinite-loading v-if="txs.txs.length" @infinite="infiniteHandler"></infinite-loading>
         </b-col>
       </b-row>
     </b-container>
@@ -122,6 +123,8 @@ import ecrc20Module from '@/api/ecrc20/index'
 import txModule from '@/api/transaction/index'
 import contractModule from '@/api/contracts/index'
 import ecoweb3 from '@/ecoweb3/index'
+import InfiniteLoading from 'vue-infinite-loading'
+
 import { Socket } from 'vue-socket.io-extended'
 import { AddressSummary } from '../api/address/type'
 import { TokenTracker as Tracker } from '../api/ecrc20/type'
@@ -134,7 +137,8 @@ import { ContractInfo } from '../api/contracts/type'
     TokenTracker,
     TransactionBox,
     TokenScriptLog,
-    StorageLog
+    StorageLog,
+    InfiniteLoading
   }
 })
 export default class Address extends Vue {
@@ -144,7 +148,6 @@ export default class Address extends Vue {
   @Socket('ecocd/addresstxid')
   async onNewTx(payload: any) {
     let tx = await txModule.getTransactionByHash(payload.txid)
-    console.log('getting new tx', tx)
     this.txs.txs.unshift(tx)
   }
 
@@ -155,13 +158,13 @@ export default class Address extends Vue {
   contractInfo: ContractInfo = {} as ContractInfo
   isEcoAddr = false
   address = ''
+  page = 0
 
   async mounted() {
     this.address = this.addr
     this.isEcoAddr = await ecoweb3.isEcoAddress(this.address)
 
     if (!this.isEcoAddr) {
-      console.log('contract addressed!')
       // if its not a eco this.address so it is meaning a given address is a contract address
       this.contractInfo = await contractModule.getTokenContractInfo(this.address)
       this.address = await ecoweb3.getBitAddressFromContractAddress(this.address)
@@ -169,11 +172,16 @@ export default class Address extends Vue {
 
     this.addressSummary = await addressModule.getAddressSummary(this.address)
     this.tokenBalance = await ecrc20Module.getTokenTracker(this.address)
-    this.txs = await txModule.getAddressTransactions(this.address)
-
+    this.txs = await txModule.getAddressTransactions({ hash: this.address, pageNum: this.page })
+    this.page++
     // subscribe tx to a socket
-    console.log('subscribing address tx...')
     this.addressTxSubscription('subscribe', this.address)
+  }
+
+  beforeDestroy() {
+    // unsubscribe transaction
+    console.log('unsubscribed', this.address)
+    this.addressTxSubscription('unsubscribe', this.address)
   }
 
   addressTxSubscription(action: string, address: string) {
@@ -190,10 +198,25 @@ export default class Address extends Vue {
     return Object.keys(this.contractInfo.storage).length
   }
 
-  beforeDestroy() {
-    // unsubscribe transaction
-    console.log('unsubscribed', this.address)
-    this.addressTxSubscription('unsubscribe', this.address)
+  async infiniteHandler($state: any) {
+    if (this.page < this.txs.pagesTotal) {
+      let moreTxs: Txs = await txModule.getAddressTransactions({
+        hash: this.address,
+        pageNum: this.page
+      })
+
+      setTimeout(() => {
+        // this.txs.txs.concat(moreTxs.txs)
+        for (let tx of moreTxs.txs) {
+          this.txs.txs.push(tx)
+        }
+        // document.documentElement.scrollTop = currentScroll
+        $state.loaded()
+        this.page++
+      }, 1000)
+    } else {
+      $state.complete()
+    }
   }
 }
 </script>

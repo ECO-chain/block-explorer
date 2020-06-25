@@ -31,9 +31,9 @@ async function getBlockTransactions(context: ActionContext, hash: string): Promi
   }
 }
 
-async function getAddressTransactions(context: ActionContext, hash: string): Promise<Txs> {
+async function getAddressTransactions(context: ActionContext, payload: { hash: string, pageNum: number }): Promise<Txs> {
   try {
-    const res = await Axios.get(`${env!.baseURL}api/txs?address=${hash}`)
+    const res = await Axios.get(`${env!.baseURL}api/txs?address=${payload.hash}&pageNum=${payload.pageNum}`)
     return res.data
   } catch (e) {
     return e
