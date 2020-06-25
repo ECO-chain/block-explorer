@@ -8,8 +8,6 @@ import ecrc20Module from '@/api/ecrc20/index'
 const CONTRACT_CALL = 194;
 const CONTRACT_CREATE = 193;
 
-const TOPICS_HASH = 'ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
-
 namespace ecoweb3 {
   /**  somehow eslint doesn't let normal function declaration pass, so we have to do this way i think
    or maybe we have to fixes it if possible **/
@@ -116,37 +114,5 @@ namespace ecoweb3 {
     return null
   }
 }
-
-function getContractByteCode(hex: string) {
-  try {
-    let script = ecocCore.Script(hex)
-
-    if (script.chunks && script.chunks.length) {
-      for (let k = 0; k < script.chunks.length; k++) {
-        if (script.chunks[k] &&
-          script.chunks[k]['opcodenum'] &&
-          [CONTRACT_CALL, CONTRACT_CREATE].indexOf(script.chunks[k]['opcodenum']) !== -1) {
-          switch (script.chunks[k]['opcodenum']) {
-            case CONTRACT_CALL:
-              return {
-                code: script.chunks[k - 2]['buf'].toString('hex'),
-                type: 'Call'
-              };
-            case CONTRACT_CREATE:
-              return {
-                code: script.chunks[k - 1]['buf'].toString('hex'),
-                type: 'Create'
-              }
-          }
-        }
-      }
-    }
-  } catch (e) {
-    return e
-  }
-  return null
-}
-
-
 
 export default ecoweb3

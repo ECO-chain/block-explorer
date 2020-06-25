@@ -122,9 +122,10 @@ import ecrc20Module from '@/api/ecrc20/index'
 import txModule from '@/api/transaction/index'
 import contractModule from '@/api/contracts/index'
 import ecoweb3 from '@/ecoweb3/index'
+import { Socket } from 'vue-socket.io-extended'
 import { AddressSummary } from '../api/address/type'
 import { TokenTracker as Tracker } from '../api/ecrc20/type'
-import { Txs } from '../api/transaction/type'
+import { Txs, Tx } from '../api/transaction/type'
 import { ContractInfo } from '../api/contracts/type'
 
 @Component({
@@ -139,29 +140,46 @@ import { ContractInfo } from '../api/contracts/type'
 export default class Address extends Vue {
   @Prop() addr!: string
 
-  // Subscribe address/tx
+  // address/tx subscribed
+  @Socket('ecocd/addresstxid')
+  async onNewTx(payload: any) {
+    let tx = await txModule.getTransactionByHash(payload.txid)
+    console.log('getting new tx', tx)
+    this.txs.txs.unshift(tx)
+  }
 
   addressSummary: AddressSummary = {} as AddressSummary
   tokenBalance: Tracker[] = []
   txs: Txs = {} as Txs
+  tx: Tx = {} as Tx
   contractInfo: ContractInfo = {} as ContractInfo
   isEcoAddr = false
+  address = ''
 
   async mounted() {
-    let address = this.addr
-    this.isEcoAddr = await ecoweb3.isEcoAddress(address)
+    this.address = this.addr
+    this.isEcoAddr = await ecoweb3.isEcoAddress(this.address)
 
     if (!this.isEcoAddr) {
       console.log('contract addressed!')
-      // if its not a eco address so it is meaning a given address is a contract address
-      this.contractInfo = await contractModule.getTokenContractInfo(address)
-      address = await ecoweb3.getBitAddressFromContractAddress(address)
-
+      // if its not a eco this.address so it is meaning a given address is a contract address
+      this.contractInfo = await contractModule.getTokenContractInfo(this.address)
+      this.address = await ecoweb3.getBitAddressFromContractAddress(this.address)
     }
 
-    this.addressSummary = await addressModule.getAddressSummary(address)
-    this.tokenBalance = await ecrc20Module.getTokenTracker(address)
-    this.txs = await txModule.getAddressTransactions(address)
+    this.addressSummary = await addressModule.getAddressSummary(this.address)
+    this.tokenBalance = await ecrc20Module.getTokenTracker(this.address)
+    this.txs = await txModule.getAddressTransactions(this.address)
+
+    // subscribe tx to a socket
+    console.log('subscribing address tx...')
+    this.addressTxSubscription('subscribe', this.address)
+  }
+
+  addressTxSubscription(action: string, address: string) {
+    if (['subscribe', 'unsubscribe'].includes(action)) {
+      this.$socket.client.emit(action, 'ecocd/addresstxid', [address])
+    }
   }
 
   toQRCodeFormat(addr: string) {
@@ -174,6 +192,8 @@ export default class Address extends Vue {
 
   beforeDestroy() {
     // unsubscribe transaction
+    console.log('unsubscribed', this.address)
+    this.addressTxSubscription('unsubscribe', this.address)
   }
 }
 </script>
