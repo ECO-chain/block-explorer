@@ -57,7 +57,11 @@
                       </div>
                     </b-collapse>
                   </b-col>
-                  <b-col cols="4" class="addr-value" v-if="!moreDetail && vin.sumValue">{{ vin.sumValue }}</b-col>
+                  <b-col
+                    cols="4"
+                    class="addr-value"
+                    v-if="!moreDetail && vin.sumValue"
+                  >{{ vin.sumValue }}</b-col>
                   <b-col cols="4" class="addr-value" v-else>{{ vin.value }} ECOC</b-col>
                 </template>
               </b-row>
@@ -98,7 +102,11 @@
                       </div>
                     </b-collapse>
                   </b-col>
-                  <b-col cols="4" class="addr-value" v-if="!moreDetail && vout.sumValue">{{ vout.sumValue }}</b-col>
+                  <b-col
+                    cols="4"
+                    class="addr-value"
+                    v-if="!moreDetail && vout.sumValue"
+                  >{{ vout.sumValue }}</b-col>
                   <b-col cols="4" class="addr-value" v-else>{{ vout.value }} ECOC (U)</b-col>
                 </template>
               </b-row>
@@ -108,7 +116,7 @@
       </b-col>
     </b-row>
 
-    <div v-if="tx.isEcrc20Transfer">
+    <div v-if="tx.isEcrc20Transfer && tx.receipt">
       <hr />
       <b-row>
         <b-col cols="12">
@@ -164,10 +172,18 @@
 </template>
 
 <script lang="ts">
+/* eslint-disable no-unused-vars */
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import TokenScriptLog from '@/components/TokenScriptLog.vue'
-// eslint-disable-next-line no-unused-vars
-import { Tx, TxValueIn, TxValueOut } from '../api/transaction/type'
+import ecoweb3 from '@/ecoweb3/index'
+import {
+  Tx,
+  TxValueIn,
+  TxValueOut,
+  TxReceipt,
+  ReceiptLog,
+  TokenEvent
+} from '../api/transaction/type'
 
 @Component({
   components: {
@@ -187,10 +203,13 @@ export default class TransactionBox extends Vue {
   simpleVinTx: TxValueIn[] = []
   simpleVoutTx: TxValueOut[] = []
 
-  mounted() {
+  created() {
     this.simpleVinTx = this.aggregateVinValue(this.tx.vin)
     this.simpleVoutTx = this.aggregateVoutValue(this.tx.vout)
-    console.log('now vout', this.simpleVoutTx)
+
+    if (this.tx.isEcrc20Transfer && this.tx.receipt) {
+      this.processECRC20Tx(this.tx.receipt)
+    }
   }
 
   toggleMore() {
@@ -287,9 +306,19 @@ export default class TransactionBox extends Vue {
     return true
   }
 
-  parsingAddress(val:any) {
+  parsingAddress(val: any) {
     val = JSON.parse(JSON.stringify(val.scriptPubKey.addresses))
     return val[0]
+  }
+
+  async processECRC20Tx(receipt: TxReceipt) {
+    let tokenEvent: TokenEvent = {} as TokenEvent
+    receipt.log.forEach(async (log: ReceiptLog) => {
+      tokenEvent = await ecoweb3.parseTokenTxEvent(log)
+      this.tx.tokenEvent!.push(tokenEvent)
+    })
+
+    console.log('after processed', this.tx)
   }
 }
 </script>

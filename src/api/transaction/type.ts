@@ -1,3 +1,5 @@
+import { TokenSummary } from '../ecrc20/type';
+
 export interface TransactionState {}
 
 export interface Txs {
@@ -24,6 +26,9 @@ export interface Tx {
   // In case of normal transaction / reward transaction
   valueIn?: number
   fees?: number
+  // ECRC20 Transaction
+  receipt?: TxReceipt
+  tokenEvent?: TokenEvent[]
 }
 
 // for vin
@@ -70,4 +75,31 @@ export interface SocketTx {
   txid: string
   valueOut: number
   vout: object[]
+}
+
+export interface TxReceipt {
+  blockHash: string
+  blockNumber: number
+  contractAddress: string
+  cumulativeGasUsed: number
+  excepted: string
+  from: string
+  gasUsed: number
+  log: ReceiptLog[]
+  to: string
+  transactionHash: string
+  transactionIndex: number
+}
+
+export interface ReceiptLog {
+  address: string
+  data: string
+  topics: string[]
+}
+
+export interface TokenEvent {
+  addressFrom: string
+  addressTo: string
+  amount: number
+  contractInfo: TokenSummary
 }

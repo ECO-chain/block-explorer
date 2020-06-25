@@ -2,9 +2,13 @@ import ecoUtils from 'ecoweb3/src/utils'
 import ecocCore from 'ecoccore-lib'
 import { env } from '@/config'
 import { lookupOpcode } from './utils'
+import { TokenSummary } from '@/api/ecrc20/type'
+import ecrc20Module from '@/api/ecrc20/index'
 
 const CONTRACT_CALL = 194;
 const CONTRACT_CREATE = 193;
+
+const TOPICS_HASH = 'ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
 
 namespace ecoweb3 {
   /**  somehow eslint doesn't let normal function declaration pass, so we have to do this way i think
@@ -58,6 +62,29 @@ namespace ecoweb3 {
     }
     return opcodesStr;
   }
+
+  export const parseTokenTxEvent = async function (logItem: any) {
+    try {
+      let tokenData = await ecrc20Module.getTokenSummary(logItem.address)
+
+      if (tokenData && tokenData.contract_address) {
+        let addressFrom = logItem.topics[1]
+        let addressTo = logItem.topics[2]
+        let amount = parseInt(logItem.data, 16)
+
+        const tokenEvent = {
+          addressFrom: await getBitAddressFromContractAddress(addressFrom.slice(addressFrom.length - 40, addressFrom.length)),
+          addressTo: await getBitAddressFromContractAddress(addressTo.slice(addressTo.length - 40, addressTo.length)),
+          amount: amount,
+          contractInfo: tokenData
+        };
+
+        return tokenEvent
+      }
+    } catch (e) {
+      return e
+    }
+  }
 }
 
 function getContractByteCode(hex: string) {
@@ -89,5 +116,7 @@ function getContractByteCode(hex: string) {
   }
   return null
 }
+
+
 
 export default ecoweb3
