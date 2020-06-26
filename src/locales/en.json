@@ -60,6 +60,7 @@
       "start_d": "Start Date",
       "init_block_height:": "Initial Blockchain Height",
       "sync_block": "Synced Blocks",
+      "skipped_block": "Skipped Blocks",
       "sync_type": "Sync Type",
       "ecoc_node_info": "Ecochain node information",
       "version": "Version",
@@ -84,8 +85,10 @@
       "minted_ecoc": "Minted ECOC coins",
       "tx_summary": "Transaction Summary",
       "total_tx_fee": "Total Transaction Fees",
+      "num_of_tx": "Number of Transactions",
       "total_output_vol": "Total Output Volume (ECOC)",
       "est_tx_vol": "Estimated Transaction Volume (ECOC)",
+      "view_chart": "View Chart",
       "stake_diffi": "Staking difficulty",
       "difficulty": "Difficulty",
       "percent_staked": "Percent of staked supply"
@@ -124,7 +127,7 @@
       "to": "To",
       "quantity": "Quantity",
       "rank": "Rank",
-      "total_of_holders": "A Total of 66 {holders} found",
+      "total_of_holders": "A Total of {holders} Token holders found",
       "addr": "Address",
       "percent": "Percentage",
       "read_smart_contract": "Read Smart contract",
@@ -132,7 +135,8 @@
       "version": "Version",
       "balance_of": "Balance of",
       "symbol": "Symbol",
-      "allowance": "Allownance"
+      "allowance": "Allowance",
+      "invalid_addr": "Invalid Address"
     },
     "rich_list": {
       "richest_addr": "Richest Addresses",
@@ -162,7 +166,8 @@
       "ecrc_token": "ECRC20 Token",
       "storage": "Storage",
       "entries": "Entries",
-      "tx": "Transactions"
+      "tx": "Transactions",
+      "no_tx": "This address hasn't any transactions."
     }
   },
   "components": {
@@ -232,7 +237,7 @@
       "asm": "Asm"
     },
     "token_tracker": {
-      "rank": "Rank"
+      "rank": "Rank#"
     }
   }
 }
