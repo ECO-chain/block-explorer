@@ -8,7 +8,7 @@
               <span>C</span>harts
             </h2>
           </div>
-          <!-- END .group-head -->
+
           <div class="group-head my-3 text-center text-md-left mb-5">
             <span class="stats-span">{{ chartSelected }}</span>
             <b-form-select class="stats-select mb-2" v-model="chartSelected" :options="chartsList"></b-form-select>

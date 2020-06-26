@@ -10,81 +10,75 @@ import Tokens from './pages/Tokens.vue'
 import RichestList from './pages/RichestList.vue'
 import Address from './pages/Address.vue'
 import Block from './pages/Block.vue'
-import Outputs from './pages/Outputs.vue'
 import Token from './pages/Token.vue'
 import Transaction from './pages/Transaction.vue'
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-    mode: "history",
-    routes: [
-      {
-        path: '/',
-        name: "home",
-        component: Home,
-      },
-      {
-        path: '/blocks',
-        name: 'blocks',
-        component: Blocks,
-      },
-      {
-        path: '/status',
-        name: 'status',
-        component: Status
-      },
-      {
-        path: '/stats',
-        name: 'stats',
-        component: Stats,
-      },
-      {
-        path: '/charts',
-        name: 'charts',
-        component: Charts,
-        props: true
-      },
-      {
-        path: '/tokens',
-        name: 'tokens',
-        component: Tokens
-      },
-      {
-        path: '/richest-list',
-        name: 'richestList',
-        component: RichestList,
-      },
-      {
-        path: '/address/:addr',
-        name: 'address',
-        component: Address,
-        props: true
-      },
-      {
-        path: '/block/:hash',
-        name: 'block',
-        component: Block,
-        props: true
-      },
-      {
-        path: '/stats/outputs',
-        name: 'outputs',
-        component: Outputs,
-      },
-      {
-        path: '/token/:addr',
-        name: 'token',
-        component: Token,
-        props: true
-      },
-      {
-        path: '/tx/:hash',
-        name: 'transaction',
-        component: Transaction,
-        props: true
-      }
-    ]
+  mode: "history",
+  routes: [
+    {
+      path: '/',
+      name: "home",
+      component: Home,
+    },
+    {
+      path: '/blocks',
+      name: 'blocks',
+      component: Blocks,
+    },
+    {
+      path: '/status',
+      name: 'status',
+      component: Status
+    },
+    {
+      path: '/stats',
+      name: 'stats',
+      component: Stats,
+    },
+    {
+      path: '/charts',
+      name: 'charts',
+      component: Charts,
+      props: true
+    },
+    {
+      path: '/tokens',
+      name: 'tokens',
+      component: Tokens
+    },
+    {
+      path: '/richest-list',
+      name: 'richestList',
+      component: RichestList,
+    },
+    {
+      path: '/address/:addr',
+      name: 'address',
+      component: Address,
+      props: true
+    },
+    {
+      path: '/block/:hash',
+      name: 'block',
+      component: Block,
+      props: true
+    },
+    {
+      path: '/token/:addr',
+      name: 'token',
+      component: Token,
+      props: true
+    },
+    {
+      path: '/tx/:hash',
+      name: 'transaction',
+      component: Transaction,
+      props: true
+    }
+  ]
 })
 
 export default router;

@@ -8,7 +8,6 @@
               <span>B</span>locks by Date
             </h2>
           </div>
-          <!-- END .group-head -->
 
           <nav
             class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-end my-3"

@@ -22,7 +22,6 @@
             <b-button variant="primary" class="rounded-0">Search</b-button>
           </div>
           <template v-if="Array.isArray(tokensResult.items) && input.length > 0">
-            <!-- <span>Hi</span> -->
             <token-search-result class="result-from-input" :result.sync="tokensResult.items"></token-search-result>
           </template>
         </b-col>

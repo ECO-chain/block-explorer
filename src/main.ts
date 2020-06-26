@@ -9,22 +9,16 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import { initFilters } from '@/api/filters'
 
+import { i18n } from "./i18n"
 import VueSocketIOExt from 'vue-socket.io-extended';
 import io from 'socket.io-client';
 
 const socket = io('http://localhost:3001/');
 
 Vue.use(VueSocketIOExt, socket);
-// Install BootstrapVue
 Vue.use(BootstrapVue)
-// Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
-
-// vue-awesome-swiper
-// https://github.com/surmon-china/vue-awesome-swiper
-
 Vue.use(VueAwesomeSwiper)
-
 Vue.config.productionTip = false
 
 initFilters()
@@ -32,5 +26,6 @@ initFilters()
 export default new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount("#app")

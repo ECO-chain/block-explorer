@@ -29,21 +29,10 @@
                     <router-link to="/tokens" @click.native="toggleShow()">Tokens</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/richest-list" @click.native="toggleShow()"
-                      >Rich List</router-link
-                    >
+                    <router-link to="/richest-list" @click.native="toggleShow()">Rich List</router-link>
                   </li>
                   <li class="ml-3">
-                    <b-dropdown
-                      size="sm"
-                      id="dropdown-right"
-                      right
-                      text="English"
-                      class="switch-language"
-                    >
-                      <b-dropdown-item href="#">English</b-dropdown-item>
-                      <b-dropdown-item href="#">Chinese</b-dropdown-item>
-                    </b-dropdown>
+                    <language-switcher></language-switcher>
                   </li>
                 </ul>
               </nav>
@@ -67,8 +56,13 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import LanguageSwitcher from './LanguageSwitcher.vue'
 
-@Component
+@Component({
+  components: {
+    LanguageSwitcher
+  }
+})
 export default class BlockHeader extends Vue {
   menuActive = screen.width <= 767.98 ? false : true
 
