@@ -1,0 +1,238 @@
+{
+  "views": {
+    "home": {
+      "block_info": "Blockchain Info",
+      "final_supply": "Final Supply (Max)",
+      "current_supply": "Current Supply",
+      "relay_fee": "Relay Fee",
+      "difficulty": "Difficulty",
+      "connections": "Connections",
+      "network_weight": "Network Weight",
+      "block_height": "Block Height",
+      "block_reward": "Block Reward",
+      "seven_days_tx": "7 days ECOC transaction history",
+      "blocks": "Blocks",
+      "tx": "Transactions",
+      "swiper": {
+        "blocks": {
+          "mined_by": "Mined By",
+          "size": "Size",
+          "tx": "Transaction(s)"
+        },
+        "tx": {
+          "hash": "Hash",
+          "vout": "Value Out"
+        }
+      }
+    },
+    "blocks": {
+      "blocks_by_d": "Blocks by date",
+      "height": "height",
+      "timestamp": "Timestamp (UTC)",
+      "tx": "transactions",
+      "mined_by": "Mined By"
+    },
+    "block": {
+      "block": "Block",
+      "block_hash": "BLOCKHASH",
+      "summary": "Summary",
+      "confirm": "Confirmed",
+      "num_tx": "Number Of Transactions",
+      "difficulty": "Difficulty",
+      "height": "Height",
+      "bits": "Bits",
+      "block_reward": "Block Reward",
+      "size_b": "Size (bytes)",
+      "time": "Timestamp",
+      "version": "Version",
+      "mined_by": "Mined By",
+      "nonce": "Nonce",
+      "merkle": "Merkle Root",
+      "prev_block": "Previous Block",
+      "next_block": "Next Block",
+      "tx": "Transactions"
+    },
+    "status": {
+      "chain_status": "Chain status",
+      "sync_status": "Sync status",
+      "sync_prog": "Sync Progress",
+      "current_sync": "Current Sync Status",
+      "start_d": "Start Date",
+      "init_block_height:": "Initial Blockchain Height",
+      "sync_block": "Synced Blocks",
+      "sync_type": "Sync Type",
+      "ecoc_node_info": "Ecochain node information",
+      "version": "Version",
+      "protocol_ver": "Protocol Version",
+      "blocks": "Blocks",
+      "time_off": "Time Offset",
+      "connect_to_other": "Connections to Other Nodes",
+      "mine_diffi": "Mining Difficulty",
+      "network": "Network",
+      "proxy_sett": "Proxy Settings",
+      "info_err": "Info Errors",
+      "last_blocks": "Last Blocks",
+      "last_block_hash": "Last Block Hash (ECOC)",
+      "current_block_tip": "Current Blockchain Tip"
+    },
+    "stats": {
+      "stats": "Statistics",
+      "ecoc_stats_last": "ECOC statistics for the last 24 hours",
+      "block_summary": "Block Summary",
+      "block_minted": "Blocks Minted",
+      "time_blocks": "Time Between Blocks",
+      "minted_ecoc": "Minted ECOC coins",
+      "tx_summary": "Transaction Summary",
+      "total_tx_fee": "Total Transaction Fees",
+      "total_output_vol": "Total Output Volume (ECOC)",
+      "est_tx_vol": "Estimated Transaction Volume (ECOC)",
+      "stake_diffi": "Staking difficulty",
+      "difficulty": "Difficulty",
+      "percent_staked": "Percent of staked supply"
+    },
+    "charts": {
+      "charts": "Charts",
+      "rich_list": "Rich List",
+      "balance": "Balance",
+      "addresses": "Addresses",
+      "percent_address_total": "% Addresses [Total]",
+      "coins": "Coins",
+      "percent_coins_total": "% Coins [Total]"
+    },
+    "tokens": {
+      "token_contracts": "Token Contracts",
+      "search_placeholder": "Enter an ERC20 Contract Address or Token Name",
+      "search": "Search",
+      "token_info": "Token Information",
+      "contract_addr": "Contract Address",
+      "total_supply": "Total Supply",
+      "holders": "Holders"
+    },
+    "token": {
+      "token_tracker_summary": "Token Tracker Summary",
+      "total_supply": "Total supply",
+      "token_holders": "Token Holders",
+      "name": "Name",
+      "contract_addr": "Contract Address",
+      "num_of_transfers": "No.Of.Transfers",
+      "token_decimal": "Token Decimals",
+      "token_transfers": "Token Transfers",
+      "total_of_transfer": "A Total of {transfers} found",
+      "tx_hash": "TxHash",
+      "age": "Age",
+      "from": "From",
+      "to": "To",
+      "quantity": "Quantity",
+      "rank": "Rank",
+      "total_of_holders": "A Total of 66 {holders} found",
+      "addr": "Address",
+      "percent": "Percentage",
+      "read_smart_contract": "Read Smart contract",
+      "decimals": "Decimals",
+      "version": "Version",
+      "balance_of": "Balance of",
+      "symbol": "Symbol",
+      "allowance": "Allownance"
+    },
+    "rich_list": {
+      "richest_addr": "Richest Addresses",
+      "address": "Address",
+      "balance": "Balance",
+      "minted": "Minted"
+    },
+    "transaction": {
+      "transaction": "Transaction",
+      "summary": "Summary",
+      "size": "Size",
+      "bytes": "bytes",
+      "received_tm": "Received Time",
+      "mined_tm": "Mined Time",
+      "included_in_block": "Included in Block",
+      "coinbase": "Coinbase",
+      "detail": "Details"
+    },
+    "address": {
+      "address": "Address",
+      "summary": "Summary",
+      "confirm": "Confirmed",
+      "balance": "Balance",
+      "total_received": "Total Received",
+      "total_sent": "Total Sent",
+      "num_of_tx": "No. Transactions",
+      "ecrc_token": "ECRC20 Token",
+      "storage": "Storage",
+      "entries": "Entries",
+      "tx": "Transactions"
+    }
+  },
+  "components": {
+    "header": {
+      "home": "Home",
+      "blocks": "Blocks",
+      "status": "Status",
+      "stats": "Stats",
+      "charts": "Charts",
+      "token": "Tokens",
+      "rich_list": "Rich List"
+    },
+    "search_box": {
+      "search_for_block_tx_addr": "Search for block, transaction or address",
+      "all_filter": "All Filters",
+      "addr": "Addresses",
+      "token": "Tokens",
+      "block": "Block",
+      "tx": "Transaction"
+    },
+    "search_result": {
+      "tx": "Transaction",
+      "confirm": "Confirmations",
+      "bytes": "bytes",
+      "value": "Values",
+      "addr": "Address",
+      "block": "Block",
+      "mined_by": "Mined By",
+      "token": "Token",
+      "no_result": "No matching result"
+    },
+    "chart_selector": {
+      "ecoc_total_supply": "ECOC Total supply",
+      "ecoc_total_supply_desc": "Check current ECOC supply. Maximum supply is 2,000,000,000 ECOC",
+      "fees": "Fees",
+      "fees_desc": "The total value of all transaction fees paid to miners (not including the coinbase value of block rewards).",
+      "tx": "Transactions",
+      "tx_desc": "The number of daily confirmed ECOC transactions.",
+      "outputs": "Outputs",
+      "outputs_desc": "The total value of all transaction outputs per day (includes coins returned to the sender as change).",
+      "difficulty": "Difficulty",
+      "difficulty_desc": "A relative measure of how difficult it is to find a new block. The difficulty is adjusted periodically as a function of how much hashing power has been deployed by the network of miners.",
+      "stakes": "Stakes",
+      "days": "Days",
+      "year": "Year",
+      "years": "Years",
+      "all_time": "All time"
+    },
+    "token_search_result": {
+      "addr": "Address",
+      "no_result": "No Result"
+    },
+    "transaction_box": {
+      "mined": "mined",
+      "type": "Type",
+      "no_input": "No Inputs (Newly Generated Coins)",
+      "confirm": "Confirmations:",
+      "fee": "Fee:"
+    },
+    "storage_log": {
+      "more": "More",
+      "view_all": "View all"
+    },
+    "token_script_log": {
+      "bytecode": "Bytecode",
+      "contract_code": "Contract Code",
+      "asm": "Asm"
+    },
+    "token_tracker": {
+      "rank": "Rank"
+    }
+  }
+}
