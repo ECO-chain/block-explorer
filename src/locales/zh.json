@@ -30,7 +30,8 @@
       "height": "高度",
       "timestamp": "时间戳 (UTC)",
       "tx": "交易",
-      "mined_by": "开采者"
+      "mined_by": "开采者",
+      "size_in_byte": "字节大小"
     },
     "block": {
       "block": "区块",

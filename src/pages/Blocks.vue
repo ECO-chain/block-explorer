@@ -4,9 +4,7 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page mb-1">
-              <span>B</span>locks by Date
-            </h2>
+            <h2 class="head-page mb-1">{{ $t('views.blocks.blocks_by_d') }}</h2>
           </div>
 
           <nav
@@ -53,10 +51,14 @@
                 :busy="isBusy"
               >
                 <template v-slot:cell(height)="data">
-                  <router-link :to="{ name: 'block', params: { hash: data.item.hash }}">{{ data.item.height }}</router-link>
+                  <router-link
+                    :to="{ name: 'block', params: { hash: data.item.hash }}"
+                  >{{ data.item.height }}</router-link>
                 </template>
                 <template v-slot:cell(minedBy)="data">
-                  <router-link :to="{ name: 'address', params: { addr: data.item.minedBy } }">{{ data.item.minedBy }}</router-link>
+                  <router-link
+                    :to="{ name: 'address', params: { addr: data.item.minedBy } }"
+                  >{{ data.item.minedBy }}</router-link>
                 </template>
                 <template v-slot:table-busy>
                   <div class="text-center text-danger my-2">
@@ -96,26 +98,30 @@ export default class BlocksList extends Vue {
   blocks: Blocks = {} as Blocks
   allBlocks: Blocks = {} as Blocks
 
-  fields = [
-    'height',
-    {
-      key: 'time',
-      label: 'Timestamp (UTC)',
-      formatter: (val: number) => {
-        return moment
-          .unix(val)
-          .utc()
-          .format('LLL')
-      }
-    },
-    { key: 'txlength', label: 'Transactions' },
-    { key: 'minedBy', label: 'Mined By' },
-    { key: 'size', label: 'Size in bytes' }
-  ]
+  fields: any[] = []
 
   perPage = 200
   currentPage = 1
   isBusy = true
+
+  created() {
+    this.fields = [
+      { key: 'height', label: this.$t('views.blocks.height') },
+      {
+        key: 'time',
+        label: this.$t('views.blocks.timestamp'),
+        formatter: (val: number) => {
+          return moment
+            .unix(val)
+            .utc()
+            .format('LLL')
+        }
+      },
+      { key: 'txlength', label: this.$t('views.blocks.tx') },
+      { key: 'minedBy', label: this.$t('views.blocks.mined_by') },
+      { key: 'size', label: this.$t('views.blocks.size_in_byte') }
+    ]
+  }
 
   async mounted() {
     this.blocks = await blocksModule.getAllBlocksByDateTime(this.nowTime)
@@ -148,5 +154,11 @@ export default class BlocksList extends Vue {
 <style lang="scss" scoped>
 .page-item {
   cursor: pointer;
+}
+.group-head {
+  h2::first-letter {
+    color: $purple;
+    font-weight: bold;
+  }
 }
 </style>

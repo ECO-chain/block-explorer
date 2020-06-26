@@ -7,13 +7,13 @@
     </b-row>
     <b-row class="my-3">
       <b-col cols="12" lg="6" class="d-flex flex-column">
-        <h2 class="head-global my-3">Blockchain Info</h2>
+        <h2 class="head-global my-3">{{ $t('views.home.block_info') }}</h2>
         <div class="block-global p-3 mb-3 rounded-lg w-100 h-100">
           <b-row>
             <b-col cols="12" md="6">
               <div class="show-supply-idle rounded-lg text-center p-3 my-3">
                 <p class="my-1 text-style-2">{{ statusState.finalSupply | numberWithCommas }} ECOC</p>
-                <p class="my-1">Final Supply(Max)</p>
+                <p class="my-1">{{ $t('views.home.final_supply') }}</p>
               </div>
             </b-col>
             <b-col cols="12" md="6">
@@ -21,7 +21,7 @@
                 <p
                   class="my-1 text-style-2"
                 >{{ Number(statusState.supply) | numberWithCommas }} ECOC</p>
-                <p class="my-1">Current Supply</p>
+                <p class="my-1">{{ $t('views.home.current_supply') }}</p>
               </div>
             </b-col>
           </b-row>
@@ -29,7 +29,7 @@
             <b-col cols="6" md="4">
               <div class="text-center my-3">
                 <div class="my-1 text-truncate">{{ info.relayfee }}</div>
-                <div class="my-1 small text-purple-light">Relay Fee</div>
+                <div class="my-1 small text-purple-light">{{ $t('views.home.relay_fee') }}</div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
@@ -37,13 +37,13 @@
                 <div
                   class="my-1 text-truncate"
                 >{{ info.difficulty['proof-of-stake'] | numberWithCommas }}</div>
-                <div class="my-1 small text-purple-light">Difficulty</div>
+                <div class="my-1 small text-purple-light">{{ $t('views.home.difficulty') }}</div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
                 <div class="my-1 text-truncate">{{ info.connections }}</div>
-                <div class="my-1 small text-purple-light">Connections</div>
+                <div class="my-1 small text-purple-light">{{ $t('views.home.connections') }}</div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
@@ -51,26 +51,26 @@
                 <div
                   class="my-1 text-truncate"
                 >{{ stakingInfo.netstakeweight | numberWithCommas(8) }}</div>
-                <div class="my-1 small text-purple-light">Network Weight</div>
+                <div class="my-1 small text-purple-light">{{ $t('views.home.network_weight') }}</div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
                 <div class="my-1 text-truncate">{{ info.blocks }}</div>
-                <div class="my-1 small text-purple-light">Block Height</div>
+                <div class="my-1 small text-purple-light">{{ $t('views.home.block_height') }}</div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
                 <div class="my-1 text-truncate">{{ info.reward | numberWithCommas(8) }} ECOC</div>
-                <div class="my-1 small text-purple-light">Block Reward</div>
+                <div class="my-1 small text-purple-light">{{ $t('views.home.block_reward') }}</div>
               </div>
             </b-col>
           </b-row>
         </div>
       </b-col>
       <b-col cols="12" lg="6" class="d-flex flex-column">
-        <h2 class="head-global my-3">7 days ECOC transaction history</h2>
+        <h2 class="head-global my-3">{{ $t('views.home.seven_days_tx') }}</h2>
         <div class="block-global p-3 mb-3 rounded-lg w-100 h-100 d-flex align-items-center">
           <template v-if="Array.isArray(sevenDaysTx)">
             <LineChart id="1" :labels.sync="txDate" :data.sync="txCount"></LineChart>
@@ -80,7 +80,7 @@
     </b-row>
     <b-row class="my-3">
       <b-col cols="12">
-        <h2 class="head-global my-3">Blocks</h2>
+        <h2 class="head-global my-3">{{ $t('views.home.blocks') }}</h2>
         <div class="block-bitcoin">
           <swiper :options="swiperOption">
             <!-- slides -->
@@ -95,13 +95,13 @@
                   <span class="small text-purple-light">{{ block.time * 1000 | timeFromNow }}</span>
                 </div>
                 <div class="my-1 small text-truncate">
-                  Mined by:
+                  {{ $t('views.home.swiper.blocks.mined_by') }}:
                   <router-link
                     :to="{ name: 'address', params: { addr: block.minedBy } }"
                   >{{ block.minedBy }}</router-link>
                 </div>
-                <div class="my-1 small">Size: {{ block.size }}</div>
-                <div class="my-1 small">Transactions: {{ block.txlength }}</div>
+                <div class="my-1 small">{{ $t('views.home.swiper.blocks.size') }}: {{ block.size }}</div>
+                <div class="my-1 small">{{ $t('views.home.swiper.blocks.tx') }}: {{ block.txlength }}</div>
               </div>
             </swiper-slide>
           </swiper>
@@ -110,7 +110,7 @@
     </b-row>
     <b-row class="my-3 mb-4 mb-sm-5">
       <b-col cols="12">
-        <h2 class="head-global my-3">Transactions</h2>
+        <h2 class="head-global my-3">{{ $t('views.home.tx') }}</h2>
         <div class="block-bitcoin">
           <swiper :options="swiperOption">
             <template v-if="socketTx.length > 0">
@@ -122,12 +122,12 @@
                     <span class="small text-purple-light">{{ Date.now() | timeFromNow }}</span>
                   </div>
                   <div class="my-1 small text-truncate">
-                    Hash:
+                    {{ $t('views.home.swiper.tx.hash') }}:
                     <router-link
                       :to="{ name: 'transaction', params: { hash: tx.txid } }"
                     >{{ tx.txid }}</router-link>
                   </div>
-                  <div class="my-1 small">Value Out: {{ tx.valueOut }} ECOC</div>
+                  <div class="my-1 small">{{ $t('views.home.swiper.tx.vout') }}: {{ tx.valueOut }} ECOC</div>
                 </div>
               </swiper-slide>
             </template>
@@ -146,7 +146,6 @@ import LineChart from '@/components/LineChart.vue'
 import statusModule from '@/api/status/index'
 import statisticsModule from '@/api/statistics/index'
 import blocksModule from '@/api/blocks/index'
-import ecoweb3 from '@/ecoweb3/index'
 import { toMonthDayFormat } from '@/api/filters'
 /* eslint-disable no-unused-vars */
 import { StatusState, Info, StakingInfo } from '../api/status/type'
@@ -225,15 +224,6 @@ export default class Home extends Vue {
     statusModule.setInfo(info)
     statusModule.setStakingInfo(stakingInfo)
     statusModule.setSupply(supply)
-
-    console.log(
-      'addr from token addr',
-      await ecoweb3.isEcoAddress('0abd9012fc9495d94346cbaded83f9e33be2ae07')
-    )
-    console.log(
-      'addr from token addr',
-      ecoweb3.getBitAddressFromContractAddress('0abd9012fc9495d94346cbaded83f9e33be2ae07')
-    )
   }
 
   get statusState(): StatusState {

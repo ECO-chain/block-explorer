@@ -30,7 +30,8 @@
       "height": "height",
       "timestamp": "Timestamp (UTC)",
       "tx": "transactions",
-      "mined_by": "Mined By"
+      "mined_by": "Mined By",
+      "size_in_byte": "Size in bytes"
     },
     "block": {
       "block": "Block",

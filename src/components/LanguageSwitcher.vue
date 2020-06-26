@@ -50,7 +50,7 @@ export default class LanguageSwitcher extends Vue {
   async switchLang(locale: string) {
     localStorage.setItem('locale', locale)
     this.locale = this.selectedLocaleName(locale)
-    // await loadLocale(locale)
+    await loadLocale(locale)
   }
 }
 </script>
