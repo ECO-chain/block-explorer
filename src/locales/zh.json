@@ -59,7 +59,7 @@
       "sync_prog": "同步进度",
       "current_sync": "当前同步状态",
       "start_d": "开始日期",
-      "init_block_height:": "初始区块链高度",
+      "init_block_height": "初始区块链高度",
       "sync_block": "同步区块",
       "skipped_block": "跳块",
       "sync_type": "同步类型",

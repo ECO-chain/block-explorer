@@ -59,7 +59,7 @@
       "sync_prog": "Sync Progress",
       "current_sync": "Current Sync Status",
       "start_d": "Start Date",
-      "init_block_height:": "Initial Blockchain Height",
+      "init_block_height": "Initial Blockchain Height",
       "sync_block": "Synced Blocks",
       "skipped_block": "Skipped Blocks",
       "sync_type": "Sync Type",

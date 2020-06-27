@@ -4,9 +4,7 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page mb-1">
-              <span>C</span>hain Status
-            </h2>
+            <h2 class="head-page mb-1">{{ $t('views.status.chain_status') }}</h2>
           </div>
           <!-- END .group-head -->
           <b-row>
@@ -14,12 +12,12 @@
               <b-row>
                 <b-col>
                   <div class="group-head my-3 text-center text-md-left">
-                    <h3 class="head-global my-3">Sync Status</h3>
+                    <h3 class="head-global my-3">{{ $t('views.status.sync_status') }}</h3>
                   </div>
                   <div class="block-global p-3 mb-3 rounded-lg">
                     <b-row class="align-items-center">
                       <b-col cols="6">
-                        <div class="my-1">Sync Progress</div>
+                        <div class="my-1">{{ $t('views.status.sync_prog') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1">
@@ -32,37 +30,37 @@
                         </div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1">Current Sync Status</div>
+                        <div class="my-1">{{ $t('views.status.current_sync') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1 text-right">{{ sync.status }}</div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1">Start Date</div>
+                        <div class="my-1">{{ $t('views.status.start_d') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1 text-right">{{ now | timeFromNow }}</div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1">Initial Block Chain Height</div>
+                        <div class="my-1">{{ $t('views.status.init_block_height') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1 text-right">{{ sync.blockChainHeight }}</div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1">Synced Blocks</div>
+                        <div class="my-1">{{ $t('views.status.sync_block') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1 text-right">-</div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1">Skipped Blocks</div>
+                        <div class="my-1">{{ $t('views.status.skipped_block') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1 text-right">-</div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1">Sync Type</div>
+                        <div class="my-1">{{ $t('views.status.sync_type') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1 text-right">{{ sync.type }}</div>
@@ -74,12 +72,12 @@
               <b-row>
                 <b-col>
                   <div class="group-head my-3 text-center text-md-left">
-                    <h3 class="head-global mb-0">Last Blocks</h3>
+                    <h3 class="head-global mb-0">{{ $t('views.status.last_blocks') }}</h3>
                   </div>
                   <div class="block-global p-3 mb-3 rounded-lg">
                     <b-row class="align-items-center">
                       <b-col cols="12">
-                        <div class="my-1">Last Block Hash (ECOC)</div>
+                        <div class="my-1">{{ $t('views.status.last_block_hash') }}</div>
                       </b-col>
                       <b-col cols="12">
                         <div class="my-1 text-right text-truncate">
@@ -89,7 +87,7 @@
                         </div>
                       </b-col>
                       <b-col cols="12">
-                        <div class="my-1">Current Blockchain Tip ()</div>
+                        <div class="my-1">{{ $t('views.status.current_block_tip') }}</div>
                       </b-col>
                       <b-col cols="12">
                         <div class="my-1 text-right text-truncate">
@@ -105,42 +103,42 @@
             </b-col>
             <b-col cols="12" md="6" class="d-flex flex-column">
               <div class="group-head my-3 text-center text-md-left">
-                <h3 class="head-global mb-0">Ecochain node information</h3>
+                <h3 class="head-global mb-0">{{ $t('views.status.ecoc_node_info') }}</h3>
               </div>
               <div class="block-global p-3 mb-3 rounded-lg h-100">
                 <b-row class="align-items-center">
                   <b-col cols="6">
-                    <div class="my-1">Version</div>
+                    <div class="my-1">{{ $t('views.status.version') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.version }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">Protocol Version</div>
+                    <div class="my-1">{{ $t('views.status.protocol_ver') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.protocolversion }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">Blocks</div>
+                    <div class="my-1">{{ $t('views.status.blocks') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.blocks | numberWithCommas }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">Time Offset</div>
+                    <div class="my-1">{{ $t('views.status.time_off') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.timeoffset }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">Connections to Other Nodes</div>
+                    <div class="my-1">{{ $t('views.status.connect_to_other') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.connections }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">Mining Difficulty</div>
+                    <div class="my-1">{{ $t('views.status.mine_diffi') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div
@@ -148,19 +146,19 @@
                     >{{ statusInfo.difficulty['proof-of-stake'] | numberWithCommas }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">Network</div>
+                    <div class="my-1">{{ $t('views.status.network') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.network }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">Proxy Settings</div>
+                    <div class="my-1">{{ $t('views.status.proxy_sett') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.proxy ? statusInfo.proxy : '-' }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">Info Errors</div>
+                    <div class="my-1">{{ $t('views.status.info_err') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.errors ? statusInfo.errors : '-' }}</div>
@@ -197,3 +195,12 @@ export default class Status extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.group-head {
+  h2::first-letter {
+    color: $purple;
+    font-weight: bold;
+  }
+}
+</style>
