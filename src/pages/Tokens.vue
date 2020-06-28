@@ -4,9 +4,7 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page mb-1">
-              <span>T</span>oken Contracts
-            </h2>
+            <h2 class="head-page mb-1">{{ $t('components.tokens.token_contracts') }}</h2>
           </div>
           <!-- END .group-head -->
         </b-col>
@@ -17,24 +15,28 @@
               v-model="input"
               @update="queryToken"
               class="rounded-0"
-              placeholder="Enter an ERC20 Contract Address or Token Name"
+              :placeholder="$t('views.tokens.search_placeholder')"
             ></b-form-input>
-            <b-button variant="primary" class="rounded-0">Search</b-button>
+            <b-button variant="primary" class="rounded-0">{{ $t('views.tokens.search') }}</b-button>
           </div>
           <template v-if="Array.isArray(tokensResult.items) && input.length > 0">
             <token-search-result class="result-from-input" :result.sync="tokensResult.items"></token-search-result>
           </template>
         </b-col>
 
-      <b-col cols="12">
+        <b-col cols="12">
           <div class="block-global p-3 my-3 rounded-lg">
             <div class="table-responsive m-0">
               <b-table dark :items="tokens.items" :fields="fields">
                 <template v-slot:cell(name)="data">
-                  <router-link :to="{ name: 'token', params: { addr: data.item.contract_address }}"><b>{{ data.item.symbol }} - {{data.item.name}}</b></router-link>
+                  <router-link :to="{ name: 'token', params: { addr: data.item.contract_address }}">
+                    <b>{{ data.item.symbol }} - {{data.item.name}}</b>
+                  </router-link>
                 </template>
                 <template v-slot:cell(contract_address)="data">
-                  <router-link :to="{ name: 'address', params: { addr: data.item.contract_address }}">{{ data.item.contract_address }}</router-link>
+                  <router-link
+                    :to="{ name: 'address', params: { addr: data.item.contract_address }}"
+                  >{{ data.item.contract_address }}</router-link>
                 </template>
               </b-table>
             </div>
@@ -64,18 +66,27 @@ export default class Tokens extends Vue {
   tokensResult: TokenItems = {} as TokenItems
   input = ''
 
-  fields = [
-    { key: 'name', label: 'Token Information', sortable: true },
-    { key: 'contract_address' },
-    {
-      key: 'total_supply',
-      sortable: true,
-      formatter: (value: string) => {
-        return numberWithCommas(Number(value), 8)
+  fields: any[] = []
+
+  created() {
+    this.fields = [
+      { key: 'name', label: this.$t('views.tokens.token_info'), sortable: true },
+      { key: 'contract_address', label: this.$t('views.tokens.contract_addr') },
+      {
+        key: 'total_supply',
+        label: this.$t('views.tokens.total_supply'),
+        sortable: true,
+        formatter: (value: string) => {
+          return numberWithCommas(Number(value), 8)
+        }
+      },
+      {
+        key: 'count_holders',
+        label: this.$t('views.tokens.holders'),
+        sortable: true
       }
-    },
-    { key: 'count_holders', sortable: true, label: 'Holders' }
-  ]
+    ]
+  }
 
   async mounted() {
     this.tokens = await ecrc20Module.getAllTokens()
@@ -84,16 +95,23 @@ export default class Tokens extends Vue {
   }
 
   async queryToken(val: string) {
-    if (val !== "") {
+    if (val !== '') {
       this.tokensResult = await ecrc20Module.getTokenBySearch(val)
-      console.log("search result", this.tokensResult)
+      console.log('search result', this.tokensResult)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .result-from-input {
-    margin: -1.4rem 5.3rem 0 1.1rem;
+.result-from-input {
+  margin: -1.4rem 5.3rem 0 1.1rem;
+}
+
+.group-head {
+  h2::first-letter {
+    color: $purple;
+    font-weight: bold;
   }
+}
 </style>
