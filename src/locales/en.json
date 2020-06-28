@@ -118,7 +118,7 @@
       "token_holders": "Token Holders",
       "name": "Name",
       "contract_addr": "Contract Address",
-      "num_of_transfers": "No.Of.Transfers",
+      "num_of_transfers": "No.of Transfers",
       "token_decimal": "Token Decimals",
       "token_transfers": "Token Transfers",
       "total_of_transfer": "A Total of {transfers} found",

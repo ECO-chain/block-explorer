@@ -4,11 +4,9 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page my-0">
-              <span>T</span>ransaction
-            </h2>
-            <p class="my-0 text-truncate">
-              TRANSACTION:
+            <h2 class="head-page my-0">{{ $t('views.transaction.transaction') }}</h2>
+            <p class="my-0 text-truncate text-uppercase">
+              {{ $t('views.transaction.transaction') }}:
               <span class="text-purple">{{ tx.txid }}</span>
             </p>
           </div>
@@ -17,30 +15,30 @@
 
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h3 class="head-global my-3">Summary</h3>
+            <h3 class="head-global my-3">{{ $t('views.transaction.summary') }}</h3>
           </div>
           <div class="block-global p-3 mb-3 rounded-lg">
             <b-row>
               <b-col cols="6">
-                <div class="my-1">Size</div>
+                <div class="my-1">{{ $t('views.transaction.size') }}</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1 text-right text-truncate">{{ tx.size }} (bytes)</div>
+                <div class="my-1 text-right text-truncate">{{ tx.size }} ({{ $t('views.transaction.bytes') }})</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1">Received Time</div>
+                <div class="my-1">{{ $t('views.transaction.received_tm') }}</div>
               </b-col>
               <b-col cols="6">
                 <div class="my-1 text-right text-truncate">{{ tx.time | timeFormat('LLLTS') }}</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1">Mined Time</div>
+                <div class="my-1">{{ $t('views.transaction.mined_tm') }}</div>
               </b-col>
               <b-col cols="6">
                 <div class="my-1 text-right text-truncate">{{ tx.blocktime | timeFormat('LLLTS')}}</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1">Included in Block</div>
+                <div class="my-1">{{ $t('views.transaction.included_in_block') }}</div>
               </b-col>
               <b-col cols="6">
                 <div class="my-1 text-right text-truncate">
@@ -48,7 +46,7 @@
                 </div>
               </b-col>
               <b-col cols="6" v-if="tx.isCoinBase">
-                <div class="my-1">Coinbase</div>
+                <div class="my-1">{{ $t('views.transaction.coinbase') }}</div>
               </b-col>
               <b-col cols="6" v-if="tx.isCoinBase">
                 <div class="my-1 text-right text-truncate">{{ tx.vin[0].coinbase }}</div>
@@ -59,12 +57,11 @@
 
         <b-col cols="12" v-if="'txid' in tx">
           <div class="group-head my-3 text-center text-md-left">
-            <h3 class="head-global my-3">Details</h3>
+            <h3 class="head-global my-3">{{ $t('views.transaction.detail') }}</h3>
           </div>
 
           <TransactionBox :tx="tx" :txPage="true"></TransactionBox>
         </b-col>
-
       </b-row>
     </b-container>
   </div>
@@ -92,3 +89,12 @@ export default class Transaction extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.group-head {
+  h2::first-letter {
+    color: $purple;
+    font-weight: bold;
+  }
+}
+</style>

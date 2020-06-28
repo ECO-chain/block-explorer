@@ -4,9 +4,7 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page my-0">
-              <span>T</span>oken tracker summary
-            </h2>
+            <h2 class="head-page my-0">{{ $t('views.token.token_tracker_summary') }}</h2>
           </div>
           <!-- END .group-head -->
         </b-col>
@@ -17,7 +15,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">Total supply:</div>
+                    <div class="my-1">{{ $t('views.token.total_supply') }}:</div>
                   </b-col>
                   <b-col cols="6">
                     <div
@@ -29,7 +27,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">Name:</div>
+                    <div class="my-1">{{ $t('views.token.name') }}:</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">{{ summary.name }}</div>
@@ -39,7 +37,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">Token Holders:</div>
+                    <div class="my-1">{{ $t('views.token.token_holders') }}:</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">{{ summary.holders_count }}</div>
@@ -49,7 +47,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1" id="my-address">Contract Address:</div>
+                    <div class="my-1" id="my-address">{{ $t('views.token.contract_addr') }}:</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">
@@ -72,7 +70,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">No.Of.Transfers:</div>
+                    <div class="my-1">{{ $t('views.token.num_of_transfers') }}:</div>
                   </b-col>
                   <b-col cols="6">
                     <div
@@ -84,7 +82,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">Token Decimals:</div>
+                    <div class="my-1">{{ $t('views.token.token_decimal') }}:</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">{{ summary.decimals }}</div>
@@ -96,13 +94,12 @@
         </b-col>
 
         <b-col cols="12">
-          <b-tabs nav-class="tabs-global">
-            <b-tab title="TOKEN TRANSFERS" active>
+          <b-tabs nav-class="tabs-global text-uppercase">
+            <b-tab :title="$t('views.token.token_transfers')" active>
               <div class="block-global p-3 my-0 rounded-lg">
-                <p>
-                  A Total of
-                  <span class="text-green">{{ transfer.count }}</span> found
-                </p>
+                <i18n path="views.token.total_of_transfer" tag="p">
+                  <span place="transfers" class="text-green">{{ transfer.count }}</span>
+                </i18n>
                 <div class="table-responsive m-0">
                   <b-table dark :items="transfer.items" :fields="transferFields">
                     <template v-slot:cell(tx_hash)="data">
@@ -135,12 +132,11 @@
               </div>
               <!-- END .block-global -->
             </b-tab>
-            <b-tab title="TOKEN HOLDERS">
+            <b-tab :title="$t('views.token.token_holders')">
               <div class="block-global p-3 my-0 rounded-lg">
-                <p>
-                  A Total of
-                  <span class="text-green">{{ holder.count }}</span> Token holders found:
-                </p>
+                <i18n path="views.token.total_of_holders" tag="p">
+                  <span place="holders" class="text-green">{{ holder.count }}</span>
+                </i18n>
                 <div class="table-responsive m-0">
                   <b-table dark :items="holder.items" :fields="holderFields">
                     <template v-slot:cell(rank)="data">{{ holder.offset + data.index + 1}}</template>
@@ -167,10 +163,10 @@
               </div>
               <!-- END .block-global -->
             </b-tab>
-            <b-tab title="READ SMART CONTRACT">
+            <b-tab :title="$t('views.token.read_smart_contract')">
               <div class="block-global p-3 my-0 rounded-lg">
                 <b-row class="align-items-center">
-                  <b-col cols="auto">1. Name</b-col>
+                  <b-col cols="auto">1. {{ $t('views.token.name') }}</b-col>
                   <b-col cols="auto">
                     <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                   </b-col>
@@ -179,7 +175,7 @@
                 </b-row>
                 <hr class="my-3" />
                 <b-row class="align-items-center">
-                  <b-col cols="auto">2. TotalSupply</b-col>
+                  <b-col cols="auto">2. {{ $t('views.token.total_supply') }}</b-col>
                   <b-col cols="auto">
                     <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                   </b-col>
@@ -188,7 +184,7 @@
                 </b-row>
                 <hr class="my-3" />
                 <b-row class="align-items-center">
-                  <b-col cols="auto">3. Decimals</b-col>
+                  <b-col cols="auto">3. {{ $t('views.token.decimals') }}</b-col>
                   <b-col cols="auto">
                     <b-icon-arrow-right-short class="h3 mb-0">{{ summary.decimals }}</b-icon-arrow-right-short>
                   </b-col>
@@ -197,7 +193,7 @@
                 </b-row>
                 <hr class="my-3" />
                 <b-row class="align-items-center">
-                  <b-col cols="auto">4. Version</b-col>
+                  <b-col cols="auto">4. {{ $t('views.token.version') }}</b-col>
                   <b-col cols="auto">
                     <b-icon-arrow-right-short class="h3 mb-0">{{ summary.version }}</b-icon-arrow-right-short>
                   </b-col>
@@ -205,7 +201,7 @@
                 </b-row>
                 <hr class="my-3" />
                 <b-row class="align-items-center">
-                  <b-col cols="auto">5. BalanceOf</b-col>
+                  <b-col cols="auto">5. {{ $t('views.token.balance_of') }}</b-col>
                   <b-col cols="auto">
                     <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                   </b-col>
@@ -242,7 +238,7 @@
                 </b-row>
                 <hr class="my-3" />
                 <b-row class="align-items-center">
-                  <b-col cols="auto">6. Symbol</b-col>
+                  <b-col cols="auto">6. {{ $t('views.token.symbol') }}</b-col>
                   <b-col cols="auto">
                     <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                   </b-col>
@@ -251,7 +247,7 @@
                 </b-row>
                 <hr class="my-3" />
                 <b-row class="align-items-center">
-                  <b-col cols="auto">7. Allowance</b-col>
+                  <b-col cols="auto">7. {{ $t('views.token.allowance') }}</b-col>
                   <b-col cols="auto">
                     <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
                   </b-col>
@@ -311,47 +307,52 @@ export default class Token extends Vue {
   transfer: TokenTransfers = {} as TokenTransfers
   holder: TokenHolders = {} as TokenHolders
 
-  transferFields = [
-    { key: 'tx_hash', label: 'TxHash' },
-    {
-      key: 'tx_time',
-      label: 'Age',
-      formatter: (value: number) => {
-        return timeFromNow(value * 1000)
-      }
-    },
-    { key: 'from' },
-    { key: 'to' },
-    {
-      key: 'value',
-      label: 'quantity',
-      formatter: (value: string) => {
-        return numberWithCommas(Number(value), 8)
-      }
-    }
-  ]
-
-  holderFields = [
-    'rank',
-    { key: 'address' },
-    {
-      key: 'amount',
-      label: 'Quantity',
-      formatter: (value: string) => {
-        return numberWithCommas(Number(value), 8)
-      }
-    },
-    {
-      key: 'percentage',
-      label: 'Percentage'
-    }
-  ]
+  transferFields: any[] = []
+  holderFields: any[] = []
 
   rows = 100
   nowLimit = 20
   currentPage = 1
   hovered = false
   clicked = false
+
+  created() {
+    this.transferFields = [
+      { key: 'tx_hash', label: this.$t('views.token.tx_hash') },
+      {
+        key: 'tx_time',
+        label: this.$t('views.token.age'),
+        formatter: (value: number) => {
+          return timeFromNow(value * 1000)
+        }
+      },
+      { key: 'from', label: this.$t('views.token.from') },
+      { key: 'to', label: this.$t('views.token.to') },
+      {
+        key: 'value',
+        label: this.$t('views.token.quantity'),
+        formatter: (value: string) => {
+          return numberWithCommas(Number(value), 8)
+        }
+      }
+    ]
+
+    this.holderFields = [
+      { key: 'rank', label: this.$t('views.token.rank') },
+      { key: 'address', label: this.$t('views.token.addr') },
+      {
+        key: 'amount',
+        label: this.$t('views.token.quantity'),
+        formatter: (value: string) => {
+          return numberWithCommas(Number(value), 8)
+        }
+      },
+      {
+        key: 'percentage',
+        label: this.$t('views.token.percent')
+      }
+    ]
+  }
 
   async mounted() {
     console.log('sent prop addr', this.addr)
@@ -420,5 +421,12 @@ export default class Token extends Vue {
 .copy-i {
   margin-right: 1rem;
   cursor: pointer;
+}
+
+.group-head {
+  h2::first-letter {
+    color: $purple;
+    font-weight: bold;
+  }
 }
 </style>
