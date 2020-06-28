@@ -1,7 +1,7 @@
 <template>
   <div class="main-result">
     <b-card v-if="sType === 'transaction'" @click="goToTx(sResult.txid)">
-      <b-card-text class="result-label">Transaction</b-card-text>
+      <b-card-text class="result-label">{{ $t('components.search_result.tx' )}}</b-card-text>
       <div class="p-3 hvr-sweep-to-right">
         <b-row class="transaction-result">
           <b-col>
@@ -14,13 +14,15 @@
         <b-row class="transaction-result">
           <b-col class="tx-detail">
             <b-icon-info-circle-fill></b-icon-info-circle-fill>
-            <span class="pl-2">{{ sResult.confirmations }}</span> Confirmations
+            <span class="pl-2">{{ sResult.confirmations }}</span>
+            {{ $t('components.search_result.confirm' )}}
           </b-col>
           <b-col class="text-center tx-detail">
-            <span>{{ sResult.size }}</span> bytes
+            <span>{{ sResult.size }}</span>
+            {{ $t('components.search_result.bytes' )}}
           </b-col>
           <b-col class="text-right tx-detail">
-            Value:
+            {{ $t('components.search_result.value' )}}:
             <span>{{ sResult.valueOut }} ECOC</span>
           </b-col>
         </b-row>
@@ -28,23 +30,21 @@
     </b-card>
 
     <b-card v-if="sType === 'address'" @click="goToAddress(sResult.addrStr)">
-      <b-card-text class="result-label">Address</b-card-text>
+      <b-card-text class="result-label">{{ $t('components.search_result.addr' )}}</b-card-text>
       <div class="p-3 hvr-sweep-to-right">
         <b-row class="address-result">
           <b-col>
             <p class="addr-hash text-truncate mb-1">{{ sResult.addrStr }}</p>
           </b-col>
           <b-col>
-            <p class="addr-balance text-right mb-1">
-              {{ sResult.balance | numberWithCommas }} ECOC
-            </p>
+            <p class="addr-balance text-right mb-1">{{ sResult.balance | numberWithCommas }} ECOC</p>
           </b-col>
         </b-row>
       </div>
     </b-card>
 
     <b-card v-if="sType === 'block'" @click="goToBlock(sResult.hash)">
-      <b-card-text class="result-label">Block</b-card-text>
+      <b-card-text class="result-label">{{ $t('components.search_result.block' )}}</b-card-text>
       <div class="p-3 hvr-sweep-to-right">
         <b-row class="block-result">
           <b-col>
@@ -64,7 +64,7 @@
             {{ sResult.tx.length > 1 ? 'Transactions' : 'Transaction' }}
           </b-col>
           <b-col class="text-right text-truncate">
-            Mined by
+            {{ $t('components.search_result.mined_by' )}}
             <span>{{ sResult.minedBy }}</span>
           </b-col>
         </b-row>
@@ -72,27 +72,28 @@
     </b-card>
 
     <b-card v-if="sType === 'token'" @click="goToToken(sResult.contract_address)">
-      <b-card-text class="result-label">Token</b-card-text>
+      <b-card-text class="result-label">{{ $t('components.search_result.token' )}}</b-card-text>
       <div class="p-3 hvr-sweep-to-right">
         <b-row class="token-result">
           <b-col>
-            <b-card-text class="token-symbol"
-              >{{ sResult.symbol }} - {{ sResult.name }}</b-card-text
-            >
+            <b-card-text class="token-symbol">{{ sResult.symbol }} - {{ sResult.name }}</b-card-text>
           </b-col>
           <b-col>
-            <b-card-text class="token-supply"
-              >{{ Number(sResult.total_supply) | numberWithCommas(8) }} ECOC</b-card-text
-            >
+            <b-card-text
+              class="token-supply"
+            >{{ Number(sResult.total_supply) | numberWithCommas(8) }} ECOC</b-card-text>
           </b-col>
         </b-row>
-        <b-card-text class="token-address">Address - {{ sResult.contract_address }}</b-card-text>
+        <b-card-text
+          class="token-address"
+        >{{ $t('components.search_result.addr' )}} - {{ sResult.contract_address }}</b-card-text>
       </div>
     </b-card>
 
     <b-card v-if="sType === 'error'">
       <b-card-text class="text-center font-weight-bold">
-        <i class="far fa-dizzy pr-2"></i>No matching result
+        <i class="far fa-dizzy pr-2"></i>
+        {{ $t('components.search_result.no_result' )}}
       </b-card-text>
     </b-card>
   </div>

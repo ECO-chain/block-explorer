@@ -2,7 +2,9 @@
   <div>
     <b-card>
       <b-list-group flush>
-        <b-list-group-item v-if="tokenResult.length < 1">No result</b-list-group-item>
+        <b-list-group-item
+          v-if="tokenResult.length < 1"
+        >{{ $t('components.token_search_result.no_result') }}</b-list-group-item>
         <b-list-group-item
           v-else
           v-for="(token, index) in tokenResult"
@@ -15,12 +17,14 @@
               <b-card-text class="result-symbol">{{ token.symbol }} - {{ token.name }}</b-card-text>
             </b-col>
             <b-col>
-              <b-card-text class="result-supply"
-                >{{ Number(token.total_supply) | numberWithCommas(8) }} ECOC</b-card-text
-              >
+              <b-card-text
+                class="result-supply"
+              >{{ Number(token.total_supply) | numberWithCommas(8) }} ECOC</b-card-text>
             </b-col>
           </b-row>
-          <b-card-text class="result-address">Address - {{ token.contract_address }}</b-card-text>
+          <b-card-text
+            class="result-address"
+          >{{ $t('components.token_search_result.addr') }} - {{ token.contract_address }}</b-card-text>
         </b-list-group-item>
       </b-list-group>
     </b-card>

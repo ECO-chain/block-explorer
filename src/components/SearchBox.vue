@@ -6,7 +6,7 @@
         class="rounded-0"
         v-model="keyword"
         @keypress.enter="searchFor(keyword)"
-        placeholder="Search for block, transaction or address"
+        :placeholder="$t('components.search_box.search_for_block_tx_addr')"
       ></b-form-input>
       <b-button
         @click="searchFor(keyword)"
@@ -43,19 +43,25 @@ import { BlockHash } from '../api/blocks/type'
 export default class BlockSearchBox extends Vue {
   selected = 'all'
   keyword = null
-  options = [
-    { value: 'all', text: 'All Filters' },
-    { value: 'address', text: 'Addresses' },
-    { value: 'token', text: 'Tokens' },
-    { value: 'block', text: 'Block' },
-    { value: 'tx', text: 'Transaction' }
-  ]
+  options: any[] = []
 
   loading = false
   result: any = null
   type = ''
 
-  mounted() {}
+  mounted() {
+    this.options = [
+      { value: 'all', text: this.$t('components.search_box.all_filter') },
+      { value: 'address', text: this.$t('components.search_box.addr') },
+      { value: 'token', text: this.$t('components.search_box.token') },
+      { value: 'block', text: this.$t('components.search_box.block') },
+      { value: 'tx', text: this.$t('components.search_box.tx') }
+    ]
+  }
+
+  forceReload() {
+    this.$forceUpdate()
+  }
 
   async searchFor(input: string) {
     switch (this.selected) {

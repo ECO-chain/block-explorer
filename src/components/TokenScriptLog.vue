@@ -2,15 +2,15 @@
   <b-row>
     <b-col cols="12" md="6">
       <div class="block-scroll p-3 my-3 rounded-lg">
-        <h4 class="text-style-1 text-uppercase mb-2">
-          {{ isToken ? 'Bytecode' : 'Contract Code' }}
-        </h4>
+        <h4
+          class="text-style-1 text-uppercase mb-2"
+        >{{ isToken ? $t('components.token_script_log.bytecode') : $t('components.token_script_log.contract_code') }}</h4>
         <div class="content-scroll text-break small">{{ byteCode }}</div>
       </div>
     </b-col>
     <b-col cols="12" md="6">
       <div class="block-scroll p-3 my-3 rounded-lg">
-        <h4 class="text-style-1 text-uppercase mb-2">Asm</h4>
+        <h4 class="text-style-1 text-uppercase mb-2">{{ $t('components.token_script_log.asm') }}</h4>
         <div class="content-scroll text-break small">{{ asmCode }}</div>
       </div>
     </b-col>

@@ -225,8 +225,8 @@
       "mined": "mined",
       "type": "Type",
       "no_input": "No Inputs (Newly Generated Coins)",
-      "confirm": "Confirmations:",
-      "fee": "Fee:"
+      "confirm": "Confirmations",
+      "fee": "Fee"
     },
     "storage_log": {
       "more": "More",
@@ -238,7 +238,7 @@
       "asm": "Asm"
     },
     "token_tracker": {
-      "rank": "Rank#"
+      "rank": "Rank"
     }
   }
 }

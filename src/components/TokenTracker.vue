@@ -7,18 +7,21 @@
       >
         <b-row>
           <b-col cols="2">
-            <div class="token-sym text-center font-weight-bold">
-              {{ tokenBalance.contract.symbol }}
-            </div>
+            <div class="token-sym text-center font-weight-bold">{{ tokenBalance.contract.symbol }}</div>
           </b-col>
           <b-col cols="8" class="token-text">
             <b-row class="font-weight-bold">{{ tokenBalance.contract.name }}</b-row>
             <b-row class="token-amount">
               {{ tokenBalance.amount | numberWithCommas(8) }}
-              <span class="ml-2">{{ tokenBalance.contract.symbol }}</span>
+              <span
+                class="ml-2"
+              >{{ tokenBalance.contract.symbol }}</span>
             </b-row>
           </b-col>
-          <b-col cols="2" class="text-md-right token-text">RANK #{{ tokenBalance.rank }}</b-col>
+          <b-col
+            cols="2"
+            class="text-md-right token-text text-uppercase"
+          >{{ $t('components.token_tracker.rank') }} #{{ tokenBalance.rank }}</b-col>
         </b-row>
       </b-card>
     </b-col>
