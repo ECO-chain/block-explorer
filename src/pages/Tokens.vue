@@ -4,7 +4,7 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page mb-1">{{ $t('components.tokens.token_contracts') }}</h2>
+            <h2 class="head-page mb-1">{{ $t('views.tokens.token_contracts') }}</h2>
           </div>
           <!-- END .group-head -->
         </b-col>

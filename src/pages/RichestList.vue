@@ -4,9 +4,8 @@
       <b-row class="mb-3">
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page mb-1"><span>R</span>ichest Addresses</h2>
+            <h2 class="head-page mb-1">{{ $t('views.rich_list.richest_addr') }}</h2>
           </div>
-          <!-- END .group-head -->
         </b-col>
 
         <b-col cols="12">
@@ -14,7 +13,9 @@
             <div class="table-responsive m-0">
               <b-table dark :fields="fields" :items="richestList">
                 <template v-slot:cell(address)="data">
-                  <router-link :to="{ name: 'address', params: { addr: data.item.address } }">{{ data.item.address }}</router-link>
+                  <router-link
+                    :to="{ name: 'address', params: { addr: data.item.address } }"
+                  >{{ data.item.address }}</router-link>
                 </template>
               </b-table>
             </div>
@@ -35,15 +36,29 @@ import { RichList } from '@/api/statistics/type'
 export default class RichestList extends Vue {
   richestList: RichList[] = []
 
-  fields = [
-    { key: 'address' },
-    { key: 'balance', sortable: true, formatter: (value: number) => {
-      return `${value.toLocaleString()} ECOC`
-    }},
-    { key: 'blocks_mined', label: 'Minted', sortable: true, formatter: (value: number) => {
-      return value.toLocaleString()
-    }}
-  ]
+  fields: any[] = []
+
+  created() {
+    this.fields = [
+      { key: 'address', label: this.$t('views.rich_list.address') },
+      {
+        key: 'balance',
+        label: this.$t('views.rich_list.balance'),
+        sortable: true,
+        formatter: (value: number) => {
+          return `${value.toLocaleString()} ECOC`
+        }
+      },
+      {
+        key: 'blocks_mined',
+        label: this.$t('views.rich_list.minted'),
+        sortable: true,
+        formatter: (value: number) => {
+          return value.toLocaleString()
+        }
+      }
+    ]
+  }
 
   async mounted() {
     this.richestList = await statisticsModule.getRichestList()
@@ -51,3 +66,12 @@ export default class RichestList extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.group-head {
+  h2::first-letter {
+    color: $purple;
+    font-weight: bold;
+  }
+}
+</style>
