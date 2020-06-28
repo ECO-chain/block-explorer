@@ -4,7 +4,7 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page my-0"><span>A</span>ddress</h2>
+            <h2 class="head-page my-0">{{ $t('views.address.address') }}</h2>
             <h4 class="my-0 text-truncate text-purple">{{ addr }}</h4>
           </div>
         </b-col>
@@ -12,13 +12,15 @@
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
             <h3 class="head-global my-3">
-              Summary
-              <span class="small text-purple">[Confirmed]</span>
+              {{ $t('views.address.summary') }}
+              <span
+                class="small text-purple"
+              >[{{ $t('views.address.confirm') }}]</span>
             </h3>
           </div>
           <b-card class="block-global mb-3 rounded-lg addr-balance-block">
             <b-row>
-              <b-col>Balance</b-col>
+              <b-col>{{ $t('views.address.balance') }}</b-col>
               <b-col class="text-right addr-balance">
                 {{ addressSummary.balance | numberWithCommas }}
                 <span>ECOC</span>
@@ -30,31 +32,31 @@
               <b-col cols="12" md>
                 <b-row class="align-items-center">
                   <b-col cols="6">
-                    <div class="my-1">Total Received</div>
+                    <div class="my-1">{{ $t('views.address.total_received') }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">
-                      {{ addressSummary.totalReceived | numberWithCommas }} ECOC
-                    </div>
+                    <div
+                      class="my-1 text-right"
+                    >{{ addressSummary.totalReceived | numberWithCommas }} ECOC</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">Total Sent</div>
+                    <div class="my-1">{{ $t('views.address.total_sent') }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">
-                      {{ addressSummary.totalSent | numberWithCommas }} ECOC
-                    </div>
+                    <div
+                      class="my-1 text-right"
+                    >{{ addressSummary.totalSent | numberWithCommas }} ECOC</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">No. Transactions</div>
+                    <div class="my-1">{{ $t('views.address.num_of_tx') }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">
-                      {{ addressSummary.txApperances | numberWithCommas }}
-                    </div>
+                    <div
+                      class="my-1 text-right"
+                    >{{ addressSummary.txApperances | numberWithCommas }}</div>
                   </b-col>
                   <b-col cols="6" v-if="!isEcoAddr">
-                    <div class="my-1">ECRC20 Token</div>
+                    <div class="my-1">{{ $t('views.address.ecrc_token') }}</div>
                   </b-col>
                   <b-col cols="6" v-if="!isEcoAddr">
                     <div class="my-1 text-right">
@@ -81,20 +83,18 @@
 
         <b-col cols="12" v-if="tokenBalance.length > 0 && isEcoAddr">
           <div class="group-head my-3 text-center text-md-left">
-            <h3 class="head-global my-3">ECRC20 Token</h3>
+            <h3 class="head-global my-3">{{ $t('views.address.ecrc_token') }}</h3>
           </div>
-          <TokenTracker
-            v-for="(balance, index) in tokenBalance"
-            :key="index"
-            :token="balance"
-          ></TokenTracker>
+          <TokenTracker v-for="(balance, index) in tokenBalance" :key="index" :token="balance"></TokenTracker>
         </b-col>
 
         <b-col cols="12" v-if="!isEcoAddr">
           <div class="group-head my-3 text-center text-md-left">
             <h3 class="head-global my-3">
-              Storage
-              <span class="small text-purple">[{{ getEntriesCount() }} entries]</span>
+              {{ $t('views.address.storage') }}
+              <span
+                class="small text-purple"
+              >[{{ getEntriesCount() }} {{ $t('views.address.entries') }}]</span>
             </h3>
           </div>
           <StorageLog :entries="contractInfo.storage"></StorageLog>
@@ -102,7 +102,7 @@
 
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h3 class="head-global my-3">Transactions</h3>
+            <h3 class="head-global my-3">{{ $t('views.address.tx') }}</h3>
           </div>
           <TransactionBox v-for="(tx, index) in txs.txs" :key="index" :tx="tx"></TransactionBox>
           <infinite-loading v-if="txs.txs.length" @infinite="infiniteHandler"></infinite-loading>
@@ -237,5 +237,12 @@ export default class Address extends Vue {
 
 .qr {
   border-radius: 8px;
+}
+
+.group-head {
+  h2::first-letter {
+    color: $purple;
+    font-weight: bold;
+  }
 }
 </style>

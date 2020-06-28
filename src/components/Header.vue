@@ -11,27 +11,46 @@
               <nav class="topnav" v-if="menuActive">
                 <ul class="list-unstyled d-md-flex m-0 topnav-list align-items-center">
                   <li class="ml-3">
-                    <router-link to="/" @click.native="toggleShow()">Home</router-link>
+                    <router-link
+                      to="/"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.home') }}</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/blocks" @click.native="toggleShow()">Blocks</router-link>
+                    <router-link
+                      to="/blocks"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.blocks') }}</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/status" @click.native="toggleShow()">Status</router-link>
+                    <router-link
+                      to="/status"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.status') }}</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/stats" @click.native="toggleShow()">Stats</router-link>
+                    <router-link
+                      to="/stats"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.stats') }}</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/charts" @click.native="toggleShow()">Charts</router-link>
+                    <router-link
+                      to="/charts"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.charts') }}</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/tokens" @click.native="toggleShow()">Tokens</router-link>
+                    <router-link
+                      to="/tokens"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.token') }}</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/richest-list" @click.native="toggleShow()"
-                      >Rich List</router-link
-                    >
+                    <router-link
+                      to="/richest-list"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.rich_list') }}</router-link>
                   </li>
                   <li class="ml-3">
                     <language-switcher></language-switcher>
