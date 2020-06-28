@@ -12,12 +12,16 @@
           <h3 class="head-global my-3">Rich List</h3>
           <div class="block-global p-3 mb-3 rounded-lg">
             <b-table dark :items="balanceInterval" :fields="fields">
-              <template
-                v-slot:cell(percentAddresses)="data"
-              >{{ data.item.percentAddresses.toFixed(2) }}% [{{ data.item.percentAddressesTotal.toFixed(2) }}%]</template>
-              <template
-                v-slot:cell(percentCoins)="data"
-              >{{ data.item.percentCoins.toFixed(2) }}% [{{ data.item.percentCoinsTotal.toFixed(2) }}%]</template>
+              <template v-slot:cell(percentAddresses)="data"
+                >{{ data.item.percentAddresses.toFixed(2) }}% [{{
+                  data.item.percentAddressesTotal.toFixed(2)
+                }}%]</template
+              >
+              <template v-slot:cell(percentCoins)="data"
+                >{{ data.item.percentCoins.toFixed(2) }}% [{{
+                  data.item.percentCoinsTotal.toFixed(2)
+                }}%]</template
+              >
             </b-table>
           </div>
         </b-col>

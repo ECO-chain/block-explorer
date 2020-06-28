@@ -15,9 +15,9 @@
               <b-card-text class="result-symbol">{{ token.symbol }} - {{ token.name }}</b-card-text>
             </b-col>
             <b-col>
-              <b-card-text
-                class="result-supply"
-              >{{ Number(token.total_supply) | numberWithCommas(8) }} ECOC</b-card-text>
+              <b-card-text class="result-supply"
+                >{{ Number(token.total_supply) | numberWithCommas(8) }} ECOC</b-card-text
+              >
             </b-col>
           </b-row>
           <b-card-text class="result-address">Address - {{ token.contract_address }}</b-card-text>

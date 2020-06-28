@@ -18,9 +18,9 @@
                     <div class="my-1">{{ $t('views.token.total_supply') }}:</div>
                   </b-col>
                   <b-col cols="6">
-                    <div
-                      class="my-1 text-right text-truncate"
-                    >{{ summary.total_supply | numberWithCommas(8) }} BCST</div>
+                    <div class="my-1 text-right text-truncate">
+                      {{ summary.total_supply | numberWithCommas(8) }} BCST
+                    </div>
                   </b-col>
                 </b-row>
               </b-col>
@@ -59,10 +59,9 @@
                         v-b-tooltip.hover
                         :title="copyMessage"
                       ></i>
-                      <router-link
-                        to="/address"
-                        class="text-truncate"
-                      >{{ summary.contract_address }}</router-link>
+                      <router-link to="/address" class="text-truncate">{{
+                        summary.contract_address
+                      }}</router-link>
                     </div>
                   </b-col>
                 </b-row>
@@ -73,9 +72,9 @@
                     <div class="my-1">{{ $t('views.token.num_of_transfers') }}:</div>
                   </b-col>
                   <b-col cols="6">
-                    <div
-                      class="my-1 text-right text-truncate"
-                    >{{ summary.transfers_count | numberWithCommas }}</div>
+                    <div class="my-1 text-right text-truncate">
+                      {{ summary.transfers_count | numberWithCommas }}
+                    </div>
                   </b-col>
                 </b-row>
               </b-col>
@@ -98,24 +97,27 @@
             <b-tab :title="$t('views.token.token_transfers')" active>
               <div class="block-global p-3 my-0 rounded-lg">
                 <i18n path="views.token.total_of_transfer" tag="p">
-                  <span place="transfers" class="text-green">{{ transfer.count }}</span>
+                  <template v-slot:transfers>
+                    <span class="text-green">{{ transfer.count }}</span>
+                  </template>
                 </i18n>
                 <div class="table-responsive m-0">
                   <b-table dark :items="transfer.items" :fields="transferFields">
                     <template v-slot:cell(tx_hash)="data">
                       <router-link
                         :to="{ name: 'transaction', params: { hash: data.item.tx_hash } }"
-                      >{{ data.item.tx_hash }}</router-link>
+                        >{{ data.item.tx_hash }}</router-link
+                      >
                     </template>
                     <template v-slot:cell(from)="data">
-                      <router-link
-                        :to="{ name: 'address', params: { addr: data.item.from } }"
-                      >{{ data.item.from }}</router-link>
+                      <router-link :to="{ name: 'address', params: { addr: data.item.from } }">{{
+                        data.item.from
+                      }}</router-link>
                     </template>
                     <template v-slot:cell(to)="data">
-                      <router-link
-                        :to="{ name: 'address', params: { addr: data.item.to } }"
-                      >{{ data.item.to }}</router-link>
+                      <router-link :to="{ name: 'address', params: { addr: data.item.to } }">{{
+                        data.item.to
+                      }}</router-link>
                     </template>
                   </b-table>
                 </div>
@@ -135,18 +137,22 @@
             <b-tab :title="$t('views.token.token_holders')">
               <div class="block-global p-3 my-0 rounded-lg">
                 <i18n path="views.token.total_of_holders" tag="p">
-                  <span place="holders" class="text-green">{{ holder.count }}</span>
+                  <template v-slot:holders>
+                    <span class="text-green">{{ holder.count }}</span>
+                  </template>
                 </i18n>
                 <div class="table-responsive m-0">
                   <b-table dark :items="holder.items" :fields="holderFields">
-                    <template v-slot:cell(rank)="data">{{ holder.offset + data.index + 1}}</template>
-                    <template
-                      v-slot:cell(percentage)="data"
-                    >{{ calculatePercentage(summary.total_supply, data.item.amount) }}%</template>
+                    <template v-slot:cell(rank)="data">{{
+                      holder.offset + data.index + 1
+                    }}</template>
+                    <template v-slot:cell(percentage)="data"
+                      >{{ calculatePercentage(summary.total_supply, data.item.amount) }}%</template
+                    >
                     <template v-slot:cell(address)="data">
-                      <router-link
-                        :to="{ name: 'address', params: { addr: data.item.address } }"
-                      >{{ data.item.address }}</router-link>
+                      <router-link :to="{ name: 'address', params: { addr: data.item.address } }">{{
+                        data.item.address
+                      }}</router-link>
                     </template>
                   </b-table>
                 </div>
@@ -186,7 +192,9 @@
                 <b-row class="align-items-center">
                   <b-col cols="auto">3. {{ $t('views.token.decimals') }}</b-col>
                   <b-col cols="auto">
-                    <b-icon-arrow-right-short class="h3 mb-0">{{ summary.decimals }}</b-icon-arrow-right-short>
+                    <b-icon-arrow-right-short class="h3 mb-0">{{
+                      summary.decimals
+                    }}</b-icon-arrow-right-short>
                   </b-col>
                   <b-col cols="auto">8</b-col>
                   <b-col cols="auto" class="text-purple-light">uint8</b-col>
@@ -195,7 +203,9 @@
                 <b-row class="align-items-center">
                   <b-col cols="auto">4. {{ $t('views.token.version') }}</b-col>
                   <b-col cols="auto">
-                    <b-icon-arrow-right-short class="h3 mb-0">{{ summary.version }}</b-icon-arrow-right-short>
+                    <b-icon-arrow-right-short class="h3 mb-0">{{
+                      summary.version
+                    }}</b-icon-arrow-right-short>
                   </b-col>
                   <b-col cols="auto" class="text-purple-light">string</b-col>
                 </b-row>
@@ -227,10 +237,9 @@
                             balance
                             <span class="text-purple-light">uint256</span> 0
                           </b-col>
-                          <b-col
-                            cols="auto"
-                            class="d-block text-truncate"
-                          >[ Owner address: 0abd9012fc9495d94346cbaded83f9e33be2ae07 ]</b-col>
+                          <b-col cols="auto" class="d-block text-truncate"
+                            >[ Owner address: 0abd9012fc9495d94346cbaded83f9e33be2ae07 ]</b-col
+                          >
                         </b-row>
                       </div>
                     </div>
@@ -274,10 +283,9 @@
                             balance
                             <span class="text-purple-light">uint256</span> 0
                           </b-col>
-                          <b-col
-                            cols="auto"
-                            class="d-block text-truncate"
-                          >[ Owner address: 0abd9012fc9495d94346cbaded83f9e33be2ae07 ]</b-col>
+                          <b-col cols="auto" class="d-block text-truncate"
+                            >[ Owner address: 0abd9012fc9495d94346cbaded83f9e33be2ae07 ]</b-col
+                          >
                         </b-row>
                       </div>
                     </div>

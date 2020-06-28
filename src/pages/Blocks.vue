@@ -51,14 +51,14 @@
                 :busy="isBusy"
               >
                 <template v-slot:cell(height)="data">
-                  <router-link
-                    :to="{ name: 'block', params: { hash: data.item.hash }}"
-                  >{{ data.item.height }}</router-link>
+                  <router-link :to="{ name: 'block', params: { hash: data.item.hash } }">{{
+                    data.item.height
+                  }}</router-link>
                 </template>
                 <template v-slot:cell(minedBy)="data">
-                  <router-link
-                    :to="{ name: 'address', params: { addr: data.item.minedBy } }"
-                  >{{ data.item.minedBy }}</router-link>
+                  <router-link :to="{ name: 'address', params: { addr: data.item.minedBy } }">{{
+                    data.item.minedBy
+                  }}</router-link>
                 </template>
                 <template v-slot:table-busy>
                   <div class="text-center text-danger my-2">

@@ -8,9 +8,13 @@
           @click="toggleMore"
         ></b-icon>
         <span v-if="txPage">{{ tx.txid }}</span>
-        <router-link v-else :to="{ name: 'transaction', params: { hash: tx.txid } }">{{ tx.txid }}</router-link>
+        <router-link v-else :to="{ name: 'transaction', params: { hash: tx.txid } }">{{
+          tx.txid
+        }}</router-link>
       </b-col>
-      <b-col cols="12" md class="text-md-right small">mined {{ tx.time | timeFormat('LLL') }}</b-col>
+      <b-col cols="12" md class="text-md-right small"
+        >mined {{ tx.time | timeFormat('LLL') }}</b-col
+      >
     </b-row>
     <hr />
     <b-row>
@@ -44,24 +48,22 @@
               >
                 <template v-if="checkDuplicatedAddress(vin)">
                   <b-col cols="8" class="text-truncate">
-                    <router-link
-                      :to="{ name: 'address', params: { addr: vin.addr } }"
-                    >{{ vin.addr }}</router-link>
+                    <router-link :to="{ name: 'address', params: { addr: vin.addr } }">{{
+                      vin.addr
+                    }}</router-link>
                     <b-collapse v-model="moreDetail" class="tx-collapse">
                       <p class="tx-detail">Confirmations: {{ tx.confirmations }}</p>
                       <div v-if="vin.items.length > 0">
-                        <div v-for="(val,index) in vin.items" :key="index">
+                        <div v-for="(val, index) in vin.items" :key="index">
                           <p class="tx-detail">{{ val.addr }}</p>
                           <p class="tx-detail">{{ val.value }}</p>
                         </div>
                       </div>
                     </b-collapse>
                   </b-col>
-                  <b-col
-                    cols="4"
-                    class="addr-value"
-                    v-if="!moreDetail && vin.sumValue"
-                  >{{ vin.sumValue }}</b-col>
+                  <b-col cols="4" class="addr-value" v-if="!moreDetail && vin.sumValue">{{
+                    vin.sumValue
+                  }}</b-col>
                   <b-col cols="4" class="addr-value" v-else>{{ vin.value }} ECOC</b-col>
                 </template>
               </b-row>
@@ -85,28 +87,27 @@
                     <router-link
                       v-if="'addresses' in vout.scriptPubKey"
                       :to="{ name: 'address', params: { addr: vout.scriptPubKey.addresses[0] } }"
-                    >{{ vout.scriptPubKey.addresses[0] }}</router-link>
+                      >{{ vout.scriptPubKey.addresses[0] }}</router-link
+                    >
                     <span v-else>{{ `Unparsed address ${index}` }}</span>
                     <b-collapse v-model="moreDetail" class="tx-collapse">
                       <div v-if="vout.items && vout.items.length > 0">
-                        <div v-for="(val,index) in vout.items" :key="index">
+                        <div v-for="(val, index) in vout.items" :key="index">
                           <p class="tx-detail">{{ parsingAddress(val) }}</p>
                           <p class="tx-detail">{{ val.value }}</p>
                         </div>
                       </div>
                       <div v-else>
-                        <p
-                          class="tx-detail"
-                        >Type {{ 'type' in vout.scriptPubKey ? vout.scriptPubKey.type : '' }}</p>
+                        <p class="tx-detail">
+                          Type {{ 'type' in vout.scriptPubKey ? vout.scriptPubKey.type : '' }}
+                        </p>
                         <p class="tx-detail">scriptPubKey {{ vout.scriptPubKey.asm }}</p>
                       </div>
                     </b-collapse>
                   </b-col>
-                  <b-col
-                    cols="4"
-                    class="addr-value"
-                    v-if="!moreDetail && vout.sumValue"
-                  >{{ vout.sumValue }}</b-col>
+                  <b-col cols="4" class="addr-value" v-if="!moreDetail && vout.sumValue">{{
+                    vout.sumValue
+                  }}</b-col>
                   <b-col cols="4" class="addr-value" v-else>{{ vout.value }} ECOC (U)</b-col>
                 </template>
               </b-row>
@@ -129,12 +130,13 @@
               <b-col cols="12" lg>
                 <b-row class="align-items-center no-gutters">
                   <b-col cols="8" class="text-truncate">
-                    <router-link to="/address" class="d-block text-truncate">{{ event.addressFrom }}</router-link>
+                    <router-link to="/address" class="d-block text-truncate">{{
+                      event.addressFrom
+                    }}</router-link>
                   </b-col>
-                  <b-col
-                    cols="4"
-                    class="text-right small text-purple-light"
-                  >{{ event.amount | numberWithCommas(8) }} BCST</b-col>
+                  <b-col cols="4" class="text-right small text-purple-light"
+                    >{{ event.amount | numberWithCommas(8) }} BCST</b-col
+                  >
                 </b-row>
               </b-col>
               <b-col cols="12" lg="1" class="text-center">
@@ -143,18 +145,23 @@
               <b-col cols="12" lg>
                 <b-row class="align-items-center no-gutters">
                   <b-col cols="8" class="text-truncate">
-                    <router-link to="/address" class="d-block text-truncate">{{ event.addressTo }}</router-link>
+                    <router-link to="/address" class="d-block text-truncate">{{
+                      event.addressTo
+                    }}</router-link>
                   </b-col>
-                  <b-col
-                    cols="4"
-                    class="text-right small text-purple-light"
-                  >{{ event.amount | numberWithCommas(8) }} BCST</b-col>
+                  <b-col cols="4" class="text-right small text-purple-light"
+                    >{{ event.amount | numberWithCommas(8) }} BCST</b-col
+                  >
                 </b-row>
               </b-col>
             </b-row>
           </b-col>
         </b-row>
-        <TokenScriptLog v-if="byteCode.length > 0" :byteCode="byteCode" :isToken="false"></TokenScriptLog>
+        <TokenScriptLog
+          v-if="byteCode.length > 0"
+          :byteCode="byteCode"
+          :isToken="false"
+        ></TokenScriptLog>
       </div>
     </template>
 
@@ -164,10 +171,12 @@
         <div class="d-inline-block small text-purple-light mx-3 mr-md-0">FEE: {{ tx.fees }}</div>
       </b-col>
       <b-col md class="text-center text-md-right">
-        <div
-          class="d-inline-block small text-purple-light mx-3 mr-md-0"
-        >CONFIRMATIONS: {{ tx.confirmations }}</div>
-        <div class="d-inline-block small text-purple-light mx-3 mr-md-0">{{ tx.valueOut }} ECOC</div>
+        <div class="d-inline-block small text-purple-light mx-3 mr-md-0">
+          CONFIRMATIONS: {{ tx.confirmations }}
+        </div>
+        <div class="d-inline-block small text-purple-light mx-3 mr-md-0">
+          {{ tx.valueOut }} ECOC
+        </div>
       </b-col>
     </b-row>
   </div>

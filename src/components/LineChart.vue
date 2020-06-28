@@ -42,7 +42,7 @@ export default class LineChart extends Vue {
             pointHoverRadius: 10,
             pointRadius: 0,
             pointStyle: 'rect',
-            data: dataSet,
+            data: dataSet
           }
         ]
       },
@@ -91,5 +91,4 @@ export default class LineChart extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

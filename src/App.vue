@@ -54,7 +54,6 @@ export default class App extends Vue {
   onMarkets(payload: any) {
     console.log('Martket', payload)
   }
-
 }
 </script>
 

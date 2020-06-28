@@ -1,10 +1,8 @@
 <template>
   <b-dropdown size="sm" id="dropdown-right" right :text="locale" class="switch-language">
-    <b-dropdown-item
-      v-for="lang in langs"
-      :key="lang.key"
-      @click="switchLang(lang.key)"
-    >{{ lang.localizedName }}</b-dropdown-item>
+    <b-dropdown-item v-for="lang in langs" :key="lang.key" @click="switchLang(lang.key)">{{
+      lang.localizedName
+    }}</b-dropdown-item>
   </b-dropdown>
 </template>
 
@@ -28,8 +26,9 @@ export default class LanguageSwitcher extends Vue {
 
   locale = 'en'
 
-  mounted() {
+  async mounted() {
     this.locale = this.selectedLocaleName(this.currentLocale)
+    await loadLocale(this.currentLocale)
   }
 
   get currentLocale() {
@@ -55,5 +54,4 @@ export default class LanguageSwitcher extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

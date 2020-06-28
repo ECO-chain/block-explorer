@@ -7,7 +7,9 @@
       >
         <b-row>
           <b-col cols="2">
-            <div class="token-sym text-center font-weight-bold">{{ tokenBalance.contract.symbol }}</div>
+            <div class="token-sym text-center font-weight-bold">
+              {{ tokenBalance.contract.symbol }}
+            </div>
           </b-col>
           <b-col cols="8" class="token-text">
             <b-row class="font-weight-bold">{{ tokenBalance.contract.name }}</b-row>

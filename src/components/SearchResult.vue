@@ -35,7 +35,9 @@
             <p class="addr-hash text-truncate mb-1">{{ sResult.addrStr }}</p>
           </b-col>
           <b-col>
-            <p class="addr-balance text-right mb-1">{{ sResult.balance | numberWithCommas }} ECOC</p>
+            <p class="addr-balance text-right mb-1">
+              {{ sResult.balance | numberWithCommas }} ECOC
+            </p>
           </b-col>
         </b-row>
       </div>
@@ -74,12 +76,14 @@
       <div class="p-3 hvr-sweep-to-right">
         <b-row class="token-result">
           <b-col>
-            <b-card-text class="token-symbol">{{ sResult.symbol }} - {{ sResult.name }}</b-card-text>
+            <b-card-text class="token-symbol"
+              >{{ sResult.symbol }} - {{ sResult.name }}</b-card-text
+            >
           </b-col>
           <b-col>
-            <b-card-text
-              class="token-supply"
-            >{{ Number(sResult.total_supply) | numberWithCommas(8) }} ECOC</b-card-text>
+            <b-card-text class="token-supply"
+              >{{ Number(sResult.total_supply) | numberWithCommas(8) }} ECOC</b-card-text
+            >
           </b-col>
         </b-row>
         <b-card-text class="token-address">Address - {{ sResult.contract_address }}</b-card-text>

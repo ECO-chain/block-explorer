@@ -12,15 +12,17 @@
           <b-row>
             <b-col cols="12" md="6">
               <div class="show-supply-idle rounded-lg text-center p-3 my-3">
-                <p class="my-1 text-style-2">{{ statusState.finalSupply | numberWithCommas }} ECOC</p>
+                <p class="my-1 text-style-2">
+                  {{ statusState.finalSupply | numberWithCommas }} ECOC
+                </p>
                 <p class="my-1">{{ $t('views.home.final_supply') }}</p>
               </div>
             </b-col>
             <b-col cols="12" md="6">
               <div class="show-supply-idle rounded-lg text-center p-3 my-3">
-                <p
-                  class="my-1 text-style-2"
-                >{{ Number(statusState.supply) | numberWithCommas }} ECOC</p>
+                <p class="my-1 text-style-2">
+                  {{ Number(statusState.supply) | numberWithCommas }} ECOC
+                </p>
                 <p class="my-1">{{ $t('views.home.current_supply') }}</p>
               </div>
             </b-col>
@@ -34,9 +36,9 @@
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div
-                  class="my-1 text-truncate"
-                >{{ info.difficulty['proof-of-stake'] | numberWithCommas }}</div>
+                <div class="my-1 text-truncate">
+                  {{ info.difficulty['proof-of-stake'] | numberWithCommas }}
+                </div>
                 <div class="my-1 small text-purple-light">{{ $t('views.home.difficulty') }}</div>
               </div>
             </b-col>
@@ -48,10 +50,12 @@
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div
-                  class="my-1 text-truncate"
-                >{{ stakingInfo.netstakeweight | numberWithCommas(8) }}</div>
-                <div class="my-1 small text-purple-light">{{ $t('views.home.network_weight') }}</div>
+                <div class="my-1 text-truncate">
+                  {{ stakingInfo.netstakeweight | numberWithCommas(8) }}
+                </div>
+                <div class="my-1 small text-purple-light">
+                  {{ $t('views.home.network_weight') }}
+                </div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
@@ -89,19 +93,25 @@
                 <div
                   class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
                 >
-                  <router-link
-                    :to="{ name: 'block', params: { hash: block.hash } }"
-                  >{{ block.height }}</router-link>
-                  <span class="small text-purple-light">{{ block.time * 1000 | timeFromNow }}</span>
+                  <router-link :to="{ name: 'block', params: { hash: block.hash } }">{{
+                    block.height
+                  }}</router-link>
+                  <span class="small text-purple-light">{{
+                    (block.time * 1000) | timeFromNow
+                  }}</span>
                 </div>
                 <div class="my-1 small text-truncate">
                   {{ $t('views.home.swiper.blocks.mined_by') }}:
-                  <router-link
-                    :to="{ name: 'address', params: { addr: block.minedBy } }"
-                  >{{ block.minedBy }}</router-link>
+                  <router-link :to="{ name: 'address', params: { addr: block.minedBy } }">{{
+                    block.minedBy
+                  }}</router-link>
                 </div>
-                <div class="my-1 small">{{ $t('views.home.swiper.blocks.size') }}: {{ block.size }}</div>
-                <div class="my-1 small">{{ $t('views.home.swiper.blocks.tx') }}: {{ block.txlength }}</div>
+                <div class="my-1 small">
+                  {{ $t('views.home.swiper.blocks.size') }}: {{ block.size }}
+                </div>
+                <div class="my-1 small">
+                  {{ $t('views.home.swiper.blocks.tx') }}: {{ block.txlength }}
+                </div>
               </div>
             </swiper-slide>
           </swiper>
@@ -123,11 +133,13 @@
                   </div>
                   <div class="my-1 small text-truncate">
                     {{ $t('views.home.swiper.tx.hash') }}:
-                    <router-link
-                      :to="{ name: 'transaction', params: { hash: tx.txid } }"
-                    >{{ tx.txid }}</router-link>
+                    <router-link :to="{ name: 'transaction', params: { hash: tx.txid } }">{{
+                      tx.txid
+                    }}</router-link>
                   </div>
-                  <div class="my-1 small">{{ $t('views.home.swiper.tx.vout') }}: {{ tx.valueOut }} ECOC</div>
+                  <div class="my-1 small">
+                    {{ $t('views.home.swiper.tx.vout') }}: {{ tx.valueOut }} ECOC
+                  </div>
                 </div>
               </swiper-slide>
             </template>

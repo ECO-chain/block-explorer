@@ -82,8 +82,9 @@
                       <b-col cols="12">
                         <div class="my-1 text-right text-truncate">
                           <router-link
-                            :to="{ name: 'block', params: { hash: lastBlockHash.lastblockhash }}"
-                          >{{ lastBlockHash.lastblockhash }}</router-link>
+                            :to="{ name: 'block', params: { hash: lastBlockHash.lastblockhash } }"
+                            >{{ lastBlockHash.lastblockhash }}</router-link
+                          >
                         </div>
                       </b-col>
                       <b-col cols="12">
@@ -92,8 +93,9 @@
                       <b-col cols="12">
                         <div class="my-1 text-right text-truncate">
                           <router-link
-                            :to="{ name: 'block', params: { hash: lastBlockHash.lastblockhash }}"
-                          >{{ lastBlockHash.lastblockhash }}</router-link>
+                            :to="{ name: 'block', params: { hash: lastBlockHash.lastblockhash } }"
+                            >{{ lastBlockHash.lastblockhash }}</router-link
+                          >
                         </div>
                       </b-col>
                     </b-row>
@@ -141,9 +143,9 @@
                     <div class="my-1">{{ $t('views.status.mine_diffi') }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div
-                      class="my-1 text-right"
-                    >{{ statusInfo.difficulty['proof-of-stake'] | numberWithCommas }}</div>
+                    <div class="my-1 text-right">
+                      {{ statusInfo.difficulty['proof-of-stake'] | numberWithCommas }}
+                    </div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1">{{ $t('views.status.network') }}</div>
@@ -155,13 +157,17 @@
                     <div class="my-1">{{ $t('views.status.proxy_sett') }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">{{ statusInfo.proxy ? statusInfo.proxy : '-' }}</div>
+                    <div class="my-1 text-right">
+                      {{ statusInfo.proxy ? statusInfo.proxy : '-' }}
+                    </div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1">{{ $t('views.status.info_err') }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">{{ statusInfo.errors ? statusInfo.errors : '-' }}</div>
+                    <div class="my-1 text-right">
+                      {{ statusInfo.errors ? statusInfo.errors : '-' }}
+                    </div>
                   </b-col>
                 </b-row>
               </div>

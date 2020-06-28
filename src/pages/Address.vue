@@ -4,9 +4,7 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page my-0">
-              <span>A</span>ddress
-            </h2>
+            <h2 class="head-page my-0"><span>A</span>ddress</h2>
             <h4 class="my-0 text-truncate text-purple">{{ addr }}</h4>
           </div>
         </b-col>
@@ -35,25 +33,25 @@
                     <div class="my-1">Total Received</div>
                   </b-col>
                   <b-col cols="6">
-                    <div
-                      class="my-1 text-right"
-                    >{{ addressSummary.totalReceived | numberWithCommas }} ECOC</div>
+                    <div class="my-1 text-right">
+                      {{ addressSummary.totalReceived | numberWithCommas }} ECOC
+                    </div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1">Total Sent</div>
                   </b-col>
                   <b-col cols="6">
-                    <div
-                      class="my-1 text-right"
-                    >{{ addressSummary.totalSent | numberWithCommas }} ECOC</div>
+                    <div class="my-1 text-right">
+                      {{ addressSummary.totalSent | numberWithCommas }} ECOC
+                    </div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1">No. Transactions</div>
                   </b-col>
                   <b-col cols="6">
-                    <div
-                      class="my-1 text-right"
-                    >{{ addressSummary.txApperances | numberWithCommas }}</div>
+                    <div class="my-1 text-right">
+                      {{ addressSummary.txApperances | numberWithCommas }}
+                    </div>
                   </b-col>
                   <b-col cols="6" v-if="!isEcoAddr">
                     <div class="my-1">ECRC20 Token</div>
@@ -85,7 +83,11 @@
           <div class="group-head my-3 text-center text-md-left">
             <h3 class="head-global my-3">ECRC20 Token</h3>
           </div>
-          <TokenTracker v-for="(balance, index) in tokenBalance" :key="index" :token="balance"></TokenTracker>
+          <TokenTracker
+            v-for="(balance, index) in tokenBalance"
+            :key="index"
+            :token="balance"
+          ></TokenTracker>
         </b-col>
 
         <b-col cols="12" v-if="!isEcoAddr">

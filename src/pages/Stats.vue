@@ -20,23 +20,25 @@
                 <div class="my-1">{{ $t('views.stats.block_minted') }}</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1 text-right">{{ totalStats.n_blocks_mined | numberWithCommas }}</div>
+                <div class="my-1 text-right">
+                  {{ totalStats.n_blocks_mined | numberWithCommas }}
+                </div>
               </b-col>
               <b-col cols="6">
                 <div class="my-1">{{ $t('views.stats.time_blocks') }}</div>
               </b-col>
               <b-col cols="6">
-                <div
-                  class="my-1 text-right"
-                >{{ totalStats.time_between_blocks | numberWithCommas }} secs</div>
+                <div class="my-1 text-right">
+                  {{ totalStats.time_between_blocks | numberWithCommas }} secs
+                </div>
               </b-col>
               <b-col cols="6">
                 <div class="my-1">{{ $t('views.stats.minted_ecoc') }}</div>
               </b-col>
               <b-col cols="6">
-                <div
-                  class="my-1 text-right"
-                >{{ totalStats.mined_currency_amount | numberWithCommas(8) }} ECOC</div>
+                <div class="my-1 text-right">
+                  {{ totalStats.mined_currency_amount | numberWithCommas(8) }} ECOC
+                </div>
               </b-col>
             </b-row>
           </div>
@@ -52,16 +54,17 @@
                 <div class="my-1">{{ $t('views.stats.total_tx_fee') }}</div>
               </b-col>
               <b-col>
-                <div
-                  class="my-1 text-right"
-                >{{ totalStats.transaction_fees | numberWithCommas(8) }} ECOC</div>
+                <div class="my-1 text-right">
+                  {{ totalStats.transaction_fees | numberWithCommas(8) }} ECOC
+                </div>
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
                   <router-link
-                    :to="{ name: 'charts', params: { type: 'Fees'} }"
+                    :to="{ name: 'charts', params: { type: 'Fees' } }"
                     class="btn btn-sm btn-primary"
-                  >{{ $t('views.stats.view_chart') }}</router-link>
+                    >{{ $t('views.stats.view_chart') }}</router-link
+                  >
                 </div>
               </b-col>
             </b-row>
@@ -70,16 +73,17 @@
                 <div class="my-1">{{ $t('views.stats.num_of_tx') }}</div>
               </b-col>
               <b-col>
-                <div
-                  class="my-1 text-right"
-                >{{ totalStats.number_of_transactions | numberWithCommas }}</div>
+                <div class="my-1 text-right">
+                  {{ totalStats.number_of_transactions | numberWithCommas }}
+                </div>
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
                   <router-link
-                    :to="{ name: 'charts', params: { type: 'Transactions'} }"
+                    :to="{ name: 'charts', params: { type: 'Transactions' } }"
                     class="btn btn-sm btn-primary"
-                  >{{ $t('views.stats.view_chart') }}</router-link>
+                    >{{ $t('views.stats.view_chart') }}</router-link
+                  >
                 </div>
               </b-col>
             </b-row>
@@ -88,16 +92,17 @@
                 <div class="my-1">{{ $t('views.stats.total_output_vol') }}</div>
               </b-col>
               <b-col>
-                <div
-                  class="my-1 text-right"
-                >{{ totalStats.outputs_volume | numberWithCommas(8) }} ECOC</div>
+                <div class="my-1 text-right">
+                  {{ totalStats.outputs_volume | numberWithCommas(8) }} ECOC
+                </div>
               </b-col>
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
                   <router-link
-                    :to="{ name: 'charts', params: { type: 'Outputs'} }"
+                    :to="{ name: 'charts', params: { type: 'Outputs' } }"
                     class="btn btn-sm btn-primary"
-                  >{{ $t('views.stats.view_chart') }}</router-link>
+                    >{{ $t('views.stats.view_chart') }}</router-link
+                  >
                 </div>
               </b-col>
             </b-row>
@@ -130,9 +135,10 @@
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
                   <router-link
-                    :to="{ name: 'charts', params: { type: 'Difficulty'} }"
+                    :to="{ name: 'charts', params: { type: 'Difficulty' } }"
                     class="btn btn-sm btn-primary"
-                  >{{ $t('views.stats.view_chart') }}</router-link>
+                    >{{ $t('views.stats.view_chart') }}</router-link
+                  >
                 </div>
               </b-col>
             </b-row>
@@ -146,9 +152,10 @@
               <b-col cols="12" md="auto">
                 <div class="mt-1 mb-3 mb-md-1 text-center">
                   <router-link
-                    :to="{ name: 'charts', params: { type: 'Stakes'} }"
+                    :to="{ name: 'charts', params: { type: 'Stakes' } }"
                     class="btn btn-sm btn-primary"
-                  >{{ $t('views.stats.view_chart') }}</router-link>
+                    >{{ $t('views.stats.view_chart') }}</router-link
+                  >
                 </div>
               </b-col>
             </b-row>

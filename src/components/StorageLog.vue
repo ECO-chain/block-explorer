@@ -6,7 +6,8 @@
           <b-button
             class="btn btn-sm btn-secondary my-2 my-md-0"
             @click="changeDataType(entry.typeKey, index, 'key')"
-          >{{ entry.typeKey }}</b-button>
+            >{{ entry.typeKey }}</b-button
+          >
         </b-col>
         <b-col cols="12" md>
           <b-row class="justify-content-center align-items-center no-gutters">
@@ -15,7 +16,8 @@
               md="5"
               class="text-center text-md-right text-truncate"
               :id="`tooltip-key-${index}`"
-            >{{ entry.displayedKey }}</b-col>
+              >{{ entry.displayedKey }}</b-col
+            >
             <b-tooltip :target="`tooltip-key-${index}`" class="toolja tolzzzzzz">
               <i class="far fa-copy copy-i"></i>
               {{ entry.displayedKey }}
@@ -28,7 +30,8 @@
               md="5"
               class="text-center text-md-left text-truncate"
               :id="`tooltip-value-${index}`"
-            >{{ entry.displayedValue }}</b-col>
+              >{{ entry.displayedValue }}</b-col
+            >
             <b-tooltip :target="`tooltip-value-${index}`">{{ entry.displayedValue }}</b-tooltip>
           </b-row>
         </b-col>
@@ -37,7 +40,8 @@
             class="btn btn-sm btn-secondary my-2 my-md-0"
             v-model="currentView"
             @click="changeDataType(entry.typeValue, index, 'value')"
-          >{{ entry.typeValue }}</b-button>
+            >{{ entry.typeValue }}</b-button
+          >
         </b-col>
       </b-row>
     </div>

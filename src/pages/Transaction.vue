@@ -23,7 +23,9 @@
                 <div class="my-1">{{ $t('views.transaction.size') }}</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1 text-right text-truncate">{{ tx.size }} ({{ $t('views.transaction.bytes') }})</div>
+                <div class="my-1 text-right text-truncate">
+                  {{ tx.size }} ({{ $t('views.transaction.bytes') }})
+                </div>
               </b-col>
               <b-col cols="6">
                 <div class="my-1">{{ $t('views.transaction.received_tm') }}</div>
@@ -35,14 +37,18 @@
                 <div class="my-1">{{ $t('views.transaction.mined_tm') }}</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1 text-right text-truncate">{{ tx.blocktime | timeFormat('LLLTS')}}</div>
+                <div class="my-1 text-right text-truncate">
+                  {{ tx.blocktime | timeFormat('LLLTS') }}
+                </div>
               </b-col>
               <b-col cols="6">
                 <div class="my-1">{{ $t('views.transaction.included_in_block') }}</div>
               </b-col>
               <b-col cols="6">
                 <div class="my-1 text-right text-truncate">
-                  <router-link to="/block" class="d-block text-truncate">{{ tx.blockhash }}</router-link>
+                  <router-link to="/block" class="d-block text-truncate">{{
+                    tx.blockhash
+                  }}</router-link>
                 </div>
               </b-col>
               <b-col cols="6" v-if="tx.isCoinBase">

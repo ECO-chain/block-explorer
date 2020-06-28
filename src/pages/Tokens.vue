@@ -20,7 +20,10 @@
             <b-button variant="primary" class="rounded-0">{{ $t('views.tokens.search') }}</b-button>
           </div>
           <template v-if="Array.isArray(tokensResult.items) && input.length > 0">
-            <token-search-result class="result-from-input" :result.sync="tokensResult.items"></token-search-result>
+            <token-search-result
+              class="result-from-input"
+              :result.sync="tokensResult.items"
+            ></token-search-result>
           </template>
         </b-col>
 
@@ -29,14 +32,17 @@
             <div class="table-responsive m-0">
               <b-table dark :items="tokens.items" :fields="fields">
                 <template v-slot:cell(name)="data">
-                  <router-link :to="{ name: 'token', params: { addr: data.item.contract_address }}">
-                    <b>{{ data.item.symbol }} - {{data.item.name}}</b>
+                  <router-link
+                    :to="{ name: 'token', params: { addr: data.item.contract_address } }"
+                  >
+                    <b>{{ data.item.symbol }} - {{ data.item.name }}</b>
                   </router-link>
                 </template>
                 <template v-slot:cell(contract_address)="data">
                   <router-link
-                    :to="{ name: 'address', params: { addr: data.item.contract_address }}"
-                  >{{ data.item.contract_address }}</router-link>
+                    :to="{ name: 'address', params: { addr: data.item.contract_address } }"
+                    >{{ data.item.contract_address }}</router-link
+                  >
                 </template>
               </b-table>
             </div>

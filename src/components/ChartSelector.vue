@@ -2,7 +2,11 @@
   <div>
     <div class="group-head my-3 text-center text-md-left mb-5">
       <span class="stats-span">{{ chartSelected }}</span>
-      <b-form-select class="stats-select mb-2" v-model="chartSelected" :options="chartsList"></b-form-select>
+      <b-form-select
+        class="stats-select mb-2"
+        v-model="chartSelected"
+        :options="chartsList"
+      ></b-form-select>
       <p class="m-0">{{ chart.description }}</p>
     </div>
     <div class="mb-2">
@@ -72,8 +76,7 @@ export default class ChartSelector extends Vue {
       },
       {
         name: this.$t('components.chart_selector.fees'),
-        description:
-          this.$t('components.chart_selector.fees_desc'),
+        description: this.$t('components.chart_selector.fees_desc'),
         getData: this.getFeesData
       },
       {
@@ -83,14 +86,12 @@ export default class ChartSelector extends Vue {
       },
       {
         name: this.$t('components.chart_selector.outputs'),
-        description:
-          this.$t('components.chart_selector.outputs_desc'),
+        description: this.$t('components.chart_selector.outputs_desc'),
         getData: this.getOutputsData
       },
       {
         name: this.$t('components.chart_selector.difficulty'),
-        description:
-          this.$t('components.chart_selector.difficulty_desc'),
+        description: this.$t('components.chart_selector.difficulty_desc'),
         getData: this.getDifficultyData
       },
       {
