@@ -12,17 +12,18 @@
           <b-row>
             <b-col cols="12" md="6">
               <div class="show-supply-idle rounded-lg text-center p-3 my-3">
-                <p class="my-1 text-style-2">
-                  {{ statusState.finalSupply | numberWithCommas }} ECOC
-                </p>
+                <p class="my-1 text-style-2">{{ statusState.finalSupply | numberWithCommas }} ECOC</p>
                 <p class="my-1">{{ $t('views.home.final_supply') }}</p>
               </div>
             </b-col>
             <b-col cols="12" md="6">
               <div class="show-supply-idle rounded-lg text-center p-3 my-3">
-                <p class="my-1 text-style-2">
-                  {{ Number(statusState.supply) | numberWithCommas }} ECOC
-                </p>
+                <countTo
+                  class="my-1 text-style-2"
+                  :startVal="startedSupply"
+                  :endVal="Number(statusState.supply)"
+                  :duration="6000"
+                ></countTo>ECOC
                 <p class="my-1">{{ $t('views.home.current_supply') }}</p>
               </div>
             </b-col>
@@ -36,9 +37,12 @@
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">
-                  {{ info.difficulty['proof-of-stake'] | numberWithCommas }}
-                </div>
+                <countTo
+                  class="my-1 text-truncate"
+                  :startVal="startedDifficulty"
+                  :endVal="Number(info.difficulty['proof-of-stake'])"
+                  :duration="3000"
+                ></countTo>
                 <div class="my-1 small text-purple-light">{{ $t('views.home.difficulty') }}</div>
               </div>
             </b-col>
@@ -50,17 +54,24 @@
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">
-                  {{ stakingInfo.netstakeweight | numberWithCommas(8) }}
-                </div>
-                <div class="my-1 small text-purple-light">
-                  {{ $t('views.home.network_weight') }}
-                </div>
+                <countTo
+                  class="my-1 text-truncate"
+                  :startVal="startedWeight"
+                  :endVal="stakingInfo.netstakeweight / Math.pow(10, 8)"
+                  :decimals="2"
+                  :duration="3000"
+                ></countTo>
+                <div class="my-1 small text-purple-light">{{ $t('views.home.network_weight') }}</div>
               </div>
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">{{ info.blocks }}</div>
+                <countTo
+                  class="my-1 text-truncate"
+                  :startVal="startedBlock"
+                  :endVal="info.blocks"
+                  :duration="3000"
+                ></countTo>
                 <div class="my-1 small text-purple-light">{{ $t('views.home.block_height') }}</div>
               </div>
             </b-col>
@@ -93,25 +104,21 @@
                 <div
                   class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
                 >
-                  <router-link :to="{ name: 'block', params: { hash: block.hash } }">{{
-                    block.height
-                  }}</router-link>
-                  <span class="small text-purple-light">{{
-                    (block.time * 1000) | timeFromNow
-                  }}</span>
+                  <router-link
+                    :to="{ name: 'block', params: { hash: block.hash } }"
+                  >{{ block.height }}</router-link>
+                  <span class="small text-purple-light">{{ (block.time * 1000) | timeFromNow }}</span>
                 </div>
                 <div class="my-1 small text-truncate">
                   {{ $t('views.home.swiper.blocks.mined_by') }}:
-                  <router-link :to="{ name: 'address', params: { addr: block.minedBy } }">{{
-                    block.minedBy
-                  }}</router-link>
+                  <router-link
+                    :to="{ name: 'address', params: { addr: block.minedBy } }"
+                  >{{ block.minedBy }}</router-link>
                 </div>
-                <div class="my-1 small">
-                  {{ $t('views.home.swiper.blocks.size') }}: {{ block.size }}
-                </div>
-                <div class="my-1 small">
-                  {{ $t('views.home.swiper.blocks.tx') }}: {{ block.txlength }}
-                </div>
+                <div class="my-1 small">{{ $t('views.home.swiper.blocks.size') }}: {{ block.size }}</div>
+                <div
+                  class="my-1 small"
+                >{{ $t('views.home.swiper.blocks.tx') }}: {{ block.txlength }}</div>
               </div>
             </swiper-slide>
           </swiper>
@@ -133,13 +140,13 @@
                   </div>
                   <div class="my-1 small text-truncate">
                     {{ $t('views.home.swiper.tx.hash') }}:
-                    <router-link :to="{ name: 'transaction', params: { hash: tx.txid } }">{{
-                      tx.txid
-                    }}</router-link>
+                    <router-link
+                      :to="{ name: 'transaction', params: { hash: tx.txid } }"
+                    >{{ tx.txid }}</router-link>
                   </div>
-                  <div class="my-1 small">
-                    {{ $t('views.home.swiper.tx.vout') }}: {{ tx.valueOut }} ECOC
-                  </div>
+                  <div
+                    class="my-1 small"
+                  >{{ $t('views.home.swiper.tx.vout') }}: {{ tx.valueOut }} ECOC</div>
                 </div>
               </swiper-slide>
             </template>
@@ -151,7 +158,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import { Socket } from 'vue-socket.io-extended'
 import BlockSearchBox from '@/components/SearchBox.vue'
 import LineChart from '@/components/LineChart.vue'
@@ -159,6 +166,7 @@ import statusModule from '@/api/status/index'
 import statisticsModule from '@/api/statistics/index'
 import blocksModule from '@/api/blocks/index'
 import { toMonthDayFormat } from '@/api/filters'
+import countTo from 'vue-count-to'
 /* eslint-disable no-unused-vars */
 import { StatusState, Info, StakingInfo } from '../api/status/type'
 import { TransactionStats } from '../api/statistics/type'
@@ -168,7 +176,8 @@ import { SocketTx } from '../api/transaction/type'
 @Component({
   components: {
     BlockSearchBox,
-    LineChart
+    LineChart,
+    countTo
   }
 })
 export default class Home extends Vue {
@@ -219,6 +228,12 @@ export default class Home extends Vue {
   txDate: string[] = []
   txCount: number[] = []
 
+  // For counting animation
+  startedSupply = 0
+  startedDifficulty = 0
+  startedWeight = 0
+  startedBlock = 0
+
   async mounted() {
     const info = await statusModule.getInfo()
     const stakingInfo = await statusModule.getStakingInfo()
@@ -232,6 +247,11 @@ export default class Home extends Vue {
       })
       .reverse()
     this.txCount = this.sevenDaysTx.map(tx => tx.transaction_count).reverse()
+
+    this.startedSupply = Number(supply)
+    this.startedDifficulty = this.info.difficulty['proof-of-stake']
+    this.startedWeight = this.stakingInfo.netstakeweight / Math.pow(10, 8)
+    this.startedBlock = this.info.blocks
 
     statusModule.setInfo(info)
     statusModule.setStakingInfo(stakingInfo)
@@ -263,6 +283,19 @@ export default class Home extends Vue {
     }
 
     return block
+  }
+
+  @Watch('statusState.info')
+  fsChanged(val: any) {
+    console.log('changed')
+    setTimeout(() => {
+      this.startedSupply = Number(this.statusState.supply)
+    }, 6000)
+    setTimeout(() => {
+      this.startedDifficulty = this.info.difficulty['proof-of-stake']
+      this.startedWeight = this.stakingInfo.netstakeweight / Math.pow(10, 8)
+      this.startedBlock = this.info.blocks
+    }, 3000)
   }
 }
 </script>
