@@ -27,9 +27,9 @@
     },
     "blocks": {
       "blocks_by_d": "Blocks by date",
-      "height": "height",
+      "height": "Height",
       "timestamp": "Timestamp (UTC)",
-      "tx": "transactions",
+      "tx": "Transactions",
       "mined_by": "Mined By",
       "size_in_byte": "Size in bytes"
     },
@@ -169,6 +169,10 @@
       "entries": "Entries",
       "tx": "Transactions",
       "no_tx": "This address hasn't any transactions."
+    },
+    "not_found": {
+      "page_not_found": "Page not found",
+      "to_home": "Back to homepage"
     }
   },
   "components": {

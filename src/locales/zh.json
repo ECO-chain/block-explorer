@@ -168,6 +168,10 @@
       "entries": "条目",
       "tx": "交易",
       "no_tx": "这个地址没有任何交易"
+    },
+    "not_found": {
+      "page_not_found": "页面没找到",
+      "to_home": "返到主页"
     }
   },
   "components": {

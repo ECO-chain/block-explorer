@@ -17,7 +17,9 @@
           <div class="group-head my-3 text-center text-md-left">
             <h3 class="head-global my-3">
               {{ $t('views.block.summary') }}
-              <span class="small text-purple">[ {{ $t('views.block.confirm') }} ]</span>
+              <span
+                class="small text-purple"
+              >[ {{ $t('views.block.confirm') }} ]</span>
             </h3>
           </div>
           <div class="block-global p-3 mb-3 rounded-lg">
@@ -38,9 +40,9 @@
                     <div class="my-1">{{ $t('views.block.difficulty') }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right text-truncate">
-                      {{ block.difficulty | numberWithCommas }}
-                    </div>
+                    <div
+                      class="my-1 text-right text-truncate"
+                    >{{ block.difficulty | numberWithCommas }}</div>
                   </b-col>
                 </b-row>
               </b-col>
@@ -93,9 +95,9 @@
                     <div class="my-1">{{ $t('views.block.time') }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right text-truncate">
-                      {{ block.time | timeFormat('MMMM Do YYYY, h:mm:ss a') }}
-                    </div>
+                    <div
+                      class="my-1 text-right text-truncate"
+                    >{{ block.time | timeFormat('MMMM Do YYYY, h:mm:ss a') }}</div>
                   </b-col>
                 </b-row>
               </b-col>
@@ -148,8 +150,7 @@
                     <div class="my-1 text-right text-truncate">
                       <router-link
                         :to="{ name: 'block', params: { hash: block.previousblockhash } }"
-                        >{{ block.height - 1 }}</router-link
-                      >
+                      >{{ block.height - 1 }}</router-link>
                     </div>
                   </b-col>
                 </b-row>
@@ -163,8 +164,7 @@
                     <div class="my-1 text-right text-truncate">
                       <router-link
                         :to="{ name: 'block', params: { hash: block.previousblockhash } }"
-                        >{{ block.height + 1 }}</router-link
-                      >
+                      >{{ block.height + 1 }}</router-link>
                     </div>
                   </b-col>
                 </b-row>
@@ -178,12 +178,7 @@
             <h3 class="head-global my-3">{{ $t('views.block.tx') }}</h3>
           </div>
 
-          <TransactionBox
-            v-for="(tx, index) in txs.txs"
-            :key="index"
-            :tx="tx"
-            :txPage="false"
-          ></TransactionBox>
+          <TransactionBox v-for="(tx, index) in txs.txs" :key="index" :tx="tx" :txPage="false"></TransactionBox>
         </b-col>
       </b-row>
     </b-container>

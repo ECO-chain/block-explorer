@@ -51,14 +51,14 @@
                 :busy="isBusy"
               >
                 <template v-slot:cell(height)="data">
-                  <router-link :to="{ name: 'block', params: { hash: data.item.hash } }">{{
-                    data.item.height
-                  }}</router-link>
+                  <router-link
+                    :to="{ name: 'block', params: { hash: data.item.hash } }"
+                  >{{ data.item.height }}</router-link>
                 </template>
                 <template v-slot:cell(minedBy)="data">
-                  <router-link :to="{ name: 'address', params: { addr: data.item.minedBy } }">{{
-                    data.item.minedBy
-                  }}</router-link>
+                  <router-link
+                    :to="{ name: 'address', params: { addr: data.item.minedBy } }"
+                  >{{ data.item.minedBy }}</router-link>
                 </template>
                 <template v-slot:table-busy>
                   <div class="text-center text-danger my-2">
@@ -106,7 +106,7 @@ export default class BlocksList extends Vue {
 
   created() {
     this.fields = [
-      { key: 'height', label: this.$t('views.blocks.height') },
+      { key: 'height', label: this.$t('views.blocks.height'), sortable: true },
       {
         key: 'time',
         label: this.$t('views.blocks.timestamp'),
@@ -117,9 +117,9 @@ export default class BlocksList extends Vue {
             .format('LLL')
         }
       },
-      { key: 'txlength', label: this.$t('views.blocks.tx') },
+      { key: 'txlength', label: this.$t('views.blocks.tx'), sortable: true },
       { key: 'minedBy', label: this.$t('views.blocks.mined_by') },
-      { key: 'size', label: this.$t('views.blocks.size_in_byte') }
+      { key: 'size', label: this.$t('views.blocks.size_in_byte'), sortable: true }
     ]
   }
 

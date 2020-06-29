@@ -12,6 +12,7 @@ import Address from './pages/Address.vue'
 import Block from './pages/Block.vue'
 import Token from './pages/Token.vue'
 import Transaction from './pages/Transaction.vue'
+import NotFound from './pages/NotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -77,6 +78,11 @@ const router = new VueRouter({
       name: 'transaction',
       component: Transaction,
       props: true
+    },
+    {
+      path: '*',
+      name: 'notfound',
+      component: NotFound
     }
   ]
 })
