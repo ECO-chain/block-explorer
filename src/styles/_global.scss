@@ -1,4 +1,6 @@
 // Global
+
+
 a {
   color: $purple;
 
@@ -330,7 +332,7 @@ hr {
 
   .swiper-pagination-fraction,
   .swiper-pagination-custom,
-  .swiper-container-horizontal > .swiper-pagination-bullets {
+  .swiper-container-horizontal>.swiper-pagination-bullets {
     position: relative;
     left: auto;
     bottom: auto;
@@ -509,7 +511,7 @@ select.form-control::-ms-expand {
     @include transition(transform 0.7s);
   }
 
-  .swiper-slide-visible ~ .swiper-slide:not(.swiper-slide-visible) {
+  .swiper-slide-visible~.swiper-slide:not(.swiper-slide-visible) {
     transform: translate3d(100px, 0, 0) !important;
     @include transition(transform 0.7s);
   }
@@ -622,7 +624,7 @@ select.form-control::-ms-expand {
 }
 
 @include media-breakpoint-down(sm) {
-  .add-border-top > * {
+  .add-border-top>* {
     border-top: solid 1px $purple-light;
 
     border-color: rgba($purple-light, 0.3);
@@ -759,4 +761,19 @@ select.form-control::-ms-expand {
       color: $grey;
     }
   }
+}
+
+.th-align-center {
+  text-align: center;
+}
+
+.td-align-right {
+  text-align: center;
+}
+
+.th-custom {
+  outline: none !important;
+  border: none !important;
+  background-color: #141826 !important;
+  box-shadow: rgba(6, 6, 6, 0.76) 13px 6px 20px 0px;
 }

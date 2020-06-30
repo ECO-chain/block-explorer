@@ -17,7 +17,7 @@
                   <div class="block-global p-3 mb-3 rounded-lg">
                     <b-row class="align-items-center">
                       <b-col cols="6">
-                        <div class="my-1">{{ $t('views.status.sync_prog') }}</div>
+                        <div class="status-label">{{ $t('views.status.sync_prog') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1">
@@ -30,37 +30,37 @@
                         </div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1">{{ $t('views.status.current_sync') }}</div>
+                        <div class="status-label">{{ $t('views.status.current_sync') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1 text-right">{{ sync.status }}</div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1">{{ $t('views.status.start_d') }}</div>
+                        <div class="status-label">{{ $t('views.status.start_d') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1 text-right">{{ now | timeFromNow }}</div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1">{{ $t('views.status.init_block_height') }}</div>
+                        <div class="status-label">{{ $t('views.status.init_block_height') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1 text-right">{{ sync.blockChainHeight }}</div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1">{{ $t('views.status.sync_block') }}</div>
+                        <div class="status-label">{{ $t('views.status.sync_block') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1 text-right">-</div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1">{{ $t('views.status.skipped_block') }}</div>
+                        <div class="status-label">{{ $t('views.status.skipped_block') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1 text-right">-</div>
                       </b-col>
                       <b-col cols="6">
-                        <div class="my-1">{{ $t('views.status.sync_type') }}</div>
+                        <div class="status-label">{{ $t('views.status.sync_type') }}</div>
                       </b-col>
                       <b-col cols="6">
                         <div class="my-1 text-right">{{ sync.type }}</div>
@@ -77,25 +77,23 @@
                   <div class="block-global p-3 mb-3 rounded-lg">
                     <b-row class="align-items-center">
                       <b-col cols="12">
-                        <div class="my-1">{{ $t('views.status.last_block_hash') }}</div>
+                        <div class="status-label">{{ $t('views.status.last_block_hash') }}</div>
                       </b-col>
                       <b-col cols="12">
                         <div class="my-1 text-right text-truncate">
                           <router-link
                             :to="{ name: 'block', params: { hash: lastBlockHash.lastblockhash } }"
-                            >{{ lastBlockHash.lastblockhash }}</router-link
-                          >
+                          >{{ lastBlockHash.lastblockhash }}</router-link>
                         </div>
                       </b-col>
                       <b-col cols="12">
-                        <div class="my-1">{{ $t('views.status.current_block_tip') }}</div>
+                        <div class="status-label">{{ $t('views.status.current_block_tip') }}</div>
                       </b-col>
                       <b-col cols="12">
                         <div class="my-1 text-right text-truncate">
                           <router-link
                             :to="{ name: 'block', params: { hash: lastBlockHash.lastblockhash } }"
-                            >{{ lastBlockHash.lastblockhash }}</router-link
-                          >
+                          >{{ lastBlockHash.lastblockhash }}</router-link>
                         </div>
                       </b-col>
                     </b-row>
@@ -110,64 +108,60 @@
               <div class="block-global p-3 mb-3 rounded-lg h-100">
                 <b-row class="align-items-center">
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.status.version') }}</div>
+                    <div class="status-label">{{ $t('views.status.version') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.version }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.status.protocol_ver') }}</div>
+                    <div class="status-label">{{ $t('views.status.protocol_ver') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.protocolversion }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.status.blocks') }}</div>
+                    <div class="status-label">{{ $t('views.status.blocks') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.blocks | numberWithCommas }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.status.time_off') }}</div>
+                    <div class="status-label">{{ $t('views.status.time_off') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.timeoffset }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.status.connect_to_other') }}</div>
+                    <div class="status-label">{{ $t('views.status.connect_to_other') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.connections }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.status.mine_diffi') }}</div>
+                    <div class="status-label">{{ $t('views.status.mine_diffi') }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">
-                      {{ statusInfo.difficulty['proof-of-stake'] | numberWithCommas }}
-                    </div>
+                    <div
+                      class="my-1 text-right"
+                    >{{ statusInfo.difficulty['proof-of-stake'] | numberWithCommas }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.status.network') }}</div>
+                    <div class="status-label">{{ $t('views.status.network') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right">{{ statusInfo.network }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.status.proxy_sett') }}</div>
+                    <div class="status-label">{{ $t('views.status.proxy_sett') }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">
-                      {{ statusInfo.proxy ? statusInfo.proxy : '-' }}
-                    </div>
+                    <div class="my-1 text-right">{{ statusInfo.proxy ? statusInfo.proxy : '-' }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.status.info_err') }}</div>
+                    <div class="status-label">{{ $t('views.status.info_err') }}</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1 text-right">
-                      {{ statusInfo.errors ? statusInfo.errors : '-' }}
-                    </div>
+                    <div class="my-1 text-right">{{ statusInfo.errors ? statusInfo.errors : '-' }}</div>
                   </b-col>
                 </b-row>
               </div>
@@ -208,5 +202,9 @@ export default class Status extends Vue {
     color: $purple;
     font-weight: bold;
   }
+}
+
+.status-label {
+  font-weight: 600;
 }
 </style>
