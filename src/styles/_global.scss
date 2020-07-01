@@ -776,3 +776,26 @@ select.form-control::-ms-expand {
   background-color: #141725 !important;
   box-shadow: rgba(6, 6, 6, 0.76) 13px 6px 20px 0px;
 }
+
+#btn-radios-1 {
+  label {
+    font-weight: 600;
+    border: 0;
+    font-size: 12px;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    background-color: #3d3d4638;
+    box-shadow: rgb(25, 22, 49) 1px 6px 20px 0px;
+    transition: all 0.5s ease;
+
+    &:hover {
+      background-color: #6666744c;
+    }
+  }
+
+  .active {
+    transition: all 0.5s ease;
+    background: linear-gradient(151deg, #692880 0%, #3e0b56 100%) !important;
+  }
+
+}

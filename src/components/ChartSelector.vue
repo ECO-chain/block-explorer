@@ -2,19 +2,16 @@
   <div>
     <div class="group-head my-3 text-center text-md-left mb-5">
       <span class="stats-span">{{ chartSelected }}</span>
-      <b-form-select
-        class="stats-select mb-2"
-        v-model="chartSelected"
-        :options="chartsList"
-      ></b-form-select>
+      <b-form-select class="stats-select mb-2" v-model="chartSelected" :options="chartsList"></b-form-select>
       <p class="m-0">{{ chart.description }}</p>
     </div>
-    <div class="mb-2">
+    <div class="mb-2 time-selector">
       <b-form-radio-group
         id="btn-radios-1"
         v-model="daysSelected"
         :options="daysOptions"
         buttons
+        class="custom-radio-btn"
         @input="daysChanged"
         name="radios-btn-default"
       ></b-form-radio-group>
@@ -230,29 +227,41 @@ export default class ChartSelector extends Vue {
 </script>
 
 <style lang="scss" scoped>
-select:hover {
-  border-color: white !important;
+.time-selector {
+  overflow: auto;
+  text-align: right;
 }
 
 .stats-select {
-  border-color: transparent;
+  border: 1px solid transparent;
   color: transparent;
-  background-color: transparent;
   width: auto;
   outline-color: transparent;
-  padding-bottom: 3.3rem;
-  padding-right: 6.75rem;
+  padding-bottom: 2.7rem;
+  padding-right: 3.75rem;
   padding-left: 3rem;
   cursor: pointer;
+  border-radius: 5px !important;
+  box-shadow: #1c1c34 0px 1px 20px 20px;
+}
+
+.stats-select:hover {
+  border: 1px solid white;
 }
 
 .stats-span {
   color: white;
-  font-size: 1.75rem;
+  font-size: 1.35rem;
   position: absolute;
-  padding-left: 6px;
+  padding-left: 23px;
   padding-top: 9px;
   cursor: pointer;
   pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .time-selector {
+    text-align: center;
+  }
 }
 </style>
