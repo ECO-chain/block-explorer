@@ -1,6 +1,4 @@
 // Global
-
-
 a {
   color: $purple;
 
@@ -272,6 +270,7 @@ img {
 }
 
 .container-fill-height {
+  overflow-x: hidden;
   min-height: calc(100vh - 127px);
 }
 
@@ -774,6 +773,6 @@ select.form-control::-ms-expand {
 .th-custom {
   outline: none !important;
   border: none !important;
-  background-color: #141826 !important;
+  background-color: #141725 !important;
   box-shadow: rgba(6, 6, 6, 0.76) 13px 6px 20px 0px;
 }

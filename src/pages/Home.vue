@@ -13,18 +13,19 @@
             <b-col cols="12" md="6">
               <div class="show-supply-idle rounded-lg text-center p-3 my-3">
                 <p class="my-1 text-style-2">{{ statusState.finalSupply | numberWithCommas }} ECOC</p>
-                <p class="my-1">{{ $t('views.home.final_supply') }}</p>
+                <p class="my-1 supply-label">{{ $t('views.home.final_supply') }}</p>
               </div>
             </b-col>
             <b-col cols="12" md="6">
               <div class="show-supply-idle rounded-lg text-center p-3 my-3">
-                <countTo
-                  class="my-1 text-style-2"
-                  :startVal="startedSupply"
-                  :endVal="Number(statusState.supply)"
-                  :duration="6000"
-                ></countTo>ECOC
-                <p class="my-1">{{ $t('views.home.current_supply') }}</p>
+                <p class="my-1 text-style-2">
+                  <countTo
+                    :startVal="startedSupply"
+                    :endVal="Number(statusState.supply)"
+                    :duration="6000"
+                  ></countTo>ECOC
+                </p>
+                <p class="my-1 supply-label">{{ $t('views.home.current_supply') }}</p>
               </div>
             </b-col>
           </b-row>
@@ -308,6 +309,13 @@ export default class Home extends Vue {
   -webkit-animation: idle-gradient 20s ease infinite;
   -moz-animation: idle-gradient 20s ease infinite;
   animation: idle-gradient 20s ease infinite;
+  .text-style-2 {
+    font-size: 16px;
+  }
+
+  .supply-label {
+    font-size: 14px;
+  }
 }
 
 @-webkit-keyframes idle-gradient {

@@ -3,26 +3,42 @@
     <b-container class="mb-3 mb-sm-4 pt-4 pt-sm-5">
       <b-row>
         <b-col cols="12">
-          <div class="group-head my-3 text-center text-md-left">
+          <div class="group-head my-3 text-center text-md-left text-jus">
             <h2 class="head-page mb-1">{{ $t('views.charts.charts') }}</h2>
           </div>
           <ChartSelector></ChartSelector>
         </b-col>
         <b-col cols="12">
           <h3 class="head-global my-3">Rich List</h3>
-          <div class="block-global p-3 mb-3 rounded-lg">
-            <b-table dark :items="balanceInterval" :fields="fields">
-              <template v-slot:cell(percentAddresses)="data"
-                >{{ data.item.percentAddresses.toFixed(2) }}% [{{
-                  data.item.percentAddressesTotal.toFixed(2)
-                }}%]</template
+          <div class="block-global p-3 mb-3 rounded-lg" v-if="!isMobileDevice">
+            <div class="table-responsive">
+              <b-table
+                dark
+                :items="balanceInterval"
+                :fields="fields"
+                class="balance-interval-table"
               >
-              <template v-slot:cell(percentCoins)="data"
-                >{{ data.item.percentCoins.toFixed(2) }}% [{{
-                  data.item.percentCoinsTotal.toFixed(2)
-                }}%]</template
-              >
-            </b-table>
+                <template v-slot:cell(percentAddresses)="data">
+                  {{ data.item.percentAddresses.toFixed(2) }}%
+                  <span
+                    class="percent-total"
+                  >[{{ data.item.percentAddressesTotal.toFixed(2) }}%]</span>
+                </template>
+                <template v-slot:cell(percentCoins)="data">
+                  {{ data.item.percentCoins.toFixed(2) }}%
+                  <span
+                    class="percent-total"
+                  >[{{ data.item.percentCoinsTotal.toFixed(2) }}%]</span>
+                </template>
+              </b-table>
+            </div>
+          </div>
+          <div v-else>
+            <balance-list-card
+              v-for="(balance, index) in balanceInterval"
+              :key="index"
+              :balance="balance"
+            ></balance-list-card>
           </div>
         </b-col>
       </b-row>
@@ -36,38 +52,66 @@ import { Vue, Component, Watch } from 'vue-property-decorator'
 import ChartSelector from '@/components/ChartSelector.vue'
 import statisticsModule from '@/api/statistics/index'
 import { BalanceIntervalsTable } from '../api/statistics/type'
+import BalanceListCard from '@/components/BalanceListCard.vue'
 
 @Component({
   components: {
-    ChartSelector
+    ChartSelector,
+    BalanceListCard
   }
 })
 export default class Charts extends Vue {
   balanceInterval: BalanceIntervalsTable[] = []
 
   fields: any[] = []
+  windowWidth = window.innerWidth
+  isMobiled = false
 
   // Table part
   created() {
     this.fields = [
-      { key: 'balance', label: this.$t('views.charts.balance'), sortable: true },
-      { key: 'addresses', label: this.$t('views.charts.addresses'), sortable: true },
+      {
+        key: 'balance',
+        label: this.$t('views.charts.balance'),
+        class: 'text-center',
+        thClass: 'th-custom'
+      },
+      {
+        key: 'addresses',
+        label: this.$t('views.charts.addresses'),
+        sortable: true,
+        class: 'text-right',
+        thClass: 'th-custom'
+      },
       {
         key: 'percentAddresses',
         label: this.$t('views.charts.percent_address_total'),
         sortable: true,
-        formatter: (value: any) => `${value.toFixed(2)} %`
+        formatter: (value: any) => `${value.toFixed(2)} %`,
+        class: 'text-right',
+        thClass: 'th-custom'
       },
       {
         key: 'coins',
         label: this.$t('views.charts.coins'),
-        sortable: true
+        sortable: true,
+        class: 'text-right',
+        thClass: 'th-custom text-center',
+        formatter: (value: any) => {
+          value = value.split(',').join('')
+          return `${Number(value).toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          })} ECOC`
+        }
       },
       {
         key: 'percentCoins',
         label: this.$t('views.charts.percent_coins_total'),
         sortable: true,
-        formatter: (value: any) => `${value.toFixed(2)} %`
+        formatter: (value: any) => `${value.toFixed(2)} %`,
+        class: 'text-right',
+        thClass: 'th-custom'
       }
     ]
   }
@@ -75,7 +119,16 @@ export default class Charts extends Vue {
   async mounted() {
     this.balanceInterval = await statisticsModule.getBalanceIntervalsTable()
 
+    window.addEventListener('resize', () => {
+      this.windowWidth = window.innerWidth
+      console.log(this.isMobileDevice)
+    })
+
     console.log('balance interval', this.balanceInterval)
+  }
+
+  get isMobileDevice() {
+    return this.windowWidth <= 575
   }
 }
 </script>
@@ -85,6 +138,21 @@ export default class Charts extends Vue {
   h2::first-letter {
     color: $purple;
     font-weight: bold;
+  }
+}
+
+.percent-total {
+  color: $purple;
+  font-size: smaller;
+}
+
+.balance-interval-table {
+  @media (max-width: 1200px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 991px) {
+    font-size: 11.5px;
   }
 }
 </style>
