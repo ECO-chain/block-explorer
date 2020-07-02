@@ -1,4 +1,4 @@
-export interface StatisticsState {}
+export interface StatisticsState { }
 
 export interface Total {
   n_blocks_mined: number
