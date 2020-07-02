@@ -242,7 +242,7 @@ export default class ChartSelector extends Vue {
   padding-left: 3rem;
   cursor: pointer;
   border-radius: 5px !important;
-  box-shadow: #1c1c34 0px 1px 20px 20px;
+  box-shadow: #13101f 0px 0px 20px 4px;
 }
 
 .stats-select:hover {

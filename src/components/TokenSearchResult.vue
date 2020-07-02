@@ -4,7 +4,11 @@
       <b-list-group flush>
         <b-list-group-item
           v-if="tokenResult.length < 1"
-        >{{ $t('components.token_search_result.no_result') }}</b-list-group-item>
+          class="no-result text-center font-weight-bold"
+        >
+          <i class="far fa-dizzy pr-1"></i>
+          {{ $t('components.token_search_result.no_result') }}
+        </b-list-group-item>
         <b-list-group-item
           v-else
           v-for="(token, index) in tokenResult"
@@ -13,13 +17,11 @@
           @click="$router.push(`token/${token.contract_address}`)"
         >
           <b-row class="result-item">
-            <b-col>
-              <b-card-text class="result-symbol">{{ token.symbol }} - {{ token.name }}</b-card-text>
+            <b-col class="result-symbol">
+              <b-card-text>{{ token.symbol }} - {{ token.name }}</b-card-text>
             </b-col>
-            <b-col>
-              <b-card-text
-                class="result-supply"
-              >{{ Number(token.total_supply) | numberWithCommas(8) }} ECOC</b-card-text>
+            <b-col class="result-supply">
+              <b-card-text>{{ Number(token.total_supply) | numberWithCommas(8) }} {{ token.symbol }}</b-card-text>
             </b-col>
           </b-row>
           <b-card-text
@@ -48,6 +50,10 @@ export default class TokenSearchResult extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.card-body {
+  padding: 10px 20px 10px 20px;
+}
+
 .result-list {
   padding-left: 10px;
   padding-right: 10px;
@@ -76,11 +82,19 @@ export default class TokenSearchResult extends Vue {
   margin-bottom: 5px;
 
   .result-symbol {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
     color: black;
     font-weight: 600;
   }
 
   .result-supply {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
     text-align: right;
     color: purple;
   }
@@ -89,5 +103,42 @@ export default class TokenSearchResult extends Vue {
 .result-address {
   font-size: smaller;
   font-weight: bold;
+}
+
+@media (max-width: 767px) {
+  .result-symbol {
+    font-size: 14px;
+  }
+
+  .result-supply {
+    font-size: 14px;
+  }
+
+  .no-result {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .result-symbol {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    font-size: 14px;
+  }
+
+  .result-supply {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    font-size: 14px;
+    text-align: left !important;
+  }
+
+  .result-address {
+    font-size: 11px;
+  }
 }
 </style>
