@@ -43,7 +43,7 @@ export default class BlocksListCard extends Vue {
 .card {
   border: none !important;
   background-color: transparent !important;
-  box-shadow: rgba(0, 0, 0, 0.28) 0px 3px 8px 0px;
+  box-shadow: 0 6px 12px #080808;
 }
 
 .blocks-card {
@@ -121,7 +121,6 @@ export default class BlocksListCard extends Vue {
     .block-time {
       font-size: 10px;
     }
-
   }
 }
 @media (max-width: 337px) {

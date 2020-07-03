@@ -12,12 +12,19 @@ export function timeFromNow(now: string | number) {
   return moment(now).fromNow()
 }
 
-export function numberWithCommas(num: number, decimal?: number) {
+export function numberWithCommas(num: number, decimal?: number, fixed?: number) {
   if (decimal) {
     num = num / Math.pow(10, decimal)
   }
+  if (fixed) {
+    return num.toLocaleString(undefined, {
+      minimumFractionDigits: fixed,
+      maximumFractionDigits: fixed
+    })
+  }
   return num.toLocaleString()
 }
+
 
 export function toMonthDayFormat(date: string) {
   let dArray = new Date(date).toDateString().split(' ')
@@ -26,7 +33,7 @@ export function toMonthDayFormat(date: string) {
 }
 
 export function toTimeFormat(time: string | number, format: string) {
-  if (typeof(time) === 'number') {
+  if (typeof (time) === 'number') {
     if ((time / Math.pow(10, 12)) < 1) {
       time *= 1000
     }

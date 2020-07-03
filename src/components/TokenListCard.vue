@@ -52,7 +52,7 @@ export default class TokenListCard extends Vue {
   background: #1d1e2f !important;
   font-weight: 600;
   font-size: 14px;
-  box-shadow: rgba(0, 0, 0, 0.28) 0px 3px 8px 0px;
+  box-shadow: 0 6px 12px #080808;
 
   .card-footer {
     background: #191a24;

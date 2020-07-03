@@ -50,7 +50,7 @@ export default class BalanceListCard extends Vue {
   border: none !important;
   background-color: #1d1e2f !important;
   border-radius: 0.35rem !important;
-  box-shadow: rgba(0, 0, 0, 0.28) 0px 3px 8px 0px;
+  box-shadow: 0 6px 12px #080808;
 
   .card-header {
     background: linear-gradient(151deg, rgba(89, 23, 112, 1) 0%, rgba(39, 4, 56, 1) 100%);

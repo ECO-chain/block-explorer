@@ -774,7 +774,21 @@ select.form-control::-ms-expand {
   outline: none !important;
   border: none !important;
   background-color: #141725 !important;
-  box-shadow: rgba(6, 6, 6, 0.76) 13px 6px 20px 0px;
+  box-shadow: #080808 13px 6px 20px 0px;
+}
+
+.td-tx-hash {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.td-from-and-to {
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #btn-radios-1 {
