@@ -651,7 +651,7 @@ select.form-control::-ms-expand {
 
 // tabs
 .tabs-global {
-  border-color: $purple-dark;
+  border: 0;
   padding: 0 15px;
 
   @include media-breakpoint-down(sm) {
@@ -667,6 +667,7 @@ select.form-control::-ms-expand {
   }
 
   .nav-link {
+    border: none;
     color: $grey;
 
     @include media-breakpoint-down(sm) {
@@ -678,8 +679,7 @@ select.form-control::-ms-expand {
 
   .nav-link.active,
   .nav-item.show .nav-link {
-    background-color: $purple;
-    border-color: $purple;
+    background: linear-gradient(151deg, rgba(89, 23, 112, 1) 0%, rgba(39, 4, 56, 1) 100%);
     color: $grey;
   }
 }

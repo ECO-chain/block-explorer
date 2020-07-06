@@ -99,101 +99,13 @@
         <b-col cols="12">
           <b-tabs nav-class="tabs-global text-uppercase">
             <b-tab :title="$t('views.token.token_transfers')" active>
-              <div class="block-global p-3 my-0 rounded-lg">
-                <i18n path="views.token.total_of_transfer" tag="p">
-                  <template v-slot:transfers>
-                    <span class="text-green">{{ transfer.count }}</span>
-                  </template>
-                </i18n>
-                <div v-if="!isMobileDevice">
-                  <div class="table-responsive m-0">
-                    <b-table
-                      class="token-transfer-table"
-                      dark
-                      :items="transfer.items"
-                      :fields="transferFields"
-                    >
-                      <template v-slot:cell(tx_hash)="data">
-                        <router-link
-                          :to="{ name: 'transaction', params: { hash: data.item.tx_hash } }"
-                        >{{ data.item.tx_hash }}</router-link>
-                      </template>
-                      <template v-slot:cell(fromto)="data">
-                        <div class="from-to-content">
-                          <div class="td-from-and-to">
-                            <router-link
-                              :to="{ name: 'address', params: { addr: data.item.from } }"
-                            >{{ data.item.from }}</router-link>
-                          </div>
-                          <i class="fas fa-arrow-right tx-arrow"></i>
-                          <div class="td-from-and-to">
-                            <router-link
-                              :to="{ name: 'address', params: { addr: data.item.to } }"
-                            >{{ data.item.to }}</router-link>
-                          </div>
-                        </div>
-                      </template>
-                    </b-table>
-                  </div>
-                  <div class="my-2 d-flex justify-content-center">
-                    <b-pagination
-                      class="pagination-dark"
-                      v-model="currentPage"
-                      :per-page="transfer.limit"
-                      :total-rows="transfer.count"
-                      @change="transferPageChange"
-                      size="sm"
-                    ></b-pagination>
-                  </div>
-                </div>
-                <div v-else>
-                  <token-transfer-card
-                    v-for="(transfer, index) in transfer.items"
-                    :key="index"
-                    :transfer="transfer"
-                  ></token-transfer-card>
-                </div>
-              </div>
-              <!-- END .block-global -->
+              <TokenTransfersSection :addr="addr"></TokenTransfersSection>
             </b-tab>
+
             <b-tab :title="$t('views.token.token_holders')">
-              <div class="block-global p-3 my-0 rounded-lg">
-                <i18n path="views.token.total_of_holders" tag="p">
-                  <template v-slot:holders>
-                    <span class="text-green">{{ holder.count }}</span>
-                  </template>
-                </i18n>
-                <div class="table-responsive m-0">
-                  <b-table
-                    class="token-holders-table"
-                    dark
-                    :items="holder.items"
-                    :fields="holderFields"
-                  >
-                    <template v-slot:cell(rank)="data">{{ getTokenHoldersRanking(data.item) }}</template>
-                    <template
-                      v-slot:cell(percentage)="data"
-                    >{{ calculatePercentage(summary.total_supply, data.item.amount) }}%</template>
-                    <template v-slot:cell(address)="data">
-                      <router-link
-                        :to="{ name: 'address', params: { addr: data.item.address } }"
-                      >{{ data.item.address }}</router-link>
-                    </template>
-                  </b-table>
-                </div>
-                <div class="my-2 d-flex justify-content-center">
-                  <b-pagination
-                    class="pagination-dark"
-                    v-model="currentPage"
-                    :per-page="holder.limit"
-                    :total-rows="holder.count"
-                    @change="holderPageChange"
-                    size="sm"
-                  ></b-pagination>
-                </div>
-              </div>
-              <!-- END .block-global -->
+              <TokenHoldersSection :addr="addr" :summary="summary"></TokenHoldersSection>
             </b-tab>
+
             <b-tab :title="$t('views.token.read_smart_contract')">
               <div class="block-global p-3 my-0 rounded-lg">
                 <b-row class="align-items-center">
@@ -326,114 +238,28 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import ecrc20Module from '@/api/ecrc20/index'
-import TokenTransferCard from '@/components/TokenTransferCard.vue'
-import { timeFromNow, numberWithCommas } from '@/api/filters'
+import TokenTransfersSection from '@/components/TokenTransfersSection.vue'
+import TokenHoldersSection from '@/components/TokenHoldersSection.vue'
 // eslint-disable-next-line no-unused-vars
-import { TokenSummary, TokenTransfers, TokenHolders, TokenHolder } from '../api/ecrc20/type'
+import { TokenSummary, TokenHolders, TokenHolder } from '../api/ecrc20/type'
 
 @Component({
   components: {
-    TokenTransferCard
+    TokenTransfersSection,
+    TokenHoldersSection
   }
 })
 export default class Token extends Vue {
   @Prop() addr!: string
 
   summary: TokenSummary = {} as TokenSummary
-  transfer: TokenTransfers = {} as TokenTransfers
-  holder: TokenHolders = {} as TokenHolders
 
-  transferFields: any[] = []
-  holderFields: any[] = []
-
-  rows = 100
-  nowLimit = 20
-  currentPage = 1
   hovered = false
   clicked = false
 
-  created() {
-    this.transferFields = [
-      {
-        key: 'tx_hash',
-        label: this.$t('views.token.tx_hash'),
-        thClass: 'th-custom',
-        tdClass: 'td-tx-hash'
-      },
-      {
-        key: 'tx_time',
-        label: this.$t('views.token.age'),
-        formatter: (value: number) => {
-          return timeFromNow(value * 1000)
-        },
-        sortable: true,
-        thClass: 'th-custom',
-        class: 'text-center'
-      },
-      {
-        key: 'fromto',
-        label: `Transfered to`,
-        thClass: 'th-custom',
-        class: 'text-center'
-      },
-      {
-        key: 'value',
-        label: this.$t('views.token.quantity'),
-        formatter: (value: string) => {
-          return numberWithCommas(Number(value), 8)
-        },
-        sortable: true,
-        thClass: 'th-custom',
-        class: 'text-right'
-      }
-    ]
-
-    this.holderFields = [
-      {
-        key: 'rank',
-        label: this.$t('views.token.rank'),
-        class: 'text-center',
-        thClass: 'th-custom'
-      },
-      {
-        key: 'address',
-        label: this.$t('views.token.addr'),
-        class: 'text-center',
-        thClass: 'th-custom'
-      },
-      {
-        key: 'amount',
-        label: this.$t('views.token.quantity'),
-        formatter: (value: string) => {
-          return numberWithCommas(Number(value), 8, 2)
-        },
-        class: 'text-right',
-        thClass: 'th-custom'
-      },
-      {
-        key: 'percentage',
-        label: this.$t('views.token.percent'),
-        class: 'text-right',
-        thClass: 'th-custom'
-      }
-    ]
-  }
-
   async mounted() {
     console.log('sent prop addr', this.addr)
-
     this.summary = await ecrc20Module.getTokenSummary(this.addr)
-    this.transfer = await ecrc20Module.getTokenTransfers({
-      contractAddr: this.addr,
-      limit: 20,
-      offset: 0
-    })
-
-    this.holder = await ecrc20Module.getTokenHolders({
-      contractAddr: this.addr,
-      limit: 20,
-      offset: 0
-    })
   }
 
   get copyMessage() {
@@ -442,33 +268,6 @@ export default class Token extends Vue {
 
   get isMobileDevice() {
     return window.innerWidth <= 767
-  }
-
-  getTokenHoldersRanking(holder: TokenHolder) {
-    let rankNum = this.holder.items.findIndex(el => el.address === holder.address)
-    return this.holder.offset + rankNum + 1
-  }
-
-  async transferPageChange(page: number) {
-    this.transfer = await ecrc20Module.getTokenTransfers({
-      contractAddr: this.addr,
-      limit: 20,
-      offset: this.transfer.limit * (page - 1)
-    })
-  }
-
-  async holderPageChange(page: number) {
-    this.holder = await ecrc20Module.getTokenHolders({
-      contractAddr: this.addr,
-      limit: 20,
-      offset: this.holder.limit * (page - 1)
-    })
-  }
-
-  calculatePercentage(total: string, val: string) {
-    const currentVal = Number(val) / Math.pow(10, 8)
-    const totalVal = Number(total) / Math.pow(10, 8)
-    return numberWithCommas((currentVal / totalVal) * 100, 0, 3)
   }
 
   toggleCopyMessage(hover: boolean, click: boolean) {
@@ -497,15 +296,6 @@ export default class Token extends Vue {
   cursor: pointer;
 }
 
-.from-to-content {
-  display: flex;
-  justify-content: center;
-}
-
-.tx-arrow {
-  margin: auto 0.6rem;
-}
-
 .group-head {
   h2::first-letter {
     color: $purple;
@@ -515,23 +305,5 @@ export default class Token extends Vue {
 
 .token-label {
   font-weight: 600;
-}
-
-@media (max-width: 991px) {
-  .token-transfer-table {
-    font-size: 14px;
-    .from-to-content {
-      display: block;
-      text-align: -webkit-center;
-    }
-  }
-
-  .fa-arrow-right:before {
-    content: '\f063' !important;
-  }
-
-  .token-holders-table {
-    font-size: 14px;
-  }
 }
 </style>
