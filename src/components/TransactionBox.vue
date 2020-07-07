@@ -1,19 +1,23 @@
 <template>
-  <div class="block-global p-3 my-3 rounded-lg">
+  <div class="block-global p-3 my-3 rounded-lg mb-6">
     <b-row class="align-items-end mb-3">
       <b-col cols="12" md class="text-truncate">
-        <b-icon
-          class="mr-2 toggle-more"
-          :icon="moreDetail ? 'dash-square' : 'plus-square'"
+        <i
+          class="fas pr-2 more-icon"
+          :class="moreDetail ? 'fa-minus-square' : 'fa-plus-square'"
           @click="toggleMore"
-        ></b-icon>
-        <span v-if="txPage">{{ tx.txid }}</span>
-        <router-link v-else :to="{ name: 'transaction', params: { hash: tx.txid } }">{{ tx.txid }}</router-link>
+        ></i>
+        <span class="tx-id" v-if="txPage">{{ tx.txid }}</span>
+        <router-link
+          class="tx-id"
+          v-else
+          :to="{ name: 'transaction', params: { hash: tx.txid } }"
+        >{{ tx.txid }}</router-link>
       </b-col>
       <b-col
         cols="12"
         md
-        class="text-md-right small"
+        class="text-md-right small text-center text-purple-light font-weight-bold"
       >{{ $t('components.transaction_box.mined') }} {{ tx.time | timeFormat('LLL') }}</b-col>
     </b-row>
     <hr />
@@ -28,14 +32,17 @@
                 v-for="(vout, index) in tx.vout"
                 :key="index"
               >
-                <b-col cols="8" class="text-truncate">
-                  Unparsed address [{{ index }}]
-                  <b-collapse v-model="moreDetail" class="tx-collapse">
-                    <p class="tx-detail">{{ $t('components.transaction_box.type') }}</p>
-                    <p class="tx-detail">scriptPubKey {{ vout.scriptPubKey.asm }}</p>
-                  </b-collapse>
-                </b-col>
-                <b-col cols="4" class="addr-value">{{ vout.value }} ECOC</b-col>
+                <b-col cols="8" class="text-truncate user-address">Unparsed address [{{ index }}]</b-col>
+                <b-col cols="4" class="addr-value">{{ Number(vout.value).toFixed(3) }} ECOC</b-col>
+                <b-collapse v-model="moreDetail" class="tx-collapse">
+                  <b-row class="more-tx-info">
+                    <b-col class="font-weight-bold ml-1">{{ $t('components.transaction_box.type') }}</b-col>
+                  </b-row>
+                  <b-row class="more-tx-info pb-1">
+                    <b-col class="font-weight-bold ml-1">scriptPubKey</b-col>
+                    <b-col class="text-right mr-3 text-truncate">{{ vout.scriptPubKey.asm }}</b-col>
+                  </b-row>
+                </b-collapse>
               </b-row>
             </div>
 
@@ -49,26 +56,32 @@
                 <template v-if="checkDuplicatedAddress(vin)">
                   <b-col cols="8" class="text-truncate">
                     <router-link
+                      class="user-address"
                       :to="{ name: 'address', params: { addr: vin.addr } }"
                     >{{ vin.addr }}</router-link>
-                    <b-collapse v-model="moreDetail" class="tx-collapse">
-                      <p
-                        class="tx-detail"
-                      >{{ $t('components.transaction_box.confirm') }}: {{ tx.confirmations }}</p>
-                      <div v-if="vin.items.length > 0">
-                        <div v-for="(val, index) in vin.items" :key="index">
-                          <p class="tx-detail">{{ val.addr }}</p>
-                          <p class="tx-detail">{{ val.value }}</p>
-                        </div>
-                      </div>
-                    </b-collapse>
                   </b-col>
                   <b-col
                     cols="4"
                     class="addr-value"
                     v-if="!moreDetail && vin.sumValue"
-                  >{{ vin.sumValue }}</b-col>
-                  <b-col cols="4" class="addr-value" v-else>{{ vin.value }} ECOC</b-col>
+                  >{{ vin.sumValue.toFixed(3) }} ECOC</b-col>
+                  <b-col cols="4" class="addr-value" v-else>{{ vin.value.toFixed(3) }} ECOC</b-col>
+                  <b-collapse v-model="moreDetail" class="tx-collapse">
+                    <b-row class="more-tx-info pb-1">
+                      <b-col
+                        class="font-weight-bold ml-1"
+                      >{{ $t('components.transaction_box.confirm') }}</b-col>
+                      <b-col class="text-right mr-3">{{ tx.confirmations | numberWithCommas }}</b-col>
+                    </b-row>
+                    <div v-if="vin.items.length > 0">
+                      <b-row v-for="(val, index) in vin.items" :key="index" class="duplicated-addr">
+                        <b-col class="tx-detail tx-dup-addr">{{ val.addr }}</b-col>
+                        <b-col
+                          class="tx-detail text-right tx-dup-addr"
+                        >{{ val.value.toFixed(3) }} ECOC</b-col>
+                      </b-row>
+                    </div>
+                  </b-collapse>
                 </template>
               </b-row>
             </div>
@@ -89,31 +102,42 @@
                 <template v-if="checkVoutDuplicatedAddress(vout)">
                   <b-col cols="8" class="text-truncate">
                     <router-link
+                      class="user-address"
                       v-if="'addresses' in vout.scriptPubKey"
                       :to="{ name: 'address', params: { addr: vout.scriptPubKey.addresses[0] } }"
                     >{{ vout.scriptPubKey.addresses[0] }}</router-link>
                     <span v-else>{{ `Unparsed address ${index}` }}</span>
-                    <b-collapse v-model="moreDetail" class="tx-collapse">
-                      <div v-if="vout.items && vout.items.length > 0">
-                        <div v-for="(val, index) in vout.items" :key="index">
-                          <p class="tx-detail">{{ parsingAddress(val) }}</p>
-                          <p class="tx-detail">{{ val.value }}</p>
-                        </div>
-                      </div>
-                      <div v-else>
-                        <p
-                          class="tx-detail"
-                        >{{ $t('components.transaction_box.type') }} {{ 'type' in vout.scriptPubKey ? vout.scriptPubKey.type : '' }}</p>
-                        <p class="tx-detail">scriptPubKey {{ vout.scriptPubKey.asm }}</p>
-                      </div>
-                    </b-collapse>
                   </b-col>
                   <b-col
                     cols="4"
                     class="addr-value"
                     v-if="!moreDetail && vout.sumValue"
-                  >{{ vout.sumValue }}</b-col>
-                  <b-col cols="4" class="addr-value" v-else>{{ vout.value }} ECOC (U)</b-col>
+                  >{{ vout.sumValue.toFixed(3) }} ECOC (U)</b-col>
+                  <b-col
+                    cols="4"
+                    class="addr-value"
+                    v-else
+                  >{{ Number(vout.value).toFixed(3) }} ECOC (U)</b-col>
+                  <b-collapse v-model="moreDetail" class="tx-collapse">
+                    <b-row class="more-tx-info">
+                      <b-col
+                        class="font-weight-bold ml-1"
+                      >{{ $t('components.transaction_box.type') }}</b-col>
+                      <b-col
+                        class="text-right mr-3"
+                      >{{ 'type' in vout.scriptPubKey ? vout.scriptPubKey.type : '' }}</b-col>
+                    </b-row>
+                    <b-row class="more-tx-info pb-1">
+                      <b-col class="font-weight-bold ml-1">scriptPubKey</b-col>
+                      <b-col class="text-right mr-3 text-truncate">{{ vout.scriptPubKey.asm }}</b-col>
+                    </b-row>
+                    <b-row v-for="(val, index) in vout.items" :key="index" class="duplicated-addr">
+                      <b-col class="tx-detail tx-dup-addr">{{ parsingAddress(val) }}</b-col>
+                      <b-col
+                        class="tx-detail text-right tx-dup-addr"
+                      >{{ Number(val.value).toFixed(3) }} ECOC</b-col>
+                    </b-row>
+                  </b-collapse>
                 </template>
               </b-row>
             </div>
@@ -126,16 +150,21 @@
       <div v-for="(event, index) in tkEvent" :key="index">
         <hr />
         <b-row>
-          <b-col cols="12">
-            <router-link to="/token">{{ event.contractInfo.name }}</router-link>
-            <span class="small text-purple-light">( ECRC20 )</span>
+          <b-col cols="12" class="text-center mb-3">
+            <div class="token-label">
+              <router-link to="/token" class="token-name">{{ event.contractInfo.name }}</router-link>
+              <span class="small text-purple-light pl-2">( ECRC20 )</span>
+            </div>
           </b-col>
           <b-col cols="12">
             <b-row class="justify-content-center align-items-center no-gutters">
               <b-col cols="12" lg>
                 <b-row class="align-items-center no-gutters">
                   <b-col cols="8" class="text-truncate">
-                    <router-link to="/address" class="d-block text-truncate">{{ event.addressFrom }}</router-link>
+                    <router-link
+                      to="/address"
+                      class="d-block text-truncate user-address"
+                    >{{ event.addressFrom }}</router-link>
                   </b-col>
                   <b-col
                     cols="4"
@@ -149,7 +178,10 @@
               <b-col cols="12" lg>
                 <b-row class="align-items-center no-gutters">
                   <b-col cols="8" class="text-truncate">
-                    <router-link to="/address" class="d-block text-truncate">{{ event.addressTo }}</router-link>
+                    <router-link
+                      to="/address"
+                      class="d-block text-truncate user-address"
+                    >{{ event.addressTo }}</router-link>
                   </b-col>
                   <b-col
                     cols="4"
@@ -166,16 +198,18 @@
 
     <hr />
     <b-row>
-      <b-col md v-if="tx.fees > 0">
+      <b-col cols="auto" class="text-md-left" v-if="tx.fees > 0">
         <div
           class="d-inline-block small text-purple-light mx-3 mr-md-0 text-uppercase"
-        >{{ $t('components.transaction_box.fee') }}: {{ tx.fees }}</div>
+        >{{ $t('components.transaction_box.fee') }}: {{ tx.fees.toFixed(3) }}</div>
       </b-col>
-      <b-col md class="text-center text-md-right">
+      <b-col class="text-right">
         <div
           class="d-inline-block small text-purple-light mx-3 mr-md-0 text-uppercase"
-        >{{ $t('components.transaction_box.confirm') }}: {{ tx.confirmations }}</div>
-        <div class="d-inline-block small text-purple-light mx-3 mr-md-0">{{ tx.valueOut }} ECOC</div>
+        >{{ tx.confirmations | numberWithCommas }} {{ $t('components.transaction_box.confirm') }}</div>
+        <div
+          class="d-inline-block small text-purple-light mx-3 mr-md-0"
+        >{{ tx.valueOut.toFixed(3) }} ECOC</div>
       </b-col>
     </b-row>
   </div>
@@ -370,8 +404,15 @@ export default class TransactionBox extends Vue {
 }
 
 .tx-collapse {
+  background: rgb(18, 20, 33);
+  overflow: hidden;
+  border-radius: 6px;
+  margin-top: 0.75rem;
+  margin-bottom: 1.4rem;
+  margin-left: 0.75rem;
   padding-top: 0.75rem;
   padding-left: 1rem;
+  width: -webkit-fill-available;
 }
 
 .addr-value {
@@ -380,5 +421,39 @@ export default class TransactionBox extends Vue {
   align-self: baseline;
   font-size: 80%;
   font-weight: 400;
+}
+
+.duplicated-addr {
+  padding: 6px;
+  background: #0f111b;
+  margin-right: 0px;
+}
+
+.tx-dup-addr {
+  color: #4a4c54;
+}
+
+.more-tx-info {
+  margin-bottom: 7px;
+  font-size: small;
+}
+
+.token-label {
+  padding: 0.5rem;
+  background: #11131b;
+  border-radius: 6px;
+}
+
+.more-icon {
+  color: $purple;
+}
+
+@media (max-width: 575px) {
+  .token-name,
+  .user-address,
+  .tx-id {
+    font-size: 14px;
+  }
+
 }
 </style>
