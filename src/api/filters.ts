@@ -12,19 +12,21 @@ export function timeFromNow(now: string | number) {
   return moment(now).fromNow()
 }
 
-export function numberWithCommas(num: number, decimal?: number, fixed?: number) {
-  if (decimal) {
-    num = num / Math.pow(10, decimal)
+export function numberWithCommas(num: number, options?: { decimal?: number, fixed?: number }) {
+  if (!options) {
+    return num.toLocaleString()
   }
-  if (fixed) {
+  if ('decimal' in options!) {
+    num = num / Math.pow(10, options.decimal!)
+  }
+  if ('fixed' in options!) {
     return num.toLocaleString(undefined, {
-      minimumFractionDigits: fixed,
-      maximumFractionDigits: fixed
+      minimumFractionDigits: options!.fixed,
+      maximumFractionDigits: options!.fixed
     })
   }
   return num.toLocaleString()
 }
-
 
 export function toMonthDayFormat(date: string) {
   let dArray = new Date(date).toDateString().split(' ')

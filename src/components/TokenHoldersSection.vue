@@ -78,7 +78,7 @@ export default class TokenHoldersSection extends Vue {
         key: 'amount',
         label: this.$t('views.token.quantity'),
         formatter: (value: string) => {
-          return numberWithCommas(Number(value), 8, 2)
+          return numberWithCommas(Number(value), {decimal: 8, fixed: 2})
         },
         class: 'text-right',
         thClass: 'th-custom'
@@ -107,7 +107,7 @@ export default class TokenHoldersSection extends Vue {
   calculatePercentage(total: string, val: string) {
     const currentVal = Number(val) / Math.pow(10, 8)
     const totalVal = Number(total) / Math.pow(10, 8)
-    return numberWithCommas((currentVal / totalVal) * 100, 0, 3)
+    return numberWithCommas((currentVal / totalVal) * 100, {fixed: 3})
   }
 
   getTokenHoldersRanking(holder: TokenHolder) {

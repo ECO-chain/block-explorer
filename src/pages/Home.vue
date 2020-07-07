@@ -78,7 +78,7 @@
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">{{ info.reward | numberWithCommas(8) }} ECOC</div>
+                <div class="my-1 text-truncate">{{ info.reward | numberWithCommas({decimal: 8}) }} ECOC</div>
                 <div class="my-1 small text-purple-light">{{ $t('views.home.block_reward') }}</div>
               </div>
             </b-col>

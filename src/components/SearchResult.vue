@@ -81,7 +81,7 @@
           <b-col>
             <b-card-text
               class="token-supply"
-            >{{ Number(sResult.total_supply) | numberWithCommas(8) }} ECOC</b-card-text>
+            >{{ Number(sResult.total_supply) | numberWithCommas({decimal: 8}) }} ECOC</b-card-text>
           </b-col>
         </b-row>
         <b-card-text

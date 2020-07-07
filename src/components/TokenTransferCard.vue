@@ -27,7 +27,7 @@
       <b-row>
         <b-col>
           <span class="transfer-label pr-2">Quantitiy</span>
-          {{ Number(transfer.value) | numberWithCommas(8) }}
+          {{ Number(transfer.value) | numberWithCommas({decimal: 8}) }}
         </b-col>
       </b-row>
     </b-card>

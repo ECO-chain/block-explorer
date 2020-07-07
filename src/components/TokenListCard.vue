@@ -10,7 +10,7 @@
         <b-row>
           <b-col>
             <p class="token-label">Total Supply</p>
-            <span>{{ Number(token.total_supply) | numberWithCommas(8) }}</span>
+            <span>{{ Number(token.total_supply) | numberWithCommas({decimal: 8}) }}</span>
           </b-col>
           <b-col>
             <p class="token-label">Holders</p>

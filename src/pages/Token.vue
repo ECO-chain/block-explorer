@@ -20,7 +20,7 @@
                   <b-col cols="6">
                     <div
                       class="my-1 text-right text-truncate"
-                    >{{ summary.total_supply | numberWithCommas(8) }} BCST</div>
+                    >{{ summary.total_supply | numberWithCommas({decimal: 8}) }} BCST</div>
                   </b-col>
                 </b-row>
               </b-col>

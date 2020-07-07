@@ -95,7 +95,7 @@ export default class Tokens extends Vue {
         label: this.$t('views.tokens.total_supply'),
         sortable: true,
         formatter: (value: string) => {
-          return numberWithCommas(Number(value), 8)
+          return numberWithCommas(Number(value), {decimal: 8})
         },
         thClass: 'th-custom',
         class: 'text-right'

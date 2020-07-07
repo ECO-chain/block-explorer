@@ -140,7 +140,7 @@
                   <b-col
                     cols="4"
                     class="text-right small text-purple-light"
-                  >{{ event.amount | numberWithCommas(8) }} BCST</b-col>
+                  >{{ event.amount | numberWithCommas({decimal: 8}) }} BCST</b-col>
                 </b-row>
               </b-col>
               <b-col cols="12" lg="1" class="text-center">
@@ -154,7 +154,7 @@
                   <b-col
                     cols="4"
                     class="text-right small text-purple-light"
-                  >{{ event.amount | numberWithCommas(8) }} BCST</b-col>
+                  >{{ event.amount | numberWithCommas({decimal: 8}) }} BCST</b-col>
                 </b-row>
               </b-col>
             </b-row>

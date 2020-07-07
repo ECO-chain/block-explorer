@@ -36,7 +36,7 @@
               <b-col cols="6">
                 <div
                   class="my-1 text-right"
-                >{{ totalStats.mined_currency_amount | numberWithCommas(8) }} ECOC</div>
+                >{{ totalStats.mined_currency_amount | numberWithCommas({decimal: 8}) }} ECOC</div>
               </b-col>
             </b-row>
           </div>
@@ -54,7 +54,7 @@
               <b-col>
                 <div
                   class="my-1 text-right"
-                >{{ totalStats.transaction_fees | numberWithCommas(8) }} ECOC</div>
+                >{{ totalStats.transaction_fees | numberWithCommas({decimal: 8}) }} ECOC</div>
               </b-col>
               <b-col cols="12" md="auto">
                 <b-button class="btn-view-chart" size="sm" @click="goToCharts('fees')">
@@ -86,7 +86,7 @@
               <b-col>
                 <div
                   class="my-1 text-right"
-                >{{ totalStats.outputs_volume | numberWithCommas(8) }} ECOC</div>
+                >{{ totalStats.outputs_volume | numberWithCommas({decimal: 8}) }} ECOC</div>
               </b-col>
               <b-col cols="12" md="auto">
                 <b-button class="btn-view-chart" size="sm" @click="goToCharts('fees')">

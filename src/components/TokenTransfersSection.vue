@@ -96,7 +96,7 @@ export default class TokenTransfersSection extends Vue {
         key: 'value',
         label: this.$t('views.token.quantity'),
         formatter: (value: string) => {
-          return numberWithCommas(Number(value), 8)
+          return numberWithCommas(Number(value), {decimal: 8})
         },
         sortable: true,
         thClass: 'th-custom',

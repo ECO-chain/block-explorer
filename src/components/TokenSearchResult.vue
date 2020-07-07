@@ -21,7 +21,7 @@
               <b-card-text>{{ token.symbol }} - {{ token.name }}</b-card-text>
             </b-col>
             <b-col class="result-supply">
-              <b-card-text>{{ Number(token.total_supply) | numberWithCommas(8) }} {{ token.symbol }}</b-card-text>
+              <b-card-text>{{ Number(token.total_supply) | numberWithCommas({decimal: 8}) }} {{ token.symbol }}</b-card-text>
             </b-col>
           </b-row>
           <b-card-text

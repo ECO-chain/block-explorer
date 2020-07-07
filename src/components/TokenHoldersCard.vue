@@ -11,7 +11,7 @@
       <b-row>
         <b-col>
           <b-card-text class="holder-label">Quantity</b-card-text>
-          <span>{{ holder.amount | numberWithCommas(8,2) }}</span>
+          <span>{{ holder.amount | numberWithCommas({decimal: 8, fixed: 2}) }}</span>
         </b-col>
         <b-col>
           <b-card-text class="holder-label">Percentage</b-card-text>
@@ -50,7 +50,7 @@ export default class TokenHoldersCard extends Vue {
   calculatePercentage(total: string, val: string) {
     const currentVal = Number(val) / Math.pow(10, 8)
     const totalVal = Number(total) / Math.pow(10, 8)
-    return numberWithCommas((currentVal / totalVal) * 100, 0, 3)
+    return numberWithCommas((currentVal / totalVal) * 100, {fixed: 3})
   }
 
   async infiniteHolders($state: any) {

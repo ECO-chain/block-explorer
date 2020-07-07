@@ -5,7 +5,6 @@
 <script lang="ts">
 import { Vue, Component, PropSync, Watch } from 'vue-property-decorator'
 import Chart from 'chart.js'
-// import { toMonthDayFormat, numberWithCommas } from '@/api/filters'
 
 @Component({})
 export default class LineChart extends Vue {
