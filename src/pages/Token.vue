@@ -54,14 +54,7 @@
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">
-                      <i
-                        :class="hovered ? 'fas fa-copy copy-i' : 'far fa-copy copy-i'"
-                        @mouseover="toggleCopyMessage(true, false)"
-                        @mouseout="toggleCopyMessage(false, false)"
-                        @click="toggleCopyMessage(true, true)"
-                        v-b-tooltip.hover
-                        :title="copyMessage"
-                      ></i>
+                      <CopyBtn class="mr-2" :target="summary.contract_address"></CopyBtn>
                       <router-link
                         to="/address"
                         class="text-truncate"
@@ -122,6 +115,7 @@ import ecrc20Module from '@/api/ecrc20/index'
 import TokenTransfersSection from '@/components/TokenTransfersSection.vue'
 import TokenHoldersSection from '@/components/TokenHoldersSection.vue'
 import ReadContractSection from '@/components/ReadContractSection.vue'
+import CopyBtn from '@/components/CopyBtn.vue'
 // eslint-disable-next-line no-unused-vars
 import { TokenSummary, TokenHolders, TokenHolder } from '../api/ecrc20/type'
 
@@ -129,7 +123,8 @@ import { TokenSummary, TokenHolders, TokenHolder } from '../api/ecrc20/type'
   components: {
     TokenTransfersSection,
     TokenHoldersSection,
-    ReadContractSection
+    ReadContractSection,
+    CopyBtn
   }
 })
 export default class Token extends Vue {
@@ -141,34 +136,12 @@ export default class Token extends Vue {
   clicked = false
 
   async mounted() {
-    console.log('sent prop addr', this.addr)
+    // console.log('sent prop addr', this.addr)
     this.summary = await ecrc20Module.getTokenSummary(this.addr)
-  }
-
-  get copyMessage() {
-    return this.hovered && this.clicked ? 'Copied' : 'Copy to clipboard'
   }
 
   get isMobileDevice() {
     return window.innerWidth <= 767
-  }
-
-  toggleCopyMessage(hover: boolean, click: boolean) {
-    this.hovered = hover
-    this.clicked = click
-
-    if (hover && click) {
-      this.copyAddress()
-    }
-  }
-
-  copyAddress() {
-    const el = document.createElement('textarea')
-    el.value = this.summary.contract_address
-    document.body.appendChild(el)
-    el.select()
-    document.execCommand('copy')
-    document.body.removeChild(el)
   }
 }
 </script>

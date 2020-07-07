@@ -4,7 +4,7 @@
       <b-row class="align-items-center text-center my-2">
         <b-col cols="12" md="2">
           <b-button
-            class="btn btn-sm btn-secondary my-2 my-md-0"
+            class="change-data-btn my-2 my-md-0"
             @click="changeDataType(entry.typeKey, index, 'key')"
           >{{ entry.typeKey }}</b-button>
         </b-col>
@@ -16,8 +16,7 @@
               class="text-center text-md-right text-truncate"
               :id="`tooltip-key-${index}`"
             >{{ entry.displayedKey }}</b-col>
-            <b-tooltip :target="`tooltip-key-${index}`" class="toolja tolzzzzzz">
-              <i class="far fa-copy copy-i"></i>
+            <b-tooltip :target="`tooltip-key-${index}`">
               {{ entry.displayedKey }}
             </b-tooltip>
             <b-col cols="12" md="2" class="text-center">
@@ -34,7 +33,7 @@
         </b-col>
         <b-col cols="12" md="2">
           <b-button
-            class="btn btn-sm btn-secondary my-2 my-md-0"
+            class="change-data-btn my-2 my-md-0"
             v-model="currentView"
             @click="changeDataType(entry.typeValue, index, 'value')"
           >{{ entry.typeValue }}</b-button>
@@ -46,11 +45,11 @@
         <b-col cols="12">
           <div class="my-2 text-center" v-if="limit < dataEntries.length">
             <b-button
-              class="btn btn-primary mx-2 text-uppercase"
+              class="change-data-btn mx-2 text-uppercase"
               @click="displayMore(5)"
             >{{ $t('components.storage_log.more' )}}</b-button>
             <b-button
-              class="btn btn-primary mx-2 text-uppercase"
+              class="change-data-btn mx-2 text-uppercase"
               @click="displayAll"
             >{{ $t('components.storage_log.view_all' )}}</b-button>
           </div>
@@ -193,5 +192,12 @@ export default class StorageLog extends Vue {
 <style lang="scss" scoped>
 .tooltip-inner {
   max-width: unset !important;
+}
+
+.change-data-btn {
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #323646;
 }
 </style>

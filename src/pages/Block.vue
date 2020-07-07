@@ -6,11 +6,11 @@
           <div class="group-head my-3 text-center text-md-left">
             <h2 class="head-page my-0">{{ $t('views.block.block') }} #{{ block.height }}</h2>
             <p class="my-0 text-truncate">
+              <CopyBtn :target="block.hash" class="mr-2"></CopyBtn>
               {{ $t('views.block.block_hash') }}:
               <span class="text-purple">{{ block.hash }}</span>
             </p>
           </div>
-          <!-- END .group-head -->
         </b-col>
 
         <b-col cols="12">
@@ -27,7 +27,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.block.num_tx') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.block.num_tx') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">{{ block.tx.length }}</div>
@@ -37,7 +37,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.block.difficulty') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.block.difficulty') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div
@@ -49,7 +49,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.block.height') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.block.height') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">
@@ -62,7 +62,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.block.bits') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.block.bits') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">{{ block.bits }}</div>
@@ -72,7 +72,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.block.block_reward') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.block.block_reward') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">{{ block.reward }} ECOC</div>
@@ -82,7 +82,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.block.size_b') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.block.size_b') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">{{ block.size }}</div>
@@ -92,7 +92,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.block.time') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.block.time') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div
@@ -104,7 +104,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.block.version') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.block.version') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">{{ block.version }}</div>
@@ -114,7 +114,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.block.mined_by') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.block.mined_by') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">{{ block.minedBy }}</div>
@@ -124,7 +124,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.block.nonce') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.block.nonce') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">{{ block.nonce }}</div>
@@ -134,9 +134,10 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.block.merkle') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.block.merkle') }}</div>
                   </b-col>
-                  <b-col cols="6">
+                  <b-col cols="6" class="d-flex align-items-baseline">
+                    <CopyBtn :target="block.merkleroot" class="mr-2"></CopyBtn>
                     <div class="my-1 text-right text-truncate">{{ block.merkleroot }}</div>
                   </b-col>
                 </b-row>
@@ -144,7 +145,7 @@
               <b-col cols="12" md="6">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.block.prev_block') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.block.prev_block') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">
@@ -158,7 +159,7 @@
               <b-col cols="12" md="6" v-if="'nextblockhash' in block">
                 <b-row>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.block.next_block') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.block.next_block') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">
@@ -190,6 +191,7 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import blocksModule from '@/api/blocks/index'
 import txModule from '@/api/transaction/index'
 import TransactionBox from '@/components/TransactionBox.vue'
+import CopyBtn from '@/components/CopyBtn.vue'
 // eslint-disable-next-line no-unused-vars
 import { BlockDetail } from '../api/blocks/type'
 // eslint-disable-next-line no-unused-vars
@@ -197,7 +199,8 @@ import { Txs } from '../api/transaction/type'
 
 @Component({
   components: {
-    TransactionBox
+    TransactionBox,
+    CopyBtn
   }
 })
 export default class Block extends Vue {
@@ -230,6 +233,16 @@ export default class Block extends Vue {
   h2::first-letter {
     color: $purple;
     font-weight: bold;
+  }
+}
+
+.summary-label {
+  font-weight: 600;
+}
+
+@media (max-width: 575px) {
+  .block-global {
+    font-size: 14px;
   }
 }
 </style>

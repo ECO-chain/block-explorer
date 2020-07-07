@@ -5,7 +5,10 @@
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
             <h2 class="head-page my-0">{{ $t('views.address.address') }}</h2>
-            <h4 class="my-0 text-truncate text-purple">{{ addr }}</h4>
+            <h4 class="my-0 text-truncate text-purple">
+              <CopyBtn :target="addr" class="mr-2"></CopyBtn>
+              {{ addr }}
+            </h4>
           </div>
         </b-col>
 
@@ -113,7 +116,7 @@
             ></infinite-loading>
           </div>
           <div v-else class="block-global rounded-lg">
-            <p class="no-tx"> {{ $t('views.address.no_tx') }}</p>
+            <p class="no-tx">{{ $t('views.address.no_tx') }}</p>
           </div>
         </b-col>
         <back-to-top-btn :visisbleoffset="980"></back-to-top-btn>
@@ -130,6 +133,7 @@ import TokenTracker from '@/components/TokenTracker.vue'
 import TransactionBox from '@/components/TransactionBox.vue'
 import TokenScriptLog from '@/components/TokenScriptLog.vue'
 import StorageLog from '@/components/StorageLog.vue'
+import CopyBtn from '@/components/CopyBtn.vue'
 import addressModule from '@/api/address/index'
 import ecrc20Module from '@/api/ecrc20/index'
 import txModule from '@/api/transaction/index'
@@ -152,7 +156,8 @@ import { ContractInfo } from '../api/contracts/type'
     TokenScriptLog,
     StorageLog,
     InfiniteLoading,
-    BackToTopBtn
+    BackToTopBtn,
+    CopyBtn
   }
 })
 export default class Address extends Vue {
