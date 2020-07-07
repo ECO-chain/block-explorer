@@ -43,6 +43,7 @@
     </div>
     <div v-else>
       <token-transfer-card :transfer="transfer" :addr="addr"></token-transfer-card>
+      <back-to-top-btn></back-to-top-btn>
     </div>
   </div>
 </template>
@@ -51,13 +52,15 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import ecrc20Module from '@/api/ecrc20/index'
 import TokenTransferCard from '@/components/TokenTransferCard.vue'
+import BackToTopBtn from '@/components/BackToTopBtn.vue'
 import { timeFromNow, numberWithCommas } from '@/api/filters'
 // eslint-disable-next-line no-unused-vars
 import { TokenTransfers } from '../api/ecrc20/type'
 
 @Component({
   components: {
-    TokenTransferCard
+    TokenTransferCard,
+    BackToTopBtn
   }
 })
 export default class TokenTransfersSection extends Vue {

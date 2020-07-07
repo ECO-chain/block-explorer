@@ -107,6 +107,7 @@
           <TransactionBox v-for="(tx, index) in txs.txs" :key="index" :tx="tx"></TransactionBox>
           <infinite-loading v-if="txs.txs.length" @infinite="infiniteHandler"></infinite-loading>
         </b-col>
+        <back-to-top-btn :visisbleoffset="980"></back-to-top-btn>
       </b-row>
     </b-container>
   </div>
@@ -126,6 +127,7 @@ import txModule from '@/api/transaction/index'
 import contractModule from '@/api/contracts/index'
 import ecoweb3 from '@/ecoweb3/index'
 import InfiniteLoading from 'vue-infinite-loading'
+import BackToTopBtn from '../components/BackToTopBtn.vue'
 
 import { Socket } from 'vue-socket.io-extended'
 import { AddressSummary } from '../api/address/type'
@@ -140,7 +142,8 @@ import { ContractInfo } from '../api/contracts/type'
     TransactionBox,
     TokenScriptLog,
     StorageLog,
-    InfiniteLoading
+    InfiniteLoading,
+    BackToTopBtn
   }
 })
 export default class Address extends Vue {

@@ -39,6 +39,7 @@
               :key="index"
               :balance="balance"
             ></balance-list-card>
+            <back-to-top-btn :visibleoffset="900"></back-to-top-btn>
           </div>
         </b-col>
       </b-row>
@@ -52,12 +53,14 @@ import { Vue, Component, Watch } from 'vue-property-decorator'
 import ChartSelector from '@/components/ChartSelector.vue'
 import statisticsModule from '@/api/statistics/index'
 import { BalanceIntervalsTable } from '../api/statistics/type'
+import BackToTopBtn from '../components/BackToTopBtn.vue'
 import BalanceListCard from '@/components/BalanceListCard.vue'
 
 @Component({
   components: {
     ChartSelector,
-    BalanceListCard
+    BalanceListCard,
+    BackToTopBtn
   }
 })
 export default class Charts extends Vue {
@@ -79,14 +82,12 @@ export default class Charts extends Vue {
       {
         key: 'addresses',
         label: this.$t('views.charts.addresses'),
-        sortable: true,
         class: 'text-right',
         thClass: 'th-custom'
       },
       {
         key: 'percentAddresses',
         label: this.$t('views.charts.percent_address_total'),
-        sortable: true,
         formatter: (value: any) => `${value.toFixed(2)} %`,
         class: 'text-right',
         thClass: 'th-custom'
@@ -94,7 +95,6 @@ export default class Charts extends Vue {
       {
         key: 'coins',
         label: this.$t('views.charts.coins'),
-        sortable: true,
         class: 'text-right',
         thClass: 'th-custom text-center',
         formatter: (value: any) => {
@@ -108,7 +108,6 @@ export default class Charts extends Vue {
       {
         key: 'percentCoins',
         label: this.$t('views.charts.percent_coins_total'),
-        sortable: true,
         formatter: (value: any) => `${value.toFixed(2)} %`,
         class: 'text-right',
         thClass: 'th-custom'

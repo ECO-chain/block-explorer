@@ -39,7 +39,7 @@ import { TokenHolder, TokenHolders, TokenSummary } from '../api/ecrc20/type'
 
 @Component({
   components: {
-    InfiniteLoading
+    InfiniteLoading,
   }
 })
 export default class TokenHoldersCard extends Vue {

@@ -32,6 +32,7 @@
     </div>
     <div v-else>
       <token-holders-card :holders="holder" :addr="addr" :summary="summary"></token-holders-card>
+      <back-to-top-btn></back-to-top-btn>
     </div>
   </div>
 </template>
@@ -40,13 +41,15 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import ecrc20Module from '@/api/ecrc20/index'
 import TokenHoldersCard from '@/components/TokenHoldersCard.vue'
+import BackToTopBtn from '../components/BackToTopBtn.vue'
 import { numberWithCommas } from '@/api/filters'
 // eslint-disable-next-line no-unused-vars
 import { TokenSummary, TokenHolders, TokenHolder } from '../api/ecrc20/type'
 
 @Component({
   components: {
-    TokenHoldersCard
+    TokenHoldersCard,
+    BackToTopBtn
   }
 })
 export default class TokenHoldersSection extends Vue {

@@ -18,6 +18,7 @@
                   >{{ data.item.address }}</router-link>
                 </template>
               </b-table>
+              <back-to-top-btn :visibleoffset="850"></back-to-top-btn>
             </div>
             <div v-else>
               <b-card class="rich-list" v-for="(rich, index) in richestList" :key="index">
@@ -45,7 +46,7 @@
                   </b-col>
                 </b-row>
               </b-card>
-              <hr />
+              <back-to-top-btn></back-to-top-btn>
             </div>
           </div>
         </b-col>
@@ -59,12 +60,19 @@ import { Vue, Component } from 'vue-property-decorator'
 import statisticsModule from '@/api/statistics/index'
 // eslint-disable-next-line no-unused-vars
 import { RichList } from '@/api/statistics/type'
+import BackToTopBtn from '../components/BackToTopBtn.vue'
 
-@Component({})
+
+@Component({
+  components: {
+    BackToTopBtn,
+  }
+})
 export default class RichestList extends Vue {
   richestList: RichList[] = []
 
   fields: any[] = []
+
 
   created() {
     this.fields = [

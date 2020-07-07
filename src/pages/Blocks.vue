@@ -81,6 +81,7 @@
                 aria-controls="blocks-table"
               ></b-pagination>
             </div>
+            <back-to-top-btn :visibleoffset="850"></back-to-top-btn>
           </div>
 
           <!-- mobile view -->
@@ -91,6 +92,7 @@
               :block.sync="block"
             ></blocks-list-card>
             <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+            <back-to-top-btn></back-to-top-btn>
           </div>
         </b-col>
       </b-row>
@@ -103,6 +105,7 @@ import { Vue, Component, Watch } from 'vue-property-decorator'
 import blocksModule from '../api/blocks/index'
 import { numberWithCommas } from '../api/filters'
 import BlocksListCard from '../components/BlocksListCard.vue'
+import BackToTopBtn from '../components/BackToTopBtn.vue'
 import InfiniteLoading from 'vue-infinite-loading'
 // eslint-disable-next-line no-unused-vars
 import { Blocks, Pagination } from '../api/blocks/type'
@@ -111,7 +114,8 @@ import moment from 'moment'
 @Component({
   components: {
     BlocksListCard,
-    InfiniteLoading
+    InfiniteLoading,
+    BackToTopBtn
   }
 })
 export default class BlocksList extends Vue {
