@@ -63,7 +63,7 @@
                   </b-col>
                   <b-col cols="6" v-if="!isEcoAddr">
                     <div class="my-1 text-right">
-                      <router-link to="/token">BCST</router-link>
+                      <router-link :to="{ name: 'token', params: { addr: addr } }">{{ tokenSummary.symbol }}</router-link>
                     </div>
                   </b-col>
                 </b-row>
@@ -144,7 +144,7 @@ import BackToTopBtn from '../components/BackToTopBtn.vue'
 
 import { Socket } from 'vue-socket.io-extended'
 import { AddressSummary } from '../api/address/type'
-import { TokenTracker as Tracker } from '../api/ecrc20/type'
+import { TokenTracker as Tracker, TokenSummary } from '../api/ecrc20/type'
 import { Txs, Tx } from '../api/transaction/type'
 import { ContractInfo } from '../api/contracts/type'
 
@@ -175,6 +175,7 @@ export default class Address extends Vue {
   txs: Txs = {} as Txs
   tx: Tx = {} as Tx
   contractInfo: ContractInfo = {} as ContractInfo
+  tokenSummary: TokenSummary = {} as TokenSummary
   isEcoAddr = false
   address = ''
   page = 0
@@ -186,6 +187,7 @@ export default class Address extends Vue {
     if (!this.isEcoAddr) {
       // if its not a eco this.address so it is meaning a given address is a contract address
       this.contractInfo = await contractModule.getTokenContractInfo(this.address)
+      this.tokenSummary = await ecrc20Module.getTokenSummary(this.address)
       this.address = await ecoweb3.getBitAddressFromContractAddress(this.address)
     }
 

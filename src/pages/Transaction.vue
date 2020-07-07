@@ -44,7 +44,10 @@
               </b-col>
               <b-col cols="6">
                 <div class="my-1 text-right text-truncate">
-                  <router-link to="/block" class="d-block text-truncate">{{ tx.blockhash }}</router-link>
+                  <router-link
+                    :to="{ name: 'block', params: { hash: tx.blockhash } }"
+                    class="d-block text-truncate"
+                  >{{ tx.blockhash }}</router-link>
                 </div>
               </b-col>
               <b-col cols="6" v-if="tx.isCoinBase">

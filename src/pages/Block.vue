@@ -116,8 +116,10 @@
                   <b-col cols="6">
                     <div class="my-1 summary-label">{{ $t('views.block.mined_by') }}</div>
                   </b-col>
-                  <b-col cols="6">
-                    <div class="my-1 text-right text-truncate">{{ block.minedBy }}</div>
+                  <b-col cols="6" class="my-1 text-right text-truncate">
+                    <router-link
+                      :to="{ name: 'address', params: { addr: block.minedBy } }"
+                    >{{ block.minedBy }}</router-link>
                   </b-col>
                 </b-row>
               </b-col>
@@ -164,7 +166,7 @@
                   <b-col cols="6">
                     <div class="my-1 text-right text-truncate">
                       <router-link
-                        :to="{ name: 'block', params: { hash: block.previousblockhash } }"
+                        :to="{ name: 'block', params: { hash: block.nextblockhash } }"
                       >{{ block.height + 1 }}</router-link>
                     </div>
                   </b-col>

@@ -152,7 +152,10 @@
         <b-row>
           <b-col cols="12" class="text-center mb-3">
             <div class="token-label">
-              <router-link to="/token" class="token-name">{{ event.contractInfo.name }}</router-link>
+              <router-link
+                :to="{ name: 'token', params: { addr: event.contractInfo.contract_address } }"
+                class="token-name"
+              >{{ event.contractInfo.name }}</router-link>
               <span class="small text-purple-light pl-2">( ECRC20 )</span>
             </div>
           </b-col>
@@ -162,7 +165,7 @@
                 <b-row class="align-items-center no-gutters">
                   <b-col cols="8" class="text-truncate">
                     <router-link
-                      to="/address"
+                      :to="{ name: 'address', params: { addr: event.addressFrom } }"
                       class="d-block text-truncate user-address"
                     >{{ event.addressFrom }}</router-link>
                   </b-col>
@@ -179,7 +182,7 @@
                 <b-row class="align-items-center no-gutters">
                   <b-col cols="8" class="text-truncate">
                     <router-link
-                      to="/address"
+                      :to="{ name: 'address', params: { addr: event.addressTo } }"
                       class="d-block text-truncate user-address"
                     >{{ event.addressTo }}</router-link>
                   </b-col>
@@ -454,6 +457,5 @@ export default class TransactionBox extends Vue {
   .tx-id {
     font-size: 14px;
   }
-
 }
 </style>

@@ -1,7 +1,9 @@
 <template>
   <div id="app" class="bg-space">
     <BlockHeader />
-    <router-view />
+    <transition name="fade" mode="out-in">
+      <router-view :key="$route.params.hash || $route.params.addr" />
+    </transition>
     <BlockFooter />
   </div>
 </template>
@@ -74,5 +76,16 @@ html {
 body {
   background: $purple-blue;
   padding-top: 60px;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>

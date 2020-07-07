@@ -56,7 +56,7 @@
                     <div class="my-1 text-right text-truncate">
                       <CopyBtn class="mr-2" :target="summary.contract_address"></CopyBtn>
                       <router-link
-                        to="/address"
+                        :to="{ name: 'address', params: { addr: summary.contract_address } }"
                         class="text-truncate"
                       >{{ summary.contract_address }}</router-link>
                     </div>
