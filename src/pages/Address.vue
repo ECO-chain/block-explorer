@@ -32,7 +32,7 @@
               <b-col cols="12" md>
                 <b-row class="align-items-center">
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.address.total_received') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.address.total_received') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div
@@ -40,7 +40,7 @@
                     >{{ addressSummary.totalReceived | numberWithCommas }} ECOC</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.address.total_sent') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.address.total_sent') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div
@@ -48,7 +48,7 @@
                     >{{ addressSummary.totalSent | numberWithCommas }} ECOC</div>
                   </b-col>
                   <b-col cols="6">
-                    <div class="my-1">{{ $t('views.address.num_of_tx') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.address.num_of_tx') }}</div>
                   </b-col>
                   <b-col cols="6">
                     <div
@@ -56,7 +56,7 @@
                     >{{ addressSummary.txApperances | numberWithCommas }}</div>
                   </b-col>
                   <b-col cols="6" v-if="!isEcoAddr">
-                    <div class="my-1">{{ $t('views.address.ecrc_token') }}</div>
+                    <div class="my-1 summary-label">{{ $t('views.address.ecrc_token') }}</div>
                   </b-col>
                   <b-col cols="6" v-if="!isEcoAddr">
                     <div class="my-1 text-right">
@@ -100,12 +100,21 @@
           <StorageLog :entries="contractInfo.storage"></StorageLog>
         </b-col>
 
-        <b-col cols="12">
+        <b-col cols="12" class="tx-box-wrapper">
           <div class="group-head my-3 text-center text-md-left">
             <h3 class="head-global my-3">{{ $t('views.address.tx') }}</h3>
           </div>
-          <TransactionBox v-for="(tx, index) in txs.txs" :key="index" :tx="tx"></TransactionBox>
-          <infinite-loading v-if="txs.txs.length" @infinite="infiniteHandler"></infinite-loading>
+          <div v-if="txs.txs.length > 0">
+            <TransactionBox v-for="(tx, index) in txs.txs" :key="index" :tx="tx"></TransactionBox>
+            <infinite-loading
+              slot="append"
+              force-use-infinite-wrapper="tx-box-wrapper"
+              @infinite="infiniteHandler"
+            ></infinite-loading>
+          </div>
+          <div v-else class="block-global rounded-lg">
+            <p class="no-tx"> {{ $t('views.address.no_tx') }}</p>
+          </div>
         </b-col>
         <back-to-top-btn :visisbleoffset="980"></back-to-top-btn>
       </b-row>
@@ -205,6 +214,7 @@ export default class Address extends Vue {
 
   async infiniteHandler($state: any) {
     if (this.page < this.txs.pagesTotal) {
+      console.log('loading more tx....')
       let moreTxs: Txs = await txModule.getAddressTransactions({
         hash: this.address,
         pageNum: this.page
@@ -218,7 +228,7 @@ export default class Address extends Vue {
         // document.documentElement.scrollTop = currentScroll
         $state.loaded()
         this.page++
-      }, 1000)
+      }, 500)
     } else {
       $state.complete()
     }
@@ -238,6 +248,10 @@ export default class Address extends Vue {
   }
 }
 
+.summary-label {
+  font-weight: 600;
+}
+
 .qr {
   border-radius: 8px;
 }
@@ -246,6 +260,25 @@ export default class Address extends Vue {
   h2::first-letter {
     color: $purple;
     font-weight: bold;
+  }
+}
+
+.no-tx {
+  padding: 1.6rem;
+  opacity: 0.7;
+}
+
+@media (max-width: 575px) {
+  .block-global,
+  .addr-balance-block {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 395px) {
+  .block-global,
+  .addr-balance-block {
+    font-size: 13px;
   }
 }
 </style>

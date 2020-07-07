@@ -445,7 +445,7 @@ export default class TransactionBox extends Vue {
 }
 
 .more-icon {
-  color: $purple;
+  cursor: pointer;
 }
 
 @media (max-width: 575px) {

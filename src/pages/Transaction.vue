@@ -103,4 +103,10 @@ export default class Transaction extends Vue {
     font-weight: bold;
   }
 }
+
+@media (max-width: 575px) {
+  .block-global {
+    font-size: 14px;
+  }
+}
 </style>

@@ -6,21 +6,21 @@
         @click="toECRCToken(tokenBalance.contract.contract_address)"
       >
         <b-row>
-          <b-col cols="2">
+          <b-col cols="auto">
             <div class="token-sym text-center font-weight-bold">{{ tokenBalance.contract.symbol }}</div>
           </b-col>
-          <b-col cols="8" class="token-text">
-            <b-row class="font-weight-bold">{{ tokenBalance.contract.name }}</b-row>
-            <b-row class="token-amount">
+          <b-col class="token-text pl-0">
+            <p class="font-weight-bold mb-0">{{ tokenBalance.contract.name }}</p>
+            <p class="token-amount mb-0">
               {{ tokenBalance.amount | numberWithCommas({decimal: 8}) }}
               <span
                 class="ml-2"
               >{{ tokenBalance.contract.symbol }}</span>
-            </b-row>
+            </p>
           </b-col>
           <b-col
-            cols="2"
-            class="text-md-right token-text text-uppercase"
+            cols="auto"
+            class="text-right token-rank text-uppercase"
           >{{ $t('components.token_tracker.rank') }} #{{ tokenBalance.rank }}</b-col>
         </b-row>
       </b-card>
@@ -120,5 +120,17 @@ export default class TokenTracker extends Vue {
 .hvr-sweep-to-right:active:before {
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
+}
+
+@media (max-width: 575px) {
+  .block-global {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 423px) {
+  .token-rank {
+    display: none;
+  }
 }
 </style>
