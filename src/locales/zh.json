@@ -31,7 +31,8 @@
       "timestamp": "时间戳 (UTC)",
       "tx": "交易",
       "mined_by": "开采者",
-      "size_in_byte": "字节大小"
+      "size_in_byte": "字节大小",
+      "today": "今天"
     },
     "block": {
       "block": "区块",

@@ -1,6 +1,8 @@
 import Vue from "vue"
 import VueI18n from "vue-i18n"
 import defaultMessage from "./locales/en.json"
+import moment from 'moment'
+import local from './config/local'
 
 Vue.use(VueI18n)
 
@@ -11,6 +13,11 @@ export const i18n = new VueI18n({
 })
 
 const loadedLocales = ["en"]
+
+const localeTimes = {
+  'en': 'en-us',
+  'zh': 'zh-cn'
+}
 
 export const supportedLocales = [
   { key: "en", localizedName: "English", localizedShortName: "EN" },
@@ -31,5 +38,7 @@ export async function loadLocale(locale: string) {
       loadedLocales.push(locale)
     }
     i18n.locale = locale
+    //@ts-ignore
+    moment.locale(localeTimes[locale])
   }
 }

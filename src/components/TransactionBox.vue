@@ -1,5 +1,5 @@
 <template>
-  <div class="block-global p-3 my-3 rounded-lg mb-6">
+  <div class="block-global tx-box p-3 my-3 rounded-lg mb-6">
     <b-row class="align-items-end mb-3">
       <b-col cols="12" md class="text-truncate">
         <i
@@ -395,6 +395,11 @@ export default class TransactionBox extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.tx-box {
+  border: 2px solid #393b48;
+  box-shadow: 0 6px 12px #080808 !important;
+}
+
 .toggle-more {
   cursor: pointer;
 }

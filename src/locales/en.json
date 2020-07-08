@@ -31,7 +31,8 @@
       "timestamp": "Timestamp (UTC)",
       "tx": "Transactions",
       "mined_by": "Mined By",
-      "size_in_byte": "Size in bytes"
+      "size_in_byte": "Size in bytes",
+      "today": "Today"
     },
     "block": {
       "block": "Block",

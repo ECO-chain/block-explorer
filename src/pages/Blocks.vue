@@ -199,7 +199,7 @@ export default class BlocksList extends Vue {
 
   checkDate(time: Pagination) {
     if (time.isToday) {
-      return 'Today'
+      return this.$t('views.blocks.today')
     }
     return moment(time.current).from(this.nowTime)
   }
