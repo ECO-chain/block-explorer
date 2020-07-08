@@ -78,7 +78,9 @@
             </b-col>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
-                <div class="my-1 text-truncate">{{ info.reward | numberWithCommas({decimal: 8}) }} ECOC</div>
+                <div
+                  class="my-1 text-truncate"
+                >{{ info.reward | numberWithCommas({decimal: 8}) }} ECOC</div>
                 <div class="my-1 small text-purple-light">{{ $t('views.home.block_reward') }}</div>
               </div>
             </b-col>
@@ -103,13 +105,13 @@
             <swiper-slide v-for="(block, index) in blocks.blocks" :key="index">
               <div class="block-item p-3 rounded-lg">
                 <div
-                  class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
+                  class="my-1 border-bottom border-purple-light d-flex justify-content-between align-items-center"
                 >
                   <router-link
                     :to="{ name: 'block', params: { hash: block.hash } }"
                   >{{ block.height }}</router-link>
-                  <span class="small text-purple-light">{{ (block.time * 1000) | timeFromNow }}</span>
                 </div>
+                <span class="small text-purple-light">{{ (block.time * 1000) | timeFromNow }}</span>
                 <div class="my-1 small text-truncate">
                   {{ $t('views.home.swiper.blocks.mined_by') }}:
                   <router-link
@@ -140,16 +142,26 @@
                     <span class="small text-purple-light">{{ Date.now() | timeFromNow }}</span>
                   </div>
                   <div class="my-1 small text-truncate">
-                    {{ $t('views.home.swiper.tx.hash') }}:
+                    <p
+                      class="mb-0 font-weight-bold"
+                    >{{ $t('views.home.swiper.tx.hash') }}</p>
                     <router-link
                       :to="{ name: 'transaction', params: { hash: tx.txid } }"
                     >{{ tx.txid }}</router-link>
                   </div>
-                  <div
-                    class="my-1 small"
-                  >{{ $t('views.home.swiper.tx.vout') }}: {{ tx.valueOut }} ECOC</div>
+                  <div class="my-1 small">
+                    <p
+                      class="mb-0 font-weight-bold"
+                    >{{ $t('views.home.swiper.tx.vout') }}</p>
+                    {{ tx.valueOut | numberWithCommas({fixed: 3}) }} ECOC
+                  </div>
                 </div>
               </swiper-slide>
+            </template>
+            <template v-else>
+              <div class="p-5 m-auto">
+                <b-spinner label="Loading..."></b-spinner>
+              </div>
             </template>
           </swiper>
         </div>
