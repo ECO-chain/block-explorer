@@ -139,10 +139,12 @@
       "allowance": "津贴"
     },
     "rich_list": {
+      "top_addr": "最富裕的地址",
       "richest_addr": "最富裕的地址",
       "address": "地址",
       "balance": "余额",
-      "minted": "产出的"
+      "minted": "产出的",
+      "rank": "等级"
     },
     "transaction": {
       "transaction": "交易",
@@ -182,7 +184,8 @@
       "stats": "统计信息",
       "charts": "图表",
       "token": "令牌",
-      "rich_list": "富豪榜"
+      "rich_list": "富豪榜",
+      "top_list": "富豪榜"
     },
     "search_box": {
       "search_for_block_tx_addr": "搜索区块、交易或地址",

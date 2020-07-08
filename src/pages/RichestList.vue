@@ -4,7 +4,7 @@
       <b-row class="mb-3">
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page mb-1">{{ $t('views.rich_list.richest_addr') }}</h2>
+            <h2 class="head-page mb-1">{{ $t('views.rich_list.top_addr') }}</h2>
           </div>
         </b-col>
 
@@ -12,6 +12,7 @@
           <div class="block-global p-3 my-3 rounded-lg">
             <div class="table-responsive m-0" v-if="!isMobileDevice">
               <b-table dark :fields="fields" :items="richestList" class="rich-list-table">
+                <template v-slot:cell(rank)="data">{{ getRichestRank(data.item.address) }}</template>
                 <template v-slot:cell(address)="data">
                   <router-link
                     :to="{ name: 'address', params: { addr: data.item.address } }"
@@ -62,10 +63,9 @@ import statisticsModule from '@/api/statistics/index'
 import { RichList } from '@/api/statistics/type'
 import BackToTopBtn from '../components/BackToTopBtn.vue'
 
-
 @Component({
   components: {
-    BackToTopBtn,
+    BackToTopBtn
   }
 })
 export default class RichestList extends Vue {
@@ -73,9 +73,14 @@ export default class RichestList extends Vue {
 
   fields: any[] = []
 
-
   created() {
     this.fields = [
+      {
+        key: 'rank',
+        label: this.$t('views.rich_list.rank'),
+        thClass: 'th-custom',
+        class: 'text-center'
+      },
       { key: 'address', label: this.$t('views.rich_list.address'), thClass: 'th-custom' },
       {
         key: 'balance',

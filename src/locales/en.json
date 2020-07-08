@@ -140,10 +140,12 @@
       "invalid_addr": "Invalid Address"
     },
     "rich_list": {
+      "top_addr": "Top Addresses",
       "richest_addr": "Richest Addresses",
       "address": "Address",
       "balance": "Balance",
-      "minted": "Minted"
+      "minted": "Minted",
+      "rank": "Rank"
     },
     "transaction": {
       "transaction": "Transaction",
@@ -183,7 +185,8 @@
       "stats": "Stats",
       "charts": "Charts",
       "token": "Tokens",
-      "rich_list": "Rich List"
+      "rich_list": "Rich List",
+      "top_list": "Top List"
     },
     "search_box": {
       "search_for_block_tx_addr": "Search for block, transaction or address",

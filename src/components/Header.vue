@@ -50,7 +50,7 @@
                     <router-link
                       to="/richest-list"
                       @click.native="toggleShow()"
-                    >{{ $t('components.header.rich_list') }}</router-link>
+                    >{{ $t('components.header.top_list') }}</router-link>
                   </li>
                   <li class="ml-3">
                     <language-switcher></language-switcher>
