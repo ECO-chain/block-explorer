@@ -56,7 +56,7 @@ export default class TokenHoldersCard extends Vue {
   async infiniteHolders($state: any) {
     if (this.holders.offset < this.holders.count) {
       setTimeout(async () => {
-        console.log('infinite holders')
+        // console.log('infinite holders')
         let newHolders = await ecrc20Module.getTokenHolders({
           contractAddr: this.addr,
           limit: 20,

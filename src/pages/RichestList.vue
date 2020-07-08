@@ -73,7 +73,7 @@ export default class RichestList extends Vue {
 
   async mounted() {
     this.richestList = await statisticsModule.getRichestList()
-    console.log(this.richestList)
+    // console.log(this.richestList)
   }
 
   get fields() {

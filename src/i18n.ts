@@ -30,7 +30,7 @@ export function isLocaleSupported(localeKey: string) {
 }
 
 export async function loadLocale(locale: string) {
-  console.log("LOCALE ", locale)
+  // console.log("LOCALE ", locale)
   if (i18n.locale !== locale) {
     if (loadedLocales.indexOf(locale) === -1) {
       const msgs = await require(`./locales/${locale}.json`)

@@ -201,7 +201,7 @@ export default class Address extends Vue {
 
   beforeDestroy() {
     // unsubscribe transaction
-    console.log('unsubscribed', this.address)
+    // console.log('unsubscribed', this.address)
     this.addressTxSubscription('unsubscribe', this.address)
   }
 
@@ -221,7 +221,7 @@ export default class Address extends Vue {
 
   async infiniteHandler($state: any) {
     if (this.page < this.txs.pagesTotal) {
-      console.log('loading more tx....')
+      // console.log('loading more tx....')
       let moreTxs: Txs = await txModule.getAddressTransactions({
         hash: this.address,
         pageNum: this.page

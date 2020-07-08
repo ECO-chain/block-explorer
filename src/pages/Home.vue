@@ -312,7 +312,7 @@ export default class Home extends Vue {
 
   @Watch('statusState.info')
   fsChanged(val: any) {
-    console.log('changed')
+    // console.log('changed')
     setTimeout(() => {
       this.startedSupply = Number(this.statusState.supply)
     }, 6000)

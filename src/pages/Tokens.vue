@@ -77,7 +77,7 @@ export default class Tokens extends Vue {
   async mounted() {
     this.tokens = await ecrc20Module.getAllTokens()
 
-    console.log('now tokens table', this.tokens)
+    // console.log('now tokens table', this.tokens)
   }
 
   get isMobileDevice() {
@@ -121,7 +121,7 @@ export default class Tokens extends Vue {
   async queryToken(val: string) {
     if (val !== '') {
       this.tokensResult = await ecrc20Module.getTokenBySearch(val)
-      console.log('search result', this.tokensResult)
+      // console.log('search result', this.tokensResult)
     }
   }
 }

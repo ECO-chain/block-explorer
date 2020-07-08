@@ -47,7 +47,7 @@ export default class TokenTracker extends Vue {
     )
 
     this.tokenBalance = this.token
-    console.log('rank getting', this.tokenBalance)
+    // console.log('rank getting', this.tokenBalance)
   }
 
   toECRCToken(address: string) {

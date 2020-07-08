@@ -219,8 +219,8 @@ export default class Block extends Vue {
     this.block = await blocksModule.getBlockDetail(this.hash)
     this.txs = await txModule.getBlockTransactions(this.block.hash)
 
-    console.log('block', this.block)
-    console.log('txs', this.txs)
+    // console.log('block', this.block)
+    // console.log('txs', this.txs)
   }
 
   @Watch('hash')

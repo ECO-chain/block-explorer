@@ -26,14 +26,14 @@ import { Info, StatusState } from '@/api/status/type'
 export default class App extends Vue {
   @Socket()
   connect() {
-    console.log('socket connected')
+    // console.log('socket connected')
     this.$socket.client.emit('subscribe', 'sync')
     this.$socket.client.emit('subscribe', 'inv')
-    console.log('subscribed on sync and inv')
+    // console.log('subscribed on sync and inv')
   }
 
   disconnect() {
-    console.log('socket disconnected')
+    // console.log('socket disconnected')
     this.$socket.client.emit('unsubscribe', 'sync')
     this.$socket.client.emit('unsubscribe', 'inv')
   }
@@ -49,7 +49,7 @@ export default class App extends Vue {
     statusModule.setStakingInfo(payload.stakingInfo)
     statusModule.setSupply(payload.supply)
 
-    console.log('onInfo', payload)
+    // console.log('onInfo', payload)
   }
 
   @Socket('markets_info')

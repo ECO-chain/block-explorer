@@ -94,7 +94,7 @@ export default class StorageLog extends Vue {
 
   async mounted() {
     this.dataEntries = await this.aggregateEntries(this.entries)
-    console.log('ent', this.dataEntries)
+    // console.log('ent', this.dataEntries)
   }
 
   get limitedEntries() {
@@ -136,7 +136,7 @@ export default class StorageLog extends Vue {
     const entryDisplayProp = data === 'key' ? 'displayedKey' : 'displayedValue'
     const entryData = data === 'key' ? 'key' : 'value'
 
-    console.log('before click', type)
+    // console.log('before click', type)
 
     if (isLastIndex) {
       this.limitedEntries[index][props] = firstType
@@ -144,14 +144,14 @@ export default class StorageLog extends Vue {
       this.limitedEntries[index][props] = nextType
     }
 
-    console.log('after click', this.limitedEntries[index][props])
+    // console.log('after click', this.limitedEntries[index][props])
 
     this.limitedEntries[index][entryDisplayProp] = this.parseDataType(
       this.limitedEntries[index][entryData],
       this.limitedEntries[index][props]
     )
 
-    console.log('now', this.limitedEntries[index][entryDisplayProp])
+    // console.log('now', this.limitedEntries[index][entryDisplayProp])
   }
 
   parseDataType(data: any, type: string) {

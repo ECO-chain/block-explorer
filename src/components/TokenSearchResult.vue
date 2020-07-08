@@ -44,7 +44,7 @@ export default class TokenSearchResult extends Vue {
   @PropSync('result', { type: Array }) tokenResult!: Token[]
 
   mounted() {
-    console.log('prop sent', this.tokenResult)
+    // console.log('prop sent', this.tokenResult)
   }
 }
 </script>

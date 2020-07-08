@@ -60,7 +60,7 @@ export default class TokenTransferCard extends Vue {
   async inifiniteTransfer($state: any) {
     if (this.transfer.offset < this.transfer.count) {
       setTimeout(async () => {
-        console.log('infinite transfers')
+        // console.log('infinite transfers')
         let newTransfers = await ecrc20Module.getTokenTransfers({
           contractAddr: this.addr,
           limit: 20,

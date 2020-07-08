@@ -76,10 +76,10 @@ export default class Charts extends Vue {
 
     window.addEventListener('resize', () => {
       this.windowWidth = window.innerWidth
-      console.log(this.isMobileDevice)
+      // console.log(this.isMobileDevice)
     })
 
-    console.log('balance interval', this.balanceInterval)
+    // console.log('balance interval', this.balanceInterval)
   }
 
   get fields() {

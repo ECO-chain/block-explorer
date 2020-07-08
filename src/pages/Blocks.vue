@@ -132,7 +132,7 @@ export default class BlocksList extends Vue {
     this.blocks = await blocksModule.getBlocksList()
     this.nextDay = this.blocks.pagination.next
     this.isBusy = false
-    console.log('blocks', this.blocks)
+    // console.log('blocks', this.blocks)
   }
 
   get fields() {
@@ -211,7 +211,7 @@ export default class BlocksList extends Vue {
   }
 
   async loadMoreBlocks(date: string, more: boolean) {
-    console.log('more?', more)
+    // console.log('more?', more)
     if (more) {
       let blocksD = await blocksModule.getBlocksByDateTime({
         date: date,
@@ -227,14 +227,14 @@ export default class BlocksList extends Vue {
 
       this.loadMoreBlocks(this.blocks.pagination.current, this.blocks.pagination.more)
     } else {
-      console.log('now blocks finally', this.blocks)
+      // console.log('now blocks finally', this.blocks)
       this.blocks.pagination.next = this.nextDay
     }
   }
 
   @Watch('blocks')
   async onBlocksChanged(val: any) {
-    console.log('blocks has changed', val)
+    // console.log('blocks has changed', val)
     this.loadMoreBlocks(val.pagination.current, val.pagination.more)
   }
 
@@ -249,10 +249,6 @@ export default class BlocksList extends Vue {
     }
   }
 
-  @Watch('this.$i18n')
-  onLocaleChanged(val: any) {
-    console.log('blocks!! locale has changed', val)
-  }
 }
 </script>
 

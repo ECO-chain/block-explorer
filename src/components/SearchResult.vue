@@ -100,6 +100,7 @@
 </template>
 
 <script lang="ts">
+// eslint-disable-next-line no-unused-vars
 import { Vue, Component, PropSync, Watch } from 'vue-property-decorator'
 
 @Component
@@ -108,13 +109,13 @@ export default class SearchResult extends Vue {
   @PropSync('result', { type: Object }) sResult!: object
 
   mounted() {
-    console.log('now result', this.sResult)
+    // console.log('now result', this.sResult)
   }
 
-  @Watch('sResult')
-  resultChanged(val: any) {
-    console.log('now result changed', val)
-  }
+  // @Watch('sResult')
+  // resultChanged(val: any) {
+  //   console.log('now result changed', val)
+  // }
 
   goToTx(id: string) {
     this.$router.push({ name: 'transaction', params: { hash: id } })
