@@ -67,12 +67,19 @@ export default class TokenTransfersSection extends Vue {
   @Prop() addr!: string
 
   transfer: TokenTransfers = {} as TokenTransfers
-  transferFields: any[] = []
   nowLimit = 20
   currentPage = 1
 
-  created() {
-    this.transferFields = [
+  async mounted() {
+    this.transfer = await ecrc20Module.getTokenTransfers({
+      contractAddr: this.addr,
+      limit: 20,
+      offset: 0
+    })
+  }
+
+  get transferFields() {
+    return [
       {
         key: 'tx_hash',
         label: this.$t('views.token.tx_hash'),
@@ -99,21 +106,13 @@ export default class TokenTransfersSection extends Vue {
         key: 'value',
         label: this.$t('views.token.quantity'),
         formatter: (value: string) => {
-          return numberWithCommas(Number(value), {decimal: 8})
+          return numberWithCommas(Number(value), { decimal: 8 })
         },
         sortable: true,
         thClass: 'th-custom',
         class: 'text-right'
       }
     ]
-  }
-
-  async mounted() {
-    this.transfer = await ecrc20Module.getTokenTransfers({
-      contractAddr: this.addr,
-      limit: 20,
-      offset: 0
-    })
   }
 
   get isMobileDevice() {

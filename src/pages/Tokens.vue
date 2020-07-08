@@ -74,10 +74,18 @@ export default class Tokens extends Vue {
   tokensResult: TokenItems = {} as TokenItems
   input = ''
 
-  fields: any[] = []
+  async mounted() {
+    this.tokens = await ecrc20Module.getAllTokens()
 
-  created() {
-    this.fields = [
+    console.log('now tokens table', this.tokens)
+  }
+
+  get isMobileDevice() {
+    return window.innerWidth <= 767
+  }
+
+  get fields() {
+    return [
       {
         key: 'name',
         label: this.$t('views.tokens.token_info'),
@@ -95,7 +103,7 @@ export default class Tokens extends Vue {
         label: this.$t('views.tokens.total_supply'),
         sortable: true,
         formatter: (value: string) => {
-          return numberWithCommas(Number(value), {decimal: 8})
+          return numberWithCommas(Number(value), { decimal: 8 })
         },
         thClass: 'th-custom',
         class: 'text-right'
@@ -108,16 +116,6 @@ export default class Tokens extends Vue {
         class: 'text-right'
       }
     ]
-  }
-
-  async mounted() {
-    this.tokens = await ecrc20Module.getAllTokens()
-
-    console.log('now tokens table', this.tokens)
-  }
-
-  get isMobileDevice() {
-    return window.innerWidth <= 767
   }
 
   async queryToken(val: string) {

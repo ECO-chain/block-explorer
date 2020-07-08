@@ -100,9 +100,9 @@
       "rich_list": "富豪榜",
       "balance": "平衡",
       "addresses": "地址",
-      "percent_address_total": "% 地址 < 跨度类 = '静音 FSZ-16'>",
+      "percent_address_total": "% 地址",
       "coins": "币",
-      "percent_coins_total": "% 硬币 < 跨度类 = '静音 FSZ-16'>"
+      "percent_coins_total": "% 硬币"
     },
     "tokens": {
       "token_contracts": "代币合约",

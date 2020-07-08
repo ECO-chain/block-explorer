@@ -122,16 +122,21 @@ export default class BlocksList extends Vue {
   blocks: Blocks = {} as Blocks
   // limitedBlocks: Blocks = {} as Blocks
 
-  fields: any[] = []
-
   perPage = 200
   currentPage = 1
   isBusy = true
   nextDay = ''
   limit = 50
 
-  created() {
-    this.fields = [
+  async mounted() {
+    this.blocks = await blocksModule.getBlocksList()
+    this.nextDay = this.blocks.pagination.next
+    this.isBusy = false
+    console.log('blocks', this.blocks)
+  }
+
+  get fields() {
+    return [
       {
         key: 'height',
         label: this.$t('views.blocks.height'),
@@ -174,13 +179,6 @@ export default class BlocksList extends Vue {
         }
       }
     ]
-  }
-
-  async mounted() {
-    this.blocks = await blocksModule.getBlocksList()
-    this.nextDay = this.blocks.pagination.next
-    this.isBusy = false
-    console.log('blocks', this.blocks)
   }
 
   get nowTime() {
@@ -249,6 +247,11 @@ export default class BlocksList extends Vue {
     } else {
       $state.complete()
     }
+  }
+
+  @Watch('this.$i18n')
+  onLocaleChanged(val: any) {
+    console.log('blocks!! locale has changed', val)
   }
 }
 </script>

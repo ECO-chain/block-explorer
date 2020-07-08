@@ -43,24 +43,19 @@ import { BlockHash } from '../api/blocks/type'
 export default class BlockSearchBox extends Vue {
   selected = 'all'
   keyword = null
-  options: any[] = []
 
   loading = false
   result: any = null
   type = ''
 
-  mounted() {
-    this.options = [
+  get options() {
+    return [
       { value: 'all', text: this.$t('components.search_box.all_filter') },
       { value: 'address', text: this.$t('components.search_box.addr') },
       { value: 'token', text: this.$t('components.search_box.token') },
       { value: 'block', text: this.$t('components.search_box.block') },
       { value: 'tx', text: this.$t('components.search_box.tx') }
     ]
-  }
-
-  forceReload() {
-    this.$forceUpdate()
   }
 
   async searchFor(input: string) {

@@ -66,13 +66,24 @@ import BalanceListCard from '@/components/BalanceListCard.vue'
 export default class Charts extends Vue {
   balanceInterval: BalanceIntervalsTable[] = []
 
-  fields: any[] = []
   windowWidth = window.innerWidth
   isMobiled = false
 
   // Table part
-  created() {
-    this.fields = [
+
+  async mounted() {
+    this.balanceInterval = await statisticsModule.getBalanceIntervalsTable()
+
+    window.addEventListener('resize', () => {
+      this.windowWidth = window.innerWidth
+      console.log(this.isMobileDevice)
+    })
+
+    console.log('balance interval', this.balanceInterval)
+  }
+
+  get fields() {
+    return [
       {
         key: 'balance',
         label: this.$t('views.charts.balance'),
@@ -113,17 +124,6 @@ export default class Charts extends Vue {
         thClass: 'th-custom'
       }
     ]
-  }
-
-  async mounted() {
-    this.balanceInterval = await statisticsModule.getBalanceIntervalsTable()
-
-    window.addEventListener('resize', () => {
-      this.windowWidth = window.innerWidth
-      console.log(this.isMobileDevice)
-    })
-
-    console.log('balance interval', this.balanceInterval)
   }
 
   get isMobileDevice() {

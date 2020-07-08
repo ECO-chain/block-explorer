@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="group-head my-3 text-center text-md-left mb-5">
-      <span class="stats-span">{{ chartSelected }}</span>
+      <span class="stats-span">{{ chartName }}</span>
       <b-form-select class="stats-select mb-2" v-model="chartSelected" :options="chartsList"></b-form-select>
       <p class="m-0">{{ chart.description }}</p>
     </div>
@@ -53,19 +53,27 @@ export default class ChartSelector extends Vue {
   stakes: StakeStats[] = []
   labels: any[] = []
   data: any[] = []
-  chartsList: string[] = []
 
-  chartSelected: string = ''
+  chartName = ''
+
   chart = {}
-
-  allCharts: any[] = []
-  daysOptions: any[] = []
 
   daysSelected = '30'
 
-  created() {
-    // TODO: find other way to handle these data
-    this.allCharts = [
+  async mounted() {
+    // const index = this.chartsList.indexOf(this.chartSelected)
+    this.chart = this.allCharts[this.index]
+    //@ts-ignore
+    this.chartName = this.chartSelected
+
+    this.getSupplyData(this.daysSelected).then(val => {
+      this.labels = val.tsDate
+      this.data = val.tsData
+    })
+  }
+
+  get allCharts() {
+    return [
       {
         name: this.$t('components.chart_selector.ecoc_total_supply'),
         description: this.$t('components.chart_selector.ecoc_total_supply_desc'),
@@ -97,8 +105,10 @@ export default class ChartSelector extends Vue {
         getData: this.getStakesData
       }
     ]
+  }
 
-    this.daysOptions = [
+  get daysOptions() {
+    return [
       { text: `30 ${this.$t('components.chart_selector.days')}`, value: '30' },
       { text: `60 ${this.$t('components.chart_selector.days')}`, value: '60' },
       { text: `180 ${this.$t('components.chart_selector.days')}`, value: '180' },
@@ -108,21 +118,31 @@ export default class ChartSelector extends Vue {
     ]
   }
 
-  async mounted() {
-    this.chartsList = this.allCharts.map(chart => chart.name)
+  get chartsList() {
+    return this.allCharts.map(chart => chart.name)
+  }
 
+  get chartSelected() {
     const params = this.$route.params.type
-    // if given params is not undefined
+
     if (params !== undefined) {
-      this.chartSelected = params
+      return params
     } else {
-      this.chartSelected = this.chartsList[0]
+      //@ts-ignore
+      return this.chartsList[0]
     }
+  }
 
-    const index = this.chartsList.indexOf(this.chartSelected)
+  get index() {
+    return this.chartsList.indexOf(this.chartSelected)
+  }
+
+  set chartSelected(val) {
+    this.chartName = val.toString()
+    const index = this.chartsList.indexOf(val)
     this.chart = this.allCharts[index]
-
-    this.getSupplyData(this.daysSelected).then(val => {
+    //@ts-ignore
+    this.chart.getData().then(val => {
       this.labels = val.tsDate
       this.data = val.tsData
     })
@@ -213,16 +233,17 @@ export default class ChartSelector extends Vue {
     })
   }
 
-  @Watch('chartSelected')
-  async onChartChanged(val: string) {
-    const index = this.chartsList.indexOf(val)
-    this.chart = this.allCharts[index]
-    //@ts-ignore
-    this.chart.getData().then(val => {
-      this.labels = val.tsDate
-      this.data = val.tsData
-    })
-  }
+  // @Watch('chartSelected')
+  // async onChartChanged(val: string) {
+  //   const index = this.chartsList.indexOf(val)
+  //   this.chart = this.allCharts[index]
+  //   //@ts-ignore
+  //   this.chart.getData().then(val => {
+  //     this.labels = val.tsDate
+  //     this.data = val.tsData
+  //   })
+  //   this.chartName = val
+  // }
 }
 </script>
 

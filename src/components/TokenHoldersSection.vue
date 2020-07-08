@@ -58,13 +58,19 @@ export default class TokenHoldersSection extends Vue {
 
   holder: TokenHolders = {} as TokenHolders
 
-  holderFields: any[] = []
-
   nowLimit = 20
   currentPage = 1
 
-  created() {
-    this.holderFields = [
+  async mounted() {
+    this.holder = await ecrc20Module.getTokenHolders({
+      contractAddr: this.addr,
+      limit: 20,
+      offset: 0
+    })
+  }
+
+  get holderFields() {
+    return [
       {
         key: 'rank',
         label: this.$t('views.token.rank'),
@@ -81,7 +87,7 @@ export default class TokenHoldersSection extends Vue {
         key: 'amount',
         label: this.$t('views.token.quantity'),
         formatter: (value: string) => {
-          return numberWithCommas(Number(value), {decimal: 8, fixed: 2})
+          return numberWithCommas(Number(value), { decimal: 8, fixed: 2 })
         },
         class: 'text-right',
         thClass: 'th-custom'
@@ -95,14 +101,6 @@ export default class TokenHoldersSection extends Vue {
     ]
   }
 
-  async mounted() {
-    this.holder = await ecrc20Module.getTokenHolders({
-      contractAddr: this.addr,
-      limit: 20,
-      offset: 0
-    })
-  }
-
   get isMobileDevice() {
     return window.innerWidth <= 767
   }
@@ -110,7 +108,7 @@ export default class TokenHoldersSection extends Vue {
   calculatePercentage(total: string, val: string) {
     const currentVal = Number(val) / Math.pow(10, 8)
     const totalVal = Number(total) / Math.pow(10, 8)
-    return numberWithCommas((currentVal / totalVal) * 100, {fixed: 3})
+    return numberWithCommas((currentVal / totalVal) * 100, { fixed: 3 })
   }
 
   getTokenHoldersRanking(holder: TokenHolder) {

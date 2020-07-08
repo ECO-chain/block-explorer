@@ -71,10 +71,13 @@ import BackToTopBtn from '../components/BackToTopBtn.vue'
 export default class RichestList extends Vue {
   richestList: RichList[] = []
 
-  fields: any[] = []
+  async mounted() {
+    this.richestList = await statisticsModule.getRichestList()
+    console.log(this.richestList)
+  }
 
-  created() {
-    this.fields = [
+  get fields() {
+    return [
       {
         key: 'rank',
         label: this.$t('views.rich_list.rank'),
@@ -106,11 +109,6 @@ export default class RichestList extends Vue {
         class: 'text-right'
       }
     ]
-  }
-
-  async mounted() {
-    this.richestList = await statisticsModule.getRichestList()
-    console.log(this.richestList)
   }
 
   get isMobileDevice() {

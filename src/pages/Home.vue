@@ -103,7 +103,13 @@
           <swiper :options="swiperOption">
             <!-- slides -->
             <swiper-slide v-for="(block, index) in blocks.blocks" :key="index">
-              <div class="block-item p-3 rounded-lg">
+              <div
+                class="block-item rounded-lg m-auto loading-block"
+                v-if="blockLoading && block.height === newBlockHeight"
+              >
+                <b-spinner small class="loading-spinner"></b-spinner>
+              </div>
+              <div class="block-item p-3 rounded-lg" v-else>
                 <div
                   class="my-1 border-bottom border-purple-light d-flex justify-content-between align-items-center"
                 >
@@ -142,17 +148,13 @@
                     <span class="small text-purple-light">{{ Date.now() | timeFromNow }}</span>
                   </div>
                   <div class="my-1 small text-truncate">
-                    <p
-                      class="mb-0 font-weight-bold"
-                    >{{ $t('views.home.swiper.tx.hash') }}</p>
+                    <p class="mb-0 font-weight-bold">{{ $t('views.home.swiper.tx.hash') }}</p>
                     <router-link
                       :to="{ name: 'transaction', params: { hash: tx.txid } }"
                     >{{ tx.txid }}</router-link>
                   </div>
                   <div class="my-1 small">
-                    <p
-                      class="mb-0 font-weight-bold"
-                    >{{ $t('views.home.swiper.tx.vout') }}</p>
+                    <p class="mb-0 font-weight-bold">{{ $t('views.home.swiper.tx.vout') }}</p>
                     {{ tx.valueOut | numberWithCommas({fixed: 3}) }} ECOC
                   </div>
                 </div>
@@ -198,8 +200,15 @@ export default class Home extends Vue {
   async onBlock(payload: any) {
     const socketBlock = await blocksModule.getBlockDetail(payload)
     const newBlock = this.blockDetailToBlocks(socketBlock)
+    this.blockLoading = true
+    this.newBlockHeight = newBlock.height
+
     this.blocks.blocks.pop()
     this.blocks.blocks.unshift(newBlock)
+    setTimeout(() => {
+      this.blockLoading = false
+      this.newBlockHeight = 0
+    }, 1000)
   }
   @Socket('tx')
   onTx(payload: any) {
@@ -246,6 +255,9 @@ export default class Home extends Vue {
   startedDifficulty = 0
   startedWeight = 0
   startedBlock = 0
+
+  blockLoading = false
+  newBlockHeight = 0
 
   async mounted() {
     const info = await statusModule.getInfo()
@@ -327,6 +339,15 @@ export default class Home extends Vue {
 
   .supply-label {
     font-size: 14px;
+  }
+}
+
+.loading-block {
+  text-align: center;
+  padding: 1.8rem !important;
+
+  .loading-spinner {
+    margin: 2.75rem;
   }
 }
 
