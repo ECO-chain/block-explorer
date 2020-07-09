@@ -5,7 +5,7 @@
         <b-col cols="12">
           <div class="header d-flex justify-content-between align-items-center">
             <router-link to="/" class="logo">
-              <img alt="Ecochain Explorer" src="~@/assets/images/logo-ecoc.png" />
+              <img alt="Ecochain Explorer" src="../assets/images/logo-ecoc.png" />
             </router-link>
             <transition name="am-topnav">
               <nav class="topnav" v-if="menuActive">
