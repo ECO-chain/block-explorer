@@ -1,0 +1,251 @@
+{
+  "views": {
+    "home": {
+      "block_info": "区块链信息",
+      "final_supply": "总供应量（上限)",
+      "current_supply": "当下供应",
+      "relay_fee": "接力费",
+      "difficulty": "难度",
+      "connections": "连接",
+      "network_weight": "网络权重",
+      "block_height": "区块高度",
+      "block_reward": "区块奖励",
+      "seven_days_tx": "7 日ECOC交易历史",
+      "blocks": "区块",
+      "tx": "交易",
+      "swiper": {
+        "blocks": {
+          "mined_by": "开采者",
+          "size": "量",
+          "tx": "交易"
+        },
+        "tx": {
+          "hash": "哈唏",
+          "vout": "超值"
+        }
+      }
+    },
+    "blocks": {
+      "blocks_by_d": "按日期查询区块",
+      "height": "高度",
+      "timestamp": "时间戳 (UTC)",
+      "tx": "交易",
+      "mined_by": "开采者",
+      "size_in_byte": "字节大小",
+      "today": "今天"
+    },
+    "block": {
+      "block": "区块",
+      "block_hash": "区块哈唏",
+      "summary": "总结",
+      "confirm": "已确认",
+      "num_tx": "交易次数",
+      "difficulty": "难度",
+      "height": "高度",
+      "bits": "位",
+      "block_reward": "区块奖励",
+      "size_b": "量（字节)",
+      "time": "时间戳",
+      "version": "版本",
+      "mined_by": "开采者",
+      "nonce": "Nonce",
+      "merkle": "Merkle Root",
+      "prev_block": "上一个区块",
+      "next_block": "下个区块",
+      "tx": "交易"
+    },
+    "status": {
+      "chain_status": "链状态",
+      "sync_status": "同步状态",
+      "sync_prog": "同步进度",
+      "current_sync": "当前同步状态",
+      "start_d": "开始日期",
+      "init_block_height": "初始区块链高度",
+      "sync_block": "同步区块",
+      "skipped_block": "跳块",
+      "sync_type": "同步类型",
+      "ecoc_node_info": "Ecochain 节点信息",
+      "version": "版本",
+      "protocol_ver": "协议版本",
+      "blocks": "区块",
+      "time_off": "时间偏移",
+      "connect_to_other": "连接到其他节点",
+      "mine_diffi": "开采难度",
+      "network": "网络",
+      "proxy_sett": "代理服务器设置",
+      "info_err": "信息错误",
+      "last_blocks": "上一个区块",
+      "last_block_hash": "最后一块哈希 (ECOC)",
+      "current_block_tip": "当前的区块链技巧"
+    },
+    "stats": {
+      "stats": "统计信息",
+      "ecoc_stats_last": "ECOC 过去24小时的统计数据",
+      "block_summary": "区块总结",
+      "block_minted": "以开矿区块",
+      "time_blocks": "区块间时间",
+      "minted_ecoc": "开采ECOC币",
+      "tx_summary": "交易总结",
+      "total_tx_fee": "交易费用总额",
+      "num_of_tx": "交易次数",
+      "total_output_vol": "总产量 (ECOC)",
+      "est_tx_vol": "预计交易量 (ECOC)",
+      "view_chart": "视图图表",
+      "stake_diffi": "权益难度",
+      "difficulty": "难度",
+      "percent_staked": "库存供应百分比"
+    },
+    "charts": {
+      "charts": "图表",
+      "rich_list": "富豪榜",
+      "balance": "平衡",
+      "addresses": "地址",
+      "percent_address_total": "% 地址",
+      "coins": "币",
+      "percent_coins_total": "% 硬币"
+    },
+    "tokens": {
+      "token_contracts": "代币合约",
+      "search_placeholder": "请输入ERC20合约地址或代币名称",
+      "search": "搜索",
+      "token_info": "代币信息",
+      "contract_addr": "合约地址",
+      "total_supply": "总供应",
+      "holders": "持有人"
+    },
+    "token": {
+      "token_tracker_summary": "代币追踪总结",
+      "total_supply": "总供应量",
+      "token_holders": "代币持有者",
+      "name": "名字",
+      "contract_addr": "合约地址",
+      "num_of_transfers": "转账次数",
+      "token_decimal": "代币小数点",
+      "token_transfers": "代币传输",
+      "total_of_transfer": "共计 {transfers} 建立",
+      "tx_hash": "交易哈唏",
+      "age": "年龄",
+      "from": "从",
+      "to": "到",
+      "quantity": "数量",
+      "rank": "等级",
+      "total_of_holders": "共计 {holders} 令牌持有者 建立",
+      "addr": "地址",
+      "percent": "百分比",
+      "read_smart_contract": "阅读智能合约",
+      "decimals": "小数",
+      "version": "版本",
+      "balance_of": "的余额",
+      "symbol": "符号",
+      "allowance": "津贴"
+    },
+    "rich_list": {
+      "top_addr": "最富裕的地址",
+      "richest_addr": "最富裕的地址",
+      "address": "地址",
+      "balance": "余额",
+      "minted": "产出的",
+      "rank": "等级"
+    },
+    "transaction": {
+      "transaction": "交易",
+      "summary": "总结",
+      "size": "量",
+      "bytes": "字节",
+      "received_tm": "接收时间",
+      "mined_tm": "挖矿时间",
+      "included_in_block": "包含在区块中",
+      "coinbase": "铸币厂",
+      "detail": "细节"
+    },
+    "address": {
+      "address": "地址",
+      "summary": "总结",
+      "confirm": "已确认",
+      "balance": "余额",
+      "total_received": "收到总额",
+      "total_sent": "发送总数",
+      "num_of_tx": "交易数量",
+      "ecrc_token": "ECRC20代币",
+      "storage": "存储",
+      "entries": "条目",
+      "tx": "交易",
+      "no_tx": "这个地址没有任何交易"
+    },
+    "not_found": {
+      "page_not_found": "页面没找到",
+      "to_home": "返到主页"
+    }
+  },
+  "components": {
+    "header": {
+      "home": "主页",
+      "blocks": "区块",
+      "status": "状况",
+      "stats": "统计信息",
+      "charts": "图表",
+      "token": "令牌",
+      "rich_list": "富豪榜",
+      "top_list": "富豪榜"
+    },
+    "search_box": {
+      "search_for_block_tx_addr": "搜索区块、交易或地址",
+      "all_filter": "所有筛选器",
+      "addr": "地址",
+      "token": "代币",
+      "block": "区块",
+      "tx": "交易"
+    },
+    "search_result": {
+      "tx": "交易",
+      "confirm": "笔确认",
+      "bytes": "字节",
+      "value": "值",
+      "addr": "地址",
+      "block": "区块",
+      "mined_by": "开采者",
+      "token": "代币",
+      "no_result": "没有匹配结果"
+    },
+    "chart_selector": {
+      "ecoc_total_supply": "ECOC 总量",
+      "ecoc_total_supply_desc": "检查当前 ECOC 电源. 最大供应量为2,000,000,000 ECOC",
+      "fees": "费用",
+      "fees_desc": "支付给矿工的所有交易费用的总价值（不包括区块奖励的CoinBase值)",
+      "tx": "交易",
+      "tx_desc": "每日确认的ECOC交易",
+      "outputs": "输出",
+      "outputs_desc": "每天所有交易输出的总价值（包括作为更改返回给发件人的硬币)",
+      "difficulty": "难度",
+      "difficulty_desc": "一个相对的衡量它是多么困难找到一个新的块。由于矿工网络部署了多少散列力, 对难度进行了定期调整",
+      "stakes": "抵押",
+      "days": "每日",
+      "year": "年份",
+      "years": "年份",
+      "all_time": "整体时间"
+    },
+    "token_search_result": {
+      "addr": "地址",
+      "no_result": "没有匹配结果"
+    },
+    "transaction_box": {
+      "mined": "开采",
+      "type": "类型",
+      "no_input": "无输入（新产出的币)",
+      "confirm": "证实:",
+      "fee": "费用:"
+    },
+    "storage_log": {
+      "more": "多",
+      "view_all": "全部显示"
+    },
+    "token_script_log": {
+      "bytecode": "字节码",
+      "contract_code": "合约代码",
+      "asm": "装配"
+    },
+    "token_tracker": {
+      "rank": "等级#"
+    }
+  }
+}

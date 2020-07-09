@@ -5,43 +5,55 @@
         <b-col cols="12">
           <div class="header d-flex justify-content-between align-items-center">
             <router-link to="/" class="logo">
-              <img alt="Ecochain Explorer" src="~@/assets/images/logo-ecoc.png" />
+              <img alt="Ecochain Explorer" src="../assets/images/logo-ecoc.png" />
             </router-link>
             <transition name="am-topnav">
               <nav class="topnav" v-if="menuActive">
                 <ul class="list-unstyled d-md-flex m-0 topnav-list align-items-center">
                   <li class="ml-3">
-                    <router-link to="/" @click.native="toggleShow()">Home</router-link>
+                    <router-link
+                      to="/"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.home') }}</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/blocks" @click.native="toggleShow()">Blocks</router-link>
+                    <router-link
+                      to="/blocks"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.blocks') }}</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/status" @click.native="toggleShow()">Status</router-link>
+                    <router-link
+                      to="/status"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.status') }}</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/stats" @click.native="toggleShow()">Stats</router-link>
+                    <router-link
+                      to="/stats"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.stats') }}</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/charts" @click.native="toggleShow()">Charts</router-link>
+                    <router-link
+                      to="/charts"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.charts') }}</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/tokens" @click.native="toggleShow()">Tokens</router-link>
+                    <router-link
+                      to="/tokens"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.token') }}</router-link>
                   </li>
                   <li class="ml-3">
-                    <router-link to="/rich-list" @click.native="toggleShow()">Rich List</router-link>
+                    <router-link
+                      to="/richest-list"
+                      @click.native="toggleShow()"
+                    >{{ $t('components.header.top_list') }}</router-link>
                   </li>
                   <li class="ml-3">
-                    <b-dropdown
-                      size="sm"
-                      id="dropdown-right"
-                      right
-                      text="English"
-                      class="switch-language"
-                    >
-                      <b-dropdown-item href="#">English</b-dropdown-item>
-                      <b-dropdown-item href="#">Chinese</b-dropdown-item>
-                    </b-dropdown>
+                    <language-switcher></language-switcher>
                   </li>
                 </ul>
               </nav>
@@ -64,9 +76,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator'
+import LanguageSwitcher from './LanguageSwitcher.vue'
 
-@Component
+@Component({
+  components: {
+    LanguageSwitcher
+  }
+})
 export default class BlockHeader extends Vue {
   menuActive = screen.width <= 767.98 ? false : true
 
@@ -89,10 +106,10 @@ export default class BlockHeader extends Vue {
 .header {
   height: 60px;
   @include media-breakpoint-down(md) {
-      font-size: rem(12);
+    font-size: rem(12);
   }
   @include media-breakpoint-down(sm) {
-      font-size: rem(16);
+    font-size: rem(16);
   }
   a {
     color: $white;
@@ -126,7 +143,7 @@ export default class BlockHeader extends Vue {
     text-align: center;
     padding: 2rem 0;
     li {
-      padding: .5rem 0;
+      padding: 0.5rem 0;
     }
   }
 }

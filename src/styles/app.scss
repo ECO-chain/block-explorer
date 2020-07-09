@@ -1,13 +1,12 @@
 // Fonts
-@import "../assets/fontface/NunitoSans/stylesheet.css";
+@import '../assets/fontface/NunitoSans/stylesheet.css';
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import '../../node_modules/bootstrap-vue/src/index.scss';
 
 @import 'hamburgers-settings';
-@import "~hamburgers/_sass/hamburgers/hamburgers";
+@import '~hamburgers/_sass/hamburgers/hamburgers';
 
 // Import
-@import "variables";
-@import "mixins";
-@import "global";
-
+@import 'variables';
+@import 'mixins';
+@import 'global';

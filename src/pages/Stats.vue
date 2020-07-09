@@ -4,37 +4,39 @@
       <b-row>
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h2 class="head-page my-0">
-              <span>S</span>tatistics
-            </h2>
-            <p class="my-0">ECOC statistics for the last 24 hours</p>
+            <h2 class="head-page my-0">{{ $t('views.stats.stats') }}</h2>
+            <p class="my-0">{{ $t('views.stats.ecoc_stats_last') }}</p>
           </div>
           <!-- END .group-head -->
         </b-col>
 
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h3 class="head-global my-3">Block Summary</h3>
+            <h3 class="head-global my-3">{{ $t('views.stats.block_summary') }}</h3>
           </div>
           <div class="block-global p-3 mb-3 rounded-lg">
             <b-row class="align-items-center">
               <b-col cols="6">
-                <div class="my-1">Blocks Minted</div>
+                <div class="stats-label">{{ $t('views.stats.block_minted') }}</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1 text-right">2669</div>
+                <div class="my-1 text-right">{{ totalStats.n_blocks_mined | numberWithCommas }}</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1">Time Between Blocks</div>
+                <div class="stats-label">{{ $t('views.stats.time_blocks') }}</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1 text-right">32.37 secs</div>
+                <div
+                  class="my-1 text-right"
+                >{{ totalStats.time_between_blocks | numberWithCommas }} secs</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1">Minted ECOC coins</div>
+                <div class="stats-label">{{ $t('views.stats.minted_ecoc') }}</div>
               </b-col>
               <b-col cols="6">
-                <div class="my-1 text-right">133,450.00000000 ECOC</div>
+                <div
+                  class="my-1 text-right"
+                >{{ totalStats.mined_currency_amount | numberWithCommas({decimal: 8}) }} ECOC</div>
               </b-col>
             </b-row>
           </div>
@@ -42,51 +44,60 @@
 
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h3 class="head-global my-3">Transaction Summary</h3>
+            <h3 class="head-global my-3">{{ $t('views.stats.tx_summary') }}</h3>
           </div>
           <div class="block-global p-3 mb-3 rounded-lg">
             <b-row class="align-items-center">
               <b-col>
-                <div class="my-1">Total Transaction Fees</div>
+                <div class="stats-label">{{ $t('views.stats.total_tx_fee') }}</div>
               </b-col>
               <b-col>
-                <div class="my-1 text-right">60,800.56963296 ECOC</div>
+                <div
+                  class="my-1 text-right"
+                >{{ totalStats.transaction_fees | numberWithCommas({decimal: 8}) }} ECOC</div>
               </b-col>
               <b-col cols="12" md="auto">
-                <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
-                </div>
+                <b-button class="btn-view-chart" size="sm" @click="goToCharts('fees')">
+                  <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
+                </b-button>
               </b-col>
             </b-row>
+            <hr />
             <b-row class="align-items-center">
               <b-col>
-                <div class="my-1">Number of Transactions</div>
+                <div class="stats-label">{{ $t('views.stats.num_of_tx') }}</div>
               </b-col>
               <b-col>
-                <div class="my-1 text-right">5583</div>
+                <div
+                  class="my-1 text-right"
+                >{{ totalStats.number_of_transactions | numberWithCommas }}</div>
               </b-col>
               <b-col cols="12" md="auto">
-                <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
-                </div>
+                <b-button class="btn-view-chart" size="sm" @click="goToCharts('fees')">
+                  <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
+                </b-button>
               </b-col>
             </b-row>
+            <hr />
             <b-row class="align-items-center">
               <b-col>
-                <div class="my-1">Total Output Volume (ECOC)</div>
+                <div class="stats-label">{{ $t('views.stats.total_output_vol') }}</div>
               </b-col>
               <b-col>
-                <div class="my-1 text-right">283.33837916 ECOC</div>
+                <div
+                  class="my-1 text-right"
+                >{{ totalStats.outputs_volume | numberWithCommas({decimal: 8}) }} ECOC</div>
               </b-col>
               <b-col cols="12" md="auto">
-                <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
-                </div>
+                <b-button class="btn-view-chart" size="sm" @click="goToCharts('fees')">
+                  <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
+                </b-button>
               </b-col>
             </b-row>
+            <hr />
             <b-row class="align-items-center">
               <b-col>
-                <div class="my-1">Estimated Transaction Volume (ECOC)</div>
+                <div class="stats-label">{{ $t('views.stats.est_tx_vol') }}</div>
               </b-col>
               <b-col>
                 <div class="my-1 text-right"></div>
@@ -100,33 +111,34 @@
 
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
-            <h3 class="head-global my-3">Staking difficulty</h3>
+            <h3 class="head-global my-3">{{ $t('views.stats.stake_diffi') }}</h3>
           </div>
           <div class="block-global p-3 mb-3 rounded-lg">
             <b-row class="align-items-center">
               <b-col>
-                <div class="my-1">Difficulty</div>
+                <div class="stats-label">{{ $t('views.stats.difficulty') }}</div>
               </b-col>
               <b-col>
-                <div class="my-1 text-right">5,683,342.93347735</div>
+                <div class="my-1 text-right">{{ totalStats.difficulty | numberWithCommas }}</div>
               </b-col>
               <b-col cols="12" md="auto">
-                <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
-                </div>
+                <b-button class="btn-view-chart" size="sm" @click="goToCharts('fees')">
+                  <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
+                </b-button>
               </b-col>
             </b-row>
+            <hr />
             <b-row class="align-items-center">
               <b-col>
-                <div class="my-1">Percent of staked supply</div>
+                <div class="stats-label">{{ $t('views.stats.percent_staked') }}</div>
               </b-col>
               <b-col>
-                <div class="my-1 text-right">0.6266743993294185 %</div>
+                <div class="my-1 text-right">{{ totalStats.stake | numberWithCommas }} %</div>
               </b-col>
               <b-col cols="12" md="auto">
-                <div class="mt-1 mb-3 mb-md-1 text-center">
-                  <router-link to="/stats/outputs" class="btn btn-sm btn-primary">View Chart</router-link>
-                </div>
+                <b-button class="btn-view-chart" size="sm" @click="goToCharts('fees')">
+                  <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
+                </b-button>
               </b-col>
             </b-row>
           </div>
@@ -137,10 +149,86 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component } from 'vue-property-decorator'
+import statisticsModule from '@/api/statistics/index'
+// eslint-disable-next-line no-unused-vars
+import { Total } from '../api/statistics/type'
 
-@Component
+@Component({})
 export default class Stats extends Vue {
+  totalStats: Total = {} as Total
 
+  async mounted() {
+    this.totalStats = await statisticsModule.getTotalStats()
+  }
+
+  goToCharts(path: string) {
+    switch (path) {
+      case 'fees':
+        this.$router.push({ name: 'charts', params: { type: 'Fees' } })
+        break
+      case 'tx':
+        this.$router.push({ name: 'charts', params: { type: 'Transactions' } })
+        break
+      case 'output':
+        this.$router.push({ name: 'charts', params: { type: 'Outputs' } })
+        break
+      case 'difficulty':
+        this.$router.push({ name: 'charts', params: { type: 'Difficulty' } })
+        break
+      case 'stake':
+        this.$router.push({ name: 'charts', params: { type: 'Stakes' } })
+        break
+    }
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+.group-head {
+  h2::first-letter {
+    color: $purple;
+    font-weight: bold;
+  }
+}
+
+.stats-label {
+  font-weight: 600;
+}
+
+.btn-view-chart {
+  color: $purple;
+  border-color: $purple;
+  border-radius: 4px;
+
+  &:focus {
+    box-shadow: 0 0 0 0.1rem rgba($purple, 0.3);
+  }
+
+  &:hover {
+    background-color: rgba($purple, 0.6) !important;
+    box-shadow: none;
+    color: $white !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .btn-view-chart {
+    display: block !important;
+    width: 100% !important;
+    margin-top: 1.2rem !important;
+  }
+}
+
+@media (max-width: 515px) {
+  .block-global {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 408px) {
+  .block-global {
+    font-size: 13px;
+  }
+}
+</style>
