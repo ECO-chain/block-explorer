@@ -25,9 +25,10 @@ const router = new VueRouter({
       component: Home,
     },
     {
-      path: '/blocks',
+      path: '/blocks/:date?',
       name: 'blocks',
       component: Blocks,
+      props: true,
     },
     {
       path: '/status',

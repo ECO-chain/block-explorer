@@ -34,15 +34,30 @@ async function getBlocksList(context: ActionContext): Promise<Blocks> {
   }
 }
 
-async function getBlocksByDateTime(context: ActionContext, payload: { date: string, time?: number }): Promise<Blocks> {
+async function getBlocksByDateTime(context: ActionContext, payload: { date: string, time?: number, cancel?: boolean }): Promise<Blocks> {
+  const CancelToken = Axios.CancelToken
+  const source = CancelToken.source()
+
+  if ('cancel' in payload && payload.cancel) {
+    source.cancel('Blocks requesting cancelled')
+  }
+
   try {
     if ('time' in payload) {
-      const res = await Axios.get(`${env!.baseURL}api/blocks?blockDate=${payload.date}&startTimestamp=${payload.time}`)
+      const res = await Axios.get(`${env!.baseURL}api/blocks?blockDate=${payload.date}&startTimestamp=${payload.time}`, {
+        cancelToken: source.token
+      })
+      return res.data
+    } else {
+      const res = await Axios.get(`${env!.baseURL}api/blocks?blockDate=${payload.date}`, {
+        cancelToken: source.token
+      })
       return res.data
     }
-    const res = await Axios.get(`${env!.baseURL}api/blocks?blockDate=${payload.date}`)
-    return res.data
   } catch (e) {
+    if (Axios.isCancel(e)) {
+      return e
+    }
     return e
   }
 }
@@ -73,3 +88,4 @@ async function getBlockHashByIndex(context: ActionContext, index: number): Promi
     return e
   }
 }
+

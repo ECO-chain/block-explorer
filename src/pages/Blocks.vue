@@ -13,36 +13,46 @@
             <ul
               class="pagination pagination-dark mb-3 mb-md-0 justify-content-center justify-content-md-end"
             >
-              <li
-                class="page-item"
-                :class="isBusy ? 'disabled': ''"
-                @click="changeBlocksDate(blocks.pagination.prev)"
-              >
-                <a class="page-link d-flex align-items-center">
+              <li class="page-item" :class="isBusy ? 'disabled': ''">
+                <router-link
+                  class="page-link d-flex align-items-center"
+                  :to="{ name: 'blocks', params: { date: blocks.pagination.prev } }"
+                >
                   <b-icon-arrow-left-short class="h3 mb-0"></b-icon-arrow-left-short>
                   {{ blocks.pagination.prev | timeFormat('ll') }}
-                </a>
+                </router-link>
               </li>
               <li
                 class="page-item"
                 v-if="!blocks.pagination.isToday"
                 :class="isBusy ? 'disabled': ''"
-                @click="changeBlocksDate(nextDay)"
               >
-                <a class="page-link d-flex align-items-center">
-                  {{ nextDay | timeFormat('ll') }}
+                <router-link
+                  class="page-link d-flex align-items-center"
+                  :to="{ name: 'blocks', params: { date: blocks.pagination.next } }"
+                >
+                  {{ blocks.pagination.next | timeFormat('ll') }}
                   <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
-                </a>
+                </router-link>
               </li>
             </ul>
+
             <div class="text-center text-md-right">
               <p class="mb-0">{{ blocks.pagination.current | timeFormat('dddd MMMM Do YYYY') }}</p>
               <span class="small text-white-50">{{ checkDate(blocks.pagination) }}</span>
             </div>
           </nav>
 
+          <div v-if="!isMobileDevice">
+            <b-collapse v-model="isFetchMore">
+              <div class="loading-bar">
+                <b-spinner small class="mr-2"></b-spinner>Loading more blocks...
+              </div>
+            </b-collapse>
+          </div>
+
           <div class="block-global p-3 mb-3 rounded-lg" v-if="!isMobileDevice">
-            <div class="table-responsive" v-if="!isMobileDevice">
+            <div class="table-responsive">
               <b-table
                 id="blocks-table"
                 class="blocks-list-table"
@@ -64,13 +74,27 @@
                   >{{ data.item.minedBy }}</router-link>
                 </template>
                 <template v-slot:table-busy>
-                  <div class="text-center text-danger my-2">
-                    <b-spinner class="align-middle"></b-spinner>
-                    <strong>Loading...</strong>
+                  <div class="busy">
+                    <pixel-spinner
+                      class="m-auto"
+                      :animation-duration="2000"
+                      :size="70"
+                      color="#ffffff"
+                    />
+                    <strong>Blocks is currently fetching</strong>
                   </div>
                 </template>
               </b-table>
             </div>
+
+            <div v-if="isMobileDevice">
+              <b-collapse v-model="isFetchMore">
+                <div class="loading-bar-table">
+                  <b-spinner small class="mr-2"></b-spinner>Loading more blocks...
+                </div>
+              </b-collapse>
+            </div>
+
             <div class="my-2 d-flex justify-content-center">
               <b-pagination
                 v-if="!isBusy"
@@ -86,12 +110,11 @@
 
           <!-- mobile view -->
           <div v-if="isMobileDevice">
-            <blocks-list-card
-              v-for="(block, index) in limitedBlocks"
-              :key="index"
-              :block.sync="block"
-            ></blocks-list-card>
-            <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+            <div class="busy" v-if="isBusy">
+              <pixel-spinner class="m-auto" :animation-duration="2000" :size="70" color="#ffffff" />
+              <strong>Blocks is currently fetching</strong>
+            </div>
+            <blocks-list-card v-else :blocks.sync="blocks"></blocks-list-card>
             <back-to-top-btn></back-to-top-btn>
           </div>
         </b-col>
@@ -101,9 +124,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import blocksModule from '../api/blocks/index'
 import { numberWithCommas } from '../api/filters'
+import { PixelSpinner } from 'epic-spinners'
 import BlocksListCard from '../components/BlocksListCard.vue'
 import BackToTopBtn from '../components/BackToTopBtn.vue'
 import InfiniteLoading from 'vue-infinite-loading'
@@ -115,24 +139,31 @@ import moment from 'moment'
   components: {
     BlocksListCard,
     InfiniteLoading,
-    BackToTopBtn
+    BackToTopBtn,
+    PixelSpinner
   }
 })
 export default class BlocksList extends Vue {
+  @Prop() date!: string
   blocks: Blocks = {} as Blocks
-  // limitedBlocks: Blocks = {} as Blocks
 
   perPage = 200
   currentPage = 1
   isBusy = true
+  isFetchMore = false
   nextDay = ''
-  limit = 50
 
   async mounted() {
-    this.blocks = await blocksModule.getBlocksList()
-    this.nextDay = this.blocks.pagination.next
+    if (this.date) {
+      this.blocks = await blocksModule.getBlocksByDateTime({ date: this.date })
+      this.nextDay = this.blocks.pagination.next
+      this.loadMoreBlocks(this.blocks.pagination)
+    } else {
+      this.blocks = await blocksModule.getBlocksList()
+      this.nextDay = this.blocks.pagination.next
+      this.loadMoreBlocks(this.blocks.pagination)
+    }
     this.isBusy = false
-    // console.log('blocks', this.blocks)
   }
 
   get fields() {
@@ -191,8 +222,8 @@ export default class BlocksList extends Vue {
     return window.innerWidth <= 767
   }
 
-  get limitedBlocks() {
-    return this.blocks.blocks.slice(0, this.limit)
+  get selectedDate() {
+    return this.date ? this.date : this.nowTime
   }
 
   checkDate(time: Pagination) {
@@ -202,53 +233,49 @@ export default class BlocksList extends Vue {
     return moment(time.current).from(this.nowTime)
   }
 
-  async changeBlocksDate(date: string) {
+  async loadMoreBlocks(blocksTime: Pagination) {
+    if (blocksTime.more) {
+      try {
+        this.isFetchMore = true
+        let blocksD = await blocksModule.getBlocksByDateTime({
+          date: blocksTime.current,
+          time: blocksTime.moreTs
+        })
+
+        blocksD.blocks.forEach(block => {
+          this.blocks.blocks.push(block)
+        })
+
+        this.blocks.pagination = blocksTime
+        this.blocks.pagination.next = this.nextDay
+        this.blocks.length = this.blocks.blocks.length
+
+        this.loadMoreBlocks(blocksD.pagination)
+      } catch (e) {
+        this.isFetchMore = false
+      }
+    } else {
+      this.blocks.pagination.next = this.nextDay
+      this.isFetchMore = false
+    }
+  }
+
+  @Watch('$route')
+  async routeUpdated(to: any) {
     this.isBusy = true
-    this.blocks = await blocksModule.getBlocksByDateTime({ date })
+    //cancel request
+    await blocksModule.getBlocksByDateTime({
+      date: '',
+      cancel: true
+    })
+    window.stop()
+
+    // fetch new blocks on new date
+    this.blocks = await blocksModule.getBlocksByDateTime({ date: to.params.date })
     this.nextDay = this.blocks.pagination.next
     this.isBusy = false
-    this.currentPage = 1
+    this.loadMoreBlocks(this.blocks.pagination)
   }
-
-  async loadMoreBlocks(date: string, more: boolean) {
-    // console.log('more?', more)
-    if (more) {
-      let blocksD = await blocksModule.getBlocksByDateTime({
-        date: date,
-        time: this.blocks.pagination.moreTs
-      })
-
-      for (let block of blocksD.blocks) {
-        this.blocks.blocks.push(block)
-      }
-
-      this.blocks.pagination = blocksD.pagination
-      this.blocks.length = this.blocks.blocks.length
-
-      this.loadMoreBlocks(this.blocks.pagination.current, this.blocks.pagination.more)
-    } else {
-      // console.log('now blocks finally', this.blocks)
-      this.blocks.pagination.next = this.nextDay
-    }
-  }
-
-  @Watch('blocks')
-  async onBlocksChanged(val: any) {
-    // console.log('blocks has changed', val)
-    this.loadMoreBlocks(val.pagination.current, val.pagination.more)
-  }
-
-  async infiniteHandler($state: any) {
-    if (this.limit < this.blocks.length) {
-      setTimeout(() => {
-        this.limit += 50
-        $state.loaded()
-      }, 1000)
-    } else {
-      $state.complete()
-    }
-  }
-
 }
 </script>
 
@@ -273,8 +300,31 @@ export default class BlocksList extends Vue {
   }
 }
 
+.busy {
+  text-align: center;
+  padding: 4rem;
+}
+
 .disabled {
   pointer-events: none;
   cursor: default;
+}
+
+.loading-bar {
+  display: flex;
+  font-size: 14px;
+  background: #621b82;
+  border-radius: 6px;
+  padding: 0.4rem;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-bar-table {
+  @extend .loading-bar;
+  border-radius: 0 !important;
+  background: #242731 !important;
 }
 </style>

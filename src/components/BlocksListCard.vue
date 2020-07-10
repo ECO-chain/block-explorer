@@ -1,40 +1,92 @@
 <template>
-  <b-card class="blocks-card mt-4" @click="goToBlock">
-    <b-row>
-      <b-col>
-        <router-link
-          class="block-height"
-          :to="{ name: 'block', params: { hash: blockD.hash } }"
-        >#{{ blockD.height }}</router-link>
-      </b-col>
-      <b-col class="block-time">{{ blockD.time | timeFormat('LLL') }}</b-col>
-    </b-row>
-    <b-row class="pt-2 block-mined">
-      <b-col>Mined by</b-col>
-      <b-col class="mined text-truncate">{{ blockD.minedBy }}</b-col>
-    </b-row>
-    <b-row>
-      <b-col class="block-tx">
-        <span>{{ blockD.txlength }}</span> Transaction(s)
-      </b-col>
-      <b-col class="block-size">
-        <span>{{ blockD.size | numberWithCommas }}</span> bytes
-      </b-col>
-    </b-row>
-  </b-card>
+  <div>
+    <div
+      class="blocks-list-card-wrapper"
+      v-for="(block, index) in cBlocks.blocks.slice(0, limit)"
+      :key="index"
+    >
+      <b-card class="blocks-card mt-4" @click="goToBlock(block)">
+        <b-row>
+          <b-col>
+            <router-link
+              class="block-height"
+              :to="{ name: 'block', params: { hash: block.hash } }"
+            >#{{ block.height }}</router-link>
+          </b-col>
+          <b-col class="block-time">{{ utcFormat(block.time) | timeFormat('LLL') }}</b-col>
+        </b-row>
+        <b-row class="pt-2 block-mined">
+          <b-col>Mined by</b-col>
+          <b-col class="mined text-truncate">{{ block.minedBy }}</b-col>
+        </b-row>
+        <b-row>
+          <b-col class="block-tx">
+            <span>{{ block.txlength }}</span> Transaction(s)
+          </b-col>
+          <b-col class="block-size">
+            <span>{{ block.size | numberWithCommas }}</span> bytes
+          </b-col>
+        </b-row>
+      </b-card>
+    </div>
+    <infinite-loading
+      slot="append"
+      :identifier="blocksID"
+      @infinite="infiniteHandler"
+      force-use-infinite-wrapper="blocks-list-card-wrapper"
+    >
+      <div class="mt-4" slot="error">Fetching blocks went wrong, try again later :(</div>
+    </infinite-loading>
+  </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, PropSync } from 'vue-property-decorator'
+import { Vue, Component, PropSync, Watch } from 'vue-property-decorator'
+import InfiniteLoading from 'vue-infinite-loading'
 // eslint-disable-next-line no-unused-vars
-import { Block } from '../api/blocks/type'
+import { Block, Blocks } from '../api/blocks/type'
+import moment from 'moment'
 
-@Component({})
+@Component({
+  components: {
+    InfiniteLoading
+  }
+})
 export default class BlocksListCard extends Vue {
-  @PropSync('block', { type: Object }) blockD!: Block
+  @PropSync('blocks', { type: Object }) bBlocks!: Blocks
 
-  goToBlock() {
-    this.$router.push({ name: 'block', params: { hash: this.blockD.hash } })
+  limit = 50
+
+  get cBlocks() {
+    return this.bBlocks
+  }
+
+  get blocksID() {
+    return this.cBlocks.pagination.current
+  }
+
+  async infiniteHandler($state: any) {
+    if (this.limit < this.cBlocks.length) {
+      setTimeout(() => {
+        this.limit += 50
+        $state.loaded()
+      }, 500)
+    } else {
+      $state.complete()
+    }
+  }
+
+  goToBlock(block: Block) {
+    this.$router.push({ name: 'block', params: { hash: block.hash } })
+  }
+
+  utcFormat(time: any) {
+    return moment.unix(time).utc()
+  }
+
+  @Watch('cBlocks.pagination.current')
+  async dateChanged() {
+    this.limit = 50
   }
 }
 </script>
