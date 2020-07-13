@@ -13,6 +13,7 @@ import Block from './pages/Block.vue'
 import Token from './pages/Token.vue'
 import Transaction from './pages/Transaction.vue'
 import NotFound from './pages/NotFound.vue'
+import { isBlocksDateFormat } from './api/utils'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,14 @@ const router = new VueRouter({
       name: 'blocks',
       component: Blocks,
       props: true,
+      beforeEnter: (to, from, next) => {
+        console.log(to.params.date)
+        if (isBlocksDateFormat(to.params.date)) {
+          next();
+        } else {
+          next(new Error('Invalid date format'))
+        }
+      }
     },
     {
       path: '/status',
@@ -81,11 +90,23 @@ const router = new VueRouter({
       props: true
     },
     {
-      path: '*',
+      path: '/*',
+      props: true,
+      beforeEnter: (to, from, next) => {
+        router.push({ name: 'notfound' })
+      }
+    },
+    {
+      path: '/error',
       name: 'notfound',
-      component: NotFound
+      component: NotFound,
+      props: true
     }
   ]
+})
+
+router.onError(error => {
+  router.push({ name: 'notfound', params: { msg: error.message } })
 })
 
 export default router;

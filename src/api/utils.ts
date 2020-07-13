@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export function toAddressesPercent(addrCount: number, allAddr: number[]) {
   if ((!!addrCount && !!allAddr) === false) { return 0 }
   const totalAddr = allAddr.reduce((pval, cval) => pval + cval, 0)
@@ -28,4 +30,10 @@ export function toCoinsRelativePercent(coins: number, allCoins: number[]) {
   const coinsRPercent = coins / maxCoins * 100
 
   return coinsRPercent
+}
+
+export function isBlocksDateFormat(date: string) {
+  const blocksDateFormat = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/
+
+  return moment(date).isValid() && blocksDateFormat.test(date)
 }
