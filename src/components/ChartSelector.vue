@@ -232,18 +232,6 @@ export default class ChartSelector extends Vue {
       this.data = val.tsData
     })
   }
-
-  // @Watch('chartSelected')
-  // async onChartChanged(val: string) {
-  //   const index = this.chartsList.indexOf(val)
-  //   this.chart = this.allCharts[index]
-  //   //@ts-ignore
-  //   this.chart.getData().then(val => {
-  //     this.labels = val.tsDate
-  //     this.data = val.tsData
-  //   })
-  //   this.chartName = val
-  // }
 }
 </script>
 

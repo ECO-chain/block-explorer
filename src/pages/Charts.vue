@@ -14,10 +14,17 @@
             <div class="table-responsive">
               <b-table
                 dark
+                show-empty
                 :items="balanceInterval"
                 :fields="fields"
                 class="balance-interval-table"
               >
+                <template v-slot:empty>
+                  <div class="table-no-record">
+                    <i class="far fa-tired"></i>
+                    <p>{{ $t('dom.table.no_records') }}</p>
+                  </div>
+                </template>
                 <template v-slot:cell(percentAddresses)="data">
                   {{ data.item.percentAddresses.toFixed(2) }}%
                   <span
@@ -73,13 +80,6 @@ export default class Charts extends Vue {
 
   async mounted() {
     this.balanceInterval = await statisticsModule.getBalanceIntervalsTable()
-
-    window.addEventListener('resize', () => {
-      this.windowWidth = window.innerWidth
-      // console.log(this.isMobileDevice)
-    })
-
-    // console.log('balance interval', this.balanceInterval)
   }
 
   get fields() {
@@ -127,7 +127,7 @@ export default class Charts extends Vue {
   }
 
   get isMobileDevice() {
-    return this.windowWidth <= 575
+    return window.innerWidth <= 575
   }
 }
 </script>

@@ -248,5 +248,10 @@
     "token_tracker": {
       "rank": "Rank"
     }
+  },
+  "dom": {
+    "table": {
+      "no_records": "There are no records to show"
+    }
   }
 }

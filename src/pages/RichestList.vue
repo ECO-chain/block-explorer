@@ -11,7 +11,19 @@
         <b-col cols="12">
           <div class="block-global p-3 my-3 rounded-lg">
             <div class="table-responsive m-0" v-if="!isMobileDevice">
-              <b-table dark :fields="fields" :items="richestList" class="rich-list-table">
+              <b-table
+                dark
+                show-empty
+                :fields="fields"
+                :items="richestList"
+                class="rich-list-table"
+              >
+                <template v-slot:empty>
+                  <div class="table-no-record">
+                    <i class="far fa-tired"></i>
+                    <p>{{ $t('dom.table.no_records') }}</p>
+                  </div>
+                </template>
                 <template v-slot:cell(rank)="data">{{ getRichestRank(data.item.address) }}</template>
                 <template v-slot:cell(address)="data">
                   <router-link

@@ -73,7 +73,7 @@
                 >{{ totalStats.number_of_transactions | numberWithCommas }}</div>
               </b-col>
               <b-col cols="12" md="auto">
-                <b-button class="btn-view-chart" size="sm" @click="goToCharts('fees')">
+                <b-button class="btn-view-chart" size="sm" @click="goToCharts('tx')">
                   <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
                 </b-button>
               </b-col>
@@ -89,7 +89,7 @@
                 >{{ totalStats.outputs_volume | numberWithCommas({decimal: 8}) }} ECOC</div>
               </b-col>
               <b-col cols="12" md="auto">
-                <b-button class="btn-view-chart" size="sm" @click="goToCharts('fees')">
+                <b-button class="btn-view-chart" size="sm" @click="goToCharts('output')">
                   <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
                 </b-button>
               </b-col>
@@ -122,7 +122,7 @@
                 <div class="my-1 text-right">{{ totalStats.difficulty | numberWithCommas }}</div>
               </b-col>
               <b-col cols="12" md="auto">
-                <b-button class="btn-view-chart" size="sm" @click="goToCharts('fees')">
+                <b-button class="btn-view-chart" size="sm" @click="goToCharts('difficulty')">
                   <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
                 </b-button>
               </b-col>
@@ -136,7 +136,7 @@
                 <div class="my-1 text-right">{{ totalStats.stake | numberWithCommas }} %</div>
               </b-col>
               <b-col cols="12" md="auto">
-                <b-button class="btn-view-chart" size="sm" @click="goToCharts('fees')">
+                <b-button class="btn-view-chart" size="sm" @click="goToCharts('stake')">
                   <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
                 </b-button>
               </b-col>

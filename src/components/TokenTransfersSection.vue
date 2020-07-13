@@ -7,7 +7,19 @@
     </i18n>
     <div v-if="!isMobileDevice">
       <div class="table-responsive m-0">
-        <b-table class="token-transfer-table" dark :items="transfer.items" :fields="transferFields">
+        <b-table
+          class="token-transfer-table"
+          dark
+          show-empty
+          :items="transfer.items"
+          :fields="transferFields"
+        >
+          <template v-slot:empty>
+            <div class="table-no-record">
+              <i class="far fa-tired"></i>
+              <p>{{ $t('dom.table.no_records') }}</p>
+            </div>
+          </template>
           <template v-slot:cell(tx_hash)="data">
             <router-link
               :to="{ name: 'transaction', params: { hash: data.item.tx_hash } }"

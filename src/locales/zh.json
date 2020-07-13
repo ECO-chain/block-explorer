@@ -247,5 +247,10 @@
     "token_tracker": {
       "rank": "等级#"
     }
+  },
+  "dom": {
+    "table": {
+      "no_records": "There are no records to show"
+    }
   }
 }

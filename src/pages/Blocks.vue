@@ -57,12 +57,19 @@
                 id="blocks-table"
                 class="blocks-list-table"
                 dark
+                show-empty
                 :fields="fields"
                 :items="blocks.blocks"
                 :per-page="perPage"
                 :current-page="currentPage"
                 :busy="isBusy"
               >
+                <template v-slot:empty>
+                  <div class="table-no-record">
+                    <i class="far fa-tired"></i>
+                    <p> {{ $t('dom.table.no_records') }}</p>
+                  </div>
+                </template>
                 <template v-slot:cell(height)="data">
                   <router-link
                     :to="{ name: 'block', params: { hash: data.item.hash } }"
