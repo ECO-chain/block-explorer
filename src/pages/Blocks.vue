@@ -67,7 +67,7 @@
                 <template v-slot:empty>
                   <div class="table-no-record">
                     <i class="far fa-tired"></i>
-                    <p> {{ $t('dom.table.no_records') }}</p>
+                    <p>{{ $t('dom.table.no_records') }}</p>
                   </div>
                 </template>
                 <template v-slot:cell(height)="data">
@@ -94,7 +94,7 @@
               </b-table>
             </div>
 
-            <div v-if="isMobileDevice">
+            <div v-if="!isMobileDevice">
               <b-collapse v-model="isFetchMore">
                 <div class="loading-bar-table">
                   <b-spinner small class="mr-2"></b-spinner>Loading more blocks...
@@ -117,11 +117,18 @@
 
           <!-- mobile view -->
           <div v-if="isMobileDevice">
-            <div class="busy" v-if="isBusy">
-              <pixel-spinner class="m-auto" :animation-duration="2000" :size="70" color="#ffffff" />
-              <strong>Blocks is currently fetching</strong>
-            </div>
-            <blocks-list-card v-else :blocks.sync="blocks"></blocks-list-card>
+            <transition name="fade" mode="out-in">
+              <div class="busy" v-if="isBusy">
+                <pixel-spinner
+                  class="m-auto"
+                  :animation-duration="2000"
+                  :size="70"
+                  color="#ffffff"
+                />
+                <strong>Blocks is currently fetching</strong>
+              </div>
+              <blocks-list-card v-else :blocks.sync="blocks"></blocks-list-card>
+            </transition>
             <back-to-top-btn></back-to-top-btn>
           </div>
         </b-col>
@@ -133,6 +140,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import blocksModule from '../api/blocks/index'
+import { CommonStore } from '@/store/common/index'
 import { numberWithCommas } from '../api/filters'
 import { PixelSpinner } from 'epic-spinners'
 import BlocksListCard from '../components/BlocksListCard.vue'
@@ -161,6 +169,9 @@ export default class BlocksList extends Vue {
   nextDay = ''
 
   async mounted() {
+    CommonStore.setShowLoadingSpinner(true)
+
+    // if date params given
     if (this.date) {
       this.blocks = await blocksModule.getBlocksByDateTime({ date: this.date })
       this.nextDay = this.blocks.pagination.next
@@ -171,6 +182,7 @@ export default class BlocksList extends Vue {
       this.loadMoreBlocks(this.blocks.pagination)
     }
     this.isBusy = false
+    CommonStore.setShowLoadingSpinner(false)
   }
 
   get fields() {

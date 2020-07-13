@@ -2,6 +2,9 @@
   <div id="app" class="bg-space">
     <BlockHeader />
     <transition name="fade" mode="out-in">
+      <loading-overlay v-if="isLoading" :showBackdrop="true"></loading-overlay>
+    </transition>
+    <transition name="fade" mode="out-in">
       <router-view :key="$route.params.hash || $route.params.addr" />
     </transition>
     <BlockFooter />
@@ -12,15 +15,19 @@
 import { Vue, Component } from 'vue-property-decorator'
 import BlockHeader from './components/Header.vue'
 import BlockFooter from './components/Footer.vue'
+import LoadingOverlay from './components/LoadingOverlay.vue'
 import { Socket } from 'vue-socket.io-extended'
 import statusModule from '@/api/status/index'
+// eslint-disable-next-line no-unused-vars
+import { CommonStore } from '@/store/common/index'
 // eslint-disable-next-line no-unused-vars
 import { Info, StatusState } from '@/api/status/type'
 
 @Component({
   components: {
     BlockFooter,
-    BlockHeader
+    BlockHeader,
+    LoadingOverlay
   }
 })
 export default class App extends Vue {
@@ -56,6 +63,10 @@ export default class App extends Vue {
   onMarkets(payload: any) {
     console.log('Martket', payload)
   }
+
+  get isLoading() {
+    return CommonStore.state.showLoadingSpinner
+  }
 }
 </script>
 
@@ -76,16 +87,5 @@ html {
 body {
   background: $purple-blue;
   padding-top: 60px;
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition-duration: 0.3s;
-  transition-property: opacity;
-  transition-timing-function: ease;
-}
-
-.fade-enter,
-.fade-leave-active {
-  opacity: 0;
 }
 </style>

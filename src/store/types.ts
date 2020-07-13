@@ -4,6 +4,7 @@ import { ECRC20State } from '../api/ecrc20/type'
 import { BlockState } from '@/api/blocks/type'
 import { AddressState } from '@/api/address/type'
 import { TransactionState } from '@/api/transaction/type'
+import { CommonState } from './common/type'
 
 export interface RootState {
   status: StatusState
@@ -11,5 +12,6 @@ export interface RootState {
   ecrc20: ECRC20State
   block: BlockState
   address: AddressState
-  tx: TransactionState
+  tx: TransactionState,
+  common: CommonState
 }

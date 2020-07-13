@@ -31,7 +31,6 @@ const router = new VueRouter({
       component: Blocks,
       props: true,
       beforeEnter: (to, from, next) => {
-        console.log(to.params.date)
         if (isBlocksDateFormat(to.params.date)) {
           next();
         } else {

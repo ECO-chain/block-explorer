@@ -139,6 +139,7 @@ import ecrc20Module from '@/api/ecrc20/index'
 import txModule from '@/api/transaction/index'
 import contractModule from '@/api/contracts/index'
 import ecoweb3 from '@/ecoweb3/index'
+import { CommonStore } from '@/store/common/index'
 import InfiniteLoading from 'vue-infinite-loading'
 import BackToTopBtn from '../components/BackToTopBtn.vue'
 
@@ -181,6 +182,8 @@ export default class Address extends Vue {
   page = 0
 
   async mounted() {
+    CommonStore.setShowLoadingSpinner(true)
+
     this.address = this.addr
     this.isEcoAddr = await ecoweb3.isEcoAddress(this.address)
 
@@ -197,6 +200,8 @@ export default class Address extends Vue {
     this.page++
     // subscribe tx to a socket
     this.addressTxSubscription('subscribe', this.address)
+
+    CommonStore.setShowLoadingSpinner(false)
   }
 
   beforeDestroy() {
