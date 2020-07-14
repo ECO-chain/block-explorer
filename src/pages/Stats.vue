@@ -58,7 +58,8 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <b-button class="btn-view-chart" size="sm" @click="goToCharts('fees')">
-                  <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
+                  <i class="fas fa-chart-line pr-2"></i>
+                  {{ $t('views.stats.view_chart') }}
                 </b-button>
               </b-col>
             </b-row>
@@ -74,7 +75,8 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <b-button class="btn-view-chart" size="sm" @click="goToCharts('tx')">
-                  <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
+                  <i class="fas fa-chart-line pr-2"></i>
+                  {{ $t('views.stats.view_chart') }}
                 </b-button>
               </b-col>
             </b-row>
@@ -90,7 +92,8 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <b-button class="btn-view-chart" size="sm" @click="goToCharts('output')">
-                  <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
+                  <i class="fas fa-chart-line pr-2"></i>
+                  {{ $t('views.stats.view_chart') }}
                 </b-button>
               </b-col>
             </b-row>
@@ -123,7 +126,8 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <b-button class="btn-view-chart" size="sm" @click="goToCharts('difficulty')">
-                  <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
+                  <i class="fas fa-chart-line pr-2"></i>
+                  {{ $t('views.stats.view_chart') }}
                 </b-button>
               </b-col>
             </b-row>
@@ -137,7 +141,8 @@
               </b-col>
               <b-col cols="12" md="auto">
                 <b-button class="btn-view-chart" size="sm" @click="goToCharts('stake')">
-                  <i class="fas fa-chart-line pr-2"></i>{{ $t('views.stats.view_chart') }}
+                  <i class="fas fa-chart-line pr-2"></i>
+                  {{ $t('views.stats.view_chart') }}
                 </b-button>
               </b-col>
             </b-row>
@@ -165,19 +170,34 @@ export default class Stats extends Vue {
   goToCharts(path: string) {
     switch (path) {
       case 'fees':
-        this.$router.push({ name: 'charts', params: { type: 'Fees' } })
+        this.$router.push({
+          name: 'charts',
+          params: { type: this.$t('components.chart_selector.fees').toString() }
+        })
         break
       case 'tx':
-        this.$router.push({ name: 'charts', params: { type: 'Transactions' } })
+        this.$router.push({
+          name: 'charts',
+          params: { type: this.$t('components.chart_selector.tx').toString() }
+        })
         break
       case 'output':
-        this.$router.push({ name: 'charts', params: { type: 'Outputs' } })
+        this.$router.push({
+          name: 'charts',
+          params: { type: this.$t('components.chart_selector.outputs').toString() }
+        })
         break
       case 'difficulty':
-        this.$router.push({ name: 'charts', params: { type: 'Difficulty' } })
+        this.$router.push({
+          name: 'charts',
+          params: { type: this.$t('components.chart_selector.difficulty').toString() }
+        })
         break
       case 'stake':
-        this.$router.push({ name: 'charts', params: { type: 'Stakes' } })
+        this.$router.push({
+          name: 'charts',
+          params: { type: this.$t('components.chart_selector.stakes').toString() }
+        })
         break
     }
   }

@@ -74,7 +74,7 @@
                 <VueQrcode
                   class="qr"
                   :value="toQRCodeFormat(addressSummary.addrStr)"
-                  :options="{ color: { dark: '#803D9E', light: '#0e111b' }, width: 125 }"
+                  :options="{ color: { dark: '#000000', light: '#ffffff' }, width: 125 }"
                 ></VueQrcode>
               </b-col>
 

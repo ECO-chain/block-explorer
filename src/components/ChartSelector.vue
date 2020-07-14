@@ -66,6 +66,8 @@ export default class ChartSelector extends Vue {
     //@ts-ignore
     this.chartName = this.chartSelected
 
+    console.log('now chart selected', this.chartSelected)
+
     this.getSupplyData(this.daysSelected).then(val => {
       this.labels = val.tsDate
       this.data = val.tsData
