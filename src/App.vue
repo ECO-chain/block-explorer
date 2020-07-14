@@ -20,6 +20,8 @@ import LoadingOverlay from './components/LoadingOverlay.vue'
 import { Socket } from 'vue-socket.io-extended'
 import blocksModule from '@/api/blocks/index'
 import statusModule from '@/api/status/index'
+import txModule from '@/api/transaction/index'
+import { SocketEvent } from '@/store/types'
 import { CommonStore } from '@/store/common/index'
 import { Info, StatusState } from '@/api/status/type'
 import { SocketBlock } from './api/blocks/type'
@@ -34,19 +36,16 @@ import { SocketBlock } from './api/blocks/type'
 export default class App extends Vue {
   @Socket()
   connect() {
-    // console.log('socket connected')
     this.$socket.client.emit('subscribe', 'sync')
     this.$socket.client.emit('subscribe', 'inv')
-    // console.log('subscribed on sync and inv')
   }
 
   disconnect() {
-    // console.log('socket disconnected')
     this.$socket.client.emit('unsubscribe', 'sync')
     this.$socket.client.emit('unsubscribe', 'inv')
   }
 
-  @Socket('block')
+  @Socket(SocketEvent.BLOCK)
   async onBlock(payload: any) {
     const newBlock = await blocksModule.getBlockDetail(payload)
 
@@ -58,12 +57,12 @@ export default class App extends Vue {
     blocksModule.addNewSocketBlock(newSocketBlock)
   }
 
-  @Socket('sync')
+  @Socket(SocketEvent.SYNC)
   onSync(payload: any) {
     console.log('receiving', payload)
   }
 
-  @Socket('info')
+  @Socket(SocketEvent.INFO)
   onInfo(payload: StatusState) {
     statusModule.setInfo(payload.info)
     statusModule.setStakingInfo(payload.stakingInfo)
@@ -72,7 +71,12 @@ export default class App extends Vue {
     // console.log('onInfo', payload)
   }
 
-  @Socket('markets_info')
+  @Socket(SocketEvent.TX)
+  onTx(payload: any) {
+    txModule.addNextSocketTx(payload)
+  }
+
+  @Socket(SocketEvent.MARKETS)
   onMarkets(payload: any) {
     console.log('Martket', payload)
   }

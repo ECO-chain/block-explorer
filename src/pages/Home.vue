@@ -177,12 +177,12 @@
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
-import { Socket } from 'vue-socket.io-extended'
 import BlockSearchBox from '@/components/SearchBox.vue'
 import LineChart from '@/components/LineChart.vue'
 import statusModule from '@/api/status/index'
 import statisticsModule from '@/api/statistics/index'
 import blocksModule from '@/api/blocks/index'
+import txModule from '@/api/transaction/index'
 import { toMonthDayFormat } from '@/api/filters'
 import countTo from 'vue-count-to'
 /* eslint-disable no-unused-vars */
@@ -199,29 +199,6 @@ import { SocketTx } from '../api/transaction/type'
   }
 })
 export default class Home extends Vue {
-  // @Socket('block')
-  // async onBlock(payload: any) {
-  //   const socketBlock = await blocksModule.getBlockDetail(payload)
-  //   const newBlock = this.blockDetailToBlocks(socketBlock)
-  //   this.blockLoading = true
-  //   this.newBlockHeight = newBlock.height
-
-  //   this.blocks.blocks.pop()
-  //   this.blocks.blocks.unshift(newBlock)
-  //   setTimeout(() => {
-  //     this.blockLoading = false
-  //     this.newBlockHeight = 0
-  //   }, 1000)
-  // }
-
-  @Socket('tx')
-  onTx(payload: any) {
-    if (this.socketTx.length >= 10) {
-      this.socketTx.pop()
-    }
-    this.socketTx.unshift(payload)
-  }
-
   swiperOption = {
     loop: false,
     watchSlidesVisibility: true,
@@ -250,7 +227,6 @@ export default class Home extends Vue {
 
   sevenDaysTx: TransactionStats[] | null = null
   blocks: Blocks = {} as Blocks
-  socketTx: SocketTx[] = []
   txDate: string[] = []
   txCount: number[] = []
 
@@ -305,6 +281,10 @@ export default class Home extends Vue {
 
   get checkSocketBlock() {
     return this.socketBlock.length > 0
+  }
+
+  get socketTx(): SocketTx[] {
+    return txModule.state.socketTx
   }
 
   blockDetailToBlocks(blockD: BlockDetail) {

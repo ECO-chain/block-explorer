@@ -1,17 +1,24 @@
 import { getStoreBuilder, BareActionContext } from 'vuex-typex'
 import { RootState } from '@/store/types'
 import Axios from 'axios'
+import * as mutations from './mutations'
 import { env } from '@/config'
-import { TransactionState, Txs, Tx } from './type'
+import { TransactionState, Txs, Tx, SocketTx } from './type'
 
-const initialState: TransactionState = {}
-const builder = getStoreBuilder<RootState>().module('txs', initialState)
+function initialState(): TransactionState {
+  return {
+    socketTx: [] as SocketTx[]
+  }
+}
+const builder = getStoreBuilder<RootState>().module('txs', initialState())
 const stateGetter = builder.state()
 
 const txModule = {
   get state() {
-    return stateGetter
+    return stateGetter()
   },
+
+  addNextSocketTx: builder.commit(mutations.addNextSocketTx),
 
   getBlockTransactions: builder.dispatch(getBlockTransactions),
   getAddressTransactions: builder.dispatch(getAddressTransactions),

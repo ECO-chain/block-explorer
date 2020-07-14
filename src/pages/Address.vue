@@ -63,7 +63,9 @@
                   </b-col>
                   <b-col cols="6" v-if="!isEcoAddr">
                     <div class="my-1 text-right">
-                      <router-link :to="{ name: 'token', params: { addr: addr } }">{{ tokenSummary.symbol }}</router-link>
+                      <router-link
+                        :to="{ name: 'token', params: { addr: addr } }"
+                      >{{ tokenSummary.symbol }}</router-link>
                     </div>
                   </b-col>
                 </b-row>
@@ -144,6 +146,7 @@ import InfiniteLoading from 'vue-infinite-loading'
 import BackToTopBtn from '../components/BackToTopBtn.vue'
 
 import { Socket } from 'vue-socket.io-extended'
+import { SocketEvent } from '@/store/types'
 import { AddressSummary } from '../api/address/type'
 import { TokenTracker as Tracker, TokenSummary } from '../api/ecrc20/type'
 import { Txs, Tx } from '../api/transaction/type'
@@ -165,7 +168,7 @@ export default class Address extends Vue {
   @Prop() addr!: string
 
   // address/tx subscribed
-  @Socket('ecocd/addresstxid')
+  @Socket(SocketEvent.ADDRESSTX)
   async onNewTx(payload: any) {
     let tx = await txModule.getTransactionByHash(payload.txid)
     this.txs.txs.unshift(tx)
