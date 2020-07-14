@@ -15,6 +15,8 @@ import Transaction from './pages/Transaction.vue'
 import NotFound from './pages/NotFound.vue'
 import { isBlocksDateFormat } from './api/utils'
 
+import blocksModule from '@/api/blocks/index'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -24,6 +26,15 @@ const router = new VueRouter({
       path: '/',
       name: "home",
       component: Home,
+      beforeEnter: async (to, from, next) => {
+        const socketBlock = blocksModule.state.socketBlock
+        if (socketBlock.length > 0) {
+          next()
+        } else {
+          await blocksModule.getInitialSocketBlock()
+          next()
+        }
+      }
     },
     {
       path: '/blocks/:date?',

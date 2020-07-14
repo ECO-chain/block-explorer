@@ -1,4 +1,6 @@
-export interface BlockState {}
+export interface BlockState {
+  socketBlock: SocketBlock[]
+}
 
 export interface Blocks {
   blocks: Block[]
@@ -15,6 +17,11 @@ export interface Block {
   poolInfo: object
   isMainChain: boolean
   minedBy: string
+}
+
+export interface SocketBlock {
+  block: BlockDetail
+  loading: boolean
 }
 
 export interface Pagination {

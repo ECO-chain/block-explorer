@@ -100,37 +100,40 @@
       <b-col cols="12">
         <h2 class="head-global my-3">{{ $t('views.home.blocks') }}</h2>
         <div class="block-bitcoin">
-          <swiper :options="swiperOption">
-            <!-- slides -->
-            <swiper-slide v-for="(block, index) in blocks.blocks" :key="index">
-              <div
-                class="block-item rounded-lg m-auto loading-block"
-                v-if="blockLoading && block.height === newBlockHeight"
-              >
-                <b-spinner small class="loading-spinner"></b-spinner>
-              </div>
-              <div class="block-item p-3 rounded-lg" v-else>
-                <div
-                  class="my-1 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <router-link
-                    :to="{ name: 'block', params: { hash: block.hash } }"
-                  >{{ block.height }}</router-link>
+          <template v-if="checkSocketBlock">
+            <swiper :options="swiperOption">
+              <!-- slides -->
+              <swiper-slide v-for="(sBlock, index) in socketBlock" :key="index">
+                <div class="block-item rounded-lg m-auto loading-block" v-if="sBlock.loading">
+                  <b-spinner small class="loading-spinner"></b-spinner>
                 </div>
-                <span class="small text-purple-light">{{ (block.time * 1000) | timeFromNow }}</span>
-                <div class="my-1 small text-truncate">
-                  {{ $t('views.home.swiper.blocks.mined_by') }}:
-                  <router-link
-                    :to="{ name: 'address', params: { addr: block.minedBy } }"
-                  >{{ block.minedBy }}</router-link>
+                <div class="block-item p-3 rounded-lg" v-else>
+                  <div
+                    class="my-1 border-bottom border-purple-light d-flex justify-content-between align-items-center"
+                  >
+                    <router-link
+                      :to="{ name: 'block', params: { hash: sBlock.block.hash } }"
+                    >{{ sBlock.block.height }}</router-link>
+                  </div>
+                  <span
+                    class="small text-purple-light"
+                  >{{ (sBlock.block.time * 1000) | timeFromNow }}</span>
+                  <div class="my-1 small text-truncate">
+                    {{ $t('views.home.swiper.blocks.mined_by') }}:
+                    <router-link
+                      :to="{ name: 'address', params: { addr: sBlock.block.minedBy } }"
+                    >{{ sBlock.block.minedBy }}</router-link>
+                  </div>
+                  <div
+                    class="my-1 small"
+                  >{{ $t('views.home.swiper.blocks.size') }}: {{ sBlock.block.size }}</div>
+                  <div
+                    class="my-1 small"
+                  >{{ $t('views.home.swiper.blocks.tx') }}: {{ sBlock.block.txlength }}</div>
                 </div>
-                <div class="my-1 small">{{ $t('views.home.swiper.blocks.size') }}: {{ block.size }}</div>
-                <div
-                  class="my-1 small"
-                >{{ $t('views.home.swiper.blocks.tx') }}: {{ block.txlength }}</div>
-              </div>
-            </swiper-slide>
-          </swiper>
+              </swiper-slide>
+            </swiper>
+          </template>
         </div>
       </b-col>
     </b-row>
@@ -185,7 +188,7 @@ import countTo from 'vue-count-to'
 /* eslint-disable no-unused-vars */
 import { StatusState, Info, StakingInfo } from '../api/status/type'
 import { TransactionStats } from '../api/statistics/type'
-import { Blocks, Block, BlockDetail } from '../api/blocks/type'
+import { Blocks, Block, BlockDetail, SocketBlock } from '../api/blocks/type'
 import { SocketTx } from '../api/transaction/type'
 
 @Component({
@@ -196,20 +199,21 @@ import { SocketTx } from '../api/transaction/type'
   }
 })
 export default class Home extends Vue {
-  @Socket('block')
-  async onBlock(payload: any) {
-    const socketBlock = await blocksModule.getBlockDetail(payload)
-    const newBlock = this.blockDetailToBlocks(socketBlock)
-    this.blockLoading = true
-    this.newBlockHeight = newBlock.height
+  // @Socket('block')
+  // async onBlock(payload: any) {
+  //   const socketBlock = await blocksModule.getBlockDetail(payload)
+  //   const newBlock = this.blockDetailToBlocks(socketBlock)
+  //   this.blockLoading = true
+  //   this.newBlockHeight = newBlock.height
 
-    this.blocks.blocks.pop()
-    this.blocks.blocks.unshift(newBlock)
-    setTimeout(() => {
-      this.blockLoading = false
-      this.newBlockHeight = 0
-    }, 1000)
-  }
+  //   this.blocks.blocks.pop()
+  //   this.blocks.blocks.unshift(newBlock)
+  //   setTimeout(() => {
+  //     this.blockLoading = false
+  //     this.newBlockHeight = 0
+  //   }, 1000)
+  // }
+
   @Socket('tx')
   onTx(payload: any) {
     if (this.socketTx.length >= 10) {
@@ -263,7 +267,7 @@ export default class Home extends Vue {
     const info = await statusModule.getInfo()
     const stakingInfo = await statusModule.getStakingInfo()
     const supply = await statusModule.getTotalSupply()
-    this.blocks = await blocksModule.getBlocksWithLimit(5)
+    // this.blocks = await blocksModule.getBlocksWithLimit(5)
 
     this.sevenDaysTx = await statisticsModule.getTransactionStats('7')
     this.txDate = this.sevenDaysTx
@@ -293,6 +297,14 @@ export default class Home extends Vue {
 
   get stakingInfo(): StakingInfo {
     return this.statusState.stakingInfo
+  }
+
+  get socketBlock(): SocketBlock[] {
+    return blocksModule.state.socketBlock
+  }
+
+  get checkSocketBlock() {
+    return this.socketBlock.length > 0
   }
 
   blockDetailToBlocks(blockD: BlockDetail) {

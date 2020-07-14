@@ -12,16 +12,17 @@
 </template>
 
 <script lang="ts">
+/* eslint-disable no-unused-vars */
 import { Vue, Component } from 'vue-property-decorator'
 import BlockHeader from './components/Header.vue'
 import BlockFooter from './components/Footer.vue'
 import LoadingOverlay from './components/LoadingOverlay.vue'
 import { Socket } from 'vue-socket.io-extended'
+import blocksModule from '@/api/blocks/index'
 import statusModule from '@/api/status/index'
-// eslint-disable-next-line no-unused-vars
 import { CommonStore } from '@/store/common/index'
-// eslint-disable-next-line no-unused-vars
 import { Info, StatusState } from '@/api/status/type'
+import { SocketBlock } from './api/blocks/type'
 
 @Component({
   components: {
@@ -43,6 +44,18 @@ export default class App extends Vue {
     // console.log('socket disconnected')
     this.$socket.client.emit('unsubscribe', 'sync')
     this.$socket.client.emit('unsubscribe', 'inv')
+  }
+
+  @Socket('block')
+  async onBlock(payload: any) {
+    const newBlock = await blocksModule.getBlockDetail(payload)
+
+    const newSocketBlock: SocketBlock = {
+      block: newBlock,
+      loading: true
+    }
+
+    blocksModule.addNewSocketBlock(newSocketBlock)
   }
 
   @Socket('sync')

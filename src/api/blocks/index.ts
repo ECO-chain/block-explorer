@@ -2,23 +2,33 @@ import { getStoreBuilder, BareActionContext } from 'vuex-typex'
 import { RootState } from '@/store/types'
 import Axios from 'axios'
 import { env } from '@/config'
-import { Blocks, BlockDetail, BlockState, BlockHash } from './type'
+import * as mutations from './mutations'
+import { Blocks, Block, BlockDetail, BlockState, BlockHash, SocketBlock } from './type'
 
-const initialState: BlockState = {}
-const builder = getStoreBuilder<RootState>().module('block', initialState)
+function initialState(): BlockState {
+  return {
+    socketBlock: []
+  }
+}
+const builder = getStoreBuilder<RootState>().module('block', initialState())
 const stateGetter = builder.state()
 
 const blocksModule = {
   get state() {
-    return stateGetter
+    return stateGetter()
   },
+
+  setSocketBlock: builder.commit(mutations.setSocketBlock),
+  addNewSocketBlock: builder.commit(mutations.addNewSocketBlock),
 
   getBlocksList: builder.dispatch(getBlocksList),
   getBlocksByDateTime: builder.dispatch(getBlocksByDateTime),
   getBlockDetail: builder.dispatch(getBlockDetail),
 
   getBlocksWithLimit: builder.dispatch(getBlocksWithLimit),
-  getBlockHashByIndex: builder.dispatch(getBlockHashByIndex)
+  getBlockHashByIndex: builder.dispatch(getBlockHashByIndex),
+
+  getInitialSocketBlock: builder.dispatch(getInitialSocketBlock)
 }
 
 export default blocksModule
@@ -89,3 +99,23 @@ async function getBlockHashByIndex(context: ActionContext, index: number): Promi
   }
 }
 
+async function getInitialSocketBlock() {
+  try {
+    const socketBlock = [] as SocketBlock[]
+
+    const res = await Axios.get(`${env!.baseURL}api/blocks`)
+
+    // Only first 10 latest blocks
+    const blocks = res.data.blocks.slice(0, 10)
+
+    blocks.forEach(async (block: Block) => {
+      let bDetail = await Axios.get(`${env!.baseURL}api/block/${block.hash}`)
+      const loading = false
+      socketBlock.push({ block: bDetail.data as BlockDetail, loading } as SocketBlock)
+    })
+
+    blocksModule.setSocketBlock(socketBlock)
+  } catch (e) {
+    return e
+  }
+}
