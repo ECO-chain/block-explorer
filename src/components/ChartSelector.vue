@@ -61,12 +61,8 @@ export default class ChartSelector extends Vue {
   daysSelected = '30'
 
   async mounted() {
-    // const index = this.chartsList.indexOf(this.chartSelected)
     this.chart = this.allCharts[this.index]
-    //@ts-ignore
-    this.chartName = this.chartSelected
-
-    console.log('now chart selected', this.chartSelected)
+    this.chartName = this.chartSelected.toString()
 
     this.getSupplyData(this.daysSelected).then(val => {
       this.labels = val.tsDate

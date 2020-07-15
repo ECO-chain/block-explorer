@@ -12,5 +12,5 @@ export function addNewSocketBlock(state: BlockState, payload: SocketBlock) {
 
   setTimeout(() => {
     state.socketBlock[sIndex].loading = false
-  }, 1000)
+  }, 2000)
 }

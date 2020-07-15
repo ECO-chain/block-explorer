@@ -99,42 +99,13 @@
     <b-row class="my-3">
       <b-col cols="12">
         <h2 class="head-global my-3">{{ $t('views.home.blocks') }}</h2>
-        <div class="block-bitcoin">
-          <template v-if="checkSocketBlock">
-            <swiper :options="swiperOption">
-              <!-- slides -->
-              <swiper-slide v-for="(sBlock, index) in socketBlock" :key="index">
-                <div class="block-item rounded-lg m-auto loading-block" v-if="sBlock.loading">
-                  <b-spinner small class="loading-spinner"></b-spinner>
-                </div>
-                <div class="block-item p-3 rounded-lg" v-else>
-                  <div
-                    class="my-1 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                  >
-                    <router-link
-                      :to="{ name: 'block', params: { hash: sBlock.block.hash } }"
-                    >{{ sBlock.block.height }}</router-link>
-                  </div>
-                  <span
-                    class="small text-purple-light"
-                  >{{ (sBlock.block.time * 1000) | timeFromNow }}</span>
-                  <div class="my-1 small text-truncate">
-                    {{ $t('views.home.swiper.blocks.mined_by') }}:
-                    <router-link
-                      :to="{ name: 'address', params: { addr: sBlock.block.minedBy } }"
-                    >{{ sBlock.block.minedBy }}</router-link>
-                  </div>
-                  <div
-                    class="my-1 small"
-                  >{{ $t('views.home.swiper.blocks.size') }}: {{ sBlock.block.size }}</div>
-                  <div
-                    class="my-1 small"
-                  >{{ $t('views.home.swiper.blocks.tx') }}: {{ sBlock.block.txlength }}</div>
-                </div>
-              </swiper-slide>
-            </swiper>
-          </template>
-        </div>
+        <template v-if="checkSocketBlock">
+          <swiper :options="swiperOption">
+            <swiper-slide v-for="(sBlock, index) in socketBlock" :key="index">
+              <SocketBlocksCard :socket="sBlock"></SocketBlocksCard>
+            </swiper-slide>
+          </swiper>
+        </template>
       </b-col>
     </b-row>
     <b-row class="my-3 mb-4 mb-sm-5">
@@ -179,6 +150,7 @@
 import { Vue, Component, Watch } from 'vue-property-decorator'
 import BlockSearchBox from '@/components/SearchBox.vue'
 import LineChart from '@/components/LineChart.vue'
+import SocketBlocksCard from '@/components/SocketBlocksCard.vue'
 import statusModule from '@/api/status/index'
 import statisticsModule from '@/api/statistics/index'
 import blocksModule from '@/api/blocks/index'
@@ -195,7 +167,8 @@ import { SocketTx } from '../api/transaction/type'
   components: {
     BlockSearchBox,
     LineChart,
-    countTo
+    countTo,
+    SocketBlocksCard
   }
 })
 export default class Home extends Vue {
@@ -218,10 +191,6 @@ export default class Home extends Vue {
       1199.98: {
         slidesPerView: 4
       }
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true
     }
   }
 
@@ -302,6 +271,11 @@ export default class Home extends Vue {
     return block
   }
 
+  @Watch('socketBlock')
+  socketBlockUpdated(val: any) {
+
+  }
+
   @Watch('statusState.info')
   fsChanged(val: any) {
     // console.log('changed')
@@ -340,6 +314,27 @@ export default class Home extends Vue {
 
   .loading-spinner {
     margin: 2.75rem;
+  }
+}
+
+.swiper-container {
+  background: #00000029;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.swiper-wrapper {
+  .swiper-slide::after {
+    content: '';
+    display: block;
+    height: 15px;
+    background: #34363e;
+    position: absolute;
+    left: 0;
+    right: -500%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: -1;
   }
 }
 
