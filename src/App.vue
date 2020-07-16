@@ -75,6 +75,7 @@ export default class App extends Vue {
   onTx(payload: any) {
     console.log('newTx', payload)
     payload.loading = true
+    payload.time = Date.now()
     txModule.addNextSocketTx(payload)
   }
 

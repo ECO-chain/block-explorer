@@ -17,7 +17,8 @@
         "blocks": {
           "mined_by": "Mined By",
           "size": "Size",
-          "tx": "Transaction(s)"
+          "tx": "Transaction",
+          "txs": "Txs"
         },
         "tx": {
           "hash": "Hash",

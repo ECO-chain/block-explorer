@@ -8,7 +8,7 @@
     <template v-slot:header>
       <b-card-title class="to-block" @click="toBlock(socket.block.height)">{{ socket.block.height }}</b-card-title>
     </template>
-    <p class="label-mined">Mined by</p>
+    <p class="label-mined">{{ $t('views.home.swiper.blocks.mined_by') }}</p>
     <div
       class="to-miner text-truncate"
       @click="toMiner(socket.block.minedBy)"
@@ -16,11 +16,11 @@
     <b-row>
       <b-col class="text-center">
         <div class="block-detail">{{ socket.block.tx.length }}</div>
-        <p class="label-detail">{{ isMobileDevice ? 'Txs' : 'Transactions'}}</p>
+        <p class="label-detail">{{ isMobileDevice ? $t('views.home.swiper.blocks.txs') : $t('views.home.swiper.blocks.tx')}}</p>
       </b-col>
       <b-col class="text-center">
         <div class="block-detail text-truncate">{{ socket.block.size }}</div>
-        <p class="label-detail">Bytes</p>
+        <p class="label-detail">{{ $t('views.transaction.bytes') }}</p>
       </b-col>
     </b-row>
     <template v-slot:footer>

@@ -5,9 +5,9 @@
         <b-col cols="12">
           <div class="group-head my-3 text-center text-md-left">
             <h2 class="head-page my-0">{{ $t('views.address.address') }}</h2>
-            <h4 class="my-0 text-truncate text-purple">
+            <h4 class="user-address text-truncate text-purple">
               <CopyBtn :target="addr" class="mr-2"></CopyBtn>
-              {{ addr }}
+              <span>{{ addr }}</span>
             </h4>
           </div>
         </b-col>
@@ -110,7 +110,12 @@
             <h3 class="head-global my-3">{{ $t('views.address.tx') }}</h3>
           </div>
           <div v-if="txs.txs.length > 0">
-            <TransactionBox v-for="(tx, index) in txs.txs" :key="index" :tx="tx"></TransactionBox>
+            <TransactionBox
+              v-for="(tx, index) in txs.txs"
+              :key="index"
+              :tx="tx"
+              class="scale-in-top"
+            ></TransactionBox>
             <infinite-loading
               slot="append"
               force-use-infinite-wrapper="tx-box-wrapper"
@@ -283,6 +288,12 @@ export default class Address extends Vue {
   opacity: 0.7;
 }
 
+@media (max-width: 767px) {
+  .user-address {
+    font-size: large;
+  }
+}
+
 @media (max-width: 575px) {
   .block-global,
   .addr-balance-block {
@@ -290,10 +301,55 @@ export default class Address extends Vue {
   }
 }
 
+@media (max-width: 430px) {
+  .user-address {
+    font-size: medium;
+  }
+}
+
 @media (max-width: 395px) {
   .block-global,
   .addr-balance-block {
     font-size: 13px;
+  }
+}
+
+.scale-in-top {
+  -webkit-animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: scale-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  // animation-play-state: paused;
+}
+
+@-webkit-keyframes scale-in-top {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    opacity: 1;
+  }
+}
+@keyframes scale-in-top {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    opacity: 1;
   }
 }
 </style>

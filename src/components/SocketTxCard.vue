@@ -1,8 +1,8 @@
 <template>
   <b-card footer-tag="footer" :class="tx.loading ? '' : 'scale-in-center'">
-    <p class="tx-time">{{ Date.now() | timeFromNow }}</p>
+    <p class="tx-time">{{ tx.time | timeFromNow }}</p>
     <div class="tx-detail">
-      <p class="tx-label">Hash</p>
+      <p class="tx-label">{{ $t('views.home.swiper.tx.hash') }}</p>
       <div class="text-truncate user-address" @click="toTransaction(tx.txid)">{{ tx.txid }}</div>
     </div>
     <template v-slot:footer>
@@ -22,13 +22,13 @@ import { SocketTx } from '../api/transaction/type'
 export default class SocketTxCard extends Vue {
   @Prop() tx!: SocketTx
 
-  toTransaction() {
-    console.log('onward!!!')
+  toTransaction(id: string) {
+    this.$router.push({ name: 'transaction', params: { hash: id } })
   }
 
   updated() {
     setTimeout(() => {
-      txModule.setLoading({tx: this.tx, state: false})
+      txModule.setLoading({ tx: this.tx, state: false })
     }, 100)
   }
 
@@ -92,33 +92,32 @@ export default class SocketTxCard extends Vue {
 }
 
 .scale-in-center {
-	-webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  -webkit-animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 @-webkit-keyframes scale-in-center {
   0% {
     -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
     opacity: 1;
   }
   100% {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     opacity: 1;
   }
 }
 @keyframes scale-in-center {
   0% {
     -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
     opacity: 1;
   }
   100% {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     opacity: 1;
   }
 }
-
 </style>

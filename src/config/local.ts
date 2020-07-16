@@ -2,7 +2,7 @@ import { AppConfig } from '@/types'
 
 export default {
   name: 'local',
-  baseURL: 'http://localhost:3001/',
+  baseURL: 'https://explorer.ecoc.io/',
   network: 'livenet',
-  socketURL: 'http://localhost:3001/'
+  socketURL: 'https://explorer.ecoc.io/'
 } as AppConfig
