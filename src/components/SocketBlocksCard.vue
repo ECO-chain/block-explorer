@@ -3,7 +3,7 @@
     footer-tag="footer"
     header-tag="header"
     class="text-center"
-    :class="socket.loading ? 'slide-in-left' : ''"
+    :class="socket.loading ? '' : 'slide-in-left'"
   >
     <template v-slot:header>
       <b-card-title class="to-block" @click="toBlock(socket.block.height)">{{ socket.block.height }}</b-card-title>
@@ -16,7 +16,7 @@
     <b-row>
       <b-col class="text-center">
         <div class="block-detail">{{ socket.block.tx.length }}</div>
-        <p class="label-detail">Transactions</p>
+        <p class="label-detail">{{ isMobileDevice ? 'Txs' : 'Transactions'}}</p>
       </b-col>
       <b-col class="text-center">
         <div class="block-detail text-truncate">{{ socket.block.size }}</div>
@@ -31,6 +31,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import blocksModule from '@/api/blocks/index'
 // eslint-disable-next-line no-unused-vars
 import { BlockDetail, SocketBlock } from '../api/blocks/type'
 
@@ -38,12 +39,22 @@ import { BlockDetail, SocketBlock } from '../api/blocks/type'
 export default class SocketBlocksCard extends Vue {
   @Prop() socket!: SocketBlock
 
+  updated() {
+    setTimeout(() => {
+      blocksModule.setLoading({ block: this.socket, state: false })
+    }, 100)
+  }
+
   toMiner(addr: string) {
     this.$router.push({ name: 'address', params: { addr } })
   }
 
   toBlock(hash: string) {
     this.$router.push({ name: 'block', params: { hash } })
+  }
+
+  get isMobileDevice() {
+    return window.innerWidth <= 473
   }
 }
 </script>
@@ -83,7 +94,10 @@ export default class SocketBlocksCard extends Vue {
 .to-block {
   cursor: pointer;
   font-size: 16px;
-  color: $purple;
+  font-weight: 600;
+  background: linear-gradient(0deg, #9743bb 0%, rgb(183, 16, 204) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: 600;
 }
 
@@ -118,8 +132,8 @@ export default class SocketBlocksCard extends Vue {
 // animation
 
 .slide-in-left {
-  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) 1s both;
-  animation: slide-in-left 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) 1s both;
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: slide-in-left 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
 @-webkit-keyframes slide-in-left {

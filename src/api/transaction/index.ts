@@ -19,6 +19,7 @@ const txModule = {
   },
 
   addNextSocketTx: builder.commit(mutations.addNextSocketTx),
+  setLoading: builder.commit(mutations.setLoading),
 
   getBlockTransactions: builder.dispatch(getBlockTransactions),
   getAddressTransactions: builder.dispatch(getAddressTransactions),

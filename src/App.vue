@@ -73,6 +73,8 @@ export default class App extends Vue {
 
   @Socket(SocketEvent.TX)
   onTx(payload: any) {
+    console.log('newTx', payload)
+    payload.loading = true
     txModule.addNextSocketTx(payload)
   }
 

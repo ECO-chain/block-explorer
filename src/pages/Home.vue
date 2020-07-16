@@ -111,36 +111,18 @@
     <b-row class="my-3 mb-4 mb-sm-5">
       <b-col cols="12">
         <h2 class="head-global my-3">{{ $t('views.home.tx') }}</h2>
-        <div class="block-bitcoin">
+        <template v-if="socketTx.length > 0">
           <swiper :options="swiperOption">
-            <template v-if="socketTx.length > 0">
-              <swiper-slide v-for="(tx, index) in socketTx" :key="index">
-                <div class="block-item p-3 rounded-lg">
-                  <div
-                    class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                  >
-                    <span class="small text-purple-light">{{ Date.now() | timeFromNow }}</span>
-                  </div>
-                  <div class="my-1 small text-truncate">
-                    <p class="mb-0 font-weight-bold">{{ $t('views.home.swiper.tx.hash') }}</p>
-                    <router-link
-                      :to="{ name: 'transaction', params: { hash: tx.txid } }"
-                    >{{ tx.txid }}</router-link>
-                  </div>
-                  <div class="my-1 small">
-                    <p class="mb-0 font-weight-bold">{{ $t('views.home.swiper.tx.vout') }}</p>
-                    {{ tx.valueOut | numberWithCommas({fixed: 3}) }} ECOC
-                  </div>
-                </div>
-              </swiper-slide>
-            </template>
-            <template v-else>
-              <div class="p-5 m-auto">
-                <b-spinner label="Loading..."></b-spinner>
-              </div>
-            </template>
+            <swiper-slide v-for="(tx, index) in socketTx" :key="index">
+              <SocketTxCard :tx="tx"></SocketTxCard>
+            </swiper-slide>
           </swiper>
-        </div>
+        </template>
+        <template v-else>
+          <div class="p-5">
+            <fulfilling-square-spinner class="m-auto" :animation-duration="4000" :size="40" color="#ffffff" />
+          </div>
+        </template>
       </b-col>
     </b-row>
   </b-container>
@@ -151,6 +133,8 @@ import { Vue, Component, Watch } from 'vue-property-decorator'
 import BlockSearchBox from '@/components/SearchBox.vue'
 import LineChart from '@/components/LineChart.vue'
 import SocketBlocksCard from '@/components/SocketBlocksCard.vue'
+import { FulfillingSquareSpinner } from 'epic-spinners'
+import SocketTxCard from '@/components/SocketTxCard.vue'
 import statusModule from '@/api/status/index'
 import statisticsModule from '@/api/statistics/index'
 import blocksModule from '@/api/blocks/index'
@@ -168,14 +152,16 @@ import { SocketTx } from '../api/transaction/type'
     BlockSearchBox,
     LineChart,
     countTo,
-    SocketBlocksCard
+    SocketBlocksCard,
+    SocketTxCard,
+    FulfillingSquareSpinner
   }
 })
 export default class Home extends Vue {
   swiperOption = {
     loop: false,
     watchSlidesVisibility: true,
-    slidesPerView: 5,
+    slidesPerView: 4,
     spaceBetween: 30,
     breakpoints: {
       575.98: {
@@ -269,11 +255,6 @@ export default class Home extends Vue {
     }
 
     return block
-  }
-
-  @Watch('socketBlock')
-  socketBlockUpdated(val: any) {
-
   }
 
   @Watch('statusState.info')

@@ -20,6 +20,7 @@ const blocksModule = {
 
   setSocketBlock: builder.commit(mutations.setSocketBlock),
   addNewSocketBlock: builder.commit(mutations.addNewSocketBlock),
+  setLoading: builder.commit(mutations.setLoading),
 
   getBlocksList: builder.dispatch(getBlocksList),
   getBlocksByDateTime: builder.dispatch(getBlocksByDateTime),

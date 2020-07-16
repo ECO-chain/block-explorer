@@ -7,10 +7,10 @@ export function setSocketBlock(state: BlockState, socketBlock: SocketBlock[]) {
 export function addNewSocketBlock(state: BlockState, payload: SocketBlock) {
   state.socketBlock.pop()
   state.socketBlock.unshift(payload)
+}
 
-  const sIndex = state.socketBlock.indexOf(payload)
+export function setLoading(state: BlockState, payload: { block: SocketBlock, state: boolean }) {
+  const sIndex = state.socketBlock.indexOf(payload.block)
 
-  setTimeout(() => {
-    state.socketBlock[sIndex].loading = false
-  }, 2000)
+  state.socketBlock[sIndex].loading = payload.state
 }

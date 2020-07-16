@@ -7,3 +7,9 @@ export function addNextSocketTx(state: TransactionState, payload: SocketTx) {
   }
   state.socketTx.unshift(payload)
 }
+
+export function setLoading(state: TransactionState, payload: {tx: SocketTx, state: boolean}) {
+  const sIndex = state.socketTx.indexOf(payload.tx)
+
+  state.socketTx[sIndex].loading = payload.state
+}

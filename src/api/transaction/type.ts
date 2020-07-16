@@ -76,6 +76,7 @@ export interface SocketTx {
   txid: string
   valueOut: number
   vout: object[]
+  loading: boolean
 }
 
 export interface TxReceipt {
