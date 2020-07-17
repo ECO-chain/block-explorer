@@ -41,7 +41,7 @@ export default class SocketTxCard extends Vue {
 <style lang="scss" scoped>
 .card {
   background: #141826 !important;
-  border: 0 !important;
+  border: 1px solid #857293 !important;
   border-radius: 6px !important;
   box-shadow: 0 6px 12px #080808;
   position: relative;

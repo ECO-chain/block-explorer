@@ -210,6 +210,14 @@ export default class Address extends Vue {
     }
 
     this.addressSummary = await addressModule.getAddressSummary(this.address)
+
+    if (this.addressSummary instanceof Error) {
+      this.$router.push({
+        name: 'notfound',
+        params: { msg: 'Not available address / Invalid address' }
+      })
+    }
+
     this.tokenBalance = await ecrc20Module.getTokenTracker(this.address)
     this.txs = await txModule.getAddressTransactions({ hash: this.address, pageNum: this.page })
     this.page++

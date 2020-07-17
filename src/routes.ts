@@ -19,6 +19,7 @@ import blocksModule from '@/api/blocks/index'
 import ecoweb3 from '@/ecoweb3/index'
 import addressModule from '@/api/address/index'
 import txModule from '@/api/transaction/index'
+import { CommonStore } from '@/store/common/index'
 
 Vue.use(VueRouter)
 
@@ -30,7 +31,9 @@ const router = new VueRouter({
       name: "home",
       component: Home,
       beforeEnter: async (to, from, next) => {
+        CommonStore.setShowLoadingSpinner(true)
         await blocksModule.getInitialSocketBlock()
+        CommonStore.setShowLoadingSpinner(false)
         next()
       }
     },
@@ -78,26 +81,6 @@ const router = new VueRouter({
       name: 'address',
       component: Address,
       props: true,
-      beforeEnter: async (to, from, next) => {
-        const addr = to.params.addr
-        const isValidAddress = await ecoweb3.isEcoAddress(to.params.addr)
-        if (isValidAddress) {
-          const summary = await addressModule.getAddressSummary(to.params.addr)
-          if (summary instanceof Error) {
-            next(new Error('Not available address / Invalid address'))
-          } else {
-            next()
-          }
-        } else {
-          const ecoAddr = await ecoweb3.getBitAddressFromContractAddress(to.params.addr)
-          const summary = await addressModule.getAddressSummary(ecoAddr)
-          if (summary instanceof Error) {
-            next(new Error('Not available address / Invalid address'))
-          } else {
-            next()
-          }
-        }
-      }
     },
     {
       path: '/block/:hash',
@@ -105,7 +88,9 @@ const router = new VueRouter({
       component: Block,
       props: true,
       beforeEnter: async (to, from, next) => {
+        CommonStore.setShowLoadingSpinner(true)
         const block = await blocksModule.getBlockDetail(to.params.hash)
+        CommonStore.setShowLoadingSpinner(false)
         if (block instanceof Error) {
           next(new Error('Invalid Block hash'))
         } else {
@@ -125,7 +110,9 @@ const router = new VueRouter({
       component: Transaction,
       props: true,
       beforeEnter: async (to, from, next) => {
+        CommonStore.setShowLoadingSpinner(true)
         const tx = await txModule.getTransactionByHash(to.params.hash)
+        CommonStore.setShowLoadingSpinner(false)
         if (tx instanceof Error) {
           next(new Error('Invalid Transaction hash'))
         } else {
