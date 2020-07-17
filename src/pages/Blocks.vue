@@ -7,41 +7,43 @@
             <h2 class="head-page mb-1">{{ $t('views.blocks.blocks_by_d') }}</h2>
           </div>
 
-          <nav
-            class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-end my-3"
-          >
-            <ul
-              class="pagination pagination-dark mb-3 mb-md-0 justify-content-center justify-content-md-end"
+          <template v-if="blocks.pagination">
+            <nav
+              class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-end my-3"
             >
-              <li class="page-item" :class="isBusy ? 'disabled': ''">
-                <router-link
-                  class="page-link d-flex align-items-center"
-                  :to="{ name: 'blocks', params: { date: blocks.pagination.prev } }"
-                >
-                  <b-icon-arrow-left-short class="h3 mb-0"></b-icon-arrow-left-short>
-                  {{ blocks.pagination.prev | timeFormat('ll') }}
-                </router-link>
-              </li>
-              <li
-                class="page-item"
-                v-if="!blocks.pagination.isToday"
-                :class="isBusy ? 'disabled': ''"
+              <ul
+                class="pagination pagination-dark mb-3 mb-md-0 justify-content-center justify-content-md-end"
               >
-                <router-link
-                  class="page-link d-flex align-items-center"
-                  :to="{ name: 'blocks', params: { date: blocks.pagination.next } }"
+                <li class="page-item" :class="isBusy ? 'disabled': ''">
+                  <router-link
+                    class="page-link d-flex align-items-center"
+                    :to="{ name: 'blocks', params: { date: blocks.pagination.prev } }"
+                  >
+                    <b-icon-arrow-left-short class="h3 mb-0"></b-icon-arrow-left-short>
+                    {{ blocks.pagination.prev | timeFormat('ll') }}
+                  </router-link>
+                </li>
+                <li
+                  class="page-item"
+                  v-if="!blocks.pagination.isToday"
+                  :class="isBusy ? 'disabled': ''"
                 >
-                  {{ blocks.pagination.next | timeFormat('ll') }}
-                  <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
-                </router-link>
-              </li>
-            </ul>
+                  <router-link
+                    class="page-link d-flex align-items-center"
+                    :to="{ name: 'blocks', params: { date: blocks.pagination.next } }"
+                  >
+                    {{ blocks.pagination.next | timeFormat('ll') }}
+                    <b-icon-arrow-right-short class="h3 mb-0"></b-icon-arrow-right-short>
+                  </router-link>
+                </li>
+              </ul>
 
-            <div class="text-center text-md-right">
-              <p class="mb-0">{{ blocks.pagination.current | timeFormat('dddd MMMM Do YYYY') }}</p>
-              <span class="small text-white-50">{{ checkDate(blocks.pagination) }}</span>
-            </div>
-          </nav>
+              <div class="text-center text-md-right">
+                <p class="mb-0">{{ blocks.pagination.current | timeFormat('dddd MMMM Do YYYY') }}</p>
+                <span class="small text-white-50">{{ checkDate(blocks.pagination) }}</span>
+              </div>
+            </nav>
+          </template>
 
           <div v-if="!isMobileDevice">
             <b-collapse v-model="isFetchMore">

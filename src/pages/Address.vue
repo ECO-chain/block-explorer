@@ -12,79 +12,82 @@
           </div>
         </b-col>
 
-        <b-col cols="12">
-          <div class="group-head my-3 text-center text-md-left">
-            <h3 class="head-global my-3">
-              {{ $t('views.address.summary') }}
-              <span
-                class="small text-purple"
-              >[{{ $t('views.address.confirm') }}]</span>
-            </h3>
-          </div>
-          <b-card class="block-global mb-3 rounded-lg addr-balance-block">
-            <b-row>
-              <b-col>{{ $t('views.address.balance') }}</b-col>
-              <b-col class="text-right addr-balance">
-                {{ addressSummary.balance | numberWithCommas }}
-                <span>ECOC</span>
-              </b-col>
-            </b-row>
-          </b-card>
-          <div class="block-global p-3 mb-3 rounded-lg">
-            <b-row class="justify-content-center">
-              <b-col cols="12" md>
-                <b-row class="align-items-center">
-                  <b-col cols="6">
-                    <div class="my-1 summary-label">{{ $t('views.address.total_received') }}</div>
-                  </b-col>
-                  <b-col cols="6">
-                    <div
-                      class="my-1 text-right"
-                    >{{ addressSummary.totalReceived | numberWithCommas }} ECOC</div>
-                  </b-col>
-                  <b-col cols="6">
-                    <div class="my-1 summary-label">{{ $t('views.address.total_sent') }}</div>
-                  </b-col>
-                  <b-col cols="6">
-                    <div
-                      class="my-1 text-right"
-                    >{{ addressSummary.totalSent | numberWithCommas }} ECOC</div>
-                  </b-col>
-                  <b-col cols="6">
-                    <div class="my-1 summary-label">{{ $t('views.address.num_of_tx') }}</div>
-                  </b-col>
-                  <b-col cols="6">
-                    <div
-                      class="my-1 text-right"
-                    >{{ addressSummary.txApperances | numberWithCommas }}</div>
-                  </b-col>
-                  <b-col cols="6" v-if="!isEcoAddr">
-                    <div class="my-1 summary-label">{{ $t('views.address.ecrc_token') }}</div>
-                  </b-col>
-                  <b-col cols="6" v-if="!isEcoAddr">
-                    <div class="my-1 text-right">
-                      <router-link
-                        :to="{ name: 'token', params: { addr: addr } }"
-                      >{{ tokenSummary.symbol }}</router-link>
-                    </div>
-                  </b-col>
-                </b-row>
-              </b-col>
-              <b-col cols="auto">
-                <VueQrcode
-                  class="qr"
-                  :value="toQRCodeFormat(addressSummary.addrStr)"
-                  :options="{ color: { dark: '#000000', light: '#ffffff' }, width: 125 }"
-                ></VueQrcode>
-              </b-col>
+        <template v-if="Object.keys(addressSummary).length > 0">
+          <b-col cols="12">
+            <div class="group-head my-3 text-center text-md-left">
+              <h3 class="head-global my-3">
+                {{ $t('views.address.summary') }}
+                <span
+                  class="small text-purple"
+                >[{{ $t('views.address.confirm') }}]</span>
+              </h3>
+            </div>
+            <b-card class="block-global mb-3 rounded-lg addr-balance-block">
+              <b-row>
+                <b-col>{{ $t('views.address.balance') }}</b-col>
+                <b-col class="text-right addr-balance">
+                  {{ addressSummary.balance | numberWithCommas }}
+                  <span>ECOC</span>
+                </b-col>
+              </b-row>
+            </b-card>
 
-              <b-col cols="12" v-if="!isEcoAddr">
-                <hr class="mb-0" />
-                <TokenScriptLog :isToken="true" :byteCode="contractInfo.code"></TokenScriptLog>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
+            <div class="block-global p-3 mb-3 rounded-lg">
+              <b-row class="justify-content-center">
+                <b-col cols="12" md>
+                  <b-row class="align-items-center">
+                    <b-col cols="6">
+                      <div class="my-1 summary-label">{{ $t('views.address.total_received') }}</div>
+                    </b-col>
+                    <b-col cols="6">
+                      <div
+                        class="my-1 text-right"
+                      >{{ addressSummary.totalReceived | numberWithCommas }} ECOC</div>
+                    </b-col>
+                    <b-col cols="6">
+                      <div class="my-1 summary-label">{{ $t('views.address.total_sent') }}</div>
+                    </b-col>
+                    <b-col cols="6">
+                      <div
+                        class="my-1 text-right"
+                      >{{ addressSummary.totalSent | numberWithCommas }} ECOC</div>
+                    </b-col>
+                    <b-col cols="6">
+                      <div class="my-1 summary-label">{{ $t('views.address.num_of_tx') }}</div>
+                    </b-col>
+                    <b-col cols="6">
+                      <div
+                        class="my-1 text-right"
+                      >{{ addressSummary.txApperances | numberWithCommas }}</div>
+                    </b-col>
+                    <b-col cols="6" v-if="!isEcoAddr">
+                      <div class="my-1 summary-label">{{ $t('views.address.ecrc_token') }}</div>
+                    </b-col>
+                    <b-col cols="6" v-if="!isEcoAddr">
+                      <div class="my-1 text-right">
+                        <router-link
+                          :to="{ name: 'token', params: { addr: addr } }"
+                        >{{ tokenSummary.symbol }}</router-link>
+                      </div>
+                    </b-col>
+                  </b-row>
+                </b-col>
+                <b-col cols="auto">
+                  <VueQrcode
+                    class="qr"
+                    :value="toQRCodeFormat(addressSummary.addrStr)"
+                    :options="{ color: { dark: '#000000', light: '#ffffff' }, width: 125 }"
+                  ></VueQrcode>
+                </b-col>
+
+                <b-col cols="12" v-if="!isEcoAddr">
+                  <hr class="mb-0" />
+                  <TokenScriptLog :isToken="true" :byteCode="contractInfo.code"></TokenScriptLog>
+                </b-col>
+              </b-row>
+            </div>
+          </b-col>
+        </template>
 
         <b-col cols="12" v-if="tokenBalance.length > 0 && isEcoAddr">
           <div class="group-head my-3 text-center text-md-left">
@@ -93,39 +96,43 @@
           <TokenTracker v-for="(balance, index) in tokenBalance" :key="index" :token="balance"></TokenTracker>
         </b-col>
 
-        <b-col cols="12" v-if="!isEcoAddr">
-          <div class="group-head my-3 text-center text-md-left">
-            <h3 class="head-global my-3">
-              {{ $t('views.address.storage') }}
-              <span
-                class="small text-purple"
-              >[{{ getEntriesCount() }} {{ $t('views.address.entries') }}]</span>
-            </h3>
-          </div>
-          <StorageLog :entries="contractInfo.storage"></StorageLog>
-        </b-col>
+        <template v-if="Object.keys(contractInfo).length > 0">
+          <b-col cols="12" v-if="!isEcoAddr">
+            <div class="group-head my-3 text-center text-md-left">
+              <h3 class="head-global my-3">
+                {{ $t('views.address.storage') }}
+                <span
+                  class="small text-purple"
+                >[{{ getEntriesCount() }} {{ $t('views.address.entries') }}]</span>
+              </h3>
+            </div>
+            <StorageLog :entries="contractInfo.storage"></StorageLog>
+          </b-col>
+        </template>
 
-        <b-col cols="12" class="tx-box-wrapper">
-          <div class="group-head my-3 text-center text-md-left">
-            <h3 class="head-global my-3">{{ $t('views.address.tx') }}</h3>
-          </div>
-          <div v-if="txs.txs.length > 0">
-            <TransactionBox
-              v-for="(tx, index) in txs.txs"
-              :key="index"
-              :tx="tx"
-              class="scale-in-top"
-            ></TransactionBox>
-            <infinite-loading
-              slot="append"
-              force-use-infinite-wrapper="tx-box-wrapper"
-              @infinite="infiniteHandler"
-            ></infinite-loading>
-          </div>
-          <div v-else class="block-global rounded-lg">
-            <p class="no-tx">{{ $t('views.address.no_tx') }}</p>
-          </div>
-        </b-col>
+        <template v-if="Object.keys(txs).length > 0">
+          <b-col cols="12" class="tx-box-wrapper">
+            <div class="group-head my-3 text-center text-md-left">
+              <h3 class="head-global my-3">{{ $t('views.address.tx') }}</h3>
+            </div>
+            <div v-if="txs.txs.length > 0">
+              <TransactionBox
+                v-for="(tx, index) in txs.txs"
+                :key="index"
+                :tx="tx"
+                class="scale-in-top"
+              ></TransactionBox>
+              <infinite-loading
+                slot="append"
+                force-use-infinite-wrapper="tx-box-wrapper"
+                @infinite="infiniteHandler"
+              ></infinite-loading>
+            </div>
+            <div v-else class="block-global rounded-lg">
+              <p class="no-tx">{{ $t('views.address.no_tx') }}</p>
+            </div>
+          </b-col>
+        </template>
         <back-to-top-btn :visisbleoffset="980"></back-to-top-btn>
       </b-row>
     </b-container>

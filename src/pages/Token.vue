@@ -9,85 +9,87 @@
           <!-- END .group-head -->
         </b-col>
 
-        <b-col cols="12">
-          <div class="block-global p-3 mb-3 rounded-lg token-summary">
-            <b-row>
-              <b-col cols="12" md="6">
-                <b-row>
-                  <b-col cols="6">
-                    <div class="my-1 token-label">{{ $t('views.token.total_supply') }}</div>
-                  </b-col>
-                  <b-col cols="6">
-                    <div
-                      class="my-1 text-right text-truncate"
-                    >{{ summary.total_supply | numberWithCommas({decimal: 8}) }} BCST</div>
-                  </b-col>
-                </b-row>
-              </b-col>
-              <b-col cols="12" md="6">
-                <b-row>
-                  <b-col cols="6">
-                    <div class="my-1 token-label">{{ $t('views.token.name') }}</div>
-                  </b-col>
-                  <b-col cols="6">
-                    <div class="my-1 text-right text-truncate">{{ summary.name }}</div>
-                  </b-col>
-                </b-row>
-              </b-col>
-              <b-col cols="12" md="6">
-                <b-row>
-                  <b-col cols="6">
-                    <div class="my-1 token-label">{{ $t('views.token.token_holders') }}</div>
-                  </b-col>
-                  <b-col cols="6">
-                    <div class="my-1 text-right text-truncate">{{ summary.holders_count }}</div>
-                  </b-col>
-                </b-row>
-              </b-col>
-              <b-col cols="12" md="6">
-                <b-row>
-                  <b-col cols="6">
-                    <div
-                      class="my-1 token-label"
-                      id="my-address"
-                    >{{ $t('views.token.contract_addr') }}</div>
-                  </b-col>
-                  <b-col cols="6">
-                    <div class="my-1 text-right text-truncate">
-                      <CopyBtn class="mr-2" :target="summary.contract_address"></CopyBtn>
-                      <router-link
-                        :to="{ name: 'address', params: { addr: summary.contract_address } }"
-                        class="text-truncate"
-                      >{{ summary.contract_address }}</router-link>
-                    </div>
-                  </b-col>
-                </b-row>
-              </b-col>
-              <b-col cols="12" md="6">
-                <b-row>
-                  <b-col cols="6">
-                    <div class="my-1 token-label">{{ $t('views.token.num_of_transfers') }}</div>
-                  </b-col>
-                  <b-col cols="6">
-                    <div
-                      class="my-1 text-right text-truncate"
-                    >{{ summary.transfers_count | numberWithCommas }}</div>
-                  </b-col>
-                </b-row>
-              </b-col>
-              <b-col cols="12" md="6">
-                <b-row>
-                  <b-col cols="6">
-                    <div class="my-1 token-label">{{ $t('views.token.token_decimal') }}</div>
-                  </b-col>
-                  <b-col cols="6">
-                    <div class="my-1 text-right text-truncate">{{ summary.decimals }}</div>
-                  </b-col>
-                </b-row>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
+        <template v-if="Object.keys(summary).length > 0">
+          <b-col cols="12">
+            <div class="block-global p-3 mb-3 rounded-lg token-summary">
+              <b-row>
+                <b-col cols="12" md="6">
+                  <b-row>
+                    <b-col cols="6">
+                      <div class="my-1 token-label">{{ $t('views.token.total_supply') }}</div>
+                    </b-col>
+                    <b-col cols="6">
+                      <div
+                        class="my-1 text-right text-truncate"
+                      >{{ summary.total_supply | numberWithCommas({decimal: 8}) }} BCST</div>
+                    </b-col>
+                  </b-row>
+                </b-col>
+                <b-col cols="12" md="6">
+                  <b-row>
+                    <b-col cols="6">
+                      <div class="my-1 token-label">{{ $t('views.token.name') }}</div>
+                    </b-col>
+                    <b-col cols="6">
+                      <div class="my-1 text-right text-truncate">{{ summary.name }}</div>
+                    </b-col>
+                  </b-row>
+                </b-col>
+                <b-col cols="12" md="6">
+                  <b-row>
+                    <b-col cols="6">
+                      <div class="my-1 token-label">{{ $t('views.token.token_holders') }}</div>
+                    </b-col>
+                    <b-col cols="6">
+                      <div class="my-1 text-right text-truncate">{{ summary.holders_count }}</div>
+                    </b-col>
+                  </b-row>
+                </b-col>
+                <b-col cols="12" md="6">
+                  <b-row>
+                    <b-col cols="6">
+                      <div
+                        class="my-1 token-label"
+                        id="my-address"
+                      >{{ $t('views.token.contract_addr') }}</div>
+                    </b-col>
+                    <b-col cols="6">
+                      <div class="my-1 text-right text-truncate">
+                        <CopyBtn class="mr-2" :target="summary.contract_address"></CopyBtn>
+                        <router-link
+                          :to="{ name: 'address', params: { addr: summary.contract_address } }"
+                          class="text-truncate"
+                        >{{ summary.contract_address }}</router-link>
+                      </div>
+                    </b-col>
+                  </b-row>
+                </b-col>
+                <b-col cols="12" md="6">
+                  <b-row>
+                    <b-col cols="6">
+                      <div class="my-1 token-label">{{ $t('views.token.num_of_transfers') }}</div>
+                    </b-col>
+                    <b-col cols="6">
+                      <div
+                        class="my-1 text-right text-truncate"
+                      >{{ summary.transfers_count | numberWithCommas }}</div>
+                    </b-col>
+                  </b-row>
+                </b-col>
+                <b-col cols="12" md="6">
+                  <b-row>
+                    <b-col cols="6">
+                      <div class="my-1 token-label">{{ $t('views.token.token_decimal') }}</div>
+                    </b-col>
+                    <b-col cols="6">
+                      <div class="my-1 text-right text-truncate">{{ summary.decimals }}</div>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+            </div>
+          </b-col>
+        </template>
 
         <b-col cols="12">
           <b-tabs nav-class="tabs-global text-uppercase">
@@ -99,9 +101,9 @@
               <TokenHoldersSection :addr="addr" :summary="summary"></TokenHoldersSection>
             </b-tab>
 
-            <b-tab :title="$t('views.token.read_smart_contract')">
+            <!-- <b-tab :title="$t('views.token.read_smart_contract')">
               <ReadContractSection :summary="summary"></ReadContractSection>
-            </b-tab>
+            </b-tab> -->
           </b-tabs>
         </b-col>
       </b-row>

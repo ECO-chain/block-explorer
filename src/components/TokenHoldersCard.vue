@@ -19,7 +19,7 @@
         </b-col>
       </b-row>
     </b-card>
-    <template v-if="holders.items.length > 0">
+    <template v-if="'items' in holders">
       <infinite-loading
         slot="append"
         @infinite="infiniteHolders"
