@@ -10,7 +10,7 @@
         <h2>{{ $t('views.not_found.page_not_found') }}</h2>
         <hr />
         <b-button
-          class="mt-3 text-uppercase"
+          class="mt-3 text-uppercase back-to-home"
           @click="backToHome"
         >{{ $t('views.not_found.to_home') }}</b-button>
       </div>
@@ -53,5 +53,13 @@ h2 {
   text-align: center;
   margin-bottom: 0.75rem;
   font-weight: 600;
+}
+
+.back-to-home {
+  font-weight: 600;
+  border: 0;
+  border-radius: 6px;
+  background: -webkit-linear-gradient(145deg, #ad3bde 0%, #711383 100%);
+  box-shadow: 0 6px 12px #080808;
 }
 </style>

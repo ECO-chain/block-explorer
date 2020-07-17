@@ -16,6 +16,9 @@ import NotFound from './pages/NotFound.vue'
 import { isBlocksDateFormat } from './api/utils'
 
 import blocksModule from '@/api/blocks/index'
+import ecoweb3 from '@/ecoweb3/index'
+import addressModule from '@/api/address/index'
+import txModule from '@/api/transaction/index'
 
 Vue.use(VueRouter)
 
@@ -27,13 +30,8 @@ const router = new VueRouter({
       name: "home",
       component: Home,
       beforeEnter: async (to, from, next) => {
-        const socketBlock = blocksModule.state.socketBlock
-        if (socketBlock.length > 0) {
-          next()
-        } else {
-          await blocksModule.getInitialSocketBlock()
-          next()
-        }
+        await blocksModule.getInitialSocketBlock()
+        next()
       }
     },
     {
@@ -79,13 +77,41 @@ const router = new VueRouter({
       path: '/address/:addr',
       name: 'address',
       component: Address,
-      props: true
+      props: true,
+      beforeEnter: async (to, from, next) => {
+        const addr = to.params.addr
+        const isValidAddress = await ecoweb3.isEcoAddress(to.params.addr)
+        if (isValidAddress) {
+          const summary = await addressModule.getAddressSummary(to.params.addr)
+          if (summary instanceof Error) {
+            next(new Error('Not available address / Invalid address'))
+          } else {
+            next()
+          }
+        } else {
+          const ecoAddr = await ecoweb3.getBitAddressFromContractAddress(to.params.addr)
+          const summary = await addressModule.getAddressSummary(ecoAddr)
+          if (summary instanceof Error) {
+            next(new Error('Not available address / Invalid address'))
+          } else {
+            next()
+          }
+        }
+      }
     },
     {
       path: '/block/:hash',
       name: 'block',
       component: Block,
-      props: true
+      props: true,
+      beforeEnter: async (to, from, next) => {
+        const block = await blocksModule.getBlockDetail(to.params.hash)
+        if (block instanceof Error) {
+          next(new Error('Invalid Block hash'))
+        } else {
+          next()
+        }
+      }
     },
     {
       path: '/token/:addr',
@@ -97,7 +123,15 @@ const router = new VueRouter({
       path: '/tx/:hash',
       name: 'transaction',
       component: Transaction,
-      props: true
+      props: true,
+      beforeEnter: async (to, from, next) => {
+        const tx = await txModule.getTransactionByHash(to.params.hash)
+        if (tx instanceof Error) {
+          next(new Error('Invalid Transaction hash'))
+        } else {
+          next()
+        }
+      }
     },
     {
       path: '/*',

@@ -104,7 +104,7 @@ async function getInitialSocketBlock() {
   try {
     const socketBlock = [] as SocketBlock[]
 
-    const res = await Axios.get(`${env!.baseURL}api/blocks`)
+    const res = await Axios.get(`${env!.baseURL}api/blocks?limit=10`)
 
     // Only first 10 latest blocks
     const blocks = res.data.blocks.slice(0, 10)
