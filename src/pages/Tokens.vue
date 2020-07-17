@@ -29,7 +29,19 @@
         <b-col cols="12">
           <div class="block-global p-3 my-3 rounded-lg" v-if="!isMobileDevice">
             <div class="table-responsive m-0">
-              <b-table class="token-list-table" dark :items="tokens.items" :fields="fields">
+              <b-table
+                class="token-list-table"
+                dark
+                show-empty
+                :items="tokens.items"
+                :fields="fields"
+              >
+                <template v-slot:empty>
+                  <div class="table-no-record">
+                    <i class="far fa-tired"></i>
+                    <p>{{ $t('dom.table.no_records') }}</p>
+                  </div>
+                </template>
                 <template v-slot:cell(name)="data">
                   <router-link
                     :to="{ name: 'token', params: { addr: data.item.contract_address } }"

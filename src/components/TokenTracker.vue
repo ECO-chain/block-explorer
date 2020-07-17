@@ -5,6 +5,7 @@
         class="block-global mb-3 rounded-lg token-tracker hvr-sweep-to-right"
         @click="toECRCToken(tokenBalance.contract.contract_address)"
       >
+      <template v-if="Object.keys(tokenBalance).length > 0">
         <b-row>
           <b-col cols="auto">
             <div class="token-sym text-center font-weight-bold">{{ tokenBalance.contract.symbol }}</div>
@@ -23,6 +24,7 @@
             class="text-right token-rank text-uppercase"
           >{{ $t('components.token_tracker.rank') }} #{{ tokenBalance.rank }}</b-col>
         </b-row>
+      </template>
       </b-card>
     </b-col>
   </b-row>

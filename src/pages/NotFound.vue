@@ -2,11 +2,15 @@
   <div class="container-fill-height">
     <b-container>
       <div class="pt-5 text-uppercase text-center">
+        <div v-if="msg" class="error-msg">
+          <i class="fas fa-exclamation-circle"></i>
+          {{ msg }}
+        </div>
         <h1>404</h1>
         <h2>{{ $t('views.not_found.page_not_found') }}</h2>
         <hr />
         <b-button
-          class="mt-3 text-uppercase"
+          class="mt-3 text-uppercase back-to-home"
           @click="backToHome"
         >{{ $t('views.not_found.to_home') }}</b-button>
       </div>
@@ -15,10 +19,12 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class NotFound extends Vue {
+  @Prop() msg!: string
+
   backToHome() {
     this.$router.push({ name: 'home' })
   }
@@ -38,5 +44,22 @@ h2 {
   font-weight: 600;
   letter-spacing: 4px;
   margin-top: -1.5rem;
+}
+
+.error-msg {
+  padding: 0.5rem;
+  background: #ad3c3c;
+  border-radius: 6px;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.back-to-home {
+  font-weight: 600;
+  border: 0;
+  border-radius: 6px;
+  background: -webkit-linear-gradient(145deg, #ad3bde 0%, #711383 100%);
+  box-shadow: 0 6px 12px #080808;
 }
 </style>

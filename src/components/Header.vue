@@ -18,7 +18,7 @@
                   </li>
                   <li class="ml-3">
                     <router-link
-                      to="/blocks"
+                      :to="{ name: 'blocks', params: { date: nowTime } }"
                       @click.native="toggleShow()"
                     >{{ $t('components.header.blocks') }}</router-link>
                   </li>
@@ -78,6 +78,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import LanguageSwitcher from './LanguageSwitcher.vue'
+import moment from 'moment'
 
 @Component({
   components: {
@@ -89,6 +90,12 @@ export default class BlockHeader extends Vue {
 
   toggleShow() {
     this.menuActive = screen.width <= 767.98 ? false : true
+  }
+
+  get nowTime() {
+    return moment()
+      .format()
+      .split('T')[0]
   }
 }
 </script>

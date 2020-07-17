@@ -1,5 +1,5 @@
 <template>
-  <b-card class="token-card">
+  <b-card class="token-card mb-4">
     <b-row @click="goToToken(token.contract_address)">
       <b-col cols="3" class="token-symbol">
         <div class="token-symbol-name">{{ token.symbol }}</div>

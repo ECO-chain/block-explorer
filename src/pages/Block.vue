@@ -1,5 +1,6 @@
 <template>
   <div class="container-fill-height">
+    <template v-if="Object.keys(block).length > 0">
     <b-container class="mb-3 mb-sm-4 pt-4 pt-sm-5">
       <b-row>
         <b-col cols="12">
@@ -185,6 +186,7 @@
         </b-col>
       </b-row>
     </b-container>
+    </template>
   </div>
 </template>
 

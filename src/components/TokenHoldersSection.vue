@@ -7,7 +7,19 @@
     </i18n>
     <div v-if="!isMobileDevice">
       <div class="table-responsive m-0">
-        <b-table class="token-holders-table" dark :items="holder.items" :fields="holderFields">
+        <b-table
+          class="token-holders-table"
+          dark
+          show-empty
+          :items="holder.items"
+          :fields="holderFields"
+        >
+          <template v-slot:empty>
+            <div class="table-no-record">
+              <i class="far fa-tired"></i>
+              <p>{{ $t('dom.table.no_records') }}</p>
+            </div>
+          </template>
           <template v-slot:cell(rank)="data">{{ getTokenHoldersRanking(data.item) }}</template>
           <template
             v-slot:cell(percentage)="data"

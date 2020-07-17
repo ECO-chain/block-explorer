@@ -31,7 +31,7 @@
         </b-col>
       </b-row>
     </b-card>
-    <template v-if="transfer.items.length > 0">
+    <template v-if="'items' in transfer">
       <infinite-loading
         slot="append"
         @infinite="inifiniteTransfer"

@@ -99,74 +99,30 @@
     <b-row class="my-3">
       <b-col cols="12">
         <h2 class="head-global my-3">{{ $t('views.home.blocks') }}</h2>
-        <div class="block-bitcoin">
+        <template v-if="checkSocketBlock">
           <swiper :options="swiperOption">
-            <!-- slides -->
-            <swiper-slide v-for="(block, index) in blocks.blocks" :key="index">
-              <div
-                class="block-item rounded-lg m-auto loading-block"
-                v-if="blockLoading && block.height === newBlockHeight"
-              >
-                <b-spinner small class="loading-spinner"></b-spinner>
-              </div>
-              <div class="block-item p-3 rounded-lg" v-else>
-                <div
-                  class="my-1 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                >
-                  <router-link
-                    :to="{ name: 'block', params: { hash: block.hash } }"
-                  >{{ block.height }}</router-link>
-                </div>
-                <span class="small text-purple-light">{{ (block.time * 1000) | timeFromNow }}</span>
-                <div class="my-1 small text-truncate">
-                  {{ $t('views.home.swiper.blocks.mined_by') }}:
-                  <router-link
-                    :to="{ name: 'address', params: { addr: block.minedBy } }"
-                  >{{ block.minedBy }}</router-link>
-                </div>
-                <div class="my-1 small">{{ $t('views.home.swiper.blocks.size') }}: {{ block.size }}</div>
-                <div
-                  class="my-1 small"
-                >{{ $t('views.home.swiper.blocks.tx') }}: {{ block.txlength }}</div>
-              </div>
+            <swiper-slide v-for="(sBlock, index) in socketBlock" :key="index">
+              <SocketBlocksCard :socket="sBlock"></SocketBlocksCard>
             </swiper-slide>
           </swiper>
-        </div>
+        </template>
       </b-col>
     </b-row>
     <b-row class="my-3 mb-4 mb-sm-5">
       <b-col cols="12">
         <h2 class="head-global my-3">{{ $t('views.home.tx') }}</h2>
-        <div class="block-bitcoin">
+        <template v-if="socketTx.length > 0">
           <swiper :options="swiperOption">
-            <template v-if="socketTx.length > 0">
-              <swiper-slide v-for="(tx, index) in socketTx" :key="index">
-                <div class="block-item p-3 rounded-lg">
-                  <div
-                    class="my-1 mb-3 border-bottom border-purple-light d-flex justify-content-between align-items-center"
-                  >
-                    <span class="small text-purple-light">{{ Date.now() | timeFromNow }}</span>
-                  </div>
-                  <div class="my-1 small text-truncate">
-                    <p class="mb-0 font-weight-bold">{{ $t('views.home.swiper.tx.hash') }}</p>
-                    <router-link
-                      :to="{ name: 'transaction', params: { hash: tx.txid } }"
-                    >{{ tx.txid }}</router-link>
-                  </div>
-                  <div class="my-1 small">
-                    <p class="mb-0 font-weight-bold">{{ $t('views.home.swiper.tx.vout') }}</p>
-                    {{ tx.valueOut | numberWithCommas({fixed: 3}) }} ECOC
-                  </div>
-                </div>
-              </swiper-slide>
-            </template>
-            <template v-else>
-              <div class="p-5 m-auto">
-                <b-spinner label="Loading..."></b-spinner>
-              </div>
-            </template>
+            <swiper-slide v-for="(tx, index) in socketTx" :key="index">
+              <SocketTxCard :tx="tx"></SocketTxCard>
+            </swiper-slide>
           </swiper>
-        </div>
+        </template>
+        <template v-else>
+          <div class="p-5">
+            <fulfilling-square-spinner class="m-auto" :animation-duration="4000" :size="40" color="#ffffff" />
+          </div>
+        </template>
       </b-col>
     </b-row>
   </b-container>
@@ -174,54 +130,38 @@
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
-import { Socket } from 'vue-socket.io-extended'
 import BlockSearchBox from '@/components/SearchBox.vue'
 import LineChart from '@/components/LineChart.vue'
+import SocketBlocksCard from '@/components/SocketBlocksCard.vue'
+import { FulfillingSquareSpinner } from 'epic-spinners'
+import SocketTxCard from '@/components/SocketTxCard.vue'
 import statusModule from '@/api/status/index'
 import statisticsModule from '@/api/statistics/index'
 import blocksModule from '@/api/blocks/index'
+import txModule from '@/api/transaction/index'
 import { toMonthDayFormat } from '@/api/filters'
 import countTo from 'vue-count-to'
 /* eslint-disable no-unused-vars */
 import { StatusState, Info, StakingInfo } from '../api/status/type'
 import { TransactionStats } from '../api/statistics/type'
-import { Blocks, Block, BlockDetail } from '../api/blocks/type'
+import { Blocks, Block, BlockDetail, SocketBlock } from '../api/blocks/type'
 import { SocketTx } from '../api/transaction/type'
 
 @Component({
   components: {
     BlockSearchBox,
     LineChart,
-    countTo
+    countTo,
+    SocketBlocksCard,
+    SocketTxCard,
+    FulfillingSquareSpinner
   }
 })
 export default class Home extends Vue {
-  @Socket('block')
-  async onBlock(payload: any) {
-    const socketBlock = await blocksModule.getBlockDetail(payload)
-    const newBlock = this.blockDetailToBlocks(socketBlock)
-    this.blockLoading = true
-    this.newBlockHeight = newBlock.height
-
-    this.blocks.blocks.pop()
-    this.blocks.blocks.unshift(newBlock)
-    setTimeout(() => {
-      this.blockLoading = false
-      this.newBlockHeight = 0
-    }, 1000)
-  }
-  @Socket('tx')
-  onTx(payload: any) {
-    if (this.socketTx.length >= 10) {
-      this.socketTx.pop()
-    }
-    this.socketTx.unshift(payload)
-  }
-
   swiperOption = {
     loop: false,
     watchSlidesVisibility: true,
-    slidesPerView: 5,
+    slidesPerView: 4,
     spaceBetween: 30,
     breakpoints: {
       575.98: {
@@ -237,16 +177,11 @@ export default class Home extends Vue {
       1199.98: {
         slidesPerView: 4
       }
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true
     }
   }
 
   sevenDaysTx: TransactionStats[] | null = null
   blocks: Blocks = {} as Blocks
-  socketTx: SocketTx[] = []
   txDate: string[] = []
   txCount: number[] = []
 
@@ -263,7 +198,7 @@ export default class Home extends Vue {
     const info = await statusModule.getInfo()
     const stakingInfo = await statusModule.getStakingInfo()
     const supply = await statusModule.getTotalSupply()
-    this.blocks = await blocksModule.getBlocksWithLimit(5)
+    // this.blocks = await blocksModule.getBlocksWithLimit(5)
 
     this.sevenDaysTx = await statisticsModule.getTransactionStats('7')
     this.txDate = this.sevenDaysTx
@@ -293,6 +228,18 @@ export default class Home extends Vue {
 
   get stakingInfo(): StakingInfo {
     return this.statusState.stakingInfo
+  }
+
+  get socketBlock(): SocketBlock[] {
+    return blocksModule.state.socketBlock
+  }
+
+  get checkSocketBlock() {
+    return this.socketBlock.length > 0
+  }
+
+  get socketTx(): SocketTx[] {
+    return txModule.state.socketTx
   }
 
   blockDetailToBlocks(blockD: BlockDetail) {
@@ -348,6 +295,27 @@ export default class Home extends Vue {
 
   .loading-spinner {
     margin: 2.75rem;
+  }
+}
+
+.swiper-container {
+  background: #00000029;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.swiper-wrapper {
+  .swiper-slide::after {
+    content: '';
+    display: block;
+    height: 15px;
+    background: #34363e;
+    position: absolute;
+    left: 0;
+    right: -500%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: -1;
   }
 }
 
