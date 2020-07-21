@@ -6,7 +6,7 @@
     :class="socket.loading ? '' : 'slide-in-left'"
   >
     <template v-slot:header>
-      <b-card-title class="to-block" @click="toBlock(socket.block.height)">{{ socket.block.height }}</b-card-title>
+      <b-card-title class="to-block" @click="toBlock(socket.block.hash)">{{ socket.block.height }}</b-card-title>
     </template>
     <p class="label-mined">{{ $t('views.home.swiper.blocks.mined_by') }}</p>
     <div
