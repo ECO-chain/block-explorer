@@ -120,7 +120,12 @@
         </template>
         <template v-else>
           <div class="p-5">
-            <fulfilling-square-spinner class="m-auto" :animation-duration="4000" :size="40" color="#ffffff" />
+            <fulfilling-square-spinner
+              class="m-auto"
+              :animation-duration="4000"
+              :size="40"
+              color="#ffffff"
+            />
           </div>
         </template>
       </b-col>
@@ -154,8 +159,8 @@ import { SocketTx } from '../api/transaction/type'
     countTo,
     SocketBlocksCard,
     SocketTxCard,
-    FulfillingSquareSpinner
-  }
+    FulfillingSquareSpinner,
+  },
 })
 export default class Home extends Vue {
   swiperOption = {
@@ -166,18 +171,18 @@ export default class Home extends Vue {
     breakpoints: {
       575.98: {
         slidesPerView: 2,
-        spaceBetween: 15
+        spaceBetween: 15,
       },
       767.98: {
-        slidesPerView: 2
+        slidesPerView: 2,
       },
       991.98: {
-        slidesPerView: 3
+        slidesPerView: 3,
       },
       1199.98: {
-        slidesPerView: 4
-      }
-    }
+        slidesPerView: 4,
+      },
+    },
   }
 
   sevenDaysTx: TransactionStats[] | null = null
@@ -200,13 +205,14 @@ export default class Home extends Vue {
     const supply = await statusModule.getTotalSupply()
     // this.blocks = await blocksModule.getBlocksWithLimit(5)
 
-    this.sevenDaysTx = await statisticsModule.getTransactionStats('7')
+    this.sevenDaysTx = await statisticsModule.getTransactionStats('8')
+    this.sevenDaysTx = this.sevenDaysTx.slice(1, this.sevenDaysTx.length)
     this.txDate = this.sevenDaysTx
-      .map(tx => {
+      .map((tx) => {
         return toMonthDayFormat(tx.date.toString())
       })
       .reverse()
-    this.txCount = this.sevenDaysTx.map(tx => tx.transaction_count).reverse()
+    this.txCount = this.sevenDaysTx.map((tx) => tx.transaction_count).reverse()
 
     this.startedSupply = Number(supply)
     this.startedDifficulty = this.info.difficulty['proof-of-stake']
@@ -251,7 +257,7 @@ export default class Home extends Vue {
       txlength: blockD.tx.length,
       poolInfo: blockD.poolInfo,
       isMainChain: blockD.isMainChain,
-      minedBy: blockD.minedBy
+      minedBy: blockD.minedBy,
     }
 
     return block
