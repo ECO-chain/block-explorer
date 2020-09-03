@@ -13,6 +13,13 @@ import Block from './pages/Block.vue'
 import Token from './pages/Token.vue'
 import Transaction from './pages/Transaction.vue'
 import NotFound from './pages/NotFound.vue'
+import { isBlocksDateFormat } from './api/utils'
+
+import blocksModule from '@/api/blocks/index'
+import ecoweb3 from '@/ecoweb3/index'
+import addressModule from '@/api/address/index'
+import txModule from '@/api/transaction/index'
+import { CommonStore } from '@/store/common/index'
 
 Vue.use(VueRouter)
 
@@ -23,11 +30,25 @@ const router = new VueRouter({
       path: '/',
       name: "home",
       component: Home,
+      beforeEnter: async (to, from, next) => {
+        CommonStore.setShowLoadingSpinner(true)
+        await blocksModule.getInitialSocketBlock()
+        CommonStore.setShowLoadingSpinner(false)
+        next()
+      }
     },
     {
-      path: '/blocks',
+      path: '/blocks/:date?',
       name: 'blocks',
       component: Blocks,
+      props: true,
+      beforeEnter: (to, from, next) => {
+        if (isBlocksDateFormat(to.params.date)) {
+          next();
+        } else {
+          next(new Error('Invalid date format'))
+        }
+      }
     },
     {
       path: '/status',
@@ -59,13 +80,23 @@ const router = new VueRouter({
       path: '/address/:addr',
       name: 'address',
       component: Address,
-      props: true
+      props: true,
     },
     {
       path: '/block/:hash',
       name: 'block',
       component: Block,
-      props: true
+      props: true,
+      beforeEnter: async (to, from, next) => {
+        CommonStore.setShowLoadingSpinner(true)
+        const block = await blocksModule.getBlockDetail(to.params.hash)
+        CommonStore.setShowLoadingSpinner(false)
+        if (block instanceof Error) {
+          next(new Error('Invalid Block hash'))
+        } else {
+          next()
+        }
+      }
     },
     {
       path: '/token/:addr',
@@ -77,14 +108,36 @@ const router = new VueRouter({
       path: '/tx/:hash',
       name: 'transaction',
       component: Transaction,
-      props: true
+      props: true,
+      beforeEnter: async (to, from, next) => {
+        CommonStore.setShowLoadingSpinner(true)
+        const tx = await txModule.getTransactionByHash(to.params.hash)
+        CommonStore.setShowLoadingSpinner(false)
+        if (tx instanceof Error) {
+          next(new Error('Invalid Transaction hash'))
+        } else {
+          next()
+        }
+      }
     },
     {
-      path: '*',
+      path: '/*',
+      props: true,
+      beforeEnter: (to, from, next) => {
+        router.push({ name: 'notfound' })
+      }
+    },
+    {
+      path: '/error',
       name: 'notfound',
-      component: NotFound
+      component: NotFound,
+      props: true
     }
   ]
+})
+
+router.onError(error => {
+  router.push({ name: 'notfound', params: { msg: error.message } })
 })
 
 export default router;

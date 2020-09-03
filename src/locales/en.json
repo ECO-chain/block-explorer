@@ -17,7 +17,8 @@
         "blocks": {
           "mined_by": "Mined By",
           "size": "Size",
-          "tx": "Transaction(s)"
+          "tx": "Transaction",
+          "txs": "Txs"
         },
         "tx": {
           "hash": "Hash",
@@ -247,6 +248,11 @@
     },
     "token_tracker": {
       "rank": "Rank"
+    }
+  },
+  "dom": {
+    "table": {
+      "no_records": "There are no records to show"
     }
   }
 }

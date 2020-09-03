@@ -1,6 +1,8 @@
 import { TokenSummary } from '../ecrc20/type';
 
-export interface TransactionState {}
+export interface TransactionState {
+  socketTx: SocketTx[]
+}
 
 export interface Txs {
   pagesTotal: number
@@ -74,6 +76,8 @@ export interface SocketTx {
   txid: string
   valueOut: number
   vout: object[]
+  loading: boolean
+  time: number
 }
 
 export interface TxReceipt {
