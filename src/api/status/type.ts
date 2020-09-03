@@ -1,5 +1,6 @@
 export interface StatusState {
   finalSupply: number
+  finalSupplyThemis: number
   info: Info
   stakingInfo: StakingInfo
   supply: string

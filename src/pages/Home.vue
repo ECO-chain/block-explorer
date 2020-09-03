@@ -12,7 +12,8 @@
           <b-row>
             <b-col cols="12" md="6">
               <div class="show-supply-idle rounded-lg text-center p-3 my-3">
-                <p class="my-1 text-style-2">{{ statusState.finalSupply | numberWithCommas }} ECOC</p>
+                <p class="my-1 text-style-2">
+                  {{ getFinalSupply(info.blocks) | numberWithCommas }} ECOC</p>
                 <p class="my-1 supply-label">{{ $t('views.home.final_supply') }}</p>
               </div>
             </b-col>
@@ -261,6 +262,21 @@ export default class Home extends Vue {
     }
 
     return block
+  }
+
+  getFinalSupply(height: number) {
+    const themisHeightMainnet = 870000
+    const themisHeightTestnet = 929300
+
+    if (this.info.testnet && height > themisHeightTestnet) {
+      return this.statusState.finalSupplyThemis
+    }
+
+    if (!this.info.testnet && height > themisHeightMainnet) {
+      return this.statusState.finalSupplyThemis
+    }
+
+    return this.statusState.finalSupply
   }
 
   @Watch('statusState.info')
