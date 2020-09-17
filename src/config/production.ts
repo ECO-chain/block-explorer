@@ -1,8 +1,8 @@
 import { AppConfig } from '@/types'
 
-const prodURL = process.env.BASE_URL ? process.env.BASE_URL : '/'
-const prodSocket = process.env.SOCKET_URL ? process.env.SOCKET_URL : '/'
-const prodNetwork = process.env.NETWORK ? process.env.NETWORK : 'livenet'
+const prodURL = process.env.VUE_APP_BASE_URL? process.env.VUE_APP_BASE_URL : '/'
+const prodSocket = process.env.VUE_APP_SOCKET_URL? process.env.VUE_APP_SOCKET_URL : '/'
+const prodNetwork = process.env.VUE_APP_NETWORK? process.env.VUE_APP_NETWORK : 'livenet'
 
 export default {
   name: 'production',
