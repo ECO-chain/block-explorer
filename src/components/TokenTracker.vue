@@ -13,7 +13,7 @@
           <b-col class="token-text pl-0">
             <p class="font-weight-bold mb-0">{{ tokenBalance.contract.name }}</p>
             <p class="token-amount mb-0">
-              {{ tokenBalance.amount | numberWithCommas({decimal: 8}) }}
+              {{ tokenBalance.amount | numberWithCommas({decimal: Number(tokenBalance.contract.decimals)}) }}
               <span
                 class="ml-2"
               >{{ tokenBalance.contract.symbol }}</span>

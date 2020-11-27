@@ -54,7 +54,7 @@
       </div>
     </div>
     <div v-else>
-      <token-transfer-card :transfer="transfer" :addr="addr"></token-transfer-card>
+      <token-transfer-card :transfer="transfer" :addr="addr" :summary="summary"></token-transfer-card>
       <back-to-top-btn></back-to-top-btn>
     </div>
   </div>
@@ -67,7 +67,7 @@ import TokenTransferCard from '@/components/TokenTransferCard.vue'
 import BackToTopBtn from '@/components/BackToTopBtn.vue'
 import { timeFromNow, numberWithCommas } from '@/api/filters'
 // eslint-disable-next-line no-unused-vars
-import { TokenTransfers } from '../api/ecrc20/type'
+import { TokenTransfers, TokenSummary } from '../api/ecrc20/type'
 
 @Component({
   components: {
@@ -77,6 +77,7 @@ import { TokenTransfers } from '../api/ecrc20/type'
 })
 export default class TokenTransfersSection extends Vue {
   @Prop() addr!: string
+  @Prop() summary!: TokenSummary
 
   transfer: TokenTransfers = {} as TokenTransfers
   nowLimit = 20
@@ -118,7 +119,7 @@ export default class TokenTransfersSection extends Vue {
         key: 'value',
         label: this.$t('views.token.quantity'),
         formatter: (value: string) => {
-          return numberWithCommas(Number(value), { decimal: 8 })
+          return numberWithCommas(Number(value), { decimal: Number(this.summary.decimals) })
         },
         sortable: true,
         thClass: 'th-custom',

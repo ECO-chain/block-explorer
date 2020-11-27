@@ -1,33 +1,35 @@
 <template>
   <div>
-    <b-card class="mb-3" v-for="(transfer,index) in transfer.items" :key="index">
+    <b-card class="mb-3" v-for="(transfer, index) in transfer.items" :key="index">
       <b-row>
         <b-col>
           <b-card-text class="text-truncate transfer-hash font-weight-bolder">
-            <router-link
-              :to="{ name: 'transaction', params: { hash: transfer.tx_hash } }"
-            >{{ transfer.tx_hash }}</router-link>
+            <router-link :to="{ name: 'transaction', params: { hash: transfer.tx_hash } }">{{
+              transfer.tx_hash
+            }}</router-link>
           </b-card-text>
         </b-col>
-        <b-col class="text-right">{{ transfer.tx_time * 1000 | timeFromNow }}</b-col>
+        <b-col class="text-right">{{ (transfer.tx_time * 1000) | timeFromNow }}</b-col>
       </b-row>
       <b-row class="mt-2">
         <b-col class="transfer-to">
           <div class="text-truncate">
-            <router-link
-              :to="{ name: 'address', params: { addr: transfer.from } }"
-            >{{ transfer.from }}</router-link>
+            <router-link :to="{ name: 'address', params: { addr: transfer.from } }">{{
+              transfer.from
+            }}</router-link>
           </div>
           <i class="fas fa-arrow-right tx-arrow"></i>
           <div class="text-truncate">
-            <router-link :to="{ name: 'address', params: { addr: transfer.to } }">{{ transfer.to }}</router-link>
+            <router-link :to="{ name: 'address', params: { addr: transfer.to } }">{{
+              transfer.to
+            }}</router-link>
           </div>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
           <span class="transfer-label pr-2">Quantitiy</span>
-          {{ Number(transfer.value) | numberWithCommas({decimal: 8}) }}
+          {{ Number(transfer.value) | numberWithCommas({ decimal: Number(summary.decimals) }) }}
         </b-col>
       </b-row>
     </b-card>
@@ -46,7 +48,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 import ecrc20Module from '@/api/ecrc20/index'
 import InfiniteLoading from 'vue-infinite-loading'
 // eslint-disable-next-line no-unused-vars
-import { TokenTransfers } from '../api/ecrc20/type'
+import { TokenTransfers, TokenSummary } from '../api/ecrc20/type'
 
 @Component({
   components: {
@@ -56,6 +58,7 @@ import { TokenTransfers } from '../api/ecrc20/type'
 export default class TokenTransferCard extends Vue {
   @Prop() transfer!: TokenTransfers
   @Prop() addr!: string
+  @Prop() summary!: TokenSummary
 
   async inifiniteTransfer($state: any) {
     if (this.transfer.offset < this.transfer.count) {

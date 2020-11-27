@@ -85,7 +85,7 @@ export default class App extends Vue {
   }
 
   get isLoading() {
-    return CommonStore.state.showLoadingSpinner
+    return false //CommonStore.state.showLoadingSpinner
   }
 }
 </script>

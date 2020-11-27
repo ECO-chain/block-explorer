@@ -9,6 +9,16 @@
       <b-col cols="12" lg="6" class="d-flex flex-column">
         <h2 class="head-global my-3">{{ $t('views.home.block_info') }}</h2>
         <div class="block-global p-3 mb-3 rounded-lg w-100 h-100">
+          <b-row v-if="isMainnet">
+            <b-col cols="6" md="6">
+              <div class="show-supply-idle rounded-lg text-center p-3 my-3">
+                <p class="my-1 text-style-2">
+                  206,000,000 ECOC</p>
+                <p class="my-1 supply-label">{{ $t('views.home.burned') }}</p>
+              </div>
+            </b-col>
+          </b-row>
+
           <b-row>
             <b-col cols="12" md="6">
               <div class="show-supply-idle rounded-lg text-center p-3 my-3">
@@ -30,6 +40,7 @@
               </div>
             </b-col>
           </b-row>
+
           <b-row>
             <b-col cols="6" md="4">
               <div class="text-center my-3">
@@ -247,6 +258,10 @@ export default class Home extends Vue {
 
   get socketTx(): SocketTx[] {
     return txModule.state.socketTx
+  }
+
+  get isMainnet() {
+    return !this.info.testnet
   }
 
   blockDetailToBlocks(blockD: BlockDetail) {

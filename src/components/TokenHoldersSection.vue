@@ -99,7 +99,7 @@ export default class TokenHoldersSection extends Vue {
         key: 'amount',
         label: this.$t('views.token.quantity'),
         formatter: (value: string) => {
-          return numberWithCommas(Number(value), { decimal: 8, fixed: 2 })
+          return numberWithCommas(Number(value), { decimal: Number(this.summary.decimals), fixed: 2 })
         },
         class: 'text-right',
         thClass: 'th-custom'

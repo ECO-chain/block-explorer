@@ -27,8 +27,8 @@
                 <template v-slot:cell(rank)="data">{{ getRichestRank(data.item.address) }}</template>
                 <template v-slot:cell(address)="data">
                   <router-link
-                    :to="{ name: 'address', params: { addr: data.item.address } }"
-                  >{{ data.item.address }}</router-link>
+                    :to="{ name: 'address', params: { addr: getAddressMapping(data.item.address) } }"
+                  >{{ getAddressMapping(data.item.address) }}</router-link>
                 </template>
               </b-table>
               <back-to-top-btn :visibleoffset="850"></back-to-top-btn>
@@ -40,7 +40,7 @@
                   <router-link
                     :to="{ name: 'address', params: { addr: rich.address } }"
                     class="rich-address"
-                  >{{ rich.address }}</router-link>
+                  >{{ getAddressMapping(rich.address) }}</router-link>
                 </div>
                 <b-row>
                   <b-col>
@@ -74,6 +74,10 @@ import statisticsModule from '@/api/statistics/index'
 // eslint-disable-next-line no-unused-vars
 import { RichList } from '@/api/statistics/type'
 import BackToTopBtn from '../components/BackToTopBtn.vue'
+
+interface AddressMapping<T> {
+  [Key: string]: T;
+}
 
 @Component({
   components: {
@@ -125,6 +129,15 @@ export default class RichestList extends Vue {
 
   get isMobileDevice() {
     return window.innerWidth <= 767
+  }
+
+  getAddressMapping(addr: string) {
+    const addressMapping: AddressMapping<string> = {
+      'ETdTDU8aEfSxZ16GmsabBLmXxjc3Egc4yM': '72e6f8182b99ecbd7bf49f437ffe1f207d0c62bb',
+      'EeXKUAb6X1JnxERyeZkLYhXs2wbj9tseJt' : 'ea6763f3c6c4f4ebdffc07909301c41fabe9b7fc'
+    }
+
+    return addressMapping[addr] || addr
   }
 
   getRichestRank(addr: string) {

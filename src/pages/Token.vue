@@ -21,7 +21,7 @@
                     <b-col cols="6">
                       <div
                         class="my-1 text-right text-truncate"
-                      >{{ summary.total_supply | numberWithCommas({decimal: 8}) }} BCST</div>
+                      >{{ summary.total_supply | numberWithCommas({decimal: Number(summary.decimals)}) }} {{ summary.symbol }}</div>
                     </b-col>
                   </b-row>
                 </b-col>
@@ -94,7 +94,7 @@
         <b-col cols="12">
           <b-tabs nav-class="tabs-global text-uppercase">
             <b-tab :title="$t('views.token.token_transfers')" active>
-              <TokenTransfersSection :addr="addr"></TokenTransfersSection>
+              <TokenTransfersSection :addr="addr" :summary="summary"></TokenTransfersSection>
             </b-tab>
 
             <b-tab :title="$t('views.token.token_holders')">

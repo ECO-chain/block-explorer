@@ -54,6 +54,10 @@
                     :to="{ name: 'address', params: { addr: data.item.contract_address } }"
                   >{{ data.item.contract_address }}</router-link>
                 </template>
+
+                <template v-slot:cell(total_supply)="data">
+                  {{ data.item.total_supply | numberWithCommas({decimal: Number(data.item.decimals)}) }}
+                </template>
               </b-table>
             </div>
           </div>
@@ -69,7 +73,6 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import ecrc20Module from '@/api/ecrc20/index'
-import { numberWithCommas } from '@/api/filters'
 import TokenSearchResult from '@/components/TokenSearchResult.vue'
 import TokenListCard from '@/components/TokenListCard.vue'
 // eslint-disable-next-line no-unused-vars
@@ -114,9 +117,6 @@ export default class Tokens extends Vue {
         key: 'total_supply',
         label: this.$t('views.tokens.total_supply'),
         sortable: true,
-        formatter: (value: string) => {
-          return numberWithCommas(Number(value), { decimal: 8 })
-        },
         thClass: 'th-custom',
         class: 'text-right'
       },

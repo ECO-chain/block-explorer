@@ -11,7 +11,7 @@
       <b-row>
         <b-col>
           <b-card-text class="holder-label">Quantity</b-card-text>
-          <span>{{ holder.amount | numberWithCommas({decimal: 8, fixed: 2}) }}</span>
+          <span>{{ holder.amount | numberWithCommas({decimal: Number(summary.decimals), fixed: 2}) }}</span>
         </b-col>
         <b-col>
           <b-card-text class="holder-label">Percentage</b-card-text>
