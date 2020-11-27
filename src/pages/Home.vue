@@ -228,7 +228,7 @@ export default class Home extends Vue {
       .reverse()
     this.txCount = this.sevenDaysTx.map((tx) => tx.transaction_count).reverse()
 
-    this.startedSupply = Number(supply)
+    this.startedSupply = Number(supply) - this.burned
     this.startedDifficulty = this.info.difficulty['proof-of-stake']
     this.startedWeight = this.stakingInfo.netstakeweight / Math.pow(10, 8)
     this.startedBlock = this.info.blocks
@@ -300,7 +300,7 @@ export default class Home extends Vue {
   fsChanged(val: any) {
     // console.log('changed')
     setTimeout(() => {
-      this.startedSupply = Number(this.statusState.supply)
+      this.startedSupply = Number(this.statusState.supply) - this.burned
     }, 6000)
     setTimeout(() => {
       this.startedDifficulty = this.info.difficulty['proof-of-stake']
