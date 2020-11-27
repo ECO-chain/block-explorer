@@ -24,23 +24,32 @@
                     <p>{{ $t('dom.table.no_records') }}</p>
                   </div>
                 </template>
-                <template v-slot:cell(rank)="data">{{ getRichestRank(data.item.address) }}</template>
+                <template v-slot:cell(rank)="data">{{
+                  getRichestRank(data.item.address)
+                }}</template>
                 <template v-slot:cell(address)="data">
                   <router-link
-                    :to="{ name: 'address', params: { addr: getAddressMapping(data.item.address) } }"
-                  >{{ getAddressMapping(data.item.address) }}</router-link>
+                    :to="{
+                      name: 'address',
+                      params: { addr: getAddressMapping(data.item.address) }
+                    }"
+                    >{{ getAddressMapping(data.item.address) }}</router-link
+                  >
                 </template>
               </b-table>
               <back-to-top-btn :visibleoffset="850"></back-to-top-btn>
             </div>
             <div v-else>
               <b-card class="rich-list" v-for="(rich, index) in richestList" :key="index">
-                <b-card-text class="rich-label mt-0">Rank #{{ getRichestRank(rich.address) }}</b-card-text>
+                <b-card-text class="rich-label mt-0"
+                  >Rank #{{ getRichestRank(rich.address) }}</b-card-text
+                >
                 <div class="text-truncate">
                   <router-link
                     :to="{ name: 'address', params: { addr: rich.address } }"
                     class="rich-address"
-                  >{{ getAddressMapping(rich.address) }}</router-link>
+                    >{{ getAddressMapping(rich.address) }}</router-link
+                  >
                 </div>
                 <b-row>
                   <b-col>
@@ -76,7 +85,7 @@ import { RichList } from '@/api/statistics/type'
 import BackToTopBtn from '../components/BackToTopBtn.vue'
 
 interface AddressMapping<T> {
-  [Key: string]: T;
+  [Key: string]: T
 }
 
 @Component({
@@ -133,8 +142,10 @@ export default class RichestList extends Vue {
 
   getAddressMapping(addr: string) {
     const addressMapping: AddressMapping<string> = {
-      'ETdTDU8aEfSxZ16GmsabBLmXxjc3Egc4yM': '72e6f8182b99ecbd7bf49f437ffe1f207d0c62bb',
-      'EeXKUAb6X1JnxERyeZkLYhXs2wbj9tseJt' : 'ea6763f3c6c4f4ebdffc07909301c41fabe9b7fc'
+      ETdTDU8aEfSxZ16GmsabBLmXxjc3Egc4yM: '72e6f8182b99ecbd7bf49f437ffe1f207d0c62bb',
+      EeXKUAb6X1JnxERyeZkLYhXs2wbj9tseJt: 'ea6763f3c6c4f4ebdffc07909301c41fabe9b7fc',
+      EWZUeegrENU9N9SBrzw2BSm9HACkMGr3YH: '930ee13b397eae86f742c2cab9a6015c70db27ea',
+      ET84bLj4QVcf1TaP9BDesVW6sh2rDC26eA: '6d580586d32a9d44cc747a90ba02e1c39d05c244'
     }
 
     return addressMapping[addr] || addr

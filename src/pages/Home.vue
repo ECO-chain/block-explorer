@@ -10,10 +10,10 @@
         <h2 class="head-global my-3">{{ $t('views.home.block_info') }}</h2>
         <div class="block-global p-3 mb-3 rounded-lg w-100 h-100">
           <b-row v-if="isMainnet">
-            <b-col cols="6" md="6">
+            <b-col cols="12" md="12">
               <div class="show-supply-idle rounded-lg text-center p-3 my-3">
                 <p class="my-1 text-style-2">
-                  206,000,000 ECOC</p>
+                  {{ burned | numberWithCommas }} ECOC</p>
                 <p class="my-1 supply-label">{{ $t('views.home.burned') }}</p>
               </div>
             </b-col>
@@ -211,6 +211,8 @@ export default class Home extends Vue {
   blockLoading = false
   newBlockHeight = 0
 
+  burned = 206000000
+
   async mounted() {
     const info = await statusModule.getInfo()
     const stakingInfo = await statusModule.getStakingInfo()
@@ -288,7 +290,7 @@ export default class Home extends Vue {
     }
 
     if (!this.info.testnet && height > themisHeightMainnet) {
-      return this.statusState.finalSupplyThemis
+      return this.statusState.finalSupplyThemis - this.burned
     }
 
     return this.statusState.finalSupply

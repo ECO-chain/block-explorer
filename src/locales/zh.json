@@ -24,7 +24,8 @@
           "hash": "哈唏",
           "vout": "超值"
         }
-      }
+      },
+      "burned": "烧了"
     },
     "blocks": {
       "blocks_by_d": "按日期查询区块",

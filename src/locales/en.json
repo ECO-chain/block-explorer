@@ -24,7 +24,8 @@
           "hash": "Hash",
           "vout": "Value Out"
         }
-      }
+      },
+      "burned": "Burned"
     },
     "blocks": {
       "blocks_by_d": "Blocks by date",
