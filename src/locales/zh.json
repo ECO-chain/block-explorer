@@ -211,7 +211,7 @@
     },
     "chart_selector": {
       "ecoc_total_supply": "ECOC 总量",
-      "ecoc_total_supply_desc": "检查当前 ECOC 电源. 最大供应量为2,000,000,000 ECOC",
+      "ecoc_total_supply_desc": "检查当前 ECOC 电源. 最大供应量为94,000,000 ECOC (206,000,000 ECOC 烧了)",
       "fees": "费用",
       "fees_desc": "支付给矿工的所有交易费用的总价值（不包括区块奖励的CoinBase值)",
       "tx": "交易",

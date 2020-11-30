@@ -30,14 +30,16 @@ import { Vue, Component, Watch } from 'vue-property-decorator'
 import LineChart from '@/components/LineChart.vue'
 import statisticsModule from '@/api/statistics/index'
 import { toMonthDayFormat } from '@/api/filters'
+import statusModule from '@/api/status/index'
 import {
   SupplyStats,
   FeeStat,
   TransactionStats,
   OutputStat,
   DifficultyStats,
-  StakeStats
+  StakeStats,
 } from '../api/statistics/type'
+import { StatusState } from '../api/status/type'
 
 @Component({
   components: {
@@ -68,6 +70,14 @@ export default class ChartSelector extends Vue {
       this.labels = val.tsDate
       this.data = val.tsData
     })
+  }
+
+  get statusState(): StatusState {
+    return statusModule.state
+  }
+
+  get burned() {
+    return this.statusState.coinBurned
   }
 
   get allCharts() {
@@ -154,7 +164,10 @@ export default class ChartSelector extends Vue {
       })
       .reverse()
     // sum
-    let tsData = this.totalSupply.map(ts => ts.sum).reverse()
+    let tsData = this.totalSupply.map(ts => {
+      const supply = Number(ts.sum) - this.burned
+      return supply
+    }).reverse()
     return { tsDate, tsData }
   }
 

@@ -4,6 +4,7 @@ export interface StatusState {
   info: Info
   stakingInfo: StakingInfo
   supply: string
+  coinBurned: number
 }
 
 export interface Info {

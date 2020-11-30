@@ -10,6 +10,7 @@ function initialState(): StatusState {
     // maybe this will change later
     finalSupply: 2000000000,
     finalSupplyThemis: 300000000,
+    coinBurned: 206000000,
     info : {
       version: 0,
       protocolversion: 0,

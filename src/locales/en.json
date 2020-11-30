@@ -212,7 +212,7 @@
     },
     "chart_selector": {
       "ecoc_total_supply": "ECOC Total supply",
-      "ecoc_total_supply_desc": "Check current ECOC supply. Maximum supply is 2,000,000,000 ECOC",
+      "ecoc_total_supply_desc": "Check current ECOC supply. Maximum supply is 94,000,000 ECOC (206,000,000 ECOC Burned)",
       "fees": "Fees",
       "fees_desc": "The total value of all transaction fees paid to miners (not including the coinbase value of block rewards).",
       "tx": "Transactions",

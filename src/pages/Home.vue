@@ -211,8 +211,6 @@ export default class Home extends Vue {
   blockLoading = false
   newBlockHeight = 0
 
-  burned = 206000000
-
   async mounted() {
     const info = await statusModule.getInfo()
     const stakingInfo = await statusModule.getStakingInfo()
@@ -226,8 +224,8 @@ export default class Home extends Vue {
         return toMonthDayFormat(tx.date.toString())
       })
       .reverse()
-
     this.txCount = this.sevenDaysTx.map((tx) => tx.transaction_count).reverse()
+
     this.startedSupply = Number(supply) - this.burned
     this.startedDifficulty = this.info.difficulty['proof-of-stake']
     this.startedWeight = this.stakingInfo.netstakeweight / Math.pow(10, 8)
@@ -235,11 +233,15 @@ export default class Home extends Vue {
 
     statusModule.setInfo(info)
     statusModule.setStakingInfo(stakingInfo)
-    statusModule.setSupply(this.startedSupply.toFixed(8))
+    statusModule.setSupply(supply)
   }
 
   get statusState(): StatusState {
     return statusModule.state
+  }
+
+  get burned() {
+    return this.statusState.coinBurned
   }
 
   get info(): Info {
@@ -302,7 +304,6 @@ export default class Home extends Vue {
     setTimeout(() => {
       this.startedSupply = Number(this.statusState.supply)
     }, 6000)
-
     setTimeout(() => {
       this.startedDifficulty = this.info.difficulty['proof-of-stake']
       this.startedWeight = this.stakingInfo.netstakeweight / Math.pow(10, 8)

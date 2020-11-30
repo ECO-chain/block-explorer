@@ -9,5 +9,7 @@ export function setStakingInfo(state: StatusState, stakingInfo: StakingInfo) {
 }
 
 export function setSupply(state: StatusState, supply: string) {
-  state.supply = supply
+  const burned = state.coinBurned
+  const actualSupply = Number(supply) - burned
+  state.supply = actualSupply.toFixed(8)
 }
